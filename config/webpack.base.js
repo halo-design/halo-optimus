@@ -34,10 +34,7 @@ module.exports = {
       GLOBAL     : resolve('src/globals'),
       IMAGE      : resolve('src/assets/images'),
       LAYOUT     : resolve('src/layouts'),
-      MIDDLEWARE : resolve('src/middleware'),
       REDUCER    : resolve('src/reducers'),
-      ROUTE      : resolve('src/routes'),
-      STORE      : resolve('src/store'),
       STYLE      : resolve('src/assets/styles'),
       UTIL       : resolve('src/utils'),
       VIEW       : resolve('src/views')

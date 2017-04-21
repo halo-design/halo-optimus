@@ -1,22 +1,16 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import Home from './home'
-import NoMatch from './noMatch'
-import About from './aboutSync'
-import Topics from './topicsSync'
-import './fade.css'
+import ReactDOM from 'react-dom'
+import createStore from 'UTIL/createStore'
+import AppContainer from 'CORE/AppContainer'
 
-const Main = () => (
-  <div className='main' style={{
-    backgroundColor: 'gray'
-  }}>
-    <Switch>
-      <Route exact path='/' component={Home} />
-      <Route path='/about' component={About} />
-      <Route path='/topics' component={Topics} />
-      <Route component={NoMatch} />
-    </Switch>
-  </div>
-)
+const store = createStore()
+const MOUNT_NODE = document.getElementById('MOUNT_NODE')
 
-export default Main
+const render = () => {
+  ReactDOM.render(
+    <AppContainer store={store} />,
+    MOUNT_NODE
+  )
+}
+
+render()
