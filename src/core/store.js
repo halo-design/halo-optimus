@@ -2,7 +2,7 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import rootReducer from 'REDUCER'
-import requester from './requester'
+import requester from 'MIDDLEWARE/requester'
 
 export default (initialState = {}) => {
   const enhancers = []

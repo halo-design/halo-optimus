@@ -2,7 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-const AnimateRoute = ({ transition, ...props }) => (
+const AnimateRoute = ({ transition, path, ...props }) => (
   <Route render={({ location }) => (
     <ReactCSSTransitionGroup
       transitionName={transition}
@@ -12,7 +12,7 @@ const AnimateRoute = ({ transition, ...props }) => (
     >
       <Route
         location={location}
-        key={location.pathname}
+        key={path}
         {...props}
       />
     </ReactCSSTransitionGroup>

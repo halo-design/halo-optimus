@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body, .root, .main, .login {
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  background-color: yellow;
+}
+
+.login {
+  background-color: red;
+}

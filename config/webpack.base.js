@@ -8,12 +8,17 @@ const resolve = dir => path.join(__dirname, '..', dir)
 
 module.exports = {
   entry: {
-    app: './src/entry/index.js',
+    app: './src/core/entry.js',
     vendor: [
       'react',
+      'redux',
       'react-dom',
+      'react-redux',
+      'redux-thunk',
       'react-router',
-      'react-router-dom'
+      'react-router-dom',
+      'react-router-redux',
+      'react-addons-css-transition-group'
     ]
   },
   output: {
@@ -34,6 +39,7 @@ module.exports = {
       GLOBAL     : resolve('src/globals'),
       IMAGE      : resolve('src/assets/images'),
       LAYOUT     : resolve('src/layouts'),
+      MIDDLEWARE : resolve('src/middleware'),
       REDUCER    : resolve('src/reducers'),
       STYLE      : resolve('src/assets/styles'),
       UTIL       : resolve('src/utils'),

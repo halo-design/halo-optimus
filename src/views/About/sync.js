@@ -1,6 +1,6 @@
 import React from 'react'
-import Lazy from '../Lazy'
-import Loading from '../Loading'
+import Lazy from 'COMPONENT/Lazy'
+import Loading from 'COMPONENT/Loading'
 import loadAbout from 'bundle-loader?lazy&name=about!./index'
 
 const About = () => (
