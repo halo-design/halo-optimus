@@ -111,7 +111,9 @@ const getRequestHeader = (header, type, url) => {
     eCIFID: eCIFID || ''
   }
 
-  return type === 'J' ? Object.assign({}, PREFIX_HEADER, {'Content-Type': 'application/json; charset=UTF-8', 'type': 'J'}, header) : Object.assign({}, PREFIX_HEADER, header)
+  return type === 'J'
+  ? Object.assign({}, PREFIX_HEADER, {'Content-Type': 'application/json; charset=UTF-8', 'type': 'J'}, header)
+  : Object.assign({}, PREFIX_HEADER, header)
 }
 
 const getRequestBody = (body, header) => {
@@ -123,9 +125,9 @@ const getRequestBody = (body, header) => {
   if (type === 'K') {
     finalBody = Object2KeyValue(body)
   } else if (type === 'J') {
-    finalBody = JSON.stringify({body: body, header: header})
+    finalBody = JSON.stringify({body, header})
   } else {
-    throw new Error('unExcept type!')
+    throw new Error('Unexcept Type!')
   }
   return finalBody
 }
@@ -173,7 +175,9 @@ const requestError = (next, actionWith, failType, json, error, url) => {
 }
 
 const doRequest = request => {
-  return fetch(request).then(response => response.json().then(json => ({ json, response })))
+  return fetch(request)
+  .then(response => response.json()
+  .then(json => ({ json, response })))
   .then(({ json, response }) => {
     if (!response.ok) {
       return Promise.reject(json)

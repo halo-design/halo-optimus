@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import About from './About/sync'
+import About from 'LAYOUT/About/sync'
 
 const Main = () => (
   <div className='main'>

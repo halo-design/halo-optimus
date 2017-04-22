@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
-import Topics from './Topics/sync'
+import Topics from 'LAYOUT/Topics/sync'
 
 const Login = () => (
   <div className='login'>

@@ -3,6 +3,12 @@
   padding: 0;
 }
 
+body {
+  font-family: "SF Pro SC", "SF Pro Text", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
 html, body, .root, .main, .login {
   overflow-x: hidden;
   height: 100%;
@@ -14,5 +20,5 @@ html, body, .root, .main, .login {
 }
 
 .login {
-  background-color: red;
+  background-color: green;
 }
