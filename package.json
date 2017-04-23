@@ -12,14 +12,18 @@
     "comp": "node bin/compare.js",
     "repo": "node bin/server-report.js",
     "incr": "node bin/dist-increment.js",
-    "lint": "eslint --ext .js,.jsx src"
+    "lint": "eslint --ext .js,.jsx src",
+    "lint:fix": "eslint --fix . --ext \"js,jsx\""
   },
   "dependencies": {
+    "antd": "^2.9.2",
     "es5-shim": "^4.5.9",
     "es6-promise": "^4.1.0",
     "es6-shim": "^0.35.3",
     "isomorphic-fetch": "^2.2.1",
+    "md5": "^2.2.1",
     "normalize.css": "^6.0.0",
+    "nprogress": "^0.2.0",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",

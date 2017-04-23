@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import createStore from './store'
-import App from 'VIEW'
+import App from 'VIEW/App'
 
 const store = createStore()
 

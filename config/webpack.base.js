@@ -18,7 +18,28 @@ module.exports = {
       'react-router',
       'react-router-dom',
       'react-router-redux',
-      'react-addons-css-transition-group'
+      'react-addons-css-transition-group',
+      // plugins
+      'md5',
+      'nprogress',
+      'antd/lib/button',
+      'antd/lib/checkbox',
+      'antd/lib/col',
+      'antd/lib/date-picker',
+      'antd/lib/form',
+      'antd/lib/icon',
+      'antd/lib/input',
+      'antd/lib/message',
+      'antd/lib/modal',
+      'antd/lib/notification',
+      'antd/lib/radio',
+      'antd/lib/row',
+      'antd/lib/select',
+      'antd/lib/slider',
+      'antd/lib/spin',
+      'antd/lib/table',
+      'antd/lib/tree',
+      'antd/lib/tree-select'
     ]
   },
   output: {

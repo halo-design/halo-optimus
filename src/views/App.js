@@ -1,7 +1,7 @@
 import React from 'react'
 import { HashRouter as Router, Switch } from 'react-router-dom'
 import AnimateRoute from 'COMPONENT/AnimateRoute'
-import Mismatch from 'COMPONENT/Mismatch'
+import Mismatch from './Mismatch'
 import Login from './Login'
 import Main from './Main'
 import 'STYLE'

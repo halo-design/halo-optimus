@@ -8,7 +8,7 @@ const listHasItem = (list, key, val) => {
 
 export const checkBtnList = (menu, btnList, noDivider) => {
   const ableBtn = []
-  const divider = <span className="ant-divider"/>
+  const divider = <span className='ant-divider' />
   const size = btnList.length
   btnList.map((item, i) => {
     const btn = checkBtn(menu, item.item, item.button)
@@ -17,7 +17,7 @@ export const checkBtnList = (menu, btnList, noDivider) => {
       !noDivider && i != size - 1 ? ableBtn.push(divider) : null
     }
   })
-  return ableBtn.length == 0 ? <span>无操作权限</span> : ableBtn.map((item, i) =>(<span key={i}>{item}</span>))
+  return ableBtn.length == 0 ? <span>无操作权限</span> : ableBtn.map((item, i) => (<span key={i}>{item}</span>))
 }
 
 export const checkBtn = (menu, item, button) => {

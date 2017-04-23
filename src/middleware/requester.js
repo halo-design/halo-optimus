@@ -1,5 +1,5 @@
 import { getCookie, setCookie } from 'UTIL/cookie'
-// import { Modal } from 'antd'
+import { Modal } from 'antd'
 
 export const BZ_REQUESTER = Symbol('BZ REQUESTER')
 
@@ -140,8 +140,7 @@ const requestSuccess = (next, actionWith, successType, json, success, url) => {
     const { errorCode } = body
     header.iCIFID ? setCookie('iCIFID', header.iCIFID) : setCookie('iCIFID', body.iCIFID)
     if (errorCode !== '0') {
-      /* Modal.error */
-      console.log({
+      Modal.error({
         title: `请求失败！[${errorCode}]`,
         content: body.errorMsg,
         onOk: onClose => {
@@ -162,8 +161,7 @@ const requestError = (next, actionWith, failType, json, error, url) => {
     error()
   } else if (!isError) {
     isError = true
-    /* Modal.error */
-    console.log({
+    Modal.error({
       title: '请求失败！',
       onOk: onClose => {
         isError = false
