@@ -1,8 +1,9 @@
 import React from 'react'
+import { Spin } from 'antd'
 
 const Loading = () => (
-  <div>
-    <h2>loading...</h2>
+  <div className='app-loading-spin'>
+    <Spin size='large' />
   </div>
 )
 

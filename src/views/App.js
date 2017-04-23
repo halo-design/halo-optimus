@@ -11,7 +11,7 @@ const App = () => (
     <Switch>
       <AnimateRoute transition='slide' exact path='/' component={Mismatch} />
       <AnimateRoute transition='slide' path='/login' component={Login} />
-      <AnimateRoute transition='slide' path='/main' component={Main} />
+      <AnimateRoute transition='slide' path='/home' component={Main} />
       <AnimateRoute transition='slide' component={Mismatch} />
     </Switch>
   </Router>

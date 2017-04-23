@@ -15,6 +15,7 @@ import 'STYLE/pages/login.scss'
   }),
   dispatch => bindActionCreators({ ...loginAction }, dispatch)
 )
+
 class Login extends React.Component {
   constructor (props) {
     super(props)
@@ -73,7 +74,7 @@ class Login extends React.Component {
       NProgress.start()
       validateLogin(this.state, () => {
         NProgress.done()
-        history.push('main')
+        history.push('home')
       }, () => {
         NProgress.done()
         this.setState({

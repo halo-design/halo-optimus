@@ -22,7 +22,7 @@ body {
 }
 
 .root, 
-.app-container {
+.app-main {
   @include fullScreen;
   font-size: 14px;
 }
@@ -226,3 +226,7 @@ body {
   }
 }
 
+.app-loading-spin {
+  text-align: center;
+  padding: 20px 0;
+}

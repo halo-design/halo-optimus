@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
+import branchManage from './branchManage'
 import counter from './counter'
 
 const pagesReducer = combineReducers({
-  counter
+  counter,
+  branchManage
 })
 
 export default pagesReducer
