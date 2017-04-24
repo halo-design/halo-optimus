@@ -8,9 +8,9 @@ import Loading from 'COMPONENT/Loading'
 import Header from './Header'
 import Welcome from '../Welcome'
 import BranchManage from '../BranchManage/sync'
+import UserManage from '../UserManage'
 
-import Counter from 'LAYOUT/Counter'
-import Topics from 'LAYOUT/Topics/sync'
+import Counter from '../Counter'
 
 @connect(
   null,
@@ -43,8 +43,8 @@ export default class Main extends React.Component {
             <Switch>
               <Route exact path='/' component={Welcome} />
               <Route path='/home/branchList.html' component={BranchManage} />
-              <Route path='/home/User.html' component={Counter} />
-              <Route path='/home/Role.html' component={Topics} />
+              <Route path='/home/User.html' component={UserManage} />
+              <Route path='/home/Role.html' component={Counter} />
               <Route component={Welcome} />
             </Switch>
           </div>

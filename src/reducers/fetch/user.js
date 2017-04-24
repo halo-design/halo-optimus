@@ -5,7 +5,7 @@ import md5 from 'md5'
 const USER_COMMON = ['USER_COMMON_REQ', 'USER_COMMON_SUC', 'USER_COMMON_FAL']
 const USR_ADD = ['USR_ADD_REQ', 'USR_ADD_SUC', 'USR_ADD_FAL']
 
-const strFormat = (str, dft) => (str || dft ? dft : '')
+const strFormat = str => str || ''
 
 export const userPageByBrhAction = (data, showNum) => ({
   [BZ_REQUESTER]: {

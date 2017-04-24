@@ -57,6 +57,10 @@ body {
     @include contentRadius;
     position: relative;
     min-height: 100%;
+
+    & > div {
+      animation: fadeIn .3s;
+    }
   }
 }
 

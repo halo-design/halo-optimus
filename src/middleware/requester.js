@@ -1,4 +1,5 @@
 import { getCookie, setCookie } from 'UTIL/cookie'
+import NProgress from 'nprogress'
 import { Modal } from 'antd'
 
 export const BZ_REQUESTER = Symbol('BZ REQUESTER')
@@ -139,15 +140,18 @@ const requestSuccess = (next, actionWith, successType, json, success, url) => {
     const { header, body } = json
     const { errorCode } = body
     header.iCIFID ? setCookie('iCIFID', header.iCIFID) : setCookie('iCIFID', body.iCIFID)
-    if (errorCode !== '0') {
+    if (errorCode !== '0' && !isError) {
+      isError = true
       Modal.error({
         title: `请求失败！[${errorCode}]`,
         content: body.errorMsg,
         onOk: onClose => {
           // 数据校验失败返回登录页
           if (errorCode === 'BLEC0001' || errorCode === 'SYEC0002') {
-            window.location.replace('#/')
+            window.location.replace('#/login')
           }
+          isError = false
+          NProgress.done()
           onClose()
         }
       })
@@ -165,6 +169,7 @@ const requestError = (next, actionWith, failType, json, error, url) => {
       title: '请求失败！',
       onOk: onClose => {
         isError = false
+        NProgress.done()
         onClose()
       }
     })
