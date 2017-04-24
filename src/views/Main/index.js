@@ -9,6 +9,7 @@ import Header from './Header'
 import Welcome from '../Welcome'
 import BranchManage from '../BranchManage/sync'
 import UserManage from '../UserManage/sync'
+import RoleManage from '../RoleManage/sync'
 
 import Counter from '../Counter'
 
@@ -44,6 +45,7 @@ export default class Main extends React.Component {
               <Route exact path='/' component={Welcome} />
               <Route path='/home/branchList.html' component={BranchManage} />
               <Route path='/home/User.html' component={UserManage} />
+              <Route path='/home/Role.html' component={RoleManage} />
               <Route path='/home/postList.html' component={Counter} />
               <Route component={Welcome} />
             </Switch>
