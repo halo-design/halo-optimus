@@ -58,7 +58,8 @@ mixin groupList(title, datList)
                             span.green #{sc.tarSize}KB
                             span.state.green (未变化)
                       else if size
-                        .cell #{fileInfo[ifo]}B
+                        - var formatSize = (fileInfo[ifo] / 1024).toFixed(3)
+                        .cell #{formatSize}KB
                       else 
                         .cell #{fileInfo[ifo]}
 
