@@ -2,7 +2,9 @@ require('./check-versions')()
 const ip = require('ip')
 const opn = require('opn')
 const path = require('path')
+const http = require('http')
 const chalk = require('chalk')
+const socket = require('socket.io')
 const request = require('request')
 const express = require('express')
 const webpack = require('webpack')
@@ -16,7 +18,15 @@ if (!process.env.NODE_ENV) {
 const port = process.env.PORT || config.port
 const openBrowser = !!config.openBrowser
 const app = express()
+const httpServer = http.Server(app)
+const io = socket(httpServer)
 const compiler = webpack(webpackConfig)
+
+io.on('connection', socket => {
+  socket.on('log', info => {
+    console.log(info)
+  })
+})
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: config.publicPath,
@@ -55,7 +65,7 @@ const uri = `http://${ip.address()}:${port}`
 
 devMiddleware.waitUntilValid(() => console.log(chalk.green(`> Listening at ${uri} \n`)))
 
-module.exports = app.listen(port, err => {
+module.exports = httpServer.listen(port, err => {
   if (err) {
     console.log(chalk.red(err))
     return

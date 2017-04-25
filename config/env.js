@@ -32,7 +32,7 @@ module.exports = {
       subDir: ''
     },
     publicPath: '/',
-    htmlTemplate: resolve('static/index.html')
+    htmlTemplate: resolve('static/dev.html')
   }
 }
 

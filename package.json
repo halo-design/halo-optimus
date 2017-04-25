@@ -12,8 +12,7 @@
     "comp": "node bin/compare.js",
     "repo": "node bin/server-report.js",
     "incr": "node bin/dist-increment.js",
-    "lint": "eslint --ext .js,.jsx src",
-    "lint:fix": "eslint --fix . --ext \"js,jsx\""
+    "lint": "eslint --ext .js,.jsx src"
   },
   "dependencies": {
     "antd": "^2.9.3",
@@ -70,6 +69,7 @@
     "fs": "^0.0.1-security",
     "function-bind": "^1.1.0",
     "html-webpack-plugin": "^2.28.0",
+    "http": "^0.0.0",
     "ip": "^1.1.5",
     "less": "^2.7.2",
     "less-loader": "^4.0.2",
@@ -85,6 +85,7 @@
     "rimraf": "^2.6.0",
     "sass-loader": "^6.0.3",
     "semver": "^5.3.0",
+    "socket.io": "^1.7.3",
     "style-loader": "^0.13.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
