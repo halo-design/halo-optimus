@@ -232,7 +232,7 @@ exports.copyFile = (filePath, tarDir) => {
   fs.writeFileSync(path.join(tarDir, filename), files)
 }
 
-exports.buildIncPackage = (map, outPath) => {
+exports.distDiffer = (map, outPath) => {
   exports.deleteFolder(getFullPath(outPath))
   createDir(outPath, true)
   const data = typeof map === 'string' ? exports.readJSON(getFullPath(map)) : map

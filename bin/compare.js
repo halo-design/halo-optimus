@@ -15,7 +15,7 @@ if (shotArr.length > 1) {
     target: `${relPath}/${shotArr[0]}.json`,
     compArr: ['css', 'js', 'images', 'fonts', 'static'],
     logPath: 'data',
-    callback: data => tools.buildIncPackage(data, 'dist_inc')
+    callback: data => tools.distDiffer(data, 'dist_diff')
   })
   require('./server-report')
 } else {

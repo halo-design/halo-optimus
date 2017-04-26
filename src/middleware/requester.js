@@ -17,7 +17,7 @@ const DEFAULT_REQ_TYPE = {
 
 const Object2KeyValue = obj => {
   if (typeof obj !== 'object') {
-    throw Error('only transform simple Object to k-v params!')
+    throw Error('Only transform simple Object to k-v params!')
   }
   let kvArray = []
   for (let key in obj) {
@@ -69,7 +69,7 @@ export default store => next => action => {
     throw new Error('Expected action types to be strings.')
   }
 
-  const type = !requestType ? 'K' : requestType
+  const type = requestType || 'K'
   const finalHeader = getRequestHeader(header, type, url)
   const finalBody = getRequestBody(body, finalHeader)
   const req = getRequest(url, finalHeader, dataType, method, finalBody)

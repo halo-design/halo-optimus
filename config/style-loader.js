@@ -1,4 +1,3 @@
-const config = require('./env')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 

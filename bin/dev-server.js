@@ -8,15 +8,15 @@ const socket = require('socket.io')
 const request = require('request')
 const express = require('express')
 const webpack = require('webpack')
-const config = require('../config/env').dev
+const settings = require('../config/settings').dev
 const webpackConfig = require('../config/webpack.dev')
 
 if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV =  JSON.parse(config.env.NODE_ENV)
+  process.env.NODE_ENV =  JSON.parse(settings.env.NODE_ENV)
 }
 
-const port = process.env.PORT || config.port
-const openBrowser = !!config.openBrowser
+const port = process.env.PORT || settings.port
+const openBrowser = !!settings.openBrowser
 const app = express()
 const httpServer = http.Server(app)
 const io = socket(httpServer)
@@ -29,7 +29,7 @@ io.on('connection', socket => {
 })
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
-  publicPath: config.publicPath,
+  publicPath: settings.publicPath,
   quiet: true
 })
 
@@ -58,7 +58,7 @@ app.use(devMiddleware)
 
 app.use(hotMiddleware)
 
-const staticPath = path.posix.join(config.publicPath, config.assets.subDir)
+const staticPath = path.posix.join(settings.publicPath, settings.assets.subDir)
 app.use(staticPath, express.static('./public'))
 
 const uri = `http://${ip.address()}:${port}`

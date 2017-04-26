@@ -11,7 +11,7 @@
     "shot": "node bin/snapshots.js",
     "comp": "node bin/compare.js",
     "repo": "node bin/server-report.js",
-    "incr": "node bin/dist-increment.js",
+    "diff": "node bin/dist-different.js",
     "lint": "eslint --ext .js,.jsx src"
   },
   "dependencies": {

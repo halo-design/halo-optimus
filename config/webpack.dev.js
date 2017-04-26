@@ -3,10 +3,10 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-const config = require('./env').dev
+const settings = require('./settings').dev
 const baseWebpackConfig = require('./webpack.base')
 
-const port = process.env.PORT || config.port
+const port = process.env.PORT || settings.port
 
 Object.keys(baseWebpackConfig.entry).forEach(name => {
   baseWebpackConfig.entry[name] = ['./bin/dev-client'].concat(baseWebpackConfig.entry[name])
@@ -15,17 +15,17 @@ Object.keys(baseWebpackConfig.entry).forEach(name => {
 module.exports = merge(baseWebpackConfig, {
   devtool: '#cheap-module-eval-source-map',
   output: {
-    publicPath: `http://${ip.address()}:${port}${config.publicPath}`
+    publicPath: `http://${ip.address()}:${port}${settings.publicPath}`
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': config.env
+      'process.env': settings.env
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: config.htmlTemplate,
+      template: settings.htmlTemplate,
       inject: true
     }),
     new FriendlyErrorsPlugin()

@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const cssnano = require('cssnano')
 const styleLoader = require('./style-loader')
-const assetsPath = require('./assetsPath')
+const assetsPath = require('./assets-path')
 
 const resolve = dir => path.join(__dirname, '..', dir)
 

@@ -2,7 +2,7 @@ bin
 config
 data
 dist
-dist_inc
+dist_diff
 node_modules
 public
 resources

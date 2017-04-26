@@ -1,7 +1,7 @@
 const path = require('path')
-const config = require('./env')
+const settings = require('./settings')
 
 const isProduction = process.env.NODE_ENV === 'production'
-const assetsSubDir = config[isProduction ? 'build' : 'dev'].assets.subDir
+const assetsSubDir = settings[isProduction ? 'build' : 'dev'].assets.subDir
 
 module.exports = curPath => path.posix.join(assetsSubDir, curPath)
