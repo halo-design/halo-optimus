@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter, NavLink } from 'react-router-dom'
-import Scroll from 'COMPONENT/Scroll'
+// import Scroll from 'COMPONENT/Scroll'
 import { selectMenu } from 'REDUCER/public/menu'
 
 @connect(
@@ -99,9 +99,11 @@ class Sidebar extends React.Component {
 
     return (
       <div className='app-sidebar'>
-        <Scroll>
-          {Menu(menus, parentUrl)}
-        </Scroll>
+        <div className='scroller-wrap'>
+          <div className='scroller'>
+            {Menu(menus, parentUrl)}
+          </div>
+        </div>
       </div>
     )
   }

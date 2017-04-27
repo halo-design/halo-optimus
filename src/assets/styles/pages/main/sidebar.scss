@@ -12,8 +12,25 @@ $sidebarWidth : 200px;
   bottom: 0;
   z-index: 99;
   
-  .iScrollVerticalScrollbar {
-    opacity: .3
+  .scroller-wrap {
+    height: 100%;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, .16);
+      background-clip: padding-box;
+      border: 3px solid #eff4f8;
+      border-radius: 7px;
+
+    } 
+    
+    &::-webkit-scrollbar-track-piece {
+      background-color: #eff4f8;
+    }
   }
 
   .menu {

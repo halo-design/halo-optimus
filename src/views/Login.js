@@ -91,7 +91,7 @@ class Login extends React.Component {
         <div className='loginBox'>
           <div className='avatar'><img alt='avatar' src={avatarImg} /></div>
           <div className='input pre-icon'>
-            <i className='user' />
+            <i className='iconfont user' />
             <input
               placeholder='请输入用户名'
               value={userName}
@@ -103,7 +103,7 @@ class Login extends React.Component {
             />
           </div>
           <div className='input pre-icon'>
-            <i className='pswd' />
+            <i className='iconfont pswd' />
             <input
               placeholder='请输入密码'
               type='password'
@@ -132,6 +132,7 @@ class Login extends React.Component {
           <div className='btn-wrap'>
             <button onClick={e => this.handleSubmit()}>立即登录</button>
           </div>
+          <div className='project'>IFP内部管理系统 2.0</div>
         </div>
       </div>
     )

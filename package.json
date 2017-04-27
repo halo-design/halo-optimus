@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "dev": "node bin/dev-server.js",
-    "build": "node bin/build.js",
+    "build": "node bin/compile.js",
     "shot": "node bin/snapshots.js",
     "comp": "node bin/compare.js",
     "repo": "node bin/server-report.js",

@@ -10,6 +10,9 @@ import Welcome from '../Welcome'
 import BranchManage from '../BranchManage/sync'
 import UserManage from '../UserManage/sync'
 import RoleManage from '../RoleManage/sync'
+import PostManage from '../PostManage/sync'
+import ReviewSettings from '../ReviewSettings/sync'
+import StrategySettings from '../StrategySettings/sync'
 
 import Counter from '../Counter'
 
@@ -42,11 +45,15 @@ export default class Main extends React.Component {
         <div className='app-content'>
           <div className='app-page-wrapper'>
             <Switch>
-              <Route exact path='/' component={Welcome} />
               <Route path='/home/branchList.html' component={BranchManage} />
               <Route path='/home/User.html' component={UserManage} />
               <Route path='/home/Role.html' component={RoleManage} />
-              <Route path='/home/postList.html' component={Counter} />
+              <Route path='/home/postList.html' component={PostManage} />
+              <Route path='/home/relationList.html' component={ReviewSettings} />
+              <Route path='/home/relationSet.html' component={StrategySettings} />
+              <Route path='/home/checkList.html' component={Counter} />
+              <Route path='/home/checkHistoryList.html' component={Counter} />
+              <Route path='/home/pendHistoryList.html' component={Counter} />
               <Route component={Welcome} />
             </Switch>
           </div>
@@ -54,7 +61,6 @@ export default class Main extends React.Component {
       </div>
     )
 
-    // 若菜单未准备好，则放弃渲染，以免报错
-    return this.state.loaded ? view : (<Loading />)
+    return this.state.loaded ? view : <Loading />
   }
 }

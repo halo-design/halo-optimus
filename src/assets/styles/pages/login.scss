@@ -13,28 +13,45 @@
   @return "../../images/" + $img
 }
 
-$foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
+$foorShadow: 0 18px 38px -4px rgba(21, 21, 21, 0.18);
 
 .pageLogin {
   font-size: 14px;
   width: 100%;
   height: 100%;
-  background-image: -webkit-gradient(linear, 50% 0, 45% 100%, from(#edf3fe), to(#d5d2f0));
+  background: #eceffb;
   overflow: hidden;
   
   .loginBox {
     @include middleCenter;
-    width: 460px;
-    padding: 60px 80px 40px;
+    width: 880px;
+    height: 460px;
+    padding: 40px 46px 0 570px;
     background-color: #fff;
-    margin: -180px 0 0 -230px;
-    box-shadow: $foorShadow;
+    margin: -280px 0 0 -440px;
     border-radius: 8px;
+    overflow: hidden;
+    box-shadow: $foorShadow;
     animation: bounceInDown .3s .3s both;
+    background: #fff url(setBg("login_bg.jpg")) no-repeat left center;
+    background-size: 524px 460px;
+
+    .project {
+      width: 524px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: rgba(0, 0, 0, .5);
+      color: rgba(255, 255, 255, .6);
+      font-size: 16px;
+      text-align: center;
+      padding-top: 420px;
+    }
   }
 
   .input {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     position: relative;
     transition: border .6s;
 
@@ -43,7 +60,7 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
       display: block;
       height: 0;
       width: 0;
-      border-bottom:1px solid #ccc;
+      border-bottom:1px solid #57ACEF;
       position: absolute;
       left: 0;
       bottom: 0;
@@ -92,16 +109,17 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
         display: block;
         left: 0;
         top: 0;
-        background-position: center center;
-        background-size: 20px auto;
-        background-repeat: no-repeat;
+        text-align: center;
+        line-height: 42px;
+        font-size: 20px;
+        color: #999;
         
-        &.user {
-          background-image: url(setBg("user.svg")) 
+        &.user:after {
+          content: "\e656"
         }
 
-        &.pswd {
-          background-image: url(setBg("pswd.svg")) 
+        &.pswd:after {
+          content: "\e655"
         }
       }
     }
@@ -118,22 +136,24 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
 
   .btn-wrap {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 50px;
     
     button {
-      background-color: #57ACEF;
+      background-color: #4885FF;
       border: none;
       color: #fff;
       display: inline-block;
       width: 100%;
       height: 48px;
       line-height: 48px;
-      border-radius: 4px;
+      border-radius: 24px;
       font-size: 16px;
       outline: none;
-      transition: background-color .3s;
+      transition: all .3s;
+      box-shadow: 0 12px 23px -4px rgba(72, 133, 255, 0.42);
       &:hover {
-        background-color: #297CD3
+        background-color: #57ACEF;
+        box-shadow: 0 16px 24px -4px rgba(87, 172, 239, 0.52);
       }
     }
   }
@@ -141,13 +161,9 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
   .loginBox {
     .avatar {
       @include round;
-      width: 120px;
-      height: 120px;
-      position: absolute;
-      left: 50%;
-      top: -60px;
-      margin-left: -60px;
-      padding: 10px;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
       background-color: #fff;
       overflow: hidden;
       // background: url(setBg("avatar.png")) no-repeat center center / 100% auto;
@@ -161,7 +177,6 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
       }
     }
   }
-
 }
 
 

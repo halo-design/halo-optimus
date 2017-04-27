@@ -41,7 +41,7 @@ class Account extends React.Component {
   handleLogout () {
     const Props = this.props
     Props.logout()
-    Props.history.replace('/')
+    Props.history.replace('/login')
     Props.setPasswordVisible(false)
   }
 
