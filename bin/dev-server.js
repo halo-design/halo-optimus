@@ -12,7 +12,7 @@ const settings = require('../config/settings').dev
 const webpackConfig = require('../config/webpack.dev')
 
 if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV =  JSON.parse(settings.env.NODE_ENV)
+  process.env.NODE_ENV = JSON.parse(settings.env.NODE_ENV)
 }
 
 const port = process.env.PORT || settings.port
@@ -39,8 +39,8 @@ const hotMiddleware = require('webpack-hot-middleware')(compiler, {
 
 compiler.plugin('compilation', compilation => {
   compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
-    hotMiddleware.publish({ 
-      action: 'reload' 
+    hotMiddleware.publish({
+      action: 'reload'
     })
     cb()
   })
@@ -48,10 +48,10 @@ compiler.plugin('compilation', compilation => {
 
 app.use('/inmanage', (req, res) => {
   const url = `https://flame.zaixy.cn/inmanage${req.url}`
-  console.log(chalk.yellow(`[PROXY]: ${url}`))
+  console.log(chalk.green(`[PROXY]:`) + url)
   req.pipe(request(url)).pipe(res)
 })
-  
+
 app.use(require('connect-history-api-fallback')())
 
 app.use(devMiddleware)

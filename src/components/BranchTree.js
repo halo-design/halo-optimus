@@ -10,7 +10,7 @@ const bindDataLoop = item => {
       </TreeNode>
     )
   } else {
-    return (<TreeNode title={item.name} key={item.id} isLeaf />)
+    return <TreeNode title={item.name} key={item.id} isLeaf />
   }
 }
 
@@ -21,6 +21,7 @@ const BranchTree = ({ selected, branchList, selectedKeys }) => {
   return (
     <div className='app-barnch-tree'>
       <Tree
+        showLine
         selectedKeys={selectedKeys || []}
         onSelect={
           (info, node) => {

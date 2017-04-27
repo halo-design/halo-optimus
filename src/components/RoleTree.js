@@ -22,13 +22,16 @@ export default ({ selected, roleList, selectedKeys }) => {
   return (
     <div className='app-barnch-tree'>
       <Tree
+        showLine
         autoExpandParent
         selectedKeys={selectedKeys || []}
-        onSelect={(info, node) =>
-          selected({
-            roleId: info[0],
-            title: node.node.props.title
-          })
+        onSelect={
+          (info, node) => {
+            selected({
+              roleId: info[0],
+              title: node.node.props.title
+            })
+          }
         }
       >
         {roleList.map(bindDataLoop)}
