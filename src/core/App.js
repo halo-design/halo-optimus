@@ -9,7 +9,7 @@ const store = createStore()
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <Router basename='/'>
+      <Router basename='/inmanage'>
         <App />
       </Router>
     </Provider>,
