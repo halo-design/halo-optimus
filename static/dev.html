@@ -12,8 +12,7 @@
 <script type="text/javascript">
   var socket = io.connect();
   console.remote = function (data) {
-    // console.log(data);
-    socket.emit('log', data);
+    socket.emit('log', data)
   }
 </script>
 </head>
