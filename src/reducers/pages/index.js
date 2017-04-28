@@ -5,16 +5,20 @@ import roleManage from './roleManage'
 import postManage from './postManage'
 import reviewSettings from './reviewSettings'
 import strategySettings from './strategySettings'
-import counter from './counter'
+import checkList from './checkList'
+import checkHistoryList from './checkHistoryList'
+import applyHistoryList from './applyHistoryList'
 
 const pagesReducer = combineReducers({
-  counter,
   branchManage,
   userManage,
   roleManage,
   postManage,
   reviewSettings,
-  strategySettings
+  strategySettings,
+  checkList,
+  checkHistoryList,
+  applyHistoryList
 })
 
 export default pagesReducer

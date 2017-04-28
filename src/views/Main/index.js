@@ -13,8 +13,9 @@ import RoleManage from '../RoleManage/sync'
 import PostManage from '../PostManage/sync'
 import ReviewSettings from '../ReviewSettings/sync'
 import StrategySettings from '../StrategySettings/sync'
-
-import Counter from '../Counter'
+import CheckList from '../CheckList/sync'
+import CheckHistoryList from '../CheckHistoryList/sync'
+import ApplyHistoryList from '../ApplyHistoryList/sync'
 
 @connect(
   null,
@@ -51,9 +52,9 @@ export default class Main extends React.Component {
               <Route path='/home/postList.html' component={PostManage} />
               <Route path='/home/relationList.html' component={ReviewSettings} />
               <Route path='/home/relationSet.html' component={StrategySettings} />
-              <Route path='/home/checkList.html' component={Counter} />
-              <Route path='/home/checkHistoryList.html' component={Counter} />
-              <Route path='/home/pendHistoryList.html' component={Counter} />
+              <Route path='/home/checkList.html' component={CheckList} />
+              <Route path='/home/checkHistoryList.html' component={CheckHistoryList} />
+              <Route path='/home/pendHistoryList.html' component={ApplyHistoryList} />
               <Route component={Welcome} />
             </Switch>
           </div>

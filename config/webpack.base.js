@@ -17,7 +17,7 @@ module.exports = {
       'redux-thunk',
       'react-router',
       'react-router-dom',
-      'react-addons-css-transition-group',
+      'react-transition-group/CSSTransitionGroup',
       // plugins
       'md5',
       'nprogress',

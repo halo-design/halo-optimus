@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "clean": "rimraf dist",
     "dev": "node bin/dev-server.js",
     "build": "node bin/compile.js",
     "shot": "node bin/snapshots.js",
@@ -24,11 +25,11 @@
     "normalize.css": "^6.0.0",
     "nprogress": "^0.2.0",
     "react": "^15.5.4",
-    "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-transition-group": "^1.1.2",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
     "redux-thunk": "^2.2.0"
@@ -36,7 +37,7 @@
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.2.10",
+    "babel-loader": "^6.4.1",
     "babel-plugin-import": "^1.1.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.22.0",
@@ -60,7 +61,7 @@
     "eslint-plugin-babel": "^4.1.1",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-react": "^6.10.3",
-    "eslint-plugin-standard": "^2.0.1",
+    "eslint-plugin-standard": "^2.3.1",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.14.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",

@@ -4,10 +4,10 @@ const opn = require('opn')
 const path = require('path')
 const http = require('http')
 const chalk = require('chalk')
-const socket = require('socket.io')
 const request = require('request')
 const express = require('express')
 const webpack = require('webpack')
+const socket = require('socket.io')
 const settings = require('../config/settings').dev
 const webpackConfig = require('../config/webpack.dev')
 
@@ -48,7 +48,7 @@ compiler.plugin('compilation', compilation => {
 
 app.use('/inmanage', (req, res) => {
   const url = `https://flame.zaixy.cn/inmanage${req.url}`
-  console.log(chalk.green(`[PROXY]:`) + url)
+  console.log(chalk.green(`[PROXY]: `) + url)
   req.pipe(request(url)).pipe(res)
 })
 
