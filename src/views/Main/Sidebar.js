@@ -44,7 +44,7 @@ class Sidebar extends React.Component {
           (item, i) => {
             // 若只有单项
             if (item.menus.length === 0) {
-              const path = '/' + preUrl + item.url
+              const path = '/' + preUrl + item.url.split('.')[0]
               return (
                 <div className='subMenu' key={i}>
                   <div className='title single'>
@@ -72,7 +72,7 @@ class Sidebar extends React.Component {
                     {
                       item.menus.map(
                         (item, i) => {
-                          const path = '/' + preUrl + item.url
+                          const path = '/' + preUrl + item.url.split('.')[0]
                           return (
                             <div className='item' key={i}>
                               <NavLink

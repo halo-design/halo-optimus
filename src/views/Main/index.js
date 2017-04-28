@@ -46,15 +46,15 @@ export default class Main extends React.Component {
         <div className='app-content'>
           <div className='app-page-wrapper'>
             <Switch>
-              <Route path='/home/branchList.html' component={BranchManage} />
-              <Route path='/home/User.html' component={UserManage} />
-              <Route path='/home/Role.html' component={RoleManage} />
-              <Route path='/home/postList.html' component={PostManage} />
-              <Route path='/home/relationList.html' component={ReviewSettings} />
-              <Route path='/home/relationSet.html' component={StrategySettings} />
-              <Route path='/home/checkList.html' component={CheckList} />
-              <Route path='/home/checkHistoryList.html' component={CheckHistoryList} />
-              <Route path='/home/pendHistoryList.html' component={ApplyHistoryList} />
+              <Route path='/home/branchList' component={BranchManage} />
+              <Route path='/home/User' component={UserManage} />
+              <Route path='/home/Role' component={RoleManage} />
+              <Route path='/home/postList' component={PostManage} />
+              <Route path='/home/relationList' component={ReviewSettings} />
+              <Route path='/home/relationSet' component={StrategySettings} />
+              <Route path='/home/checkList' component={CheckList} />
+              <Route path='/home/checkHistoryList' component={CheckHistoryList} />
+              <Route path='/home/pendHistoryList' component={ApplyHistoryList} />
               <Route component={Welcome} />
             </Switch>
           </div>
