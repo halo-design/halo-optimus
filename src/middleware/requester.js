@@ -1,4 +1,5 @@
 import { getCookie, setCookie } from 'UTIL/cookie'
+import { rootPath } from 'CONSTANT/config'
 import NProgress from 'nprogress'
 import { Modal } from 'antd'
 
@@ -148,7 +149,7 @@ const requestSuccess = (next, actionWith, successType, json, success, url) => {
         onOk: onClose => {
           // 数据校验失败返回登录页
           if (errorCode === 'BLEC0001' || errorCode === 'SYEC0002') {
-            window.location.replace('/')
+            window.location.replace(rootPath)
           }
           isError = false
           NProgress.done()

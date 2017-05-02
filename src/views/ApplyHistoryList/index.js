@@ -10,11 +10,14 @@ import { getStateList } from 'REDUCER/pages/applyHistoryList'
 const RangePicker = DatePicker.RangePicker
 
 @connect(
-  state => ({
-    stateList: state.pages.applyHistoryList.stateList,
-    stateListSelectOpt: state.pages.applyHistoryList.stateListSelectOpt,
-    totalNum: state.pages.applyHistoryList.stateListTotalNum
-  }),
+  state => {
+    const { pages: { applyHistoryList } } = state
+    return {
+      stateList: applyHistoryList.stateList,
+      stateListSelectOpt: applyHistoryList.stateListSelectOpt,
+      totalNum: applyHistoryList.stateListTotalNum
+    }
+  },
   dispatch => bindActionCreators({ getStateList }, dispatch)
 )
 

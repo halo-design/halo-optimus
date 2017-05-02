@@ -6,15 +6,18 @@ import Spin from 'COMPONENT/Spin'
 import * as roleManageActions from 'REDUCER/pages/roleManage'
 
 @connect(
-  state => ({
-    visible: state.pages.roleManage.bindBoxVisible,
-    pageSize: state.pages.roleManage.pageSize,
-    totalSize: state.pages.roleManage.allMenuTotalSize,
-    curPage: state.pages.roleManage.allMenuFnCurPage,
-    selectKeys: state.pages.roleManage.allMenuFnSelectKeys,
-    dataSource: state.pages.roleManage.allMenuFnCurPageItems,
-    curRoleId: state.pages.roleManage.curRoleInfo.roleId
-  }),
+  state => {
+    const { pages: { roleManage } } = state
+    return {
+      visible: roleManage.bindBoxVisible,
+      pageSize: roleManage.pageSize,
+      totalSize: roleManage.allMenuTotalSize,
+      curPage: roleManage.allMenuFnCurPage,
+      selectKeys: roleManage.allMenuFnSelectKeys,
+      dataSource: roleManage.allMenuFnCurPageItems,
+      curRoleId: roleManage.curRoleInfo.roleId
+    }
+  },
   dispatch => bindActionCreators({ ...roleManageActions }, dispatch)
 )
 

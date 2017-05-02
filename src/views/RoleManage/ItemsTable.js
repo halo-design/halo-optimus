@@ -5,13 +5,16 @@ import { Table } from 'antd'
 import { getAllRoleFnItems, clearTableItems } from 'REDUCER/pages/roleManage'
 
 @connect(
-  state => ({
-    pageSize: state.pages.roleManage.pageSize,
-    totalSize: state.pages.roleManage.tableTotalSize,
-    curPage: state.pages.roleManage.tableCurPage,
-    dataSource: state.pages.roleManage.tableCurPageItems,
-    curRoleId: state.pages.roleManage.curRoleInfo.roleId
-  }),
+  state => {
+    const { pages: { roleManage } } = state
+    return {
+      pageSize: roleManage.pageSize,
+      totalSize: roleManage.tableTotalSize,
+      curPage: roleManage.tableCurPage,
+      dataSource: roleManage.tableCurPageItems,
+      curRoleId: roleManage.curRoleInfo.roleId
+    }
+  },
   dispatch => bindActionCreators({ getAllRoleFnItems, clearTableItems }, dispatch)
 )
 

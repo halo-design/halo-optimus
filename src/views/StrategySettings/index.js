@@ -10,13 +10,16 @@ import * as strategySettingsActions from 'REDUCER/pages/strategySettings'
 const confirm = Modal.confirm
 
 @connect(
-  state => ({
-    userMenu: state.public.menu.userMenu,
-    strategyList: state.public.strategy.strategyList,
-    strategyListSelOpt: state.public.strategy.strategyListSelOpt,
-    totalNum: state.public.strategy.strategyListTotalNum,
-    addEditBoxVisible: state.pages.strategySettings.addEditBoxVisible
-  }),
+  state => {
+    const { pages: { strategySettings }, public: { menu, strategy } } = state
+    return {
+      userMenu: menu.userMenu,
+      strategyList: strategy.strategyList,
+      strategyListSelOpt: strategy.strategyListSelOpt,
+      totalNum: strategy.strategyListTotalNum,
+      addEditBoxVisible: strategySettings.addEditBoxVisible
+    }
+  },
   dispatch => bindActionCreators({ getStrategyList, ...strategySettingsActions }, dispatch)
 )
 

@@ -10,13 +10,16 @@ import * as postManageActions from 'REDUCER/pages/postManage'
 const confirm = Modal.confirm
 
 @connect(
-  state => ({
-    userMenu: state.public.menu.userMenu,
-    postList: state.pages.postManage.postListData.postList,
-    turnPageTotalNum: state.pages.postManage.postListData.turnPageTotalNum,
-    currentPage: state.pages.postManage.currentPage,
-    turnPageShowNum: state.pages.postManage.turnPageShowNum
-  }),
+  state => {
+    const { pages: { postManage }, public: { menu } } = state
+    return {
+      userMenu: menu.userMenu,
+      postList: postManage.postListData.postList,
+      turnPageTotalNum: postManage.postListData.turnPageTotalNum,
+      currentPage: postManage.currentPage,
+      turnPageShowNum: postManage.turnPageShowNum
+    }
+  },
   dispatch => bindActionCreators({ ...postManageActions }, dispatch)
 )
 

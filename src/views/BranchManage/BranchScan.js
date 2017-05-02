@@ -14,11 +14,14 @@ const Option = Select.Option
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 @connect(
-  state => ({
-    userMenu: state.public.menu.userMenu,
-    selectedBranch: state.pages.branchManage.selectedObject,
-    branchNodes: state.public.branchTree.selectTreeBranchList
-  }),
+  state => {
+    const { pages: { branchManage }, public: { menu, branchTree } } = state
+    return {
+      userMenu: menu.userMenu,
+      selectedBranch: branchManage.selectedObject,
+      branchNodes: branchTree.selectTreeBranchList
+    }
+  },
   dispatch => bindActionCreators({ ...branchScanActions }, dispatch)
 )
 

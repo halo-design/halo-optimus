@@ -11,12 +11,15 @@ import { getCheckList, checkDecide } from 'REDUCER/pages/checkList'
 const FormItem = Form.Item
 
 @connect(
-  state => ({
-    userMenu: state.public.menu.userMenu,
-    checkList: state.pages.checkList.checkList,
-    checkListSelectOpt: state.pages.checkList.checkListSelectOpt,
-    totalNum: state.pages.checkList.checkListTotalNum
-  }),
+  state => {
+    const { pages: { checkList }, public: { menu } } = state
+    return {
+      userMenu: menu.userMenu,
+      checkList: checkList.checkList,
+      checkListSelectOpt: checkList.checkListSelectOpt,
+      totalNum: checkList.checkListTotalNum
+    }
+  },
   dispatch => bindActionCreators({ getCheckList, checkDecide }, dispatch)
 )
 

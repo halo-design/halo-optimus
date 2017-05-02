@@ -6,11 +6,14 @@ import { setRelation } from 'REDUCER/pages/reviewSettings'
 import { getStrategyList } from 'REDUCER/public/strategy'
 
 @connect(
-  state => ({
-    strategyList: state.public.strategy.strategyList,
-    strategyListSelOpt: state.public.strategy.strategyListSelOpt,
-    totalNum: state.public.strategy.strategyListTotalNum
-  }),
+  state => {
+    const { public: { strategy } } = state
+    return {
+      strategyList: strategy.strategyList,
+      strategyListSelOpt: strategy.strategyListSelOpt,
+      totalNum: strategy.strategyListTotalNum
+    }
+  },
   dispatch => bindActionCreators({ setRelation, getStrategyList }, dispatch)
 )
 

@@ -5,12 +5,15 @@ import { Row, Col, Button, Modal } from 'antd'
 import { closePreviewUser } from 'REDUCER/pages/userManage'
 
 @connect(
-  state => ({
-    visible: state.pages.userManage.previewBox.visible,
-    level: state.public.config.level,
-    certType: state.public.config.certType,
-    info: state.pages.userManage.previewBox.info
-  }),
+  state => {
+    const { pages: { userManage }, public: { config } } = state
+    return {
+      visible: userManage.previewBox.visible,
+      level: config.level,
+      certType: config.certType,
+      info: userManage.previewBox.info
+    }
+  },
   dispatch => bindActionCreators({ closePreviewUser }, dispatch)
 )
 

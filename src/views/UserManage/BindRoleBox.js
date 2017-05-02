@@ -9,13 +9,16 @@ const FormItem = Form.Item
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 @connect(
-  state => ({
-    visible: state.pages.userManage.bindRoleBox.visible,
-    treeNodes: state.public.bindRole.selectRoleTreeList,
-    selectedRoleList: state.public.bindRole.selectedRoleList,
-    allSelectRoleList: state.public.bindRole.allSelectRoleList,
-    info: state.pages.userManage.bindRoleBox.info
-  }),
+  state => {
+    const { pages: { userManage }, public: { bindRole } } = state
+    return {
+      visible: userManage.bindRoleBox.visible,
+      treeNodes: bindRole.selectRoleTreeList,
+      selectedRoleList: bindRole.selectedRoleList,
+      allSelectRoleList: bindRole.allSelectRoleList,
+      info: userManage.bindRoleBox.info
+    }
+  },
   dispatch => bindActionCreators({ closeBindRole, updateSelectedRole, userRoleAssociation }, dispatch)
 )
 
