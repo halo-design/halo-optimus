@@ -8,7 +8,7 @@ const resolve = dir => path.join(__dirname, '..', dir)
 
 module.exports = {
   entry: {
-    app: './src/core/entry.js',
+    app: './src/entry/index.js',
     vendor: [
       'react',
       'redux',
@@ -56,6 +56,7 @@ module.exports = {
       COMPONENT  : resolve('src/components'),
       CONSTANT   : resolve('src/constants'),
       CORE       : resolve('src/core'),
+      STORE       : resolve('src/store'),
       GLOBAL     : resolve('src/globals'),
       IMAGE      : resolve('src/assets/images'),
       LAYOUT     : resolve('src/layouts'),
@@ -70,7 +71,7 @@ module.exports = {
     rules: [{
       test: /\.(js|jsx)$/,
       loader: 'eslint-loader',
-      enforce: "pre",
+      enforce: 'pre',
       include: [resolve('src'), resolve('test')],
       options: {
         formatter: require('eslint-friendly-formatter')

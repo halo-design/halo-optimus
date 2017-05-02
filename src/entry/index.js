@@ -16,26 +16,26 @@ if (isIE) {
     require('es5-shim')
     require('es6-shim')
     require('isomorphic-fetch')
-    require('./app')
+    require('CORE/main')
   }, 'es5es6fetch')
 } else {
   if (!window.Promise && window.fetch) {
     require.ensure('es6-promise', require => {
       require('es6-promise').polyfill()
-      require('./app')
+      require('CORE/main')
     }, 'es6')
   } else if (window.Promise && !window.fetch) {
     require.ensure('isomorphic-fetch', require => {
       require('isomorphic-fetch')
-      require('./app')
+      require('CORE/main')
     }, 'fetch')
   } else if (!window.Promise && !window.fetch) {
     require.ensure(['es6-promise', 'isomorphic-fetch'], require => {
       require('es6-promise').polyfill()
       require('isomorphic-fetch')
-      require('./app')
+      require('CORE/main')
     }, 'es6fetch')
   } else {
-    require('./app')
+    require('CORE/main')
   }
 }

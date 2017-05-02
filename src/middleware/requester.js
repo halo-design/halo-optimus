@@ -148,7 +148,7 @@ const requestSuccess = (next, actionWith, successType, json, success, url) => {
         onOk: onClose => {
           // 数据校验失败返回登录页
           if (errorCode === 'BLEC0001' || errorCode === 'SYEC0002') {
-            window.location.replace('#/login')
+            window.location.replace('/')
           }
           isError = false
           NProgress.done()
