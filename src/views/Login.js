@@ -67,7 +67,7 @@ class Login extends React.Component {
     if (this.state.userName.trim() === '') {
       message.error('请输入用户名！')
     } else if (this.state.pswd.trim() === '') {
-      message.error('请输入密码！')
+      message.error('请输入登录密码！')
     } else if (this.state.vcode.trim() === '') {
       message.error('请输入验证码！')
     } else {

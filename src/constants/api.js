@@ -1,4 +1,6 @@
-const RMU = '/inmanage/'
+import settings from './config'
+
+const RMU = `/${settings.rootPath}/`
 
 export default {
   // 登录
