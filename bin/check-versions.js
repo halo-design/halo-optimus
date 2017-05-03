@@ -5,14 +5,14 @@ const packageConfig = require('../package.json')
 const exec = cmd => require('child_process').execSync(cmd).toString().trim()
 
 let versionRequirements = [{
-    name: 'node',
-    currentVersion: semver.clean(process.version),
-    versionRequirement: packageConfig.engines.node
-  }, {
-    name: 'npm',
-    currentVersion: exec('npm --version'),
-    versionRequirement: packageConfig.engines.npm
-  }]
+  name: 'node',
+  currentVersion: semver.clean(process.version),
+  versionRequirement: packageConfig.engines.node
+}, {
+  name: 'npm',
+  currentVersion: exec('npm --version'),
+  versionRequirement: packageConfig.engines.npm
+}]
 
 module.exports = () => {
   let warnings = []

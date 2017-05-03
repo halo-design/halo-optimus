@@ -52,19 +52,19 @@ module.exports = {
     ],
     alias: {
       // 自定义路径别名
-      ASSET      : resolve('src/assets'),
-      COMPONENT  : resolve('src/components'),
-      CONSTANT   : resolve('src/constants'),
-      CORE       : resolve('src/core'),
-      STORE       : resolve('src/store'),
-      GLOBAL     : resolve('src/globals'),
-      IMAGE      : resolve('src/assets/images'),
-      LAYOUT     : resolve('src/layouts'),
-      MIDDLEWARE : resolve('src/middleware'),
-      REDUCER    : resolve('src/reducers'),
-      STYLE      : resolve('src/assets/styles'),
-      UTIL       : resolve('src/utils'),
-      VIEW       : resolve('src/views')
+      ASSET: resolve('src/assets'),
+      COMPONENT: resolve('src/components'),
+      CONSTANT: resolve('src/constants'),
+      CORE: resolve('src/core'),
+      STORE: resolve('src/store'),
+      GLOBAL: resolve('src/globals'),
+      IMAGE: resolve('src/assets/images'),
+      LAYOUT: resolve('src/layouts'),
+      MIDDLEWARE: resolve('src/middleware'),
+      REDUCER: resolve('src/reducers'),
+      STYLE: resolve('src/assets/styles'),
+      UTIL: resolve('src/utils'),
+      VIEW: resolve('src/views')
     }
   },
   module: {

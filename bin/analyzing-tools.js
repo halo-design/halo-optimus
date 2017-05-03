@@ -19,20 +19,20 @@ exports.isEmptyObject = obj => {
   return true
 }
 
-exports.deleteFolder = dir => {  
+exports.deleteFolder = dir => {
   let files = []
-  if (fs.existsSync(dir)) {  
+  if (fs.existsSync(dir)) {
     files = fs.readdirSync(dir)
-    files.forEach((file, index) => {  
-      var curPath = path.join(dir, file) 
+    files.forEach((file, index) => {
+      var curPath = path.join(dir, file)
       if (fs.statSync(curPath).isDirectory()) {
         exports.deleteFolder(curPath)
-      } else { 
-        fs.unlinkSync(curPath)  
-      }  
+      } else {
+        fs.unlinkSync(curPath)
+      }
     })
-    fs.rmdirSync(dir) 
-  }  
+    fs.rmdirSync(dir)
+  }
 }
 
 exports.writeJSON = (path, obj) => {
@@ -61,9 +61,9 @@ exports.readDir = (rootPath, relPath, cb) => {
 const getInfo = str => {
   const arr = str.split('.')
   const len = arr.length
-  const hasHash = len > 2 ? true : false;
+  const hasHash = len > 2
   return {
-    name: hasHash ? arr.slice(0,  len - 2).join('.') : arr[0],
+    name: hasHash ? arr.slice(0, len - 2).join('.') : arr[0],
     suffix: hasHash ? arr[len - 1] : arr[1],
     hash: hasHash ? arr[len - 2] : ''
   }
@@ -122,7 +122,7 @@ exports.deleteEmptyProperty = object => {
     var value = object[key]
     if (typeof value === 'object') {
       if (Array.isArray(value)) {
-        if (value.length == 0) {
+        if (value.length === 0) {
           delete object[key]
         }
       } else {
@@ -159,6 +159,7 @@ exports.compare = opts => {
     modifiedList[e] = {}
     const tar = targetData[e]
     const old = sourceData[e]
+    let key
     for (key in tar) {
       if (key in old) {
         const tarItem = tar[key]
@@ -179,12 +180,12 @@ exports.compare = opts => {
             hashChange = {
               oldHash,
               tarHash,
-              change: oldHash === tarHash ? false : true
+              change: oldHash !== tarHash
             }
           }
           const oldSize = (oldItem.size / 1024).toFixed(3)
           const tarSize = (tarItem.size / 1024).toFixed(3)
-          const sizeDiff =((tarItem.size - oldItem.size) / 1024).toFixed(3)
+          const sizeDiff = ((tarItem.size - oldItem.size) / 1024).toFixed(3)
           const sizeChange = {
             oldSize,
             tarSize,
@@ -206,6 +207,7 @@ exports.compare = opts => {
     removeList[e] = {}
     const tar = targetData[e]
     const old = sourceData[e]
+    let key
     for (key in old) {
       if (!tar[key]) {
         removeList[e][key] = old[key]
@@ -239,8 +241,10 @@ exports.distDiffer = (map, outPath) => {
   const bundleList = merge(data.addList, data.modifiedList)
   const incPath = getFullPath(outPath)
   if (!exports.isEmptyObject(bundleList)) {
+    let key
     for (key in bundleList) {
       const curList = bundleList[key]
+      let itm
       for (itm in curList) {
         const item = curList[itm]
         const subDir = key === 'static' ? '' : key
@@ -255,5 +259,3 @@ exports.distDiffer = (map, outPath) => {
     console.log(chalk.yellow('No files available for replication!'))
   }
 }
-
-

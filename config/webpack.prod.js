@@ -30,7 +30,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     new ExtractTextPlugin({
       filename: assetsPath(`${assets.cssDir}/[name].[${settings.cssHashType}].css`),
-      allChunks : true
+      allChunks: true
     }),
     new OptimizeCSSPlugin(),
     new HtmlWebpackPlugin({
@@ -45,7 +45,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       chunksSortMode: 'dependency'
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      names : ['vendor', 'manifest']
+      names: ['vendor', 'manifest']
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, '../public'),
