@@ -27,7 +27,9 @@ const aCity = {11: '北京', 12: '天津', 13: '河北', 14: '山西', 15: '内�
   dispatch => bindActionCreators({ ...userManageAction }, dispatch)
 )
 
-class BranchAdd extends React.Component {
+@Form.create()
+
+export default class BranchAdd extends React.Component {
 
   constructor (props) {
     super(props)
@@ -621,5 +623,3 @@ class BranchAdd extends React.Component {
     )
   }
 }
-
-export default Form.create()(BranchAdd)

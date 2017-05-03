@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { Form, Input, Icon, message } from 'antd'
 const FormItem = Form.Item
 
-class InputSearch extends Component {
+@Form.create()
+
+export default class InputSearch extends Component {
 
   render () {
     const { form, placeholder, initialValue, onSearch } = this.props
@@ -38,4 +40,3 @@ class InputSearch extends Component {
   }
 }
 
-export default Form.create()(InputSearch)

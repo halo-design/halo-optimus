@@ -23,7 +23,9 @@ const FormItem = Form.Item
   dispatch => bindActionCreators({ getCheckList, checkDecide }, dispatch)
 )
 
-class CheckList extends React.Component {
+@Form.create()
+
+export default class CheckList extends React.Component {
 
   constructor (props) {
     super(props)
@@ -303,4 +305,3 @@ class CheckList extends React.Component {
   }
 }
 
-export default Form.create()(CheckList)

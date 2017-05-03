@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter, NavLink } from 'react-router-dom'
-// import Scroll from 'COMPONENT/Scroll'
 import { selectMenu } from 'REDUCER/public/menu'
 
 @connect(

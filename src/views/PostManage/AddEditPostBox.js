@@ -20,7 +20,9 @@ const RadioGroup = Radio.Group
   dispatch => bindActionCreators({ closeAddEditBox, addPostList, modifyPost }, dispatch)
 )
 
-class AddEditPostBox extends React.Component {
+@Form.create()
+
+export default class AddEditPostBox extends React.Component {
 
   constructor (props) {
     super(props)
@@ -200,5 +202,3 @@ class AddEditPostBox extends React.Component {
     )
   }
 }
-
-export default Form.create()(AddEditPostBox)

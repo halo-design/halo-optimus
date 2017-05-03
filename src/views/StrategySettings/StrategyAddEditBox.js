@@ -13,7 +13,9 @@ const RadioGroup = Radio.Group
   dispatch => bindActionCreators({ ...strategySettingsActions }, dispatch)
 )
 
-class StrategyAddEditBox extends React.Component {
+@Form.create()
+
+export default class StrategyAddEditBox extends React.Component {
 
   constructor (props) {
     super(props)
@@ -255,5 +257,3 @@ class StrategyAddEditBox extends React.Component {
     )
   }
 }
-
-export default Form.create()(StrategyAddEditBox)

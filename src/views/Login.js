@@ -16,7 +16,9 @@ import 'STYLE/pages/login.scss'
   dispatch => bindActionCreators({ ...loginAction }, dispatch)
 )
 
-class Login extends React.Component {
+@withRouter
+
+export default class Login extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -139,4 +141,3 @@ class Login extends React.Component {
   }
 }
 
-export default withRouter(Login)

@@ -17,7 +17,9 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
   dispatch => bindActionCreators({ setAddRoleBoxVisible, addRole }, dispatch)
 )
 
-class AddRoleBox extends React.Component {
+@Form.create()
+
+export default class AddRoleBox extends React.Component {
 
   constructor (props) {
     super(props)
@@ -225,5 +227,3 @@ class AddRoleBox extends React.Component {
     )
   }
 }
-
-export default Form.create()(AddRoleBox)

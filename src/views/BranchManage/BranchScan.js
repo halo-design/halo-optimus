@@ -25,7 +25,9 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
   dispatch => bindActionCreators({ ...branchScanActions }, dispatch)
 )
 
-class BranchScan extends React.Component {
+@Form.create()
+
+export default class BranchScan extends React.Component {
 
   constructor (props) {
     super(props)
@@ -389,4 +391,3 @@ class BranchScan extends React.Component {
   }
 }
 
-export default Form.create()(BranchScan)

@@ -22,7 +22,9 @@ const Option = Select.Option
   dispatch => bindActionCreators({ ...userManageAction }, dispatch)
 )
 
-class UserQuery extends React.Component {
+@Form.create()
+
+export default class UserQuery extends React.Component {
 
   constructor (props) {
     super(props)
@@ -208,5 +210,3 @@ class UserQuery extends React.Component {
     )
   }
 }
-
-export default Form.create()(UserQuery)

@@ -22,7 +22,9 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
   dispatch => bindActionCreators({ closeBindRole, updateSelectedRole, userRoleAssociation }, dispatch)
 )
 
-class BindRoleBox extends React.Component {
+@Form.create()
+
+export default class BindRoleBox extends React.Component {
 
   onClose () {
     this.props.closeBindRole()
@@ -102,4 +104,3 @@ class BindRoleBox extends React.Component {
   }
 }
 
-export default Form.create()(BindRoleBox)
