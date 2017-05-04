@@ -23,7 +23,7 @@ server.get('*', (req, res) => {
 server.listen(5000, error => {
   if (error) {
     throw error
-  } 
-  console.log(chalk.green(`Server is running at ${uri}`))  
+  }
+  console.log(chalk.green(`Server is running at ${uri}`))
   opn(uri)
 })
