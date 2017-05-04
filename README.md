@@ -1,2 +1,2 @@
-# react-halo-modern
+# react-halo-future
 Scaffolding with the latest react components
