@@ -121,7 +121,7 @@ body {
     @include bgWhite;
     margin-top: -210px;
     border-radius: 5px;
-    animation: zoomIn .3s .2s both;
+    animation: zoomIn .3s .2s both cubic-bezier(0.42, 0.96, 0.6, 1.22);
     box-shadow: 0 12px 24px -6px rgba(0,0,0,.34);
     
     .close {

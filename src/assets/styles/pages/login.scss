@@ -27,12 +27,11 @@ $foorShadow: 0 18px 38px -4px rgba(21, 21, 21, 0.18);
     width: 880px;
     height: 460px;
     padding: 40px 46px 0 570px;
-    background-color: #fff;
     margin: -280px 0 0 -440px;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: $foorShadow;
-    animation: bounceInDown .3s .3s both;
+    animation: flipInX .6s .2s both;
     background: #fff url(setBg("login_bg.jpg")) no-repeat left center;
     background-size: 524px 460px;
 
