@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom'
 export default class Mismatch extends React.Component {
   render () {
     const { isLogin } = this.props
-    return (<Redirect to={isLogin === 'false' ? '/login' : '/home'} />)
+    return <Redirect to={isLogin === 'false' ? '/login' : '/home'} />
   }
 
 }
