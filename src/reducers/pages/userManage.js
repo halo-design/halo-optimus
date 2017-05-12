@@ -1,7 +1,7 @@
 import { getRoleByUserAction } from '../fetch/role'
 import { userPageByBrhAction, addUserAction, updateUserAction, delUserAction } from '../fetch/user'
 import NProgress from 'nprogress'
-import { message, notification } from 'antd'
+import { NotiSuccess, NotiWarning, MsgWarning } from 'UTIL/info'
 
 export const PAGE_USERS = 'PAGE_USERS'
 export const SET_PREV_USER = 'SET_PREV_USER'
@@ -57,7 +57,7 @@ export const previewUser = (num, success, fail) => (dispatch, getState) => {
     dispatch(setPreviewInfo(action.data.body))
     if (success) success()
   }, () => {
-    message.warning('获取失败！')
+    MsgWarning('获取失败！')
     if (fail) fail()
   })
 }
@@ -86,7 +86,7 @@ export const modifyUser = (num, success, fail) => (dispatch, getState) => {
     dispatch(applyInitVal(action.data.body))
     if (success) success()
   }, () => {
-    message.warning('获取失败！')
+    MsgWarning('获取失败！')
     if (fail) fail()
   })
 }
@@ -116,13 +116,13 @@ export const addUser = (params, success, fail) => (dispatch, getState) => {
         dispatch(updateSelectKeys([params.brhId]))
         dispatch(pageUsers(data))
       })
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '用户添加成功！'
       })
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '用户添加失败！'
       })
@@ -140,13 +140,13 @@ export const updateUser = (params, success, fail) => (dispatch, getState) => {
   dispatch(updateUserAction(params)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(userPageByBrh(data))
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '用户修改成功！'
       })
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '用户修改失败！'
       })
@@ -160,13 +160,13 @@ export const delUserUpdate = (userNo, brhId, curPage) => (dispatch, getState) =>
   dispatch(delUserAction(userNo)).then(action => {
     const dataBody = action.data.body
     if (dataBody.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '用户删除成功！'
       })
       dispatch(userPageByBrh({ brhId }))
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: `删除用户失败，errCode: ${dataBody.errorCode}，errMsg: ${dataBody.errorMsg}`
       })

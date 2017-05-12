@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { notification } from 'antd'
+import { NotiSuccess, NotiWarning } from 'UTIL/info'
 import { getCheckListAction, checkDecideAction } from '../fetch/check'
 
 const GET_CHECK_LIST = 'GET_CHECK_LIST'
@@ -28,13 +28,13 @@ export const checkDecide = (data, success, fail) => (dispatch, getState) => {
         currentPage: 1,
         turnPageShowNum: getState().pages.checkList.checkListSelectOpt.turnPageShowNum
       }))
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '操作成功！'
       })
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '操作失败！'
       })

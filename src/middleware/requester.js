@@ -1,7 +1,7 @@
 import { getCookie, setCookie } from 'UTIL/cookie'
 import { rootPath } from 'CONSTANT/config'
 import NProgress from 'nprogress'
-import { Modal } from 'antd'
+import { ModalError } from 'UTIL/info'
 import qs from 'qs'
 
 export const BZ_REQUESTER = Symbol('BZ REQUESTER')
@@ -52,10 +52,6 @@ export default store => next => action => {
 
   const [reqType, successType, failType] = [`[fetch]:${types}`, `[success]:${types}`, `[failed]:${types}`]
   next(actionWith({ type: reqType, url: url }))
-
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`BZ_REQUESTER action url: ${url} body: ${finalBody}`)
-  }
 
   return doRequest(req).then(json => {
     return requestSuccess(next, actionWith, successType, json, success, url)
@@ -112,7 +108,7 @@ const requestSuccess = (next, actionWith, successType, json, success, url) => {
     header.iCIFID ? setCookie('iCIFID', header.iCIFID) : setCookie('iCIFID', body.iCIFID)
     if (errorCode !== '0' && !isError) {
       isError = true
-      Modal.error({
+      ModalError({
         title: `请求失败！[${errorCode}]`,
         content: body.errorMsg,
         onOk: onClose => {
@@ -135,7 +131,7 @@ const requestError = (next, actionWith, failType, json, error, url) => {
     error()
   } else if (!isError) {
     isError = true
-    Modal.error({
+    ModalError({
       title: '请求失败！',
       onOk: onClose => {
         isError = false

@@ -1,7 +1,7 @@
 import NProgress from 'nprogress'
 import { initBranchList } from '../public/branchTree'
 import { getBranchAction, modifyBranchAction, deleteBranchAction, addBranchAction } from '../fetch/branch'
-import { message, notification } from 'antd'
+import { NotiSuccess, NotiWarning, MsgWarning } from 'UTIL/info'
 
 const RESET_FORM = 'RESET_FORM'
 const APPLY_BRANCH = 'APPLY_BRANCH'
@@ -32,7 +32,7 @@ export const changeBranchSelected = data => (dispatch, getState) => {
       NProgress.done()
     })
   } else {
-    message.warning('当前未选中机构！')
+    MsgWarning('当前未选中机构！')
     dispatch(resetForm())
   }
 }
@@ -42,13 +42,13 @@ export const branchModify = (params, success, fail) => (dispatch, getState) => {
   dispatch(modifyBranchAction(params)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(initBranchList())
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '修改成功！'
       })
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '修改失败！'
       })
@@ -63,13 +63,13 @@ export const branchDelete = (params, success, fail) => (dispatch, getState) => {
     if (action.data.body.errorCode === '0' && action.data.body.op_result !== '0') {
       dispatch(initBranchList())
       dispatch(resetForm())
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '删除成功！'
       })
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '删除失败！'
       })
@@ -85,13 +85,13 @@ export const branchAdd = (params, success, fail) => (dispatch, getState) => {
       dispatch(initBranchList())
       // 添加完毕后选中该节点
       dispatch(changeBranchSelected(params))
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '添加成功！'
       })
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '添加失败！'
       })

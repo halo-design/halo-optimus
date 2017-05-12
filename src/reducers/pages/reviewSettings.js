@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { message, notification } from 'antd'
+import { NotiSuccess, NotiWarning, MsgError } from 'UTIL/info'
 import { getBsnListAction, getStrategyAction, setRelationAction } from '../fetch/strategy'
 
 const GET_BSN_LIST = 'GET_BSN_LIST'
@@ -20,7 +20,7 @@ export const getBsnList = selectOpt => (dispatch, getState) => {
         }
       })
     } else {
-      message.error('获取列表失败！')
+      MsgError('获取列表失败！')
     }
     NProgress.done()
   })
@@ -50,7 +50,7 @@ export const getStrategy = (authId, success, fail) => (dispatch, getState) => {
       })
       if (success) success()
     } else {
-      message.error('数据获取失败！')
+      MsgError('数据获取失败！')
       if (fail) fail()
     }
   })
@@ -61,12 +61,12 @@ export const setRelation = params => (dispatch, getState) => {
     const dataBody = action.data.body
     if (dataBody.errorCode === '0') {
       dispatch(getBsnList(getState().pages.reviewSettings.bsnSelectOpt))
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '关联成功！'
       })
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '关联失败！'
       })

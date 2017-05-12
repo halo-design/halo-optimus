@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { message, notification } from 'antd'
+import { NotiSuccess, NotiWarning, MsgError } from 'UTIL/info'
 import { getRoleTree } from '../public/bindRole'
 import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction, addRoleAction, itemsBindRoleAction, delRoleAction } from '../fetch/role'
 
@@ -73,7 +73,7 @@ export const getAllRoleFnItems = (curPage, roleId, roleName, reqType) => (dispat
         dispatch(updateMenuFnPageItems(tableCurPageItems, curPage, turnPageTotalNum))
       }
     } else {
-      message.error('获取列表失败！')
+      MsgError('获取列表失败！')
     }
   })
 }
@@ -111,7 +111,7 @@ export const getInfoByRoleId = roleId => (dispatch, getState) => {
       NProgress.done()
     } else {
       NProgress.done()
-      message.error('获取信息失败！')
+      MsgError('获取信息失败！')
     }
   })
 }
@@ -127,7 +127,7 @@ export const getInfoByRoleName = (roleName, cb) => (dispatch, getState) => {
       if (cb) cb(dataBody)
     } else {
       NProgress.done()
-      message.error('获取信息失败！')
+      MsgError('获取信息失败！')
     }
   })
 }
@@ -143,7 +143,7 @@ export const updateRole = params => (dispatch, getState) => {
   dispatch(updateRoleAction(params)).then(action => {
     const dataBody = action.data.body
     if (dataBody.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '角色更新成功！'
       })
@@ -151,7 +151,7 @@ export const updateRole = params => (dispatch, getState) => {
       dispatch(getRoleTree())
       dispatch(getInfoByRoleId(params.roleId))
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '角色更新失败！'
       })
@@ -168,7 +168,7 @@ export const setAddRoleBoxVisible = state => ({
 export const addRole = (params, success, fail) => (dispatch, getState) => {
   dispatch(addRoleAction(params)).then(action => {
     if (action.data.body.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '角色添加成功！'
       })
@@ -176,7 +176,7 @@ export const addRole = (params, success, fail) => (dispatch, getState) => {
       dispatch(getRoleTree())
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '角色添加失败！'
       })
@@ -194,14 +194,14 @@ export const setBindRoleBoxVisible = state => ({
 export const itemsBindRole = (roleId, roleMenuItemRelList, success, fail) => (dispatch, getState) => {
   dispatch(itemsBindRoleAction(roleId, roleMenuItemRelList)).then(action => {
     if (action.data.body.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '功能关联成功！'
       })
       dispatch(getAllRoleFnItems(1, roleId, '', 1))
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '功能关联失败！'
       })
@@ -214,13 +214,13 @@ export const itemsBindRole = (roleId, roleMenuItemRelList, success, fail) => (di
 export const delRole = roleId => (dispatch, getState) => {
   dispatch(delRoleAction(roleId)).then(action => {
     if (action.data.body.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '角色删除成功！'
       })
       dispatch(getRoleTree())
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '角色删除失败！'
       })

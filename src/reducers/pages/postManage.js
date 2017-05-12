@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { notification } from 'antd'
+import { NotiSuccess, NotiWarning } from 'UTIL/info'
 import { postListAction, addPostListAction, modifyPostAction, delPostAction } from '../fetch/post'
 
 const SET_POST_LIST = 'SET_POST_LIST'
@@ -66,7 +66,7 @@ export const setEditPostState = params => ({
 export const addPostList = (data, success, fail) => (dispatch, getState) => {
   dispatch(addPostListAction(data)).then(action => {
     if (action.data.body.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '岗位添加成功！'
       })
@@ -74,7 +74,7 @@ export const addPostList = (data, success, fail) => (dispatch, getState) => {
       dispatch(getPostList())
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '岗位添加失败！'
       })
@@ -87,7 +87,7 @@ export const addPostList = (data, success, fail) => (dispatch, getState) => {
 export const modifyPost = (data, success, fail) => (dispatch, getState) => {
   dispatch(modifyPostAction(data)).then(action => {
     if (action.data.body.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '岗位修改成功！'
       })
@@ -95,7 +95,7 @@ export const modifyPost = (data, success, fail) => (dispatch, getState) => {
       dispatch(getPostList())
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '岗位修改失败！'
       })
@@ -108,14 +108,14 @@ export const modifyPost = (data, success, fail) => (dispatch, getState) => {
 export const deletePost = data => (dispatch, getState) => {
   dispatch(delPostAction(data)).then(action => {
     if (action.data.body.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '岗位删除成功！'
       })
       // 刷新一次岗位列表
       dispatch(getPostList())
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '岗位删除失败！'
       })

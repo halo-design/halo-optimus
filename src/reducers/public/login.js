@@ -1,6 +1,6 @@
 import { delCookies, setCookie } from 'UTIL/cookie'
 import NProgress from 'nprogress'
-import { message } from 'antd'
+import { MsgError } from 'UTIL/info'
 import md5 from 'md5'
 import API from 'CONSTANT/api'
 import { setSessionIDAction, loginAction, logoutAction } from '../fetch/login'
@@ -69,9 +69,9 @@ export const validateLogin = (data, success, fail) => (dispatch, getState) => {
       dispatch(login_OP(dataBody.cstName))
       if (success) success()
      } else {
-      dataBody.errorMsg ? 
-      message.error(dataBody.errorMsg) : 
-      message.error('登录信息有误！')
+      dataBody.errorMsg 
+      ? MsgError(dataBody.errorMsg) 
+      : MsgError('登录信息有误！')
       dispatch(loginFailed())
       dispatch(setSessionID())
       if (fail) fail()

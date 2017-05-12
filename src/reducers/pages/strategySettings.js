@@ -1,4 +1,4 @@
-import { notification } from 'antd'
+import { NotiSuccess, NotiWarning } from 'UTIL/info'
 import { getStrategyList } from '../public/strategy'
 import { addStrategyAction, editStrategyAction, deleteStrategyAction } from '../fetch/strategy'
 
@@ -20,14 +20,14 @@ const refreshStrategy = (dispatch, getState) => dispatch(getStrategyList({
 export const addStrategy = (data, success, fail) => (dispatch, getState) => {
   dispatch(addStrategyAction(data)).then(action => {
     if (action.data.body.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '策略新增成功！'
       })
       refreshStrategy(dispatch, getState)
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '策略新增失败！'
       })
@@ -40,14 +40,14 @@ export const addStrategy = (data, success, fail) => (dispatch, getState) => {
 export const editStrategy = (data, success, fail) => (dispatch, getState) => {
   dispatch(editStrategyAction(data)).then(action => {
     if (action.data.body.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '策略修改成功！'
       })
       refreshStrategy(dispatch, getState)
       if (success) success()
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '策略修改失败！'
       })
@@ -60,13 +60,13 @@ export const editStrategy = (data, success, fail) => (dispatch, getState) => {
 export const deleteStrategy = data => (dispatch, getState) => {
   dispatch(deleteStrategyAction(data)).then(action => {
     if (action.data.body.errorCode === '0') {
-      notification.success({
+      NotiSuccess({
         message: '成功',
         description: '策略删除成功！'
       })
       refreshStrategy(dispatch, getState)
     } else {
-      notification.warning({
+      NotiWarning({
         message: '失败',
         description: '策略删除失败！'
       })

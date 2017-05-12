@@ -1,4 +1,3 @@
-import { message } from 'antd'
 import { getStrategyListAction } from '../fetch/strategy'
 import NProgress from 'nprogress'
 

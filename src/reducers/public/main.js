@@ -1,4 +1,3 @@
-import { message } from 'antd'
 import { getUserConfigData, postList } from './config'
 
 const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
