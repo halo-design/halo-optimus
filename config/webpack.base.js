@@ -19,6 +19,7 @@ module.exports = {
       'react-router-dom',
       'react-transition-group/CSSTransitionGroup',
       // plugins
+      'qs',
       'md5',
       'nprogress',
       'antd/lib/button',

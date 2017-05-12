@@ -2,6 +2,7 @@ import { getCookie, setCookie } from 'UTIL/cookie'
 import { rootPath } from 'CONSTANT/config'
 import NProgress from 'nprogress'
 import { Modal } from 'antd'
+import qs from 'qs'
 
 export const BZ_REQUESTER = Symbol('BZ REQUESTER')
 
@@ -14,34 +15,6 @@ const DEFAULT_REQ_TYPE = {
   dataType: 'JSON',
   method: 'post',
   crossDomain: true
-}
-
-const Object2KeyValue = obj => {
-  if (typeof obj !== 'object') {
-    throw Error('Only transform simple Object to k-v params!')
-  }
-  let kvArray = []
-  for (let key in obj) {
-    let item = obj[key]
-    if (item instanceof Array) {
-      arrayFormatter(kvArray, key, item)
-    } else {
-      kvArray.push(`${key}=${item}`)
-    }
-  }
-  return kvArray.join('&')
-}
-
-const arrayFormatter = (tar, arrName, arr) => {
-  for (let i in arr) {
-    let son = arr[i]
-    for (let j in son) {
-      let grandson = son[j]
-      typeof grandson === 'object'
-      ? tar.push(`${arrName}[${i}][${j}]=${JSON.stringify(grandson)}`)
-      : tar.push(`${arrName}[${i}][${j}]=${grandson}`)
-    }
-  }
 }
 
 let isError = false
@@ -62,11 +35,7 @@ export default store => next => action => {
     throw new Error('Specify a string url.')
   }
 
-  if (!Array.isArray(types) || types.length !== 3) {
-    throw new Error('Expected an array of three action types.')
-  }
-
-  if (!types.every(type => typeof type === 'string')) {
+  if (typeof types !== 'string') {
     throw new Error('Expected action types to be strings.')
   }
 
@@ -81,7 +50,7 @@ export default store => next => action => {
     return finalAction
   }
 
-  const [reqType, successType, failType] = types
+  const [reqType, successType, failType] = [`[fetch]:${types}`, `[success]:${types}`, `[failed]:${types}`]
   next(actionWith({ type: reqType, url: url }))
 
   if (process.env.NODE_ENV === 'development') {
@@ -125,7 +94,7 @@ const getRequestBody = (body, header) => {
     body = {}
   }
   if (type === 'K') {
-    finalBody = Object2KeyValue(body)
+    finalBody = qs.stringify(body)
   } else if (type === 'J') {
     finalBody = JSON.stringify({body, header})
   } else {
@@ -180,8 +149,7 @@ const requestError = (next, actionWith, failType, json, error, url) => {
 
 const doRequest = request => {
   return fetch(request)
-  .then(response => response.json()
-  .then(json => ({ json, response })))
+  .then(response => response.json().then(json => ({ json, response })))
   .then(({ json, response }) => {
     if (!response.ok) {
       return Promise.reject(json)
