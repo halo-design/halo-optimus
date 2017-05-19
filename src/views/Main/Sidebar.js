@@ -32,7 +32,8 @@ class Sidebar extends React.Component {
       A001B003: 'roleManage',
       A001B004: 'postManage',
       A001B005: 'strategyManage',
-      A001B006: 'reviewManage'
+      A001B006: 'reviewManage',
+      A001B007: 'realTimeRelease'
     }
 
     const { selectMenu, parentUrl, menus } = this.props

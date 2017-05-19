@@ -162,6 +162,12 @@ $sidebarWidth : 200px;
               content: "\e630";
             }
           }
+
+          &.realTimeRelease {
+            &:after {
+              content: "\e673";
+            }
+          }
         }
 
         &.arr:after {
