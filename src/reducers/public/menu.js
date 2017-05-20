@@ -36,15 +36,18 @@ const addWithoutPNode = (id, sourceList, targetList) => {
   let sourceNode = getNodeFromList(id, sourceList, 'id', 'menus', treeNodeToMenu)
   let node = getNodeFromList(id, targetList, 'id', 'menus', treeNodeToMenu)
 
-  if (sourceNode || !node)
+  if (sourceNode || !node) {
     return
+  }
 
   sourceList.push(node)
   addWithoutPNode(node.parentId, sourceList, targetList)
 }
 
 export const initUserMenu = cb => (dispatch, getState) => {
-  let authMenu = [], userMenu = [], topMenu = []
+  let authMenu = []
+  let userMenu = []
+  let topMenu = []
   NProgress.start()
   dispatch(getMenuAction()).then(action => {
     const dataBody = action.data.body
@@ -59,10 +62,12 @@ export const initUserMenu = cb => (dispatch, getState) => {
     })
 
     authMenu = groupList(dataBody.menuList, 'id', 'parentId', 'menus', converMenu)
-    authMenu.map(data => data.level == '0' ? topMenu.push(data) : null)
+    authMenu.map(data => data.level === '0' ? topMenu.push(data) : null)
 
     let userMenuMap = {}
-    sourceList.map(item => userMenuMap[item.id] = item)
+    sourceList.map(item => {
+      userMenuMap[item.id] = item
+    })
     sourceList.map(item => item.parentId && !userMenuMap[item.parentId] ? addWithoutPNode(item.parentId, sourceList, authMenu) : null)
 
     userMenu = groupList(sourceList, 'menuId', 'menuParentId', 'menus', converMenu)
@@ -76,7 +81,6 @@ export const initUserMenu = cb => (dispatch, getState) => {
     if (cb) cb()
   })
 }
-
 
 const initialState = {
   items: [],
@@ -104,7 +108,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         currentMenu: action.currentMenu,
-        userMenu: Object.assign({}, state.userMenu, {currentMenu: action.currentMenu}) 
+        userMenu: Object.assign({}, state.userMenu, {currentMenu: action.currentMenu})
       }
 
     default:

@@ -3,7 +3,6 @@ import { getUserConfigData, postList } from './config'
 const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
 const USER_MENU_SUC = 'USER_MENU_SUC'
 
-
 export const setPasswordVisible = passwordVisible => ({
   type: CHANGE_PASSWORD,
   passwordVisible: passwordVisible
@@ -43,7 +42,7 @@ export default (state = initialState, action) => {
       const data = action.data.body
       return {
         ...state,
-        isUserMenuLoaded:true,
+        isUserMenuLoaded: true,
         currentCstIP: data.cstCurrLoginIP,
         currentLoginTime: data.cstCurrLoginTime,
         lastCstIP: data.cstLastLoginIP,

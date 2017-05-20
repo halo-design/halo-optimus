@@ -8,13 +8,12 @@ const UPDATE_USER_ROLE = 'UPDATE_USER_ROLE'
 const UPDATE_ROLE_TREE_LIST = 'UPDATE_ROLE_TREE_LIST'
 const UPDATE_ROLE_TREE = 'UPDATE_ROLE_TREE'
 
-
 // 用户绑定角色所需要数据的类型
 const converTreeSelectRole = roleList => ({
   label: roleList.roleName,
   value: roleList.roleId,
   key: roleList.roleId,
-  children: [] 
+  children: []
 })
 
 // 查询所有角色时，树所需要的类型
@@ -34,7 +33,7 @@ export const getUserRoleTree = userNo => (dispatch, getState) => {
     let selectKeys = []
     let userRoleRelList = dataBody.userRoleRelList
     userRoleRelList.map(item => {
-      item.state == '1' ? selectKeys.push(item.roleId) : null
+      item.state === '1' ? selectKeys.push(item.roleId) : null
     })
     dispatch(updateSelectedRole(selectKeys))
     let allSelectRoleList = dataBody.userRoleRelList
@@ -53,7 +52,7 @@ export const getUserRoleTree = userNo => (dispatch, getState) => {
 export const userRoleAssociation = (userNo, userName, roleList) => (dispatch, getState) => {
   dispatch(userRoleAssociationAction(userNo, userName, roleList)).then(action => {
     const dataBody = action.data.body
-    if (dataBody.errorCode == '0') {
+    if (dataBody.errorCode === '0') {
       NotiSuccess({
         message: '成功',
         description: '綁定成功！'

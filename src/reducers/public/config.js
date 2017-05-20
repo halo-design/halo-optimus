@@ -13,13 +13,13 @@ const setUserTypeLevel = (certType, level) => ({
 export const getUserConfigData = () => (dispatch, getState) => {
   dispatch(getUserConfigDataAction('')).then(action => {
     let paramList = action.data.body.paramList
-    let levelList = [],
-        certTypeList = []
-    if (paramList) {  
+    let levelList = []
+    let certTypeList = []
+    if (paramList) {
       paramList.filter(item => {
-        if (item.paramType == 'level') {
+        if (item.paramType === 'level') {
           levelList.push(item)
-        } else if (item.paramType == 'certType') {
+        } else if (item.paramType === 'certType') {
           certTypeList.push(item)
         }
       })
@@ -31,13 +31,12 @@ export const getUserConfigData = () => (dispatch, getState) => {
 // 查询所有岗位
 export const postList = data => (dispatch, getState) => {
   dispatch(postListAction(data)).then(action => {
-      dispatch({
-        type: POST_LIST,
-        data: action.data.body
-      })
+    dispatch({
+      type: POST_LIST,
+      data: action.data.body
+    })
   })
 }
-
 
 const initialState = {
   certType: [],

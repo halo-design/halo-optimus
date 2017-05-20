@@ -50,7 +50,7 @@ export default store => next => action => {
     return finalAction
   }
 
-  const [reqType, successType, failType] = [`[fetch]:${types}`, `[success]:${types}`, `[failed]:${types}`]
+  const [reqType, successType, failType] = [`[FETCH]: ${types}`, `[SUCCESS]: ${types}`, `[FAILED]: ${types}`]
   next(actionWith({ type: reqType, url: url }))
 
   return doRequest(req).then(json => {

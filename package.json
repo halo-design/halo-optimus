@@ -18,7 +18,7 @@
     "upload:diff": "gulp diff"
   },
   "dependencies": {
-    "antd": "^2.10.0",
+    "antd": "^2.10.1",
     "es5-shim": "^4.5.9",
     "es6-promise": "^4.1.0",
     "es6-shim": "^0.35.3",

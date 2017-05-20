@@ -10,7 +10,6 @@ export const LOGONOUT = 'LOGONOUT'
 export const SETSESSIONID = 'SETSESSIONID'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
 
-
 export const setSesionId_OP = data => {
   const checkCodeSrc = `${API.CHECKCODE_URL}?nocache=${Date.now()}&iCIFID=${data}`
   return {
@@ -52,7 +51,7 @@ export const logout = () => (dispatch, getState) => {
   dispatch(logout_OP())
 }
 
-//验证登陆
+// 验证登陆
 export const validateLogin = (data, success, fail) => (dispatch, getState) => {
   const newData = {
     loginName: data.userName,
@@ -63,22 +62,23 @@ export const validateLogin = (data, success, fail) => (dispatch, getState) => {
   dispatch(loginAction(newData)).then(action => {
     NProgress.done()
     const dataBody = action.data.body
-    if (dataBody.result == '1') {
+    if (dataBody.result === '1') {
       setCookie('eCIFID', dataBody.cstNo)
       setCookie('cstName', dataBody.cstName)
       dispatch(login_OP(dataBody.cstName))
-      if (success) success()
-     } else {
-      dataBody.errorMsg 
-      ? MsgError(dataBody.errorMsg) 
+      if (success) {
+        success()
+      }
+    } else {
+      dataBody.errorMsg
+      ? MsgError(dataBody.errorMsg)
       : MsgError('登录信息有误！')
       dispatch(loginFailed())
       dispatch(setSessionID())
       if (fail) fail()
-     }
+    }
   })
 }
-
 
 const initialState = {
   isLogin: 'false',

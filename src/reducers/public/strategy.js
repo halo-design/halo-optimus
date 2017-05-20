@@ -3,7 +3,6 @@ import NProgress from 'nprogress'
 
 const SET_STRATEGY_LIST = 'SET_STRATEGY_LIST'
 
-
 export const getStrategyList = selOpt => (dispatch, getState) => {
   NProgress.start()
   dispatch(getStrategyListAction(selOpt)).then(action => {
@@ -32,7 +31,7 @@ export const getStrategyList = selOpt => (dispatch, getState) => {
     })
     NProgress.done()
   })
-} 
+}
 
 const initialState = {
   strategyList: [],

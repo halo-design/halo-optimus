@@ -5,7 +5,6 @@ import { getBranchListAction } from '../fetch/branch'
 const GET_BRANCH_LIST = 'GET_BRANCH_LIST'
 const USER_GROUP_BRANCH = 'USER_GROUP_BRANCH'
 
-
 const getBranch = branch => ({
   label: branch.brhName,
   value: branch.brhId,
@@ -30,7 +29,7 @@ export const initBranchList = cb => (dispatch, getState) => {
     // 新增的时候查机构列表
     dispatch({
       type: GET_BRANCH_LIST,
-      data: { 
+      data: {
         selectTreeBranchList
       }
     })
@@ -54,7 +53,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-        
+
     case GET_BRANCH_LIST:
       return {
         ...state,
