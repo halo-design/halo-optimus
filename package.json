@@ -9,13 +9,13 @@
     "clean": "rimraf dist",
     "dev": "node bin/dev-server.js",
     "build": "node bin/compile.js",
-    "shot": "node bin/snapshots.js",
-    "comp": "node bin/compare.js",
+    "shot": "gulp snapshot",
+    "comp": "gulp compare",
     "repo": "node bin/server-report.js",
-    "diff": "node bin/dist-different.js",
+    "diff": "gulp dist-different",
     "lint": "eslint --ext .js,.jsx src",
-    "upload": "gulp deploy",
-    "upload:diff": "gulp diff"
+    "upload": "gulp upload",
+    "upload:diff": "gulp upload-diff"
   },
   "dependencies": {
     "antd": "^2.10.1",

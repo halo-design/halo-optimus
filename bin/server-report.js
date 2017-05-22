@@ -14,11 +14,12 @@ const viewFn = pug.compileFile('./static/report.pug')
 const Data = tools.readJSON(path.join(rootPath, 'data/compare.json'))
 tools.deleteEmptyProperty(Data)
 const reportView = viewFn(Data)
+const finalReport = layout.replace('<div id="app"></div>', reportView)
 
 const uri = `http://${ip.address()}:5000`
 server.use('/static', express.static(path.join(rootPath, 'static')))
 server.get('*', (req, res) => {
-  res.send(layout.replace('<div id="app"></div>', reportView))
+  res.send(finalReport)
 })
 server.listen(5000, error => {
   if (error) {
