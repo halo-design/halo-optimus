@@ -10,5 +10,4 @@ export default class Mismatch extends React.Component {
     const { isLogin } = this.props
     return <Redirect to={isLogin === 'false' ? '/login' : '/home'} />
   }
-
 }
