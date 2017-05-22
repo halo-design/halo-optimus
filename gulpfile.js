@@ -1,12 +1,10 @@
 const fs = require('fs')
-const ip = require('ip')
 const opn = require('opn')
 const pug = require('pug')
 const gulp = require('gulp')
 const path = require('path')
 const chalk = require('chalk')
 const sftp = require('gulp-sftp')
-const express = require('express')
 const tools = require('./bin/analyzing-tools')
 
 gulp.task('upload', () => 
@@ -14,7 +12,7 @@ gulp.task('upload', () =>
   .pipe(sftp({
     host: '139.224.128.69',
     auth: 'nginxAdmin',
-    remotePath: '/home/nginx/www/ydkf/inmanage/tmp'
+    remotePath: '/home/nginx/www/ydkf/inmanage'
   }))
 )
 
@@ -24,7 +22,7 @@ gulp.task('upload-diff', () =>
     host: '139.224.128.69',
     user: 'nginx',
     auth: 'nginxAdmin',
-    remotePath: '/home/nginx/www/ydkf/inmanage/tmp'
+    remotePath: '/home/nginx/www/ydkf/inmanage'
   }))
 )
 
@@ -57,8 +55,7 @@ gulp.task('compare', () => {
   }
 })
 
-gulp.task('server-report', () => {
-  const server = express()
+gulp.task('report', () => {
   const rootPath = path.resolve()
   const layout = fs.readFileSync('./static/report.html', 'utf8')
   const viewFn = pug.compileFile('./static/report.pug')
@@ -66,19 +63,8 @@ gulp.task('server-report', () => {
   tools.deleteEmptyProperty(Data)
   const reportView = viewFn(Data)
   const finalReport = layout.replace('<div id="app"></div>', reportView)
-
-  const uri = `http://${ip.address()}:5000`
-  server.use('/static', express.static(path.join(rootPath, 'static')))
-  server.get('*', (req, res) => {
-    res.send(finalReport)
-  })
-  server.listen(5000, error => {
-    if (error) {
-      throw error
-    }
-    console.log(chalk.green(`Server is running at ${uri}`))
-    opn(uri)
-  })
+  fs.writeFileSync('./data/compareReport.html', finalReport)
+  opn('./data/compareReport.html')
 })
 
-gulp.task('compare-report', ['compare', 'server-report'])
+gulp.task('compare-report', ['compare', 'report'])

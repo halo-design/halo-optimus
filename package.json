@@ -10,7 +10,6 @@
     "dev": "node bin/dev-server.js",
     "build": "node bin/compile.js",
     "shot": "gulp snapshot",
-    "repo": "gulp server-report",
     "diff": "gulp dist-different",
     "comp": "gulp compare-report",
     "lint": "eslint --ext .js,.jsx src",
