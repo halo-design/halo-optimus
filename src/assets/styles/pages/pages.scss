@@ -1,0 +1,21 @@
+.upgradeManage {
+  .subNoData {
+    text-align: center;
+  }
+
+  .subList {
+    tr {
+      td {
+        padding: 10px;
+
+        &.panel {
+          text-align: center;
+
+          a {
+            margin: 0 10px;
+          }
+        }
+      }
+    }
+  }
+}

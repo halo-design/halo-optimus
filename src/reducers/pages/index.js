@@ -8,6 +8,7 @@ import strategySettings from './strategySettings'
 import checkList from './checkList'
 import checkHistoryList from './checkHistoryList'
 import applyHistoryList from './applyHistoryList'
+import updateManage from './updateManage'
 
 const pagesReducer = combineReducers({
   branchManage,
@@ -18,7 +19,8 @@ const pagesReducer = combineReducers({
   strategySettings,
   checkList,
   checkHistoryList,
-  applyHistoryList
+  applyHistoryList,
+  updateManage
 })
 
 export default pagesReducer

@@ -33,3 +33,13 @@ export const str2json = str => {
   })
   return jsonArr
 }
+
+export const releaseFilter = record => record === '0' ? '待发布' : record === '1' ? '灰度发布' : '正式发布'
+
+export const enterpriseFilter = record => record === '0' ? '企业包' : '正式包'
+
+export const upgradeTypeFilter = record => record === '1' ? '单次提醒' : '多次提醒'
+
+export const platformFilter = record => record === '1' ? 'Android' : 'IOS'
+
+export const releaseStatusFilter = record => record === '1' ? '发布中' : record === '2' ? '已结束' : '暂停'

@@ -16,6 +16,7 @@ import StrategySettings from '../StrategySettings/sync'
 import CheckList from '../CheckList/sync'
 import CheckHistoryList from '../CheckHistoryList/sync'
 import ApplyHistoryList from '../ApplyHistoryList/sync'
+import UpgradeManage from '../UpgradeManage/sync'
 
 @connect(
   null,
@@ -55,6 +56,7 @@ export default class Main extends React.Component {
               <Route path='/home/checkList' component={CheckList} />
               <Route path='/home/checkHistoryList' component={CheckHistoryList} />
               <Route path='/home/pendHistoryList' component={ApplyHistoryList} />
+              <Route path='/home/upgradeManage' component={UpgradeManage} />
               <Route component={Welcome} />
             </Switch>
           </div>
