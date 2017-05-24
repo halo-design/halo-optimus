@@ -1,60 +1,31 @@
-import API from 'CONSTANT/api'
-import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
+import { getFetch } from 'CONSTANT/api'
 
-export const getBsnListAction = selectOpt => ({
-  [BZ_REQUESTER]: {
-    types: 'REL_MEUITM',
-    url: API.GET_BSN_LIST_URL,
-    body: selectOpt
+export const getBsnListAction = data => getFetch('GET_BSN_LIST_URL', {
+  body: data
+})
+
+export const getStrategyAction = authId => getFetch('GET_STRATEGY_URL', {
+  body: {
+    authId
   }
 })
 
-export const getStrategyAction = authId => ({
-  [BZ_REQUESTER]: {
-    types: 'REL_MEUITM',
-    url: API.GET_STRATEGY_URL,
-    body: {
-      authId
-    }
-  }
+export const getStrategyListAction = data => getFetch('GET_STRATEGY_LIST_URL', {
+  body: data
 })
 
-export const getStrategyListAction = params => ({
-  [BZ_REQUESTER]: {
-    types: 'REL_MEUITM',
-    url: API.GET_STRATEGY_LIST_URL,
-    body: params
-  }
+export const setRelationAction = data => getFetch('SET_CONNECTION_URL', {
+  body: data
 })
 
-export const setRelationAction = params => ({
-  [BZ_REQUESTER]: {
-    types: 'REL_MEUITM',
-    url: API.SET_CONNECTION_URL,
-    body: params
-  }
+export const addStrategyAction = data => getFetch('ADD_STRATEGY_URL', {
+  body: data
 })
 
-export const addStrategyAction = params => ({
-  [BZ_REQUESTER]: {
-    types: 'REL_MEUITM',
-    url: API.ADD_STRATEGY_URL,
-    body: params
-  }
+export const editStrategyAction = data => getFetch('EDIT_STRATEGY_URL', {
+  body: data
 })
 
-export const editStrategyAction = params => ({
-  [BZ_REQUESTER]: {
-    types: 'REL_MEUITM',
-    url: API.EDIT_STRATEGY_URL,
-    body: params
-  }
-})
-
-export const deleteStrategyAction = params => ({
-  [BZ_REQUESTER]: {
-    types: 'REL_MEUITM',
-    url: API.DELETE_STRATEGY_URL,
-    body: params
-  }
+export const deleteStrategyAction = data => getFetch('DELETE_STRATEGY_URL', {
+  body: data
 })

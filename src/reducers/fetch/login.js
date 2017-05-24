@@ -1,25 +1,11 @@
-import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
-import API from 'CONSTANT/api'
+import { getFetch } from 'CONSTANT/api'
 
-export const setSessionIDAction = () => ({
-  [BZ_REQUESTER]: {
-    types: 'APP_MGR',
-    url: API.SESSION_URL,
-    body: ''
-  }
+export const setSessionIDAction = () => getFetch('SESSION_URL', {
+  body: ''
 })
 
-export const loginAction = (data) => ({
-  [BZ_REQUESTER]: {
-    types: 'APP_MGR',
-    url: API.LOGIN_URL,
-    body: data
-  }
+export const loginAction = data => getFetch('LOGIN_URL', {
+  body: data
 })
 
-export const logoutAction = () => ({
-  [BZ_REQUESTER]: {
-    types: 'APP_MGR',
-    url: API.LOGOUT_URL
-  }
-})
+export const logoutAction = () => getFetch('LOGOUT_URL')

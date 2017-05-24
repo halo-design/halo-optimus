@@ -1,35 +1,18 @@
-import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
-import API from 'CONSTANT/api'
+import { getFetch } from 'CONSTANT/api'
 
-export const getCheckListAction = data => ({
-  [BZ_REQUESTER]: {
-    types: 'CHECK',
-    url: API.GET_CHECK_LIST_URL,
-    body: data
-  }
+export const getCheckListAction = data => getFetch('GET_CHECK_LIST_URL', {
+  body: data
 })
 
-export const getStateListAction = data => ({
-  [BZ_REQUESTER]: {
-    types: 'CHECK',
-    url: API.GET_STATE_LIST_URL,
-    body: data
-  }
+export const getStateListAction = data => getFetch('GET_STATE_LIST_URL', {
+  body: data
 })
 
-export const getHistoryListAction = data => ({
-  [BZ_REQUESTER]: {
-    types: 'CHECK',
-    url: API.GET_CHECK_HISTORY_LIST_URL,
-    body: data
-  }
+export const getHistoryListAction = data => getFetch('GET_CHECK_HISTORY_LIST_URL', {
+  body: data
 })
 
-export const checkDecideAction = data => ({
-  [BZ_REQUESTER]: {
-    types: 'CHECK',
-    url: API.OPERATE_CHECK_URL,
-    body: data
-  }
+export const checkDecideAction = data => getFetch('OPERATE_CHECK_URL', {
+  body: data
 })
 

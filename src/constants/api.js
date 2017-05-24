@@ -1,8 +1,8 @@
+import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 import settings from './config'
 
 const RMU = `/${settings.rootPath}/`
-
-export default {
+const API = {
   // 登录
   CHECKCODE_URL: `${RMU}IM01003.do`,
   LOGIN_URL: `${RMU}IM01001.do`,
@@ -117,3 +117,17 @@ export default {
   GET_ASSOCIATE_LIST_URL: `${RMU}TSM01017.do`,
   DO_SCHEDULE_ROLE_ASSOCIATE_URL: `${RMU}TSM01015.do`
 }
+
+export const getFetch = (reqURL, params) => {
+  const data = params || {}
+  return {
+    [BZ_REQUESTER]: {
+      types: reqURL,
+      url: API[reqURL],
+      ...data
+    }
+  }
+}
+
+export default API
+

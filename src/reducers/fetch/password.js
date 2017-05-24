@@ -1,10 +1,5 @@
-import API from 'CONSTANT/api'
-import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
+import { getFetch } from 'CONSTANT/api'
 
-export const changePasswordAction = (data) => ({
-  [BZ_REQUESTER]: {
-    types: 'APP_PSWD',
-    url: API.CHANGE_PASSWORD_URL,
-    body: data
-  }
+export const changePasswordAction = data => getFetch('CHANGE_PASSWORD_URL', {
+  body: data
 })
