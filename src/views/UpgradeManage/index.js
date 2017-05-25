@@ -3,7 +3,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Button, Table, Spin, Icon } from 'antd'
 import { releaseFilter, releaseStatusFilter, enterpriseFilter, upgradeTypeFilter, platformFilter } from 'UTIL/filters'
-import { queryUpdateList, getUpgradeTask } from 'REDUCER/pages/updateManage'
+import * as updateManageActions from 'REDUCER/pages/updateManage'
+import { queryWhiteList } from 'REDUCER/public/config'
+import AddPackage from './AddPackage'
+import AddEditRelease from './AddEditRelease'
 
 @connect(
   state => {
@@ -12,7 +15,7 @@ import { queryUpdateList, getUpgradeTask } from 'REDUCER/pages/updateManage'
       upgradeList: updateManage.upgradeList
     }
   },
-  dispatch => bindActionCreators({ queryUpdateList, getUpgradeTask }, dispatch)
+  dispatch => bindActionCreators({ ...updateManageActions, queryWhiteList }, dispatch)
 )
 
 export default class UpgradeManageView extends React.Component {
@@ -20,12 +23,23 @@ export default class UpgradeManageView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      taskList: {}
+      taskList: {},
+      mode: 'add',
+      currentRelease: null
     }
   }
 
   componentWillMount () {
     this.props.queryUpdateList()
+    this.props.queryWhiteList()
+  }
+
+  releaseItem (data) {
+    this.setState({
+      currentRelease: data,
+      mode: 'add'
+    })
+    this.props.setAddEditRelVisible(true)
   }
 
   getSubList (record) {
@@ -69,7 +83,7 @@ export default class UpgradeManageView extends React.Component {
   }
 
   render () {
-    const { upgradeList } = this.props
+    const { upgradeList, setAddPkgVisible } = this.props
 
     const columns = [{
       title: '平台',
@@ -96,21 +110,33 @@ export default class UpgradeManageView extends React.Component {
       key: 'gmtCreate'
     }, {
       title: '操作',
-      dataIndex: 'operation',
+      dataIndex: 'productVersion',
       key: 'operation',
-      render: () => <a>创建发布</a>
+      render: (text, record, index) => <a onClick={e => this.releaseItem(upgradeList[index])}>创建发布</a>
     }]
 
     return (
       <div className='upgradeManage' style={{padding: '20px 30px'}}>
         <div style={{paddingBottom: '20px'}}>
-          <Button type='primary' icon='plus-circle-o'>添加发布包</Button>
+          <Button
+            type='primary'
+            icon='plus-circle-o'
+            onClick={e => setAddPkgVisible(true)}
+          >
+            添加发布包
+          </Button>
         </div>
         <Table
+          bordered
           rowKey='id'
           columns={columns}
           expandedRowRender={record => this.getSubList(record)}
           dataSource={upgradeList}
+        />
+        <AddPackage />
+        <AddEditRelease
+          itemInfo={this.state.currentRelease}
+          mode={this.state.mode}
         />
       </div>
     )

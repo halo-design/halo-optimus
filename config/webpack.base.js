@@ -39,7 +39,8 @@ module.exports = {
       'antd/lib/spin',
       'antd/lib/table',
       'antd/lib/tree',
-      'antd/lib/tree-select'
+      'antd/lib/tree-select',
+      'antd/lib/popconfirm'
     ]
   },
   output: {

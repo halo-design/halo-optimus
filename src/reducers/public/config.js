@@ -1,8 +1,10 @@
 import { getUserConfigDataAction } from '../fetch/config'
 import { postListAction } from '../fetch/post'
+import { queryWhiteListAction } from '../fetch/whitelist'
 
 const SET_USER_TYPE_LEVEL = 'SET_USER_TYPE_LEVEL'
 const POST_LIST = 'POST_LIST'
+const GET_WHITE_LIST = 'GET_WHITE_LIST'
 
 const setUserTypeLevel = (certType, level) => ({
   type: SET_USER_TYPE_LEVEL,
@@ -38,10 +40,22 @@ export const postList = data => (dispatch, getState) => {
   })
 }
 
+// 查询白名单列表
+export const queryWhiteList = () => (dispatch, getState) => {
+  dispatch(queryWhiteListAction()).then(action => {
+    const dataBody = action.data.body
+    dispatch({
+      type: GET_WHITE_LIST,
+      data: dataBody.whiteList
+    })
+  })
+}
+
 const initialState = {
   certType: [],
   level: [],
-  post: []
+  post: [],
+  whiteList: []
 }
 
 export default (state = initialState, action) => {
@@ -58,6 +72,12 @@ export default (state = initialState, action) => {
         ...state,
         certType: action.certType,
         level: action.level
+      }
+
+    case GET_WHITE_LIST:
+      return {
+        ...state,
+        whiteList: action.data
       }
 
     default:
