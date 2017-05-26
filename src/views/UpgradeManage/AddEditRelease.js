@@ -80,7 +80,7 @@ export default class AddEditRelease extends React.Component {
   }
 
   onSubmit () {
-    const { form, itemInfo, addUpgradeTask } = this.props
+    const { form, itemInfo, addUpgradeTask, mode, taskId } = this.props
     const { getFieldsValue, validateFields } = form
     validateFields((errors, values) => {
       if (errors) {
@@ -100,7 +100,10 @@ export default class AddEditRelease extends React.Component {
           let time = formData.realGreyEndtime
           formData.realGreyEndtime = `${time.format('YYYYMMDD')}000000`
         }
-        // console.log(formData)
+        if (mode === 'modify') {
+          formData.id = taskId
+        }
+        console.log(formData)
 
         const showSpin = () => {
           this.setState({
@@ -146,7 +149,7 @@ export default class AddEditRelease extends React.Component {
   }
 
   render () {
-    const { form, visible, whiteList, itemInfo, mode, resourceList, getResourceList, initData, taskId } = this.props
+    const { form, visible, whiteList, itemInfo, mode, resourceList, getResourceList, initData } = this.props
     const { getFieldDecorator } = form
     const formItemLayout = {
       labelCol: {
@@ -163,7 +166,6 @@ export default class AddEditRelease extends React.Component {
     const disabledDate = current => current && current.valueOf() < Date.now()
 
     const modTitle = itemInfo && (`${isAdd ? '创建发布任务' : '修改发布任务'}  ${platformFilter(itemInfo.platform)}  ${itemInfo.productVersion}`)
-    !isAdd && console.log(initData, taskId)
 
     const columns = [{
       title: '规则元素',
@@ -296,7 +298,9 @@ export default class AddEditRelease extends React.Component {
                   getFieldDecorator('whitelistIds', {
                     initialValue: isAdd ? [] : initData.whitelistIds,
                     rules: [{
-                      type: 'array'
+                      type: 'array',
+                      required: true,
+                      message: '请选择白名单'
                     }]
                   })(
                     <Select mode='multiple' placeholder='请选择白名单'>
@@ -323,7 +327,7 @@ export default class AddEditRelease extends React.Component {
               >
                 {
                   getFieldDecorator('realGreyEndtime', {
-                    initialValue: isAdd ? '' : moment(initData.realGreyEndtime.split('.')[0], 'YYYY-MM-DD hh:mm:ss'),
+                    initialValue: isAdd ? '' : moment(initData.realGreyEndtime, 'YYYY-MM-DD'),
                     rules: [{
                       required: true,
                       message: '请选择结束时间'

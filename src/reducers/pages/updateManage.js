@@ -83,18 +83,22 @@ export const getTaskDetail = (state, success, fail) => (dispatch, getState) => {
 }
 
 export const addUpgradeTask = (state, success, fail) => (dispatch, getState) => {
+  let str = '添加'
+  if ('id' in state) {
+    str = '修改'
+  }
   dispatch(RQ.addUpgradeTaskAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(getUpgradeTaskList({packageInfoId: state.packageInfoId}))
       NotiSuccess({
         message: '成功',
-        description: '添加成功！'
+        description: str + '成功！'
       })
       success && success()
     } else {
       NotiWarning({
         message: '失败',
-        description: '添加失败！'
+        description: str + '失败！'
       })
       fail && fail()
     }
