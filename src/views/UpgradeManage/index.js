@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Button, Table, Spin, Icon } from 'antd'
+import WaitSpin from 'COMPONENT/Spin'
 import { releaseFilter, releaseStatusFilter, enterpriseFilter, upgradeTypeFilter, platformFilter } from 'UTIL/filters'
 import * as updateManageActions from 'REDUCER/pages/updateManage'
 import { queryWhiteList } from 'REDUCER/public/config'
@@ -12,7 +13,9 @@ import AddEditRelease from './AddEditRelease'
   state => {
     const { pages: { updateManage } } = state
     return {
-      upgradeList: updateManage.upgradeList
+      addEditReleaseVisible: updateManage.addEditReleaseState.visible,
+      upgradeList: updateManage.upgradeList,
+      upgradeTaskList: updateManage.upgradeTaskList
     }
   },
   dispatch => bindActionCreators({ ...updateManageActions, queryWhiteList }, dispatch)
@@ -23,9 +26,7 @@ export default class UpgradeManageView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      taskList: {},
-      mode: 'add',
-      currentRelease: null
+      loading: false
     }
   }
 
@@ -35,19 +36,44 @@ export default class UpgradeManageView extends React.Component {
   }
 
   releaseItem (data) {
-    this.setState({
-      currentRelease: data,
-      mode: 'add'
+    this.props.setAddEditRelState({
+      mode: 'add',
+      itemInfo: data,
+      visible: true
     })
-    this.props.setAddEditRelVisible(true)
+  }
+
+  modifyItem (record, task) {
+    const showSpin = () => {
+      this.setState({
+        loading: true
+      })
+    }
+    const hideSpin = () => {
+      this.setState({
+        loading: false
+      })
+    }
+    showSpin()
+    this.props.getTaskDetail({
+      taskId: task.id
+    }, data => {
+      hideSpin()
+      this.props.setAddEditRelState({
+        mode: 'modify',
+        itemInfo: record,
+        taskId: task.id,
+        initData: data,
+        visible: true
+      })
+    }, hideSpin)
   }
 
   getSubList (record) {
     const id = record.id
-    const list = this.state.taskList
+    const list = this.props.upgradeTaskList
     if (list[id]) {
       const lis = list[id]
-      console.log(lis)
       return lis.length === 0
       ? <div className='subNoData'><Icon type='frown-o' /> 暂无数据</div>
       : <table className='subList'>
@@ -60,7 +86,7 @@ export default class UpgradeManageView extends React.Component {
                 <td>{item.gmtModified}</td>
                 <td>{upgradeTypeFilter(item.upgradeType)}</td>
                 <td className='panel'>
-                  <a>修改</a>
+                  <a onClick={e => this.modifyItem(record, lis[i])}>修改</a>
                   <a>暂停</a>
                   <a>结束</a>
                 </td>
@@ -70,20 +96,12 @@ export default class UpgradeManageView extends React.Component {
         </tbody>
       </table>
     }
-    this.props.getUpgradeTask({packageInfoId: id}, data => {
-      const newList = {
-        ...this.state.taskList,
-        [id]: data.versionTaskList
-      }
-      this.setState({
-        taskList: newList
-      })
-    })
+    this.props.getUpgradeTaskList({packageInfoId: id})
     return <div style={{textAlign: 'center'}}><Spin /></div>
   }
 
   render () {
-    const { upgradeList, setAddPkgVisible } = this.props
+    const { upgradeList, setAddPkgVisible, addEditReleaseVisible } = this.props
 
     const columns = [{
       title: '平台',
@@ -134,10 +152,10 @@ export default class UpgradeManageView extends React.Component {
           dataSource={upgradeList}
         />
         <AddPackage />
-        <AddEditRelease
-          itemInfo={this.state.currentRelease}
-          mode={this.state.mode}
-        />
+        {
+          addEditReleaseVisible && <AddEditRelease />
+        }
+        <WaitSpin loading={this.state.loading} />
       </div>
     )
   }

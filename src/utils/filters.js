@@ -34,7 +34,18 @@ export const str2json = str => {
   return jsonArr
 }
 
-export const releaseFilter = record => record === '0' ? '待发布' : record === '1' ? '灰度发布' : '正式发布'
+export const releaseFilter = record => {
+  switch (record) {
+    case '1':
+      return '白名单灰度'
+
+    case '2':
+      return '时间窗灰度'
+
+    default:
+      return '正式发布'
+  }
+}
 
 export const enterpriseFilter = record => record === '0' ? '企业包' : '正式包'
 
@@ -43,3 +54,44 @@ export const upgradeTypeFilter = record => record === '1' ? '单次提醒' : '�
 export const platformFilter = record => record === '1' ? 'Android' : 'IOS'
 
 export const releaseStatusFilter = record => record === '1' ? '发布中' : record === '2' ? '已结束' : '暂停'
+
+export const operationFilter = record => {
+  switch (record) {
+    case '1':
+      return '包含'
+
+    case '2':
+      return '不包含'
+
+    case '3':
+      return '范围内'
+
+    case '4':
+      return '范围外'
+
+    default:
+      return record
+  }
+}
+
+export const ruleElementFilter = record => {
+  switch (record) {
+    case 'version':
+      return '版本号'
+
+    case 'city':
+      return '城市'
+
+    case 'mobileModel':
+      return '机型'
+
+    case 'netType':
+      return 'netType'
+
+    case 'osVersion':
+      return 'OS版本'
+
+    default:
+      return record
+  }
+}

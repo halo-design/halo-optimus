@@ -1,8 +1,9 @@
 import React from 'react'
-import { Form, Button, Input, Row, Col, message, Modal, Radio } from 'antd'
+import { Form, Button, message, Select, Modal, Radio } from 'antd'
 
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
+const Option = Select.Option
 
 @Form.create()
 
@@ -11,39 +12,94 @@ export default class AddRule extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading: false
+      ruleElement: 'city',
+      operation: '1'
     }
   }
 
-  componentWillMount () {
+  reset () {
+    this.setState({
+      ruleElement: 'city',
+      operation: '1'
+    })
     this.props.form.resetFields()
+  }
+
+  componentWillMount () {
+    const { getResourceList, itemInfo } = this.props
+    getResourceList({
+      platform: itemInfo.platform,
+      resourceType: this.state.ruleElement
+    })
+    this.reset()
   }
 
   onClose () {
     this.props.setVisible(false)
+    this.reset()
   }
 
   onSubmit () {
-    const { form } = this.props
+    const { form, addRow } = this.props
     const { getFieldsValue, validateFields } = form
     validateFields((errors, values) => {
       if (errors) {
         message.error('请正确填写内容！')
       } else {
         let formData = getFieldsValue()
+        if (formData.value1 && formData.value2) {
+          formData = {
+            ...formData,
+            value: `${formData.value1} - ${formData.value2}`
+          }
+        } else {
+          formData = {
+            ...formData,
+            value: formData.value.join(', ')
+          }
+        }
         console.log(formData)
+        addRow(formData)
+        this.onClose()
       }
     })
   }
 
+  typeChange (val) {
+    const { getResourceList, itemInfo } = this.props
+    this.setState({
+      ruleElement: val
+    })
+    getResourceList({
+      platform: itemInfo.platform,
+      resourceType: val
+    })
+  }
+
+  operationChange (val) {
+    this.setState({
+      operation: val
+    })
+  }
+
   render () {
-    const { visible, form } = this.props
+    const { visible, form, resourceList } = this.props
+    const { ruleElement, operation } = this.state
     const { getFieldDecorator } = form
 
     const formItemLayout = {
-      labelCol: { span: 8 },
+      labelCol: { span: 5 },
       wrapperCol: { span: 16 }
     }
+
+    const typeFlag = ruleElement === 'version' || ruleElement === 'osVersion'
+    const operateFlag = operation === '1' || operation === '2'
+
+    const resourceOpt = resourceList.map(item => (
+      <Option key={item.id} value={item.resourceName}>
+        {item.resourceName}
+      </Option>
+    ))
 
     return (
       <div className='AddRuleBox'>
@@ -73,69 +129,102 @@ export default class AddRule extends React.Component {
           ]}
         >
           <Form layout='horizontal'>
-            <Row>
-              <Col span={11}>
-                <FormItem
-                  label='岗位名称：'
-                  {...formItemLayout}
-                  required
-                >
-                  {
-                    getFieldDecorator('postName', {
-                      initialValue: '',
-                      rules: [
-                        {
-                          required: true,
-                          message: '请输入岗位名称'
-                        }
-                      ]
-                    })(
-                      <Input
-                        placeholder='请输入岗位名称'
-                        size='large'
-                      />
-                    )
-                  }
-                </FormItem>
-                <FormItem
-                  label='状态：'
-                  {...formItemLayout}
-                  required
-                >
-                  {
-                    getFieldDecorator('state', {
-                      initialValue: '0',
-                      rules: [{
-                        message: ' '
-                      }]
-                    })(
-                      <RadioGroup>
-                        <Radio key='a' value='1'>可用</Radio>
-                        <Radio key='b' value='0'>禁用</Radio>
-                      </RadioGroup>
-                    )
-                  }
-                </FormItem>
-              </Col>
-
-              <Col span={13}>
-                <FormItem
-                  label='备注：'
-                  {...formItemLayout}
-                >
-                  {
-                    getFieldDecorator('remark', {
-                      initialValue: '0'
-                    })(
-                      <Input
-                        placeholder='请输入备注'
-                        size='large'
-                      />
-                    )
-                  }
-                </FormItem>
-              </Col>
-            </Row>
+            <FormItem
+              {...formItemLayout}
+              label='类型'
+            >
+              {getFieldDecorator('ruleElement', {
+                rules: [{
+                  required: true
+                }],
+                initialValue: 'city'
+              })(
+                <Select onChange={val => this.typeChange(val)}>
+                  <Option value='version'>版本号</Option>
+                  <Option value='city'>城市</Option>
+                  <Option value='mobileModel'>机型</Option>
+                  <Option value='netType'>网络</Option>
+                  <Option value='osVersion'>OS版本</Option>
+                </Select>
+              )}
+            </FormItem>
+            <FormItem
+              label='操作类型'
+              {...formItemLayout}
+              required
+            >
+              {
+                getFieldDecorator('operation', {
+                  initialValue: '1'
+                })(
+                  <RadioGroup onChange={e => this.operationChange(e.target.value)}>
+                    <Radio value='1'>包含</Radio>
+                    <Radio value='2'>不包含</Radio>
+                    {typeFlag && <Radio value='3'>范围内</Radio>}
+                    {typeFlag && <Radio value='4'>范围外</Radio>}
+                  </RadioGroup>
+                )
+              }
+            </FormItem>
+            {
+              operateFlag &&
+              <FormItem
+                {...formItemLayout}
+                label='资源值'
+              >
+                {getFieldDecorator('value', {
+                  rules: [{
+                    required: true,
+                    message: '请选择资源值',
+                    type: 'array'
+                  }]
+                })(
+                  <Select mode='multiple' placeholder='请选择资源值'>
+                    {resourceOpt}
+                  </Select>
+                )}
+              </FormItem>
+            }
+            {
+              !operateFlag &&
+              <FormItem
+                {...formItemLayout}
+                label='资源值上限'
+              >
+                {
+                  getFieldDecorator('value1', {
+                    rules: [{
+                      required: true,
+                      message: '请选择资源值'
+                    }]
+                  })(
+                    <Select placeholder='请选择资源值'>
+                      {resourceOpt}
+                    </Select>
+                  )
+                }
+              </FormItem>
+            }
+            {
+              !operateFlag &&
+              <FormItem
+                {...formItemLayout}
+                label='资源值下限'
+              >
+                {
+                  getFieldDecorator('value2', {
+                    rules: [{
+                      required: true,
+                      message: '请选择资源值'
+                    }]
+                  })(
+                    <Select placeholder='请选择资源值'>
+                      {resourceOpt}
+                    </Select>
+                  )
+                }
+              </FormItem>
+            }
           </Form>
         </Modal>
       </div>
