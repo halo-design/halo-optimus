@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Form, Button, Input, Row, Col, Select, DatePicker } from 'antd'
 import UserAddEditBox from './UserAddEditBox'
-import { checkBtn } from 'UTIL/authButton'
+import { checkBtn } from 'UTIL/filters'
 import * as userManageAction from 'REDUCER/pages/userManage'
 
 const { RangePicker } = DatePicker

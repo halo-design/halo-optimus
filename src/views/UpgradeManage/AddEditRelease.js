@@ -5,7 +5,7 @@ import moment from 'moment'
 import { Form, Button, Radio, Row, Col, Select, Input, DatePicker, message, Modal, InputNumber, Table, Popconfirm } from 'antd'
 import Spin from 'COMPONENT/Spin'
 import * as updateManageActions from 'REDUCER/pages/updateManage'
-import { platformFilter, operationFilter, ruleElementFilter } from 'UTIL/filters'
+import { platformFilter, operationFilter, ruleElementFilter, whitelistIdsFilter, formatGreyConfigInfo } from 'UTIL/filters'
 import AddRule from './AddRule'
 
 const FormItem = Form.Item
@@ -57,7 +57,7 @@ export default class AddEditRelease extends React.Component {
       this.setState({
         publishType: initData.publishType,
         publishMode: initData.publishMode,
-        ruleList: JSON.parse(initData.greyConfigInfo).subRules
+        ruleList: formatGreyConfigInfo(initData.greyConfigInfo)
       })
     }
   }
@@ -296,7 +296,7 @@ export default class AddEditRelease extends React.Component {
               >
                 {
                   getFieldDecorator('whitelistIds', {
-                    initialValue: isAdd ? [] : initData.whitelistIds,
+                    initialValue: isAdd ? [] : whitelistIdsFilter(initData.whitelistIds),
                     rules: [{
                       type: 'array',
                       required: true,

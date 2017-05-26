@@ -1,3 +1,67 @@
+import React from 'react'
+
+const listHasItem = (list, key, val) => {
+  let hasIt = false
+  list.map(item => {
+    item[key] === val ? hasIt = true : null
+  })
+  return hasIt
+}
+
+export const checkBtnList = (menu, btnList, noDivider) => {
+  const ableBtn = []
+  const divider = <span className='ant-divider' />
+  const size = btnList.length
+  btnList.map((item, i) => {
+    const btn = checkBtn(menu, item.item, item.button)
+    if (btn) {
+      ableBtn.push(btn)
+      !noDivider && i !== size - 1 ? ableBtn.push(divider) : null
+    }
+  })
+  return ableBtn.length === 0 ? <span>无操作权限</span> : ableBtn.map((item, i) => (<span key={i}>{item}</span>))
+}
+
+export const checkBtn = (menu, item, button) => {
+  let menuItem = item
+  item.length > 4 ? null : menuItem = menu.currentMenu + item
+  return listHasItem(menu.menuItemList, 'menuItemId', menuItem) ? button : null
+}
+
+export const groupList = (list, id, parentId, childName, conver) => {
+  let groupList = []
+  let keyMap = {}
+
+  list.map(item => {
+    keyMap[item[id]] = conver ? conver(item) : item
+  })
+
+  list.map(item => {
+    if (!item[parentId] || !keyMap[item[parentId]]) {
+      groupList.push(keyMap[item[id]])
+    } else if (keyMap[item[parentId]]) {
+      keyMap[item[parentId]][childName] ? null : keyMap[item[parentId]][childName] = []
+      keyMap[item[parentId]][childName].push(keyMap[item[id]])
+    }
+  })
+
+  return groupList
+}
+
+export const getNodeFromList = (id, list, idName, childName, conver) => {
+  let node = null
+  for (var el of list) {
+    let chName = el[childName]
+    if (el[idName] === id) {
+      node = conver ? conver(el) : el
+    } else if (chName && chName.length > 0) {
+      node = getNodeFromList(id, chName, idName, childName, conver)
+      node ? node = (conver ? conver(node) : node) : null
+    }
+  }
+  return node
+}
+
 export const isEmptyObject = obj => {
   let name
   for (name in obj) {
@@ -94,4 +158,15 @@ export const ruleElementFilter = record => {
     default:
       return record
   }
+}
+
+export const whitelistIdsFilter = data => data.map(item => item.whiteListName)
+
+export const formatGreyConfigInfo = data => {
+  const rules = JSON.parse(data).subRules
+  return rules.map(item => ({
+    ruleElement: item.right,
+    operation: item.operator,
+    value: Array.isArray(item.left) ? item.left.join(', ') : isEmptyObject(item.left) ? '暂无' : `${item.left.upper} - ${item.left.lower}`
+  }))
 }

@@ -1,4 +1,4 @@
-import { groupList } from 'UTIL/formatList'
+import { groupList } from 'UTIL/filters'
 import NProgress from 'nprogress'
 import { getUserRoleListAction, userRoleAssociationAction, getRoleListAction } from '../fetch/role'
 import { NotiSuccess, NotiWarning } from 'UTIL/info'

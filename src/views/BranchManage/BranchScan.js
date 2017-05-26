@@ -4,8 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Form, Button, Input, Row, Col, Select, message, Modal, TreeSelect } from 'antd'
 import Spin from 'COMPONENT/Spin'
 import BranchAdd from './BranchAdd'
-import { checkBtnList } from 'UTIL/authButton'
-import { isEmptyObject } from 'UTIL/filters'
+import { checkBtnList, isEmptyObject } from 'UTIL/filters'
 import * as branchScanActions from 'REDUCER/pages/branchManage'
 
 const FormItem = Form.Item

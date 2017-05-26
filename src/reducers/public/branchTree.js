@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { groupList } from 'UTIL/formatList'
+import { groupList } from 'UTIL/filters'
 import { getBranchListAction } from '../fetch/branch'
 
 const GET_BRANCH_LIST = 'GET_BRANCH_LIST'

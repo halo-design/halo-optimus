@@ -1,4 +1,4 @@
-import { groupList, getNodeFromList } from 'UTIL/formatList'
+import { groupList, getNodeFromList } from 'UTIL/filters'
 import NProgress from 'nprogress'
 import { getMenuAction } from '../fetch/menu'
 import { refreshInfo } from './main'

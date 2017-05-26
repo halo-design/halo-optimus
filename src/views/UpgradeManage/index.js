@@ -69,6 +69,10 @@ export default class UpgradeManageView extends React.Component {
     }, hideSpin)
   }
 
+  pauseItem (record, task) {
+    console.log(record, task)
+  }
+
   getSubList (record) {
     const id = record.id
     const list = this.props.upgradeTaskList
@@ -85,11 +89,14 @@ export default class UpgradeManageView extends React.Component {
                 <td>{releaseStatusFilter(item.taskStatus)}</td>
                 <td>{item.gmtModified}</td>
                 <td>{upgradeTypeFilter(item.upgradeType)}</td>
-                <td className='panel'>
-                  <a onClick={e => this.modifyItem(record, lis[i])}>修改</a>
-                  <a>暂停</a>
-                  <a>结束</a>
-                </td>
+                {
+                  item.taskStatus !== '2' &&
+                  <td className='panel'>
+                    <a onClick={e => this.modifyItem(record, item)}>修改</a>
+                    <a onClick={e => this.pauseItem(record, item)}>暂停</a>
+                    <a onClick={e => this.closeItem(record, item)}>结束</a>
+                  </td>
+                }
               </tr>
             )
           }

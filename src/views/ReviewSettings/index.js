@@ -6,7 +6,7 @@ import InputSearch from 'COMPONENT/InputSearch'
 import DetailBox from './DetailBox'
 import RelSetBox from './RelSetBox'
 import Spin from 'COMPONENT/Spin'
-import { checkBtn } from 'UTIL/authButton'
+import { checkBtn } from 'UTIL/filters'
 import { getBsnList, getStrategy } from 'REDUCER/pages/reviewSettings'
 import { getStrategyList } from 'REDUCER/public/strategy'
 

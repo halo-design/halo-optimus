@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Button, Table, Modal } from 'antd'
 import StrategyAddEditBox from './StrategyAddEditBox'
-import { checkBtn, checkBtnList } from 'UTIL/authButton'
+import { checkBtn, checkBtnList } from 'UTIL/filters'
 import { getStrategyList } from 'REDUCER/public/strategy'
 import * as strategySettingsActions from 'REDUCER/pages/strategySettings'
 
