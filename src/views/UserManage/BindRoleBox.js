@@ -10,13 +10,29 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 @connect(
   state => {
-    const { pages: { userManage }, public: { bindRole } } = state
+    const {
+      pages: {
+        userManage: {
+          bindRoleBox: {
+            visible,
+            info
+          }
+        }
+      },
+      public: {
+        bindRole: {
+          selectRoleTreeList,
+          selectedRoleList,
+          allSelectRoleList
+        }
+      }
+    } = state
     return {
-      visible: userManage.bindRoleBox.visible,
-      treeNodes: bindRole.selectRoleTreeList,
-      selectedRoleList: bindRole.selectedRoleList,
-      allSelectRoleList: bindRole.allSelectRoleList,
-      info: userManage.bindRoleBox.info
+      visible,
+      treeNodes: selectRoleTreeList,
+      selectedRoleList,
+      allSelectRoleList,
+      info
     }
   },
   dispatch => bindActionCreators({ closeBindRole, updateSelectedRole, userRoleAssociation }, dispatch)

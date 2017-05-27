@@ -11,12 +11,23 @@ import * as userManageAction from 'REDUCER/pages/userManage'
 
 @connect(
   state => {
-    const { pages: { userManage }, public: { menu } } = state
+    const {
+      pages: {
+        userManage: {
+          userList,
+          totalSize,
+          pageData
+        }
+      },
+      public: {
+        menu: { userMenu }
+      }
+    } = state
     return {
-      dataSource: userManage.userList,
-      userMenu: menu.userMenu,
-      totalSize: userManage.totalSize,
-      pageData: userManage.pageData
+      dataSource: userList,
+      userMenu,
+      totalSize,
+      pageData
     }
   },
   dispatch => bindActionCreators({ ...userManageAction, getUserRoleTree }, dispatch)

@@ -11,11 +11,21 @@ import { userPageByBrh } from 'REDUCER/pages/userManage'
 
 @connect(
   state => {
-    const { pages: { userManage }, public: { branchTree } } = state
+    const {
+      pages: {
+        userManage: { selectedKeys }
+      },
+      public: {
+        branchTree: {
+          allBranchList,
+          treeBranchList
+        }
+      }
+  } = state
     return {
-      treeBranchList: branchTree.treeBranchList,
-      allBranchList: branchTree.allBranchList,
-      selectedKeys: userManage.selectedKeys
+      treeBranchList,
+      allBranchList,
+      selectedKeys
     }
   },
   dispatch => bindActionCreators({ initBranchList, userPageByBrh }, dispatch)

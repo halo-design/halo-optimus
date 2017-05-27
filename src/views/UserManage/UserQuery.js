@@ -12,11 +12,19 @@ const Option = Select.Option
 
 @connect(
   state => {
-    const { pages: { userManage }, public: { menu, config } } = state
+    const {
+      pages: {
+        userManage: { userBox }
+      },
+      public: {
+        menu: { userMenu },
+        config: { level }
+      }
+    } = state
     return {
-      userMenu: menu.userMenu,
-      level: config.level,
-      userBox: userManage.userBox
+      userMenu,
+      level,
+      userBox
     }
   },
   dispatch => bindActionCreators({ ...userManageAction }, dispatch)

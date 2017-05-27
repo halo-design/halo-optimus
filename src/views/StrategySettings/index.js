@@ -11,13 +11,25 @@ const confirm = Modal.confirm
 
 @connect(
   state => {
-    const { pages: { strategySettings }, public: { menu, strategy } } = state
+    const {
+      pages: {
+        strategySettings: { addEditBoxVisible }
+      },
+      public: {
+        menu: { userMenu },
+        strategy: {
+          strategyList,
+          strategyListSelOpt,
+          strategyListTotalNum
+        }
+      }
+    } = state
     return {
-      userMenu: menu.userMenu,
-      strategyList: strategy.strategyList,
-      strategyListSelOpt: strategy.strategyListSelOpt,
-      totalNum: strategy.strategyListTotalNum,
-      addEditBoxVisible: strategySettings.addEditBoxVisible
+      userMenu,
+      strategyList,
+      strategyListSelOpt,
+      totalNum: strategyListTotalNum,
+      addEditBoxVisible
     }
   },
   dispatch => bindActionCreators({ getStrategyList, ...strategySettingsActions }, dispatch)

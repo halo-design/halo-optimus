@@ -14,14 +14,26 @@ const aCity = {11: '北京', 12: '天津', 13: '河北', 14: '山西', 15: '内�
 
 @connect(
   state => {
-    const { pages: { userManage }, public: { config, branchTree } } = state
+    const {
+      pages: {
+        userManage: { userBox }
+      },
+      public: {
+        config: {
+          certType,
+          level,
+          post: { postList }
+        },
+        branchTree: { selectTreeBranchList, allBranchList }
+      }
+    } = state
     return {
-      userBox: userManage.userBox,
-      branchNodes: branchTree.selectTreeBranchList,
-      allBranchList: branchTree.allBranchList,
-      certType: config.certType,
-      postList: config.post.postList,
-      level: config.level
+      userBox,
+      branchNodes: selectTreeBranchList,
+      allBranchList,
+      certType,
+      postList,
+      level
     }
   },
   dispatch => bindActionCreators({ ...userManageAction }, dispatch)

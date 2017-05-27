@@ -6,12 +6,21 @@ import { closePreviewUser } from 'REDUCER/pages/userManage'
 
 @connect(
   state => {
-    const { pages: { userManage }, public: { config } } = state
+    const {
+      pages: {
+        userManage: {
+          previewBox: { visible, info }
+        }
+      },
+      public: {
+        config: { level, certType }
+      }
+    } = state
     return {
-      visible: userManage.previewBox.visible,
-      level: config.level,
-      certType: config.certType,
-      info: userManage.previewBox.info
+      visible,
+      level,
+      certType,
+      info
     }
   },
   dispatch => bindActionCreators({ closePreviewUser }, dispatch)
