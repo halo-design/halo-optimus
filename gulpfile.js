@@ -12,7 +12,7 @@ gulp.task('upload', () =>
   .pipe(sftp({
     host: '139.224.128.69',
     auth: 'nginxAdmin',
-    remotePath: '/home/nginx/www/ydkf/inmanage'
+    remotePath: '/home/nginx/www/ydkf/halo'
   }))
 )
 
@@ -22,7 +22,7 @@ gulp.task('upload-diff', () =>
     host: '139.224.128.69',
     user: 'nginx',
     auth: 'nginxAdmin',
-    remotePath: '/home/nginx/www/ydkf/inmanage'
+    remotePath: '/home/nginx/www/ydkf/halo'
   }))
 )
 

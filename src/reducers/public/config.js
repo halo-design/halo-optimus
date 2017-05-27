@@ -1,10 +1,12 @@
 import { getUserConfigDataAction } from '../fetch/config'
 import { postListAction } from '../fetch/post'
 import { queryWhiteListAction } from '../fetch/whitelist'
+import { queryResourceAction } from '../fetch/resource'
 
 const SET_USER_TYPE_LEVEL = 'SET_USER_TYPE_LEVEL'
 const POST_LIST = 'POST_LIST'
 const GET_WHITE_LIST = 'GET_WHITE_LIST'
+const GET_RESOURCE_LIST = 'GET_RESOURCE_LIST'
 
 const setUserTypeLevel = (certType, level) => ({
   type: SET_USER_TYPE_LEVEL,
@@ -51,11 +53,25 @@ export const queryWhiteList = () => (dispatch, getState) => {
   })
 }
 
+// 查询资源列表
+export const getResourceList = state => (dispatch, getState) => {
+  dispatch(queryResourceAction(state)).then(action => {
+    const dataBody = action.data.body
+    if (dataBody.errorCode === '0') {
+      dispatch({
+        type: GET_RESOURCE_LIST,
+        data: dataBody.resourceList
+      })
+    }
+  })
+}
+
 const initialState = {
   certType: [],
   level: [],
   post: [],
-  whiteList: []
+  whiteList: [],
+  resourceList: []
 }
 
 export default (state = initialState, action) => {
@@ -78,6 +94,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         whiteList: action.data
+      }
+
+    case GET_RESOURCE_LIST:
+      return {
+        ...state,
+        resourceList: action.data
       }
 
     default:

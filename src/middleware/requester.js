@@ -1,5 +1,5 @@
 import { getCookie, setCookie } from 'UTIL/cookie'
-import { rootPath } from 'CONSTANT/config'
+import { errorCodeCheck } from 'CONSTANT/config'
 import NProgress from 'nprogress'
 import { ModalError } from 'UTIL/info'
 import qs from 'qs'
@@ -112,10 +112,7 @@ const requestSuccess = (next, actionWith, successType, json, success, url) => {
         title: `请求失败！[${errorCode}]`,
         content: body.errorMsg,
         onOk: onClose => {
-          // 数据校验失败返回登录页
-          if (errorCode === 'BLEC0001' || errorCode === 'SYEC0002') {
-            window.location.replace(rootPath)
-          }
+          errorCodeCheck(errorCode)
           isError = false
           NProgress.done()
           onClose()

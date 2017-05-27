@@ -1,7 +1,7 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 import settings from './config'
 
-const RMU = `/${settings.rootPath}/`
+const RMU = `/${settings.serverRootPath}/`
 const API = {
   // 登录
   CHECKCODE_URL: `${RMU}IM01003.do`,

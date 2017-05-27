@@ -20,6 +20,3 @@ export const pauseHotpatchTaskAction = data => getFetch('PAUSE_HOTPATCHTASK_URL'
   body: data
 })
 
-export const getResourceAction = data => getFetch('GET_RESOURCE_URL', {
-  body: data
-})

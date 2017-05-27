@@ -15,7 +15,7 @@ module.exports = {
     },
     jsHashType: 'chunkhash:8',
     cssHashType: 'contenthash:8',
-    publicPath: '/inmanage/',
+    publicPath: '/halo/',
     sourceMap: false,
     gzip: false,
     gzipExtensions: ['js', 'css'],
@@ -35,4 +35,3 @@ module.exports = {
     htmlTemplate: resolve('static/dev.html')
   }
 }
-

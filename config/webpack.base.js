@@ -10,6 +10,7 @@ module.exports = {
   entry: {
     app: './src/entry/index.js',
     vendor: [
+      // core
       'react',
       'redux',
       'react-dom',
@@ -21,6 +22,7 @@ module.exports = {
       // plugins
       'qs',
       'md5',
+      'moment',
       'nprogress',
       'antd/lib/button',
       'antd/lib/checkbox',

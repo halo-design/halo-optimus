@@ -1,12 +1,10 @@
 import NProgress from 'nprogress'
 import * as RQ from '../fetch/update'
-import { queryResourceAction } from '../fetch/resource'
 import { NotiSuccess, NotiWarning, MsgError } from 'UTIL/info'
 
 const GET_UPDATE_LIST = 'GET_UPDATE_LIST'
 const SET_ADD_PKG_VISIBLE = 'SET_ADD_PKG_VISIBLE'
 const SET_RELEASE_STATE = 'SET_RELEASE_STATE'
-const GET_RESOURCE_LIST = 'GET_RESOURCE_LIST'
 const GET_UPGRADE_TASK_LIST = 'GET_UPGRADE_TASK_LIST'
 
 export const queryUpdateList = () => (dispatch, getState) => {
@@ -105,18 +103,6 @@ export const addUpgradeTask = (state, success, fail) => (dispatch, getState) => 
   })
 }
 
-export const getResourceList = state => (dispatch, getState) => {
-  dispatch(queryResourceAction(state)).then(action => {
-    const dataBody = action.data.body
-    if (dataBody.errorCode === '0') {
-      dispatch({
-        type: GET_RESOURCE_LIST,
-        data: dataBody.resourceList
-      })
-    }
-  })
-}
-
 export const changeTaskStatus = (state, success, fail) => (dispatch, getState) => {
   dispatch(RQ.changeTaskStatusAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
@@ -138,7 +124,6 @@ export const changeTaskStatus = (state, success, fail) => (dispatch, getState) =
 
 const initialState = {
   upgradeList: [],
-  resourceList: [],
   upgradeTaskList: {},
   addPkgVisible: false,
   addEditReleaseState: {
@@ -175,12 +160,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         addEditReleaseState: action.data
-      }
-
-    case GET_RESOURCE_LIST:
-      return {
-        ...state,
-        resourceList: action.data
       }
 
     default:

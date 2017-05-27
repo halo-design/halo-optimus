@@ -3,25 +3,34 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Button, Table, Spin, Icon, Popconfirm } from 'antd'
 import WaitSpin from 'COMPONENT/Spin'
-import { releaseFilter, releaseStatusFilter, enterpriseFilter, upgradeTypeFilter, platformFilter } from 'UTIL/filters'
-import * as updateManageActions from 'REDUCER/pages/updateManage'
+import { platformFilter, releaseFilter, releaseStatusFilter } from 'UTIL/filters'
+import * as hotpatchManageActions from 'REDUCER/pages/hotpatchManage'
+import { getTaskDetail } from 'REDUCER/pages/updateManage'
 import { queryWhiteList } from 'REDUCER/public/config'
-import AddPackage from './AddPackage'
-import AddEditRelease from './AddEditRelease'
+import AddHotpatch from './AddHotpatch'
+import AddEditHotpatchTask from './AddEditHotpatchTask'
 
 @connect(
   state => {
-    const { pages: { updateManage } } = state
+    const {
+      pages: {
+        hotpatchManage: {
+          hotpatchList,
+          hotpatchTaskList,
+          addEditHotpatchState: { visible }
+        }
+      }
+    } = state
     return {
-      addEditReleaseVisible: updateManage.addEditReleaseState.visible,
-      upgradeList: updateManage.upgradeList,
-      upgradeTaskList: updateManage.upgradeTaskList
+      hotpatchList,
+      hotpatchTaskList,
+      addEditTaskVisible: visible
     }
   },
-  dispatch => bindActionCreators({ ...updateManageActions, queryWhiteList }, dispatch)
+  dispatch => bindActionCreators({ ...hotpatchManageActions, queryWhiteList, getTaskDetail }, dispatch)
 )
 
-export default class UpgradeManageView extends React.Component {
+export default class HotpacthManageView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -31,19 +40,19 @@ export default class UpgradeManageView extends React.Component {
   }
 
   componentWillMount () {
-    this.props.queryUpdateList()
+    this.props.queryHotpatchList()
     this.props.queryWhiteList()
   }
 
-  releaseItem (data) {
-    this.props.setAddEditRelState({
+  addTask (data) {
+    this.props.setAddEditHotpatchState({
       mode: 'add',
       itemInfo: data,
       visible: true
     })
   }
 
-  modifyItem (record, task) {
+  modifyTask (record, task) {
     const showSpin = () => {
       this.setState({
         loading: true
@@ -59,7 +68,7 @@ export default class UpgradeManageView extends React.Component {
       taskId: task.id
     }, data => {
       hideSpin()
-      this.props.setAddEditRelState({
+      this.props.setAddEditHotpatchState({
         mode: 'modify',
         itemInfo: record,
         taskId: task.id,
@@ -69,17 +78,17 @@ export default class UpgradeManageView extends React.Component {
     }, hideSpin)
   }
 
-  changeItem (state, task) {
+  changeTask (state, task) {
     this.props.changeTaskStatus({
       taskId: task.id,
       taskStatus: state,
-      packageInfoId: task.packageInfoId
+      hotpatchId: task.hotpatchId
     })
   }
 
   getSubList (record) {
     const id = record.id
-    const list = this.props.upgradeTaskList
+    const list = this.props.hotpatchTaskList
     if (list[id]) {
       const lis = list[id]
       return lis.length === 0
@@ -92,18 +101,17 @@ export default class UpgradeManageView extends React.Component {
                 <td>{releaseFilter(item.publishMode)}</td>
                 <td>{releaseStatusFilter(item.taskStatus)}</td>
                 <td>{item.gmtModified}</td>
-                <td>{upgradeTypeFilter(item.upgradeType)}</td>
                 {
                   item.taskStatus !== '2'
                   ? (
                     <td className='panel'>
-                      <a onClick={e => this.modifyItem(record, item)}>修改</a>
+                      <a onClick={e => this.modifyTask(record, item)}>修改</a>
                       {
                         item.taskStatus === '3'
                         ? (
                           <Popconfirm
                             title='确定要继续吗？'
-                            onConfirm={e => this.changeItem(1, item)}
+                            onConfirm={e => this.changeTask(1, item)}
                             okText='确定'
                             cancelText='取消'
                           >
@@ -112,7 +120,7 @@ export default class UpgradeManageView extends React.Component {
                         ) : (
                           <Popconfirm
                             title='确定要暂停吗？'
-                            onConfirm={e => this.changeItem(3, item)}
+                            onConfirm={e => this.changeTask(3, item)}
                             okText='确定'
                             cancelText='取消'
                           >
@@ -122,7 +130,7 @@ export default class UpgradeManageView extends React.Component {
                       }
                       <Popconfirm
                         title='确定要结束吗？'
-                        onConfirm={e => this.changeItem(2, item)}
+                        onConfirm={e => this.changeTask(2, item)}
                         okText='确定'
                         cancelText='取消'
                       >
@@ -137,12 +145,12 @@ export default class UpgradeManageView extends React.Component {
         </tbody>
       </table>
     }
-    this.props.getUpgradeTaskList({packageInfoId: id})
+    this.props.getHotpatchTaskList({hotpatchId: id})
     return <div style={{textAlign: 'center'}}><Spin /></div>
   }
 
   render () {
-    const { upgradeList, setAddPkgVisible, addEditReleaseVisible } = this.props
+    const { hotpatchList, addEditTaskVisible, setAddHotpatchVisible } = this.props
 
     const columns = [{
       title: '平台',
@@ -150,39 +158,38 @@ export default class UpgradeManageView extends React.Component {
       key: 'platform',
       render: record => <span>{platformFilter(record)}</span>
     }, {
+      title: '资源名称',
+      dataIndex: 'sourceName',
+      key: 'sourceName',
+      render: record => <span>{record || '暂无'}</span>
+    }, {
+      title: '资源类型',
+      dataIndex: 'sourceType',
+      key: 'sourceType'
+    }, {
       title: '版本号',
       dataIndex: 'productVersion',
       key: 'productVersion'
     }, {
-      title: '发布状态',
-      dataIndex: 'publishStatus',
-      key: 'publishStatus',
-      render: record => <span>{releaseFilter(record)}</span>
-    }, {
-      title: '发布包类型',
-      dataIndex: 'isEnterprise',
-      key: 'isEnterprise',
-      render: record => <span>{enterpriseFilter(record)}</span>
-    }, {
-      title: '创建时间',
-      dataIndex: 'gmtCreate',
-      key: 'gmtCreate'
+      title: '备注',
+      dataIndex: 'memo',
+      key: 'memo'
     }, {
       title: '操作',
       dataIndex: 'operation',
       key: 'operation',
-      render: (text, record, index) => <a onClick={e => this.releaseItem(upgradeList[index])}>创建发布</a>
+      render: (text, record, index) => <a onClick={e => this.addTask(hotpatchList[index])}>创建发布</a>
     }]
 
     return (
-      <div className='upgradeManage' style={{padding: '20px 30px'}}>
+      <div className='hotpacthManage' style={{padding: '20px 30px'}}>
         <div style={{paddingBottom: '20px'}}>
           <Button
             type='primary'
             icon='plus-circle-o'
-            onClick={e => setAddPkgVisible(true)}
+            onClick={e => setAddHotpatchVisible(true)}
           >
-            添加发布包
+            添加热修复
           </Button>
         </div>
         <Table
@@ -190,11 +197,11 @@ export default class UpgradeManageView extends React.Component {
           rowKey='id'
           columns={columns}
           expandedRowRender={record => this.getSubList(record)}
-          dataSource={upgradeList}
+          dataSource={hotpatchList}
         />
-        <AddPackage />
+        <AddHotpatch />
         {
-          addEditReleaseVisible && <AddEditRelease />
+          addEditTaskVisible && <AddEditHotpatchTask />
         }
         <WaitSpin loading={this.state.loading} />
       </div>

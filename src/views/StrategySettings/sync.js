@@ -1,12 +1,5 @@
 import React from 'react'
-import Lazy from 'COMPONENT/Lazy'
-import Loading from 'COMPONENT/Loading'
-import loadStrategySettings from 'bundle-loader?lazy&name=strategySettings!./index'
+import BufferCompnent from 'COMPONENT/Buffer'
+import strategySettings from 'bundle-loader?lazy&name=strategySettings!./index'
 
-const StrategySettings = () => (
-  <Lazy load={loadStrategySettings}>
-    {StrategySettings => StrategySettings ? <StrategySettings /> : <Loading />}
-  </Lazy>
-)
-
-export default StrategySettings
+export default () => <BufferCompnent compnent={strategySettings} />

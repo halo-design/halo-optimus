@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux'
 import moment from 'moment'
 import { Form, Button, Radio, Row, Col, Select, Input, DatePicker, message, Modal, InputNumber, Table, Popconfirm } from 'antd'
 import Spin from 'COMPONENT/Spin'
+import * as hotpatchManageActions from 'REDUCER/pages/hotpatchManage'
 import { getResourceList } from 'REDUCER/public/config'
-import * as updateManageActions from 'REDUCER/pages/updateManage'
 import { platformFilter, operationFilter, ruleElementFilter, whitelistIdsFilter, formatGreyConfigInfo } from 'UTIL/filters'
 import AddRule from './AddRule'
 
@@ -17,14 +17,14 @@ const Option = Select.Option
   state => {
     const {
       pages: {
-        updateManage: {
-          addEditReleaseState: { mode, taskId, initData, itemInfo, visible }
+        hotpatchManage: {
+          addEditHotpatchState: { mode, taskId, initData, itemInfo, visible }
         }
       },
       public: {
         config: {
-          resourceList,
-          whiteList
+          whiteList,
+          resourceList
         }
       }
     } = state
@@ -38,12 +38,12 @@ const Option = Select.Option
       whiteList
     }
   },
-  dispatch => bindActionCreators({ ...updateManageActions, getResourceList }, dispatch)
+  dispatch => bindActionCreators({ ...hotpatchManageActions, getResourceList }, dispatch)
 )
 
 @Form.create()
 
-export default class AddEditRelease extends React.Component {
+export default class AddEditHotpatchTask extends React.Component {
 
   constructor (props) {
     super(props)
@@ -86,14 +86,14 @@ export default class AddEditRelease extends React.Component {
   }
 
   onClose () {
-    this.props.setAddEditRelState({
+    this.props.setAddEditHotpatchState({
       visible: false
     })
     this.reset()
   }
 
   onSubmit () {
-    const { form, itemInfo, addUpgradeTask, mode, taskId } = this.props
+    const { form, itemInfo, addHotpatchTask, mode, taskId } = this.props
     const { getFieldsValue, validateFields } = form
     validateFields((errors, values) => {
       if (errors) {
@@ -103,7 +103,7 @@ export default class AddEditRelease extends React.Component {
         formData = {
           ...formData,
           greyConfigInfo: JSON.stringify(this.state.ruleList),
-          packageInfoId: itemInfo.id
+          hotpatchId: itemInfo.id
         }
         if (formData.whitelistIds) {
           let ids = formData.whitelistIds
@@ -128,7 +128,7 @@ export default class AddEditRelease extends React.Component {
           })
         }
         showSpin()
-        addUpgradeTask(formData, () => {
+        addHotpatchTask(formData, () => {
           this.onClose()
           hideSpin()
         }, hideSpin)
@@ -264,24 +264,6 @@ export default class AddEditRelease extends React.Component {
                 )
               }
             </FormItem>
-            <FormItem
-              {...formItemLayout}
-              label='升级模式'
-            >
-              {
-                getFieldDecorator('upgradeType', {
-                  initialValue: isAdd ? '1' : initData.upgradeType,
-                  rules: [{
-                    required: true
-                  }]
-                })(
-                  <RadioGroup>
-                    <Radio value='1'>单次</Radio>
-                    <Radio value='2'>多次</Radio>
-                  </RadioGroup>
-                )
-              }
-            </FormItem>
             {
               !isOffical &&
               <FormItem
@@ -375,25 +357,11 @@ export default class AddEditRelease extends React.Component {
             }
             <FormItem
               {...formItemLayout}
-              label='升级提示信息'
-            >
-              {
-                getFieldDecorator('upgradeContent', {
-                  initialValue: isAdd ? '欢迎使用新版本' : initData.upgradeContent
-                })(
-                  <Input
-                    type='textarea'
-                  />
-                )
-              }
-            </FormItem>
-            <FormItem
-              {...formItemLayout}
               label='发布描述'
             >
               {
                 getFieldDecorator('memo', {
-                  initialValue: isAdd ? '新版本发布' : initData.memo
+                  initialValue: isAdd ? 'hotpatch发布' : initData.memo
                 })(
                   <Input
                     type='textarea'
