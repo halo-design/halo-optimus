@@ -10,11 +10,19 @@ const RangePicker = DatePicker.RangePicker
 
 @connect(
   state => {
-    const { pages: { checkHistoryList } } = state
+    const {
+      pages: {
+        checkHistoryList: {
+          historyList,
+          historyListSelectOpt,
+          historyListTotalNum
+        }
+      }
+    } = state
     return {
-      historyList: checkHistoryList.historyList,
-      historyListSelectOpt: checkHistoryList.historyListSelectOpt,
-      totalNum: checkHistoryList.historyListTotalNum
+      historyList,
+      historyListSelectOpt,
+      totalNum: historyListTotalNum
     }
   },
   dispatch => bindActionCreators({ getHistoryList }, dispatch)

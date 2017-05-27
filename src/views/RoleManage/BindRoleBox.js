@@ -7,15 +7,27 @@ import * as roleManageActions from 'REDUCER/pages/roleManage'
 
 @connect(
   state => {
-    const { pages: { roleManage } } = state
+    const {
+      pages: {
+        roleManage: {
+          bindBoxVisible,
+          pageSize,
+          allMenuTotalSize,
+          allMenuFnCurPage,
+          allMenuFnSelectKeys,
+          allMenuFnCurPageItems,
+          curRoleInfo: { roleId }
+        }
+      }
+    } = state
     return {
-      visible: roleManage.bindBoxVisible,
-      pageSize: roleManage.pageSize,
-      totalSize: roleManage.allMenuTotalSize,
-      curPage: roleManage.allMenuFnCurPage,
-      selectKeys: roleManage.allMenuFnSelectKeys,
-      dataSource: roleManage.allMenuFnCurPageItems,
-      curRoleId: roleManage.curRoleInfo.roleId
+      pageSize,
+      visible: bindBoxVisible,
+      totalSize: allMenuTotalSize,
+      curPage: allMenuFnCurPage,
+      selectKeys: allMenuFnSelectKeys,
+      dataSource: allMenuFnCurPageItems,
+      curRoleId: roleId
     }
   },
   dispatch => bindActionCreators({ ...roleManageActions }, dispatch)

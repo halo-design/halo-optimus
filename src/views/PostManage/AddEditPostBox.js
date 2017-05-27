@@ -10,11 +10,19 @@ const RadioGroup = Radio.Group
 
 @connect(
   state => {
-    const { pages: { postManage } } = state
+    const {
+      pages: {
+        postManage: {
+          addEditBoxVisible,
+          addEditBoxType,
+          addEditBoxInitVals
+        }
+      }
+    } = state
     return {
-      visible: postManage.addEditBoxVisible,
-      formType: postManage.addEditBoxType,
-      initVals: postManage.addEditBoxInitVals
+      visible: addEditBoxVisible,
+      formType: addEditBoxType,
+      initVals: addEditBoxInitVals
     }
   },
   dispatch => bindActionCreators({ closeAddEditBox, addPostList, modifyPost }, dispatch)

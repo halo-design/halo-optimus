@@ -12,12 +12,23 @@ import { getStrategyList } from 'REDUCER/public/strategy'
 
 @connect(
   state => {
-    const { pages: { reviewSettings }, public: { menu } } = state
+    const {
+      pages: {
+        reviewSettings: {
+          bsnList,
+          bsnListTotalNum,
+          bsnSelectOpt
+        }
+      },
+      public: {
+        menu: { userMenu }
+      }
+    } = state
     return {
-      userMenu: menu.userMenu,
-      bsnList: reviewSettings.bsnList,
-      bsnListTotalNum: reviewSettings.bsnListTotalNum,
-      bsnSelectOpt: reviewSettings.bsnSelectOpt
+      userMenu,
+      bsnList,
+      bsnListTotalNum,
+      bsnSelectOpt
     }
   },
   dispatch => bindActionCreators({ getBsnList, getStrategy, getStrategyList }, dispatch)

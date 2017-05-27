@@ -6,13 +6,23 @@ import { getAllRoleFnItems, clearTableItems } from 'REDUCER/pages/roleManage'
 
 @connect(
   state => {
-    const { pages: { roleManage } } = state
+    const {
+      pages: {
+        roleManage: {
+          pageSize,
+          tableTotalSize,
+          tableCurPage,
+          tableCurPageItems,
+          curRoleInfo: { roleId }
+        }
+      }
+    } = state
     return {
-      pageSize: roleManage.pageSize,
-      totalSize: roleManage.tableTotalSize,
-      curPage: roleManage.tableCurPage,
-      dataSource: roleManage.tableCurPageItems,
-      curRoleId: roleManage.curRoleInfo.roleId
+      pageSize,
+      totalSize: tableTotalSize,
+      curPage: tableCurPage,
+      dataSource: tableCurPageItems,
+      curRoleId: roleId
     }
   },
   dispatch => bindActionCreators({ getAllRoleFnItems, clearTableItems }, dispatch)

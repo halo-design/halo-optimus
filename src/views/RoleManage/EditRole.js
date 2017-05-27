@@ -14,12 +14,23 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 @connect(
   state => {
-    const { pages: { roleManage }, public: { menu, bindRole } } = state
+    const {
+      pages: {
+        roleManage: {
+          curRoleInfo,
+          selectModifyRole
+        }
+      },
+      public: {
+        menu: { userMenu },
+        bindRole: { selectRoleTreeList }
+      }
+  } = state
     return {
-      userMenu: menu.userMenu,
-      treeNodes: bindRole.selectRoleTreeList,
-      info: roleManage.curRoleInfo,
-      selectModifyRole: roleManage.selectModifyRole
+      userMenu,
+      treeNodes: selectRoleTreeList,
+      info: curRoleInfo,
+      selectModifyRole
     }
   },
   dispatch => bindActionCreators({ ...roleManageActions }, dispatch)

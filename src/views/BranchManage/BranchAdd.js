@@ -11,11 +11,21 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 @connect(
   state => {
-    const { pages: { branchManage }, public: { branchTree } } = state
+    const {
+      pages: {
+        branchManage: { addBranchBoxVisible }
+      },
+      public: {
+        branchTree: {
+          selectTreeBranchList,
+          allBranchList
+        }
+      }
+    } = state
     return {
-      visible: branchManage.addBranchBoxVisible,
-      branchNodes: branchTree.selectTreeBranchList,
-      allBranchList: branchTree.allBranchList
+      visible: addBranchBoxVisible,
+      branchNodes: selectTreeBranchList,
+      allBranchList
     }
   },
   dispatch => bindActionCreators({ setAddBranchVisible, branchAdd }, dispatch)

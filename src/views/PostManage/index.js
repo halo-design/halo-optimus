@@ -10,13 +10,27 @@ const confirm = Modal.confirm
 
 @connect(
   state => {
-    const { pages: { postManage }, public: { menu } } = state
+    const {
+      pages: {
+        postManage: {
+          postListData: {
+            postList,
+            turnPageTotalNum
+          },
+          currentPage,
+          turnPageShowNum
+        }
+      },
+      public: {
+        menu: { userMenu }
+      }
+    } = state
     return {
-      userMenu: menu.userMenu,
-      postList: postManage.postListData.postList,
-      turnPageTotalNum: postManage.postListData.turnPageTotalNum,
-      currentPage: postManage.currentPage,
-      turnPageShowNum: postManage.turnPageShowNum
+      userMenu,
+      postList,
+      turnPageTotalNum,
+      currentPage,
+      turnPageShowNum
     }
   },
   dispatch => bindActionCreators({ ...postManageActions }, dispatch)

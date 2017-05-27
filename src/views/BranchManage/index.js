@@ -10,10 +10,17 @@ import { changeBranchSelected, resetForm } from 'REDUCER/pages/branchManage'
 
 @connect(
   state => {
-    const { pages: { branchManage }, public: { branchTree } } = state
+    const {
+      pages: {
+        branchManage: { brhId }
+      },
+      public: {
+        branchTree: { treeBranchList }
+      }
+    } = state
     return {
-      treeBranchList: branchTree.treeBranchList,
-      branchId: branchManage.brhId
+      treeBranchList,
+      branchId: brhId
     }
   },
   dispatch => bindActionCreators({ initBranchList, changeBranchSelected, resetForm }, dispatch)

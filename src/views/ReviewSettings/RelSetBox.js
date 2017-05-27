@@ -7,11 +7,19 @@ import { getStrategyList } from 'REDUCER/public/strategy'
 
 @connect(
   state => {
-    const { public: { strategy } } = state
+    const {
+      public: {
+        strategy: {
+          strategyList,
+          strategyListSelOpt,
+          strategyListTotalNum
+        }
+      }
+    } = state
     return {
-      strategyList: strategy.strategyList,
-      strategyListSelOpt: strategy.strategyListSelOpt,
-      totalNum: strategy.strategyListTotalNum
+      strategyList,
+      strategyListSelOpt,
+      totalNum: strategyListTotalNum
     }
   },
   dispatch => bindActionCreators({ setRelation, getStrategyList }, dispatch)

@@ -11,12 +11,23 @@ const FormItem = Form.Item
 
 @connect(
   state => {
-    const { pages: { checkList }, public: { menu } } = state
+    const {
+      pages: {
+        checkList: {
+          checkList,
+          checkListSelectOpt,
+          checkListTotalNum
+        }
+      },
+      public: {
+        menu: { userMenu }
+      }
+    } = state
     return {
-      userMenu: menu.userMenu,
-      checkList: checkList.checkList,
-      checkListSelectOpt: checkList.checkListSelectOpt,
-      totalNum: checkList.checkListTotalNum
+      userMenu,
+      checkList,
+      checkListSelectOpt,
+      totalNum: checkListTotalNum
     }
   },
   dispatch => bindActionCreators({ getCheckList, checkDecide }, dispatch)
