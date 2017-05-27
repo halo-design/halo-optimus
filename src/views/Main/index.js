@@ -18,6 +18,7 @@ import CheckHistoryList from '../CheckHistoryList/sync'
 import ApplyHistoryList from '../ApplyHistoryList/sync'
 import UpgradeManage from '../UpgradeManage/sync'
 import HotpatchManage from '../HotpatchManage/sync'
+import WhiteListManage from '../WhiteListManage/sync'
 
 @connect(
   null,
@@ -59,6 +60,7 @@ export default class Main extends React.Component {
               <Route path='/home/pendHistoryList' component={ApplyHistoryList} />
               <Route path='/home/upgradeManage' component={UpgradeManage} />
               <Route path='/home/hotpatchManage' component={HotpatchManage} />
+              <Route path='/home/whiteListManage' component={WhiteListManage} />
               <Route component={Welcome} />
             </Switch>
           </div>

@@ -275,7 +275,7 @@ export default class BranchScan extends React.Component {
                     <Input
                       placeholder='请输入用户描述'
                       size='large'
-                     />
+                    />
                   )
                 }
               </FormItem>

@@ -55,7 +55,10 @@ export default class ChangePswd extends React.Component {
   render () {
     const { oldPswd, newPswd, newAgainPswd } = this.state
     return (
-      <div className='app-modal-box-mask'>
+      <div
+        className='app-modal-box-mask'
+        onClick={e => { e.target.className === 'app-modal-box-mask' && this.onClose() }}
+      >
         <div className='app-modal-box'>
           <div className='title'>修改密码</div>
           <div className='content'>

@@ -10,6 +10,7 @@ import checkHistoryList from './checkHistoryList'
 import applyHistoryList from './applyHistoryList'
 import updateManage from './updateManage'
 import hotpatchManage from './hotpatchManage'
+import whiteListManage from './whiteListManage'
 
 const pagesReducer = combineReducers({
   branchManage,
@@ -22,7 +23,8 @@ const pagesReducer = combineReducers({
   checkHistoryList,
   applyHistoryList,
   updateManage,
-  hotpatchManage
+  hotpatchManage,
+  whiteListManage
 })
 
 export default pagesReducer
