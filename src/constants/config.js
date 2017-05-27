@@ -8,7 +8,7 @@ export const routeRootPath = isProd ? `/${rootPath}` : rootPath === serverRootPa
 export const errorCodeCheck = errorCode => {
   // 数据校验失败返回登录页
   if (errorCode === 'BLEC0001' || errorCode === 'SYEC0002') {
-    window.location.replace(routeRootPath)
+    window.location.replace('/' + routeRootPath)
   }
 }
 

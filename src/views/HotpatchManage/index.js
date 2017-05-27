@@ -183,8 +183,9 @@ export default class HotpacthManageView extends React.Component {
 
     return (
       <div className='hotpacthManage' style={{padding: '20px 30px'}}>
-        <div style={{paddingBottom: '20px'}}>
+        <div style={{paddingBottom: '20px', textAlign: 'right'}}>
           <Button
+            size='large'
             type='primary'
             icon='plus-circle-o'
             onClick={e => setAddHotpatchVisible(true)}

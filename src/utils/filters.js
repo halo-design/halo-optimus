@@ -115,9 +115,23 @@ export const enterpriseFilter = record => record === '0' ? '企业包' : '正式
 
 export const upgradeTypeFilter = record => record === '1' ? '单次提醒' : '多次提醒'
 
-export const platformFilter = record => record === '1' ? 'Android' : 'IOS'
-
 export const releaseStatusFilter = record => record === '1' ? '发布中' : record === '2' ? '已结束' : '暂停'
+
+export const platformFilter = record => {
+  switch (record) {
+    case '0':
+      return '平台无关'
+
+    case '1':
+      return 'Android'
+
+    case '2':
+      return 'IOS'
+
+    default:
+      return record
+  }
+}
 
 export const operationFilter = record => {
   switch (record) {
@@ -169,4 +183,49 @@ export const formatGreyConfigInfo = data => {
     operation: item.operator,
     value: Array.isArray(item.left) ? item.left.join(', ') : isEmptyObject(item.left) ? '暂无' : `${item.left.upper} - ${item.left.lower}`
   }))
+}
+
+export const whiteListFilter = record => {
+  switch (record) {
+    case 'userid':
+      return '用户白名单'
+
+    default:
+      return record
+  }
+}
+
+export const businessFilter = record => {
+  switch (record) {
+    case 'hotpatch':
+      return '热修复'
+
+    case 'upgrade':
+      return '升级'
+
+    default:
+      return record
+  }
+}
+
+export const resourceFilter = record => {
+  switch (record) {
+    case 'version':
+      return '版本号'
+
+    case 'city':
+      return '城市'
+
+    case 'mobileModel':
+      return '机型'
+
+    case 'netType':
+      return '网络'
+
+    case 'osVersion':
+      return 'osVersion'
+
+    default:
+      return record
+  }
 }

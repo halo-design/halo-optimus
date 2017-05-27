@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Table, Button, Popconfirm } from 'antd'
 import AddWhiteListBox from './AddWhiteListBox'
 import AddUserIdBox from './AddUserIdBox'
+import { whiteListFilter, businessFilter } from 'UTIL/filters'
 import * as whiteListManageActions from 'REDUCER/pages/whiteListManage'
 
 @connect(
@@ -22,7 +23,7 @@ import * as whiteListManageActions from 'REDUCER/pages/whiteListManage'
   dispatch => bindActionCreators({ ...whiteListManageActions }, dispatch)
 )
 
-export default class WhiteListManage extends React.Component {
+export default class WhiteListManageView extends React.Component {
 
   addList () {
     this.props.setAddWhiteListVisible(true)
@@ -54,11 +55,13 @@ export default class WhiteListManage extends React.Component {
       }, {
         title: '白名单类型',
         dataIndex: 'idType',
-        key: 'idType'
+        key: 'idType',
+        render: text => <span>{whiteListFilter(text)}</span>
       }, {
         title: '业务类型',
         dataIndex: 'business',
-        key: 'business'
+        key: 'business',
+        render: text => <span>{businessFilter(text)}</span>
       }, {
         title: '白名单数量',
         dataIndex: 'whiteListCount',
