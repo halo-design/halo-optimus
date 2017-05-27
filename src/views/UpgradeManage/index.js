@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Button, Table, Spin, Icon } from 'antd'
+import { Button, Table, Spin, Icon, Popconfirm } from 'antd'
 import WaitSpin from 'COMPONENT/Spin'
 import { releaseFilter, releaseStatusFilter, enterpriseFilter, upgradeTypeFilter, platformFilter } from 'UTIL/filters'
 import * as updateManageActions from 'REDUCER/pages/updateManage'
@@ -69,8 +69,12 @@ export default class UpgradeManageView extends React.Component {
     }, hideSpin)
   }
 
-  pauseItem (record, task) {
-    console.log(record, task)
+  changeItem (state, task) {
+    this.props.changeTaskStatus({
+      taskId: task.id,
+      taskStatus: state,
+      packageInfoId: task.packageInfoId
+    })
   }
 
   getSubList (record) {
@@ -93,8 +97,36 @@ export default class UpgradeManageView extends React.Component {
                   item.taskStatus !== '2' &&
                   <td className='panel'>
                     <a onClick={e => this.modifyItem(record, item)}>修改</a>
-                    <a onClick={e => this.pauseItem(record, item)}>暂停</a>
-                    <a onClick={e => this.closeItem(record, item)}>结束</a>
+                    {
+                      item.taskStatus === '3'
+                      ? (
+                        <Popconfirm
+                          title='确定要继续吗？'
+                          onConfirm={e => this.changeItem(1, item)}
+                          okText='确定'
+                          cancelText='取消'
+                        >
+                          <a>继续</a>
+                        </Popconfirm>
+                      ) : (
+                        <Popconfirm
+                          title='确定要暂停吗？'
+                          onConfirm={e => this.changeItem(3, item)}
+                          okText='确定'
+                          cancelText='取消'
+                        >
+                          <a>暂停</a>
+                        </Popconfirm>
+                      )
+                    }
+                    <Popconfirm
+                      title='确定要结束吗？'
+                      onConfirm={e => this.changeItem(2, item)}
+                      okText='确定'
+                      cancelText='取消'
+                    >
+                      <a>结束</a>
+                    </Popconfirm>
                   </td>
                 }
               </tr>

@@ -117,6 +117,25 @@ export const getResourceList = state => (dispatch, getState) => {
   })
 }
 
+export const changeTaskStatus = (state, success, fail) => (dispatch, getState) => {
+  dispatch(RQ.changeTaskStatusAction(state)).then(action => {
+    if (action.data.body.errorCode === '0') {
+      dispatch(getUpgradeTaskList({packageInfoId: state.packageInfoId}))
+      NotiSuccess({
+        message: '成功',
+        description: '修改成功！'
+      })
+      success && success()
+    } else {
+      NotiWarning({
+        message: '失败',
+        description: '修改失败！'
+      })
+      fail && fail()
+    }
+  })
+}
+
 const initialState = {
   upgradeList: [],
   resourceList: [],

@@ -17,3 +17,7 @@ export const getUpgradeTaskAction = data => getFetch('GET_UPGRADETASK_URL', {
 export const getTaskDetailAction = data => getFetch('GET_TASK_DETAIL_URL', {
   body: data
 })
+
+export const changeTaskStatusAction = data => getFetch('CHANGE_TASK_STATUS_URL', {
+  body: data
+})
