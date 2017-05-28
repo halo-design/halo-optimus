@@ -7,6 +7,8 @@ import { getCookie } from 'UTIL/cookie'
 import { logout } from 'REDUCER/public/login'
 import { setPasswordVisible } from 'REDUCER/public/main'
 
+@withRouter
+
 @connect(
   state => ({
     loginInfo: state.public.login
@@ -14,7 +16,7 @@ import { setPasswordVisible } from 'REDUCER/public/main'
   dispatch => bindActionCreators({ logout, setPasswordVisible }, dispatch)
 )
 
-class Account extends React.Component {
+export default class Account extends React.Component {
 
   constructor (props) {
     super(props)
@@ -82,5 +84,3 @@ class Account extends React.Component {
     )
   }
 }
-
-export default withRouter(Account)

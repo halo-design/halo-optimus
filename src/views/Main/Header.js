@@ -5,6 +5,8 @@ import Account from './Account'
 import Sidebar from './Sidebar'
 import ChangePswd from './ChangePswd'
 
+@withRouter
+
 @connect(
   state => ({
     items: state.public.menu.items,
@@ -12,7 +14,7 @@ import ChangePswd from './ChangePswd'
   })
 )
 
-class Header extends React.Component {
+export default class Header extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -71,10 +73,9 @@ class Header extends React.Component {
           parentUrl={currentUrl}
         />
         <Account />
-        {passwordVisible ? <ChangePswd /> : null}
+        {passwordVisible && <ChangePswd />}
       </div>
     )
   }
 }
 
-export default withRouter(Header)

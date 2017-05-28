@@ -2,6 +2,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 const rootPath = 'halo'
 const serverRootPath = 'inmanage'
+const projectName = 'IFP内部管理系统'
 
 export const routeRootPath = isProd ? `/${rootPath}` : rootPath === serverRootPath ? '/' : rootPath
 
@@ -14,5 +15,6 @@ export const errorCodeCheck = errorCode => {
 
 export default {
   rootPath,
-  serverRootPath
+  serverRootPath,
+  projectName
 }

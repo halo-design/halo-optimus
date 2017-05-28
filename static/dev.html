@@ -11,8 +11,11 @@
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
   var socket = io.connect();
-  console.remote = function (data) {
-    socket.emit('log', data)
+  console.remote = function () {
+    let arg = [].slice.apply(arguments)
+    arg.forEach(function (item, i) {
+      socket.emit('log', item)
+    })
   }
 </script>
 </head>

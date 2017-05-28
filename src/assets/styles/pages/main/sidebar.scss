@@ -57,35 +57,6 @@ $sidebarWidth : 200px;
       &.active {
         .menuList {
           height: auto;
-
-          .item {
-            opacity: 1;
-            
-            &:nth-child(1) {
-              transition-delay: 0s;
-            }
-
-            &:nth-child(2) {
-              transition-delay: .06s;
-            }
-
-            &:nth-child(2) {
-              transition-delay: .12s;
-            }
-
-            &:nth-child(3) {
-              transition-delay: .18s;
-            }
-
-            &:nth-child(4) {
-              transition-delay: .24s;
-            }
-
-            &:nth-child(5) {
-              transition-delay: .3s;
-            }
-          }
-
         }
 
         .title {
@@ -111,6 +82,8 @@ $sidebarWidth : 200px;
           a {
             padding-left: 24px;
             color: #888;
+            transition: background-color .2s;
+
             &.active {
               color: #3b8cff;
               background-color: #E4E9EC;
@@ -203,13 +176,8 @@ $sidebarWidth : 200px;
 
       .menuList {
         height: 0;
+        transition: height .2s;
         overflow: hidden;
-        
-        .item {
-          opacity: 0;
-          transition: all .3s linear .3s;
-        }
-        
       }
 
     }

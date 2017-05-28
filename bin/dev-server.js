@@ -30,12 +30,13 @@ io.on('connection', socket => {
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: settings.publicPath,
-  quiet: true
+  quiet: true,
+  stats: {
+    colors: true
+  }
 })
 
-const hotMiddleware = require('webpack-hot-middleware')(compiler, {
-  log: () => {}
-})
+const hotMiddleware = require('webpack-hot-middleware')(compiler)
 
 compiler.plugin('compilation', compilation => {
   compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
