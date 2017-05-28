@@ -14,6 +14,13 @@ import settings from 'CONSTANT/config'
 
 export default class Sidebar extends React.Component {
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      top: false
+    }
+  }
+
   handleActive (e) {
     const target = e.target
     const parent = target.parentNode
@@ -35,6 +42,18 @@ export default class Sidebar extends React.Component {
     document.title = `${settings.projectName} - ${e.target.innerText}`
   }
 
+  componentDidMount () {
+    const docEl = document.documentElement
+
+    const scroll = () => {
+      let scrollTop = docEl.scrollTop || document.body.scrollTop
+      this.setState({
+        top: scrollTop > 60
+      })
+    }
+    window.addEventListener('scroll', scroll, false)
+  }
+
   render () {
     // 定义一个样式映射表
     const CSS = {
@@ -50,7 +69,6 @@ export default class Sidebar extends React.Component {
     const { parentUrl, menus } = this.props
     const Menu = (menus, preUrl) => (
       <div className='menu'>
-        <div className='menu-title'><span>{menus.title}</span></div>
         {menus.menus.map(
           (item, i) => {
             // 若只有单项
@@ -110,7 +128,8 @@ export default class Sidebar extends React.Component {
 
     return (
       <div className='app-sidebar'>
-        <div className='scroller-wrap'>
+        <div className='sidebar-title'><span>{menus.title}</span></div>
+        <div className={this.state.top ? 'scroller-wrap fixed' : 'scroller-wrap'}>
           <div className='scroller'>
             {Menu(menus, parentUrl)}
           </div>

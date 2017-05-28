@@ -11,10 +11,38 @@ $sidebarWidth : 200px;
   top: 60px;
   bottom: 0;
   z-index: 99;
+
+  .sidebar-title {
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    line-height: 32px;
+    border-bottom: 1px solid #e4e9ec;
+    
+    span {
+      font-size: 15px;
+      padding: 6px 26px;
+      background-color: #3b8cff;
+      border-radius: 4px;
+      color: #fff;
+      cursor: default;
+    }
+  }
   
   .scroller-wrap {
-    height: 100%;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    width: 200px;
     overflow: auto;
+
+    &.fixed {
+      z-index: 999;
+      background-color: #eff4f8;
+      position: fixed;
+      top: 0;
+    }
 
     &::-webkit-scrollbar {
       width: 14px;
@@ -34,22 +62,6 @@ $sidebarWidth : 200px;
   }
 
   .menu {
-    .menu-title {
-      text-indent: 44px;
-      width: 100%;
-      height: 50px;
-      line-height: 32px;
-      border-bottom: 1px solid #e4e9ec;
-      
-      span {
-        font-size: 15px;
-        padding: 6px 26px;
-        background-color: #3b8cff;
-        border-radius: 4px;
-        color: #fff;
-        cursor: default;
-      }
-    }
     .subMenu {
       line-height: 42px;
       width: 100%;

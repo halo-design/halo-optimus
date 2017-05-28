@@ -9,15 +9,6 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="Bookmark" href="/favicon.ico">
 <script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript">
-  var socket = io.connect();
-  console.remote = function () {
-    let arg = [].slice.apply(arguments)
-    arg.forEach(function (item, i) {
-      socket.emit('log', item)
-    })
-  }
-</script>
 </head>
 <body>
   <!-- 此处注入 -->

@@ -26,6 +26,15 @@ io.on('connection', socket => {
   socket.on('log', info => {
     console.log(info)
   })
+  socket.on('log:success', info => {
+    console.log(chalk.green(info))
+  })
+  socket.on('log:error', info => {
+    console.log(chalk.red(info))
+  })
+  socket.on('log:warn', info => {
+    console.log(chalk.yellow(info))
+  })
 })
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
