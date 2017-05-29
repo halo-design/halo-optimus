@@ -7,10 +7,12 @@
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
+    "clean:diff": "rimraf dist_diff",
     "dev": "node bin/dev-server.js",
     "build": "node bin/compile.js",
     "shot": "gulp snapshot",
     "diff": "gulp dist-different",
+    "repo": "gulp report",
     "comp": "gulp compare-report",
     "lint": "eslint --ext .js,.jsx src",
     "upload": "gulp upload",
