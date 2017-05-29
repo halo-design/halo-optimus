@@ -80,7 +80,7 @@ export const addHotpatchList = (state, success, fail) => (dispatch, getState) =>
 
 export const setAddHotpatchVisible = state => ({
   type: SET_ADD_HOTPATCH_VISIBLE,
-  visible: state
+  data: state
 })
 
 export const setAddEditHotpatchState = state => ({
@@ -142,7 +142,7 @@ export default (state = initialState, action) => {
     case SET_ADD_HOTPATCH_VISIBLE:
       return {
         ...state,
-        addHotpatchVisible: action.visible
+        addHotpatchVisible: action.data
       }
 
     case SET_HOTPATCH_STATE:

@@ -26,7 +26,7 @@ const Option = Select.Option
 
 @Form.create()
 
-export default class AddWhiteListBox extends React.Component {
+export default class AddWhiteListBoxView extends React.Component {
 
   constructor (props) {
     super(props)

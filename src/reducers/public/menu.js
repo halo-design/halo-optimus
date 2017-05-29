@@ -9,7 +9,7 @@ const SELECT_LEFT_MENU = 'SELECT_LEFT_MENU'
 
 export const selectMenu = currentMenu => ({
   type: SELECT_LEFT_MENU,
-  currentMenu: currentMenu
+  data: currentMenu
 })
 
 const converMenu = menu => ({
@@ -55,7 +55,7 @@ export const initUserMenu = cb => (dispatch, getState) => {
 
     dispatch({
       type: SAVE_USER_MENU,
-      userMenu: {
+      data: {
         menuList: sourceList,
         menuItemList: dataBody.menuItemList
       }
@@ -76,7 +76,7 @@ export const initUserMenu = cb => (dispatch, getState) => {
       items: userMenu
     })
 
-    dispatch(refreshInfo(action.data))
+    dispatch(refreshInfo(action.data.body))
     NProgress.done()
     if (cb) cb()
   })
@@ -95,7 +95,7 @@ export default (state = initialState, action) => {
     case SAVE_USER_MENU:
       return {
         ...state,
-        userMenu: action.userMenu
+        userMenu: action.data
       }
 
     case MERGE_FINAL_MENU:
@@ -107,8 +107,11 @@ export default (state = initialState, action) => {
     case SELECT_LEFT_MENU:
       return {
         ...state,
-        currentMenu: action.currentMenu,
-        userMenu: Object.assign({}, state.userMenu, {currentMenu: action.currentMenu})
+        currentMenu: action.data,
+        userMenu: {
+          ...state.userMenu,
+          currentMenu: action.data
+        }
       }
 
     default:

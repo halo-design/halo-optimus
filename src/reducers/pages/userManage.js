@@ -13,12 +13,9 @@ export const CLOSE_MODIFY_USER = 'CLOSE_MODIFY_USER'
 export const SET_ADDUSER_VISIBLE = 'SET_ADDUSER_VISIBLE'
 export const UPDATE_SELECTE_KEYS = 'UPDATE_SELECTE_KEYS'
 
-const pageUsers = data => ({
+const pageUsers = state => ({
   type: PAGE_USERS,
-  userList: data.userList,
-  currentPage: data.currentPage,
-  totalSize: data.totalSize,
-  turnPageShowNum: data.turnPageShowNum
+  data: state
 })
 
 // 查询用户信息 搜索功能 分页功能
@@ -26,15 +23,18 @@ export const userPageByBrh = (params, cb) => (dispatch, getState) => {
   NProgress.start()
   let pageShowNum = getState().pages.userManage.pageData.turnPageShowNum
   dispatch(userPageByBrhAction(params, pageShowNum)).then(action => {
-    let dataBody = action.data.body
-    let userList = dataBody.userList.map(user => Object.assign(user, {
+    const dataBody = action.data.body
+    const userList = dataBody.userList.map(user => ({
+      ...user,
       key: user.userNo
     }))
-    let data = {
+    const data = {
       userList: userList,
       totalSize: dataBody.turnPageTotalNum,
-      turnPageShowNum: dataBody.turnPageShowNum,
-      currentPage: dataBody.currentPage
+      pageData: {
+        turnPageShowNum: dataBody.turnPageShowNum,
+        currentPage: dataBody.currentPage
+      }
     }
     dispatch(updateSelectKeys([params.brhId]))
     dispatch(pageUsers(data))
@@ -73,7 +73,7 @@ export const closeBindRole = () => ({
 
 export const setAddUserBoxVsisible = state => ({
   type: SET_ADDUSER_VISIBLE,
-  visible: state
+  data: state
 })
 
 const applyInitVal = info => ({
@@ -104,7 +104,8 @@ export const addUser = (params, success, fail) => (dispatch, getState) => {
       }
       dispatch(userPageByBrhAction(dataList, 10)).then(action => {
         const dataBody = action.data.body
-        let userList = dataBody.userList.map(user => Object.assign(user, {
+        let userList = dataBody.userList.map(user => ({
+          ...user,
           key: user.userNo
         }))
         let data = {
@@ -132,14 +133,13 @@ export const addUser = (params, success, fail) => (dispatch, getState) => {
 }
 
 export const updateUser = (params, success, fail) => (dispatch, getState) => {
-  let data = Object.assign({}, {
-    currentPage: '1',
-    brhId: params.brhId,
-    brhName: ''
-  })
   dispatch(updateUserAction(params)).then(action => {
     if (action.data.body.errorCode === '0') {
-      dispatch(userPageByBrh(data))
+      dispatch(userPageByBrh({
+        currentPage: '1',
+        brhId: params.brhId,
+        brhName: ''
+      }))
       NotiSuccess({
         message: '成功',
         description: '用户修改成功！'
@@ -227,12 +227,7 @@ export default (state = initialState, action) => {
     case PAGE_USERS:
       return {
         ...state,
-        userList: action.userList,
-        totalSize: action.totalSize,
-        pageData: {
-          currentPage: action.currentPage,
-          turnPageShowNum: action.turnPageShowNum
-        }
+        ...action.data
       }
 
     case SET_BIND_USER:
@@ -257,7 +252,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userBox: {
-          visible: action.visible,
+          visible: action.data,
           initVal: {},
           type: 'ADD'
         }

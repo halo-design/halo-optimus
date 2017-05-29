@@ -28,7 +28,7 @@ import { getAllRoleFnItems, clearTableItems } from 'REDUCER/pages/roleManage'
   dispatch => bindActionCreators({ getAllRoleFnItems, clearTableItems }, dispatch)
 )
 
-export default class ItemsTable extends React.Component {
+export default class ItemsTableView extends React.Component {
 
   componentWillUnmount () {
     this.props.clearTableItems()

@@ -12,7 +12,7 @@ import settings from 'CONSTANT/config'
   dispatch => bindActionCreators({ selectMenu }, dispatch)
 )
 
-export default class Sidebar extends React.Component {
+export default class SidebarView extends React.Component {
 
   constructor (props) {
     super(props)

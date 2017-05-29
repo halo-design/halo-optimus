@@ -21,7 +21,7 @@ const RadioGroup = Radio.Group
 
 @Form.create()
 
-export default class AddHotpatch extends React.Component {
+export default class AddHotpatchView extends React.Component {
 
   constructor (props) {
     super(props)

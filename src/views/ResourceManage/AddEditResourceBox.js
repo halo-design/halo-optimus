@@ -32,7 +32,7 @@ const Option = Select.Option
 
 @Form.create()
 
-export default class AddEditResourceBox extends React.Component {
+export default class AddEditResourceBoxView extends React.Component {
 
   constructor (props) {
     super(props)

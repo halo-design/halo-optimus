@@ -8,7 +8,7 @@ import { Table } from 'antd'
   })
 )
 
-export default class DetailBox extends React.Component {
+export default class DetailBoxView extends React.Component {
 
   render () {
     const { info, detail } = this.props
@@ -55,9 +55,10 @@ export default class DetailBox extends React.Component {
 
     let dataSource = []
     if (detail.alias) {
-      dataSource.push(Object.assign({}, detail, {
+      dataSource.push({
+        ...detail,
         key: 1
-      }))
+      })
     }
 
     return (

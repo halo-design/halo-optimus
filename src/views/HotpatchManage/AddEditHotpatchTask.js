@@ -43,7 +43,7 @@ const Option = Select.Option
 
 @Form.create()
 
-export default class AddEditHotpatchTask extends React.Component {
+export default class AddEditHotpatchTaskView extends React.Component {
 
   constructor (props) {
     super(props)

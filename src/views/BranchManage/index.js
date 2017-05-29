@@ -26,7 +26,7 @@ import { changeBranchSelected, resetForm } from 'REDUCER/pages/branchManage'
   dispatch => bindActionCreators({ initBranchList, changeBranchSelected, resetForm }, dispatch)
 )
 
-export default class BranchManage extends React.Component {
+export default class BranchManageView extends React.Component {
 
   constructor (props) {
     super(props)

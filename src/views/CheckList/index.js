@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Form, Button, Table, Modal, Input, message } from 'antd'
-import { checkBtnList, str2json } from 'UTIL/filters'
+import { checkBtnList, str2json, formatDateTime } from 'UTIL/filters'
 import InfoTable from 'COMPONENT/InfoTable'
 import Spin from 'COMPONENT/Spin'
 import { getCheckList, checkDecide } from 'REDUCER/pages/checkList'
@@ -35,7 +35,7 @@ const FormItem = Form.Item
 
 @Form.create()
 
-export default class CheckList extends React.Component {
+export default class CheckListView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -81,12 +81,11 @@ export default class CheckList extends React.Component {
         if (errors) {
           message.error('填写内容有错误，请仔细填写!')
         } else {
-          const rejReason = getFieldValue('rejReason')
-          Object.assign(data, {
+          this.applyDecide({
+            ...data,
             authFlag: 1,
-            rejReason: rejReason
+            rejReason: getFieldValue('rejReason')
           })
-          this.applyDecide(data)
         }
       })
     } else {
@@ -167,9 +166,7 @@ export default class CheckList extends React.Component {
       title: '交易名称',
       dataIndex: 'bsnName',
       key: 'bsnName',
-      render: (text, record) => {
-        return <a onClick={e => { this.checkReview(record) }}>{text}</a>
-      }
+      render: (text, record) => <a onClick={e => { this.checkReview(record) }}>{text}</a>
     }, {
       title: '申请人编号',
       dataIndex: 'applicantId',
@@ -181,7 +178,8 @@ export default class CheckList extends React.Component {
     }, {
       title: '更新日期',
       dataIndex: 'updateDate',
-      key: 'updateDate'
+      key: 'updateDate',
+      render: (text, record) => <span>{formatDateTime(text)}</span>
     }, {
       title: '操作',
       key: 'operation',

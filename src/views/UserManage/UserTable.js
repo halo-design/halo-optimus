@@ -33,7 +33,7 @@ import * as userManageAction from 'REDUCER/pages/userManage'
   dispatch => bindActionCreators({ ...userManageAction, getUserRoleTree }, dispatch)
 )
 
-export default class UserTable extends React.Component {
+export default class UserTableView extends React.Component {
 
   constructor (props) {
     super(props)

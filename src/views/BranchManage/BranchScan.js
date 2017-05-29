@@ -34,7 +34,7 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 @Form.create()
 
-export default class BranchScan extends React.Component {
+export default class BranchScanView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -82,9 +82,10 @@ export default class BranchScan extends React.Component {
               level = '3'
               break
           }
-          params = Object.assign({}, getFieldsValue(), {
+          params = {
+            ...getFieldsValue(),
             brhLevel: level
-          })
+          }
           // 避免将空字段保存为 'undefined'
           params.brhParentId ? null : params.brhParentId = ''
 

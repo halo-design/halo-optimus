@@ -41,7 +41,7 @@ export const getUpgradeTaskList = (data, cb) => (dispatch, getState) => {
 
 export const setAddPkgVisible = state => ({
   type: SET_ADD_PKG_VISIBLE,
-  visible: state
+  data: state
 })
 
 export const setAddEditRelState = state => ({
@@ -153,7 +153,7 @@ export default (state = initialState, action) => {
     case SET_ADD_PKG_VISIBLE:
       return {
         ...state,
-        addPkgVisible: action.visible
+        addPkgVisible: action.data
       }
 
     case SET_RELEASE_STATE:

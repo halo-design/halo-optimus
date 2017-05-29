@@ -15,7 +15,7 @@ const RadioGroup = Radio.Group
 
 @Form.create()
 
-export default class StrategyAddEditBox extends React.Component {
+export default class StrategyAddEditBoxView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -62,10 +62,11 @@ export default class StrategyAddEditBox extends React.Component {
         params.authDefine = '' + params.ad1 + params.ad2 + params.ad3 + params.ad4 + params.ad5
         isAdd
         ? handleFn = addStrategy
-        : Object.assign(params, {
+        : params = {
+          ...params,
           authId: initVal.authId,
           areaNo: initVal.areaNo
-        })
+        }
 
         showSpin()
         handleFn(params, () => {

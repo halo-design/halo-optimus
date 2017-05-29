@@ -35,7 +35,7 @@ const confirm = Modal.confirm
   dispatch => bindActionCreators({ getStrategyList, ...strategySettingsActions }, dispatch)
 )
 
-export default class StrategySettings extends React.Component {
+export default class StrategySettingsView extends React.Component {
 
   constructor (props) {
     super(props)

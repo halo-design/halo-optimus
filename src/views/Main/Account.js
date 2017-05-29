@@ -16,7 +16,7 @@ import { setPasswordVisible } from 'REDUCER/public/main'
   dispatch => bindActionCreators({ logout, setPasswordVisible }, dispatch)
 )
 
-export default class Account extends React.Component {
+export default class AccountView extends React.Component {
 
   constructor (props) {
     super(props)

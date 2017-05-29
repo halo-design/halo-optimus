@@ -26,7 +26,7 @@ import { closePreviewUser } from 'REDUCER/pages/userManage'
   dispatch => bindActionCreators({ closePreviewUser }, dispatch)
 )
 
-export default class PreviewBox extends React.Component {
+export default class PreviewBoxView extends React.Component {
 
   onClose () {
     this.props.closePreviewUser()

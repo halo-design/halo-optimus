@@ -29,7 +29,7 @@ const FormItem = Form.Item
 
 @Form.create()
 
-export default class AddUserIdBox extends React.Component {
+export default class AddUserIdBoxView extends React.Component {
 
   constructor (props) {
     super(props)

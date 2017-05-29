@@ -28,7 +28,7 @@ const RangePicker = DatePicker.RangePicker
   dispatch => bindActionCreators({ getHistoryList }, dispatch)
 )
 
-export default class ApplyHistoryList extends React.Component {
+export default class ApplyHistoryListView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -93,9 +93,7 @@ export default class ApplyHistoryList extends React.Component {
       title: '交易名称',
       dataIndex: 'bsnName',
       key: 'bsnName',
-      render: (text, record) => {
-        return <a onClick={e => this.stateReview(record)}>{text}</a>
-      }
+      render: (text, record) => <a onClick={e => this.stateReview(record)}>{text}</a>
     }, {
       title: '授权人编号',
       dataIndex: 'cstNo',
@@ -108,17 +106,12 @@ export default class ApplyHistoryList extends React.Component {
       title: '授权结果',
       dataIndex: 'authFlag',
       key: 'authFlag',
-      render: (text, record) =>
-      text === '0' || text === 0
-      ? <span>同意</span>
-      : <span>驳回</span>
+      render: (text, record) => text === '0' || text === 0 ? <span>同意</span> : <span>驳回</span>
     }, {
       title: '授权时间',
       dataIndex: 'authTime',
       key: 'authTime',
-      render: (text, record) => {
-        return <span>{formatDateTime(text)}</span>
-      }
+      render: (text, record) => <span>{formatDateTime(text)}</span>
     }, {
       title: '驳回原因',
       dataIndex: 'rejReason',

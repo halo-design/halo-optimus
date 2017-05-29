@@ -41,7 +41,7 @@ const aCity = {11: '北京', 12: '天津', 13: '河北', 14: '山西', 15: '内�
 
 @Form.create()
 
-export default class BranchAdd extends React.Component {
+export default class BranchAddView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -84,10 +84,10 @@ export default class BranchAdd extends React.Component {
         defaultPassword: '000000',
         boxTitle: '修改用户信息'
       })
-      let newInitVal = Object.assign({},
-        this.state.initVal,
-        userBox.initVal
-      )
+      let newInitVal = {
+        ...this.state.initVal,
+        ...userBox.initVal
+      }
       this.setState({
         initVal: newInitVal
       })
@@ -134,11 +134,11 @@ export default class BranchAdd extends React.Component {
           }
         })
 
-        let data = Object.assign({
-        }, getFieldsValue(), {
+        let data = {
+          ...getFieldsValue(),
           brhName: brhName,
           postName: postName
-        })
+        }
 
         const showSpin = () => {
           this.setState({
@@ -152,10 +152,11 @@ export default class BranchAdd extends React.Component {
         }
         showSpin()
         if (userBox.type === 'MODIFY') {
-          Object.assign(data, {
+          data = {
+            ...data,
             pswdChange: this.state.pswdChange,
             userNo: userBox.initVal.userNo
-          })
+          }
           // 若密码未发生改变，将保存原密码
           this.state.pswdChange ? null : data.userPwd = userBox.initVal.userPwd
           updateUser(data, () => {

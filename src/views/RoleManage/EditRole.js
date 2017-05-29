@@ -38,7 +38,7 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 @Form.create()
 
-export default class EditRole extends React.Component {
+export default class EditRoleView extends React.Component {
 
   constructor (props) {
     super(props)

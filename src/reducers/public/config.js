@@ -10,8 +10,10 @@ const GET_RESOURCE_LIST = 'GET_RESOURCE_LIST'
 
 const setUserTypeLevel = (certType, level) => ({
   type: SET_USER_TYPE_LEVEL,
-  certType: certType,
-  level: level
+  data: {
+    certType,
+    level
+  }
 })
 
 export const getUserConfigData = () => (dispatch, getState) => {
@@ -20,7 +22,7 @@ export const getUserConfigData = () => (dispatch, getState) => {
     let levelList = []
     let certTypeList = []
     if (paramList) {
-      paramList.filter(item => {
+      paramList.map(item => {
         if (item.paramType === 'level') {
           levelList.push(item)
         } else if (item.paramType === 'certType') {
@@ -86,8 +88,7 @@ export default (state = initialState, action) => {
     case SET_USER_TYPE_LEVEL:
       return {
         ...state,
-        certType: action.certType,
-        level: action.level
+        ...action.data
       }
 
     case GET_WHITE_LIST:

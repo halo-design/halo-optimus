@@ -33,7 +33,7 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 @Form.create()
 
-export default class BranchAdd extends React.Component {
+export default class BranchAddView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -84,11 +84,12 @@ export default class BranchAdd extends React.Component {
           }
         })
 
-        let data = Object.assign({}, getFieldsValue(), {
+        const data = {
+          ...getFieldsValue(),
           brhLevel: level,
           brhPName: brhPName,
           brhParentId: selectBranchId
-        })
+        }
 
         const showSpin = () => {
           this.setState({

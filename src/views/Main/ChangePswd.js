@@ -12,7 +12,7 @@ import { changePassword } from 'REDUCER/public/password'
   dispatch => bindActionCreators({ setPasswordVisible, changePassword }, dispatch)
 )
 
-export default class ChangePswd extends React.Component {
+export default class ChangePswdView extends React.Component {
 
   constructor (props) {
     super(props)

@@ -17,7 +17,7 @@ import * as roleManageActions from 'REDUCER/pages/roleManage'
   dispatch => bindActionCreators({ ...roleManageActions, getRoleTree }, dispatch)
 )
 
-export default class RoleManage extends React.Component {
+export default class RoleManageView extends React.Component {
 
   constructor (props) {
     super(props)

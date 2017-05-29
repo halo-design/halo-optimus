@@ -14,7 +14,7 @@ import ChangePswd from './ChangePswd'
   })
 )
 
-export default class Header extends React.Component {
+export default class HeaderView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {

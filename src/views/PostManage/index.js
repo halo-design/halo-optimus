@@ -36,7 +36,7 @@ const confirm = Modal.confirm
   dispatch => bindActionCreators({ ...postManageActions }, dispatch)
 )
 
-export default class PostManage extends React.Component {
+export default class PostManageView extends React.Component {
 
   addPost () {
     this.props.setAddPostState()

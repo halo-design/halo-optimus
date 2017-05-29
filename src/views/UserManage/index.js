@@ -31,7 +31,7 @@ import { userPageByBrh } from 'REDUCER/pages/userManage'
   dispatch => bindActionCreators({ initBranchList, userPageByBrh }, dispatch)
 )
 
-export default class UserManage extends React.Component {
+export default class UserManageView extends React.Component {
 
   constructor (props) {
     super(props)

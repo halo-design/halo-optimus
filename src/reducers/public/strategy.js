@@ -10,16 +10,15 @@ export const getStrategyList = selOpt => (dispatch, getState) => {
     const authDefList = dataBody.authDefList
     let strategyList = []
     authDefList.map(item => {
-      let tmp = {}
       const def = item.authDefine.split('')
-      Object.assign(tmp, item, {
+      strategyList.push({
+        ...item,
         add1: def[0],
         add2: def[1],
         add3: def[2],
         add4: def[3],
         add5: def[4]
       })
-      strategyList.push(tmp)
     })
     dispatch({
       type: SET_STRATEGY_LIST,

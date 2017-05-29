@@ -45,7 +45,7 @@ export default store => next => action => {
   const req = getRequest(url, finalHeader, dataType, method, finalBody)
 
   const actionWith = data => {
-    const finalAction = Object.assign({}, action, data)
+    const finalAction = { ...action, ...data }
     delete finalAction[BZ_REQUESTER]
     return finalAction
   }
@@ -79,8 +79,16 @@ const getRequestHeader = (header, type, url) => {
   }
 
   return type === 'J'
-  ? Object.assign({}, PREFIX_HEADER, {'Content-Type': 'application/json; charset=UTF-8', 'type': 'J'}, header)
-  : Object.assign({}, PREFIX_HEADER, header)
+  ? {
+    ...PREFIX_HEADER,
+    ...header,
+    'Content-Type': 'application/json; charset=UTF-8',
+    'type': 'J'
+  }
+  : {
+    ...PREFIX_HEADER,
+    ...header
+  }
 }
 
 const getRequestBody = (body, header) => {

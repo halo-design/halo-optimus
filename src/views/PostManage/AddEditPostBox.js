@@ -30,7 +30,7 @@ const RadioGroup = Radio.Group
 
 @Form.create()
 
-export default class AddEditPostBox extends React.Component {
+export default class AddEditPostBoxView extends React.Component {
 
   constructor (props) {
     super(props)

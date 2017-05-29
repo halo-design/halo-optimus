@@ -7,7 +7,7 @@ const Option = Select.Option
 
 @Form.create()
 
-export default class AddRule extends React.Component {
+export default class AddRuleView extends React.Component {
 
   constructor (props) {
     super(props)

@@ -3,14 +3,21 @@ import { getUserConfigData, postList } from './config'
 const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
 const USER_MENU_SUC = 'USER_MENU_SUC'
 
-export const setPasswordVisible = passwordVisible => ({
+export const setPasswordVisible = state => ({
   type: CHANGE_PASSWORD,
-  passwordVisible: passwordVisible
+  data: state
 })
 
-export const refreshInfo = data => ({
+export const refreshInfo = body => ({
   type: USER_MENU_SUC,
-  data: data
+  data: {
+    isUserMenuLoaded: true,
+    currentCstIP: body.cstCurrLoginIP,
+    currentLoginTime: body.cstCurrLoginTime,
+    lastCstIP: body.cstLastLoginIP,
+    lastLoginTime: body.cstLastLoginTime,
+    loginCount: body.cstLoginTimes
+  }
 })
 
 // 查询用户等级 + 证件类型配置信息 + 角色树 + 岗位列表
@@ -35,19 +42,13 @@ export default (state = initialState, action) => {
     case CHANGE_PASSWORD:
       return {
         ...state,
-        passwordVisible: action.passwordVisible
+        passwordVisible: action.data
       }
 
     case USER_MENU_SUC:
-      const data = action.data.body
       return {
         ...state,
-        isUserMenuLoaded: true,
-        currentCstIP: data.cstCurrLoginIP,
-        currentLoginTime: data.cstCurrLoginTime,
-        lastCstIP: data.cstLastLoginIP,
-        lastLoginTime: data.cstLastLoginTime,
-        loginCount: data.cstLoginTimes
+        ...action.data
       }
 
     default:

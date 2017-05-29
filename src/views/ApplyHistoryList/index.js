@@ -29,7 +29,7 @@ const RangePicker = DatePicker.RangePicker
   dispatch => bindActionCreators({ getStateList }, dispatch)
 )
 
-export default class ApplyHistoryList extends React.Component {
+export default class ApplyHistoryListView extends React.Component {
 
   constructor (props) {
     super(props)

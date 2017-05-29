@@ -19,7 +19,7 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 @Form.create()
 
-export default class AddRoleBox extends React.Component {
+export default class AddRoleBoxView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -53,9 +53,10 @@ export default class AddRoleBox extends React.Component {
           let val = formData[key]
           val ? formData[key] = val : formData[key] = ''
         }
-        Object.assign(formData, {
+        formData = {
+          ...formData,
           rolePName: ''
-        })
+        }
 
         const showSpin = () => {
           this.setState({

@@ -43,7 +43,7 @@ const Option = Select.Option
 
 @Form.create()
 
-export default class AddEditRelease extends React.Component {
+export default class AddEditReleaseView extends React.Component {
 
   constructor (props) {
     super(props)

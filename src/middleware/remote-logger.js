@@ -16,7 +16,7 @@ const remoteLogger = ({ dispatch, getState }) => next => action => {
     console.remote('log:warn', `[ACTION][${moment().format('hh:mm:ss')}]: ${action.type}\n`)
     if ('data' in action) {
       const data = JSON.stringify(action.data)
-      console.remote('log:success', `[ACTION][${moment().format('hh:mm:ss')}]: ${data}\n`)
+      console.remote('log:success', `[DATA][${moment().format('hh:mm:ss')}]: ${data}\n`)
     }
   }
   return next(action)

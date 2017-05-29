@@ -18,7 +18,7 @@ import 'STYLE/pages/login.scss'
 
 @withRouter
 
-export default class Login extends React.Component {
+export default class LoginView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {

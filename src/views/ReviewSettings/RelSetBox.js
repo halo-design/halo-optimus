@@ -25,7 +25,7 @@ import { getStrategyList } from 'REDUCER/public/strategy'
   dispatch => bindActionCreators({ setRelation, getStrategyList }, dispatch)
 )
 
-export default class RelSetBox extends React.Component {
+export default class RelSetBoxView extends React.Component {
 
   setRelStrgy (record) {
     this.props.setRelation({

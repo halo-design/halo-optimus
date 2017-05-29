@@ -8,7 +8,7 @@ import 'STYLE/pages/welcome.scss'
   })
 )
 
-export default class Welcome extends React.Component {
+export default class WelcomeView extends React.Component {
 
   render () {
     const { main } = this.props

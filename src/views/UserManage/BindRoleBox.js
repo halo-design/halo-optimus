@@ -40,7 +40,7 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 @Form.create()
 
-export default class BindRoleBox extends React.Component {
+export default class BindRoleBoxView extends React.Component {
 
   onClose () {
     this.props.closeBindRole()

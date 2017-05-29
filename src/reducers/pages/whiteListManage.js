@@ -22,7 +22,7 @@ export const queryWhiteList = () => (dispatch, getState) => {
 
 export const setAddWhiteListVisible = state => ({
   type: SET_ADD_WHITELIST_VISIBLE,
-  visible: state
+  data: state
 })
 
 export const addWhiteList = (state, success, fail) => (dispatch, getState) => {
@@ -108,7 +108,7 @@ export default (state = initialState, action) => {
     case SET_ADD_WHITELIST_VISIBLE:
       return {
         ...state,
-        addWhiteListVisible: action.visible
+        addWhiteListVisible: action.data
       }
 
     case SET_ADDUSERID_STATE:

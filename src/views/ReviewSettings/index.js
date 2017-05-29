@@ -34,7 +34,7 @@ import { getStrategyList } from 'REDUCER/public/strategy'
   dispatch => bindActionCreators({ getBsnList, getStrategy, getStrategyList }, dispatch)
 )
 
-export default class ReviewSettings extends React.Component {
+export default class ReviewSettingsView extends React.Component {
 
   constructor (props) {
     super(props)

@@ -21,7 +21,7 @@ const RadioGroup = Radio.Group
 
 @Form.create()
 
-export default class AddPackage extends React.Component {
+export default class AddPackageView extends React.Component {
 
   constructor (props) {
     super(props)

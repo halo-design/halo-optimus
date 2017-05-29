@@ -10,12 +10,14 @@ export const LOGONOUT = 'LOGONOUT'
 export const SETSESSIONID = 'SETSESSIONID'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
 
-export const setSesionId_OP = data => {
-  const checkCodeSrc = `${API.CHECKCODE_URL}?nocache=${Date.now()}&iCIFID=${data}`
+export const setSesionIdOP = icifid => {
+  const checkCodeSrc = `${API.CHECKCODE_URL}?nocache=${Date.now()}&iCIFID=${icifid}`
   return {
     type: SETSESSIONID,
-    iCIFID: data,
-    checkCodeSrc: checkCodeSrc
+    data: {
+      iCIFID: icifid,
+      checkCodeSrc
+    }
   }
 }
 
@@ -25,20 +27,20 @@ export const setSessionID = () => (dispatch, getState) => {
     const { header, body } = action.data
     if (header.iCIFID) {
       setCookie('iCIFID', header.iCIFID)
-      dispatch(setSesionId_OP(header.iCIFID))
+      dispatch(setSesionIdOP(header.iCIFID))
     } else {
       setCookie('iCIFID', body.iCIFID)
-      dispatch(setSesionId_OP(body.iCIFID))
+      dispatch(setSesionIdOP(body.iCIFID))
     }
   })
 }
 
-export const login_OP = (name) => ({
+export const loginOP = data => ({
   type: LOGONIN,
-  name
+  data
 })
 
-export const logout_OP = () => ({
+export const logoutOP = () => ({
   type: LOGONOUT
 })
 
@@ -48,7 +50,7 @@ export const loginFailed = () => ({
 
 export const logout = () => (dispatch, getState) => {
   dispatch(logoutAction())
-  dispatch(logout_OP())
+  dispatch(logoutOP())
 }
 
 // 验证登陆
@@ -65,7 +67,7 @@ export const validateLogin = (data, success, fail) => (dispatch, getState) => {
     if (dataBody.result === '1') {
       setCookie('eCIFID', dataBody.cstNo)
       setCookie('cstName', dataBody.cstName)
-      dispatch(login_OP(dataBody.cstName))
+      dispatch(loginOP(dataBody.cstName))
       if (success) {
         success()
       }
@@ -94,7 +96,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLogin: 'true',
-        cstname: action.name
+        cstname: action.data
       }
     case LOGONOUT:
       return {
@@ -110,8 +112,7 @@ export default (state = initialState, action) => {
     case SETSESSIONID :
       return {
         ...state,
-        iCIFID: action.iCIFID,
-        checkCodeSrc: action.checkCodeSrc
+        ...action.data
       }
     default:
       return state

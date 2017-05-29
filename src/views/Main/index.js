@@ -26,7 +26,7 @@ import ResourceManage from '../ResourceManage/sync'
   dispatch => bindActionCreators({ initUserForm, initUserMenu }, dispatch)
 )
 
-export default class Main extends React.Component {
+export default class MainView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {

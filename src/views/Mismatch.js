@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 @connect(
   state => state.public.login
 )
-export default class Mismatch extends React.Component {
+export default class MismatchView extends React.Component {
   render () {
     const { isLogin } = this.props
     return <Redirect to={isLogin === 'false' ? '/login' : '/home'} />

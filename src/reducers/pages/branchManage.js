@@ -19,7 +19,7 @@ export const applyBranch = branchList => ({
 // 设置增加机构弹框显示隐藏
 export const setAddBranchVisible = state => ({
   type: SET_ADD_BRANCH_VISIBLE,
-  visible: state
+  data: state
 })
 
 // 树选择的节点
@@ -112,7 +112,7 @@ export default (state = initialState, action) => {
     case SET_ADD_BRANCH_VISIBLE:
       return {
         ...state,
-        addBranchBoxVisible: action.visible
+        addBranchBoxVisible: action.data
       }
 
     case RESET_FORM:

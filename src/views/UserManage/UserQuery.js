@@ -32,7 +32,7 @@ const Option = Select.Option
 
 @Form.create()
 
-export default class UserQuery extends React.Component {
+export default class UserQueryView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -74,14 +74,16 @@ export default class UserQuery extends React.Component {
       } else {
         const filterTime = fieldsValue['filterTime']
         !filterTime
-        ? Object.assign(filter, {
+        ? filter = {
+          ...filter,
           beginTime: '',
           endTime: ''
-        })
-        : Object.assign(filter, {
+        }
+        : filter = {
+          ...filter,
           beginTime: filterTime[0].format('YYYYMMDD'),
           endTime: filterTime[1].format('YYYYMMDD')
-        })
+        }
       }
     })
     userPageByBrh({
