@@ -19,7 +19,7 @@ module.exports = {
     sourceMap: false,
     gzip: false,
     gzipExtensions: ['js', 'css'],
-    bundleAnalyzerReport: process.env.npm_config_report,
+    bundleAnalyzerReport: true,
     htmlTemplate: resolve('static/index.html')
   },
   dev: {
