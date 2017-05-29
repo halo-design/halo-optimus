@@ -16,6 +16,7 @@ module.exports = {
       'react-dom',
       'react-redux',
       'redux-thunk',
+      'redux-persist',
       'react-router',
       'react-router-dom',
       'react-transition-group/CSSTransitionGroup',
