@@ -23,7 +23,6 @@ module.exports = {
       // plugins
       'qs',
       'md5',
-      'moment',
       'nprogress',
       'antd/lib/button',
       'antd/lib/checkbox',
