@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Form, Button, Input, Select, Modal, message } from 'antd'
-import Spin from 'COMPONENT/Spin'
+import Spin from 'COMPONENT/effects/Spin'
 import { setAddEditResouceState, addResourceList, changeResourceList } from 'REDUCER/pages/resourceManage'
 
 const FormItem = Form.Item

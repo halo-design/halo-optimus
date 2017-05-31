@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Form, Button, Input, Row, Col, Select, TreeSelect, message, Modal, Radio } from 'antd'
-import Spin from 'COMPONENT/Spin'
+import Spin from 'COMPONENT/effects/Spin'
 import * as userManageAction from 'REDUCER/pages/userManage'
 
 const FormItem = Form.Item

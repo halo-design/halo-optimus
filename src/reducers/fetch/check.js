@@ -1,18 +1,18 @@
 import { getFetch } from 'CONSTANT/api'
 
-export const getCheckListAction = data => getFetch('GET_CHECK_LIST_URL', {
+export const getCheckListAction = data => getFetch('GET_CHECK_LIST', {
   body: data
 })
 
-export const getStateListAction = data => getFetch('GET_STATE_LIST_URL', {
+export const getStateListAction = data => getFetch('GET_CHECK_STATE_LIST', {
   body: data
 })
 
-export const getHistoryListAction = data => getFetch('GET_CHECK_HISTORY_LIST_URL', {
+export const getHistoryListAction = data => getFetch('GET_CHECK_HISTORY_LIST', {
   body: data
 })
 
-export const checkDecideAction = data => getFetch('OPERATE_CHECK_URL', {
+export const checkDecideAction = data => getFetch('SET_CHECK_OPERATE', {
   body: data
 })
 

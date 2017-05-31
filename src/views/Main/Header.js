@@ -73,7 +73,7 @@ export default class HeaderView extends React.Component {
           parentUrl={currentUrl}
         />
         <Account />
-        {passwordVisible && <ChangePswd />}
+        <ChangePswd visible={passwordVisible} />
       </div>
     )
   }

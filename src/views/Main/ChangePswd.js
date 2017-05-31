@@ -54,7 +54,9 @@ export default class ChangePswdView extends React.Component {
 
   render () {
     const { oldPswd, newPswd, newAgainPswd } = this.state
+    const { visible } = this.props
     return (
+      visible &&
       <div
         className='app-modal-box-mask'
         onClick={e => { e.target.className === 'app-modal-box-mask' && this.onClose() }}

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Form, Button, Input, Select, Modal, message } from 'antd'
-import Spin from 'COMPONENT/Spin'
+import Spin from 'COMPONENT/effects/Spin'
 import { setAddWhiteListVisible, addWhiteList } from 'REDUCER/pages/whiteListManage'
 
 const FormItem = Form.Item

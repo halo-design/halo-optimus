@@ -1,16 +1,16 @@
 import { getFetch } from 'CONSTANT/api'
 
-export const getRoleListAction = () => getFetch('GET_ROLE_LIST_URL', {
+export const getRoleListAction = () => getFetch('GET_ROLE_LIST', {
   body: {}
 })
 
-export const getRoleByUserAction = num => getFetch('GET_ROLE_BY_USER_URL', {
+export const getRoleByUserAction = num => getFetch('GET_ROLE_BY_USER', {
   body: {
     userNo: num
   }
 })
 
-export const getUserRoleListAction = userNo => getFetch('USER_BIND_ROLE_URL', {
+export const getUserRoleListAction = userNo => getFetch('SET_USER_BIND_ROLE', {
   body: {
     userNo: userNo
   }
@@ -24,7 +24,7 @@ export const userRoleAssociationAction = (userNo, userName, roleList) => getFetc
   }
 })
 
-export const getAllRoleFnItemsAction = (curPage, roleId, roleName, state, pageSize) => getFetch('GET_ALL_ITEM_PAGE_URL', {
+export const getAllRoleFnItemsAction = (curPage, roleId, roleName, state, pageSize) => getFetch('GET_ROLE_ALL_ITEM', {
   body: {
     currentPage: curPage,
     turnPageShowNum: pageSize,
@@ -34,34 +34,34 @@ export const getAllRoleFnItemsAction = (curPage, roleId, roleName, state, pageSi
   }
 })
 
-export const getInfoByRoleIdAction = roleId => getFetch('GET_ITEM_BY_ROLE_URL', {
+export const getInfoByRoleIdAction = roleId => getFetch('GET_ROLE_ITEM', {
   body: {
     roleId: roleId
   }
 })
 
-export const getInfoByRoleNameAction = roleName => getFetch('GET_ITEM_BY_ROLE_URL', {
+export const getInfoByRoleNameAction = roleName => getFetch('GET_ROLE_ITEM', {
   body: {
     roleName: roleName || ''
   }
 })
 
-export const updateRoleAction = data => getFetch('ROLE_UPDATE_URL', {
+export const updateRoleAction = data => getFetch('SET_ROLE_UPDATE', {
   body: data
 })
 
-export const addRoleAction = data => getFetch('ROLE_ADD_URL', {
+export const addRoleAction = data => getFetch('ADD_ROLE', {
   body: data
 })
 
-export const itemsBindRoleAction = (roleId, roleMenuItemRelList) => getFetch('ROLE_BIND_ITEM_URL', {
+export const itemsBindRoleAction = (roleId, roleMenuItemRelList) => getFetch('SET_ROLE_BIND_ITEM', {
   body: {
     roleId: roleId || '',
     roleMenuItemRelList
   }
 })
 
-export const delRoleAction = roleId => getFetch('ROLE_DEL_URL', {
+export const delRoleAction = roleId => getFetch('DEL_ROLE', {
   body: {
     roleId
   }

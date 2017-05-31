@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Form, Button, Input, message, Slider, Modal, Radio } from 'antd'
-import Spin from 'COMPONENT/Spin'
+import Spin from 'COMPONENT/effects/Spin'
 import * as strategySettingsActions from 'REDUCER/pages/strategySettings'
 
 const FormItem = Form.Item

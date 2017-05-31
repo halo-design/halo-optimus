@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Form, Button, Radio, Input, message, Modal } from 'antd'
-import Spin from 'COMPONENT/Spin'
+import Spin from 'COMPONENT/effects/Spin'
 import { setAddHotpatchVisible, addHotpatchList } from 'REDUCER/pages/hotpatchManage'
 
 const FormItem = Form.Item

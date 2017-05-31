@@ -1,5 +1,5 @@
 import { getFetch } from 'CONSTANT/api'
 
-export const changePasswordAction = data => getFetch('CHANGE_PASSWORD_URL', {
+export const changePasswordAction = data => getFetch('SET_PASSWORD', {
   body: data
 })

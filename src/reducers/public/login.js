@@ -11,7 +11,7 @@ export const SETSESSIONID = 'SETSESSIONID'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
 
 export const setSesionIdOP = icifid => {
-  const checkCodeSrc = `${API.CHECKCODE_URL}?nocache=${Date.now()}&iCIFID=${icifid}`
+  const checkCodeSrc = `${API.GET_CHECKCODE_URL}?nocache=${Date.now()}&iCIFID=${icifid}`
   return {
     type: SETSESSIONID,
     data: {

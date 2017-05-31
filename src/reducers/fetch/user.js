@@ -3,7 +3,7 @@ import md5 from 'md5'
 
 const strFormat = (str, dft) => str || (dft || '')
 
-export const userPageByBrhAction = (data, showNum) => getFetch('USER_PAGE_BY_BRH_URL', {
+export const userPageByBrhAction = (data, showNum) => getFetch('GET_USER_BY_BRH', {
   body: {
     ...data,
     currentPage: strFormat(data.currentPage, 1),
@@ -11,14 +11,14 @@ export const userPageByBrhAction = (data, showNum) => getFetch('USER_PAGE_BY_BRH
   }
 })
 
-export const addUserAction = data => getFetch('USER_ADD_URL', {
+export const addUserAction = data => getFetch('ADD_USER', {
   body: {
     ...data,
     userPwd: md5(data.userPwd)
   }
 })
 
-export const updateUserAction = data => getFetch('USER_UPDATE_URL', {
+export const updateUserAction = data => getFetch('SET_UPDATE_USER', {
   body: {
     ...data,
     userPwd: data.pswdChange ? md5(data.userPwd) : data.userPwd,
@@ -26,7 +26,7 @@ export const updateUserAction = data => getFetch('USER_UPDATE_URL', {
   }
 })
 
-export const delUserAction = userNo => getFetch('USER_DEL_URL', {
+export const delUserAction = userNo => getFetch('DEL_USER', {
   body: {
     userNo: userNo
   }

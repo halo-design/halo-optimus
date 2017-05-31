@@ -10,6 +10,6 @@ export const delWhiteListAction = data => getFetch('DEL_WHITELIST_URL', {
   body: data
 })
 
-export const whiteListAddAction = data => getFetch('WHITELIST_ADD_INFO_URL', {
+export const whiteListAddAction = data => getFetch('ADD_WHITELIST_INFO', {
   body: data
 })

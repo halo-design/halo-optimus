@@ -1,18 +1,18 @@
 import { getFetch } from 'CONSTANT/api'
 
-export const getBranchListAction = () => getFetch('GET_BRANCH_LIST_URL', {
+export const getBranchListAction = () => getFetch('GET_BRANCH_LIST', {
   body: {
     queryType: '1'
   }
 })
 
 // 查询操作
-export const getBranchAction = data => getFetch('GET_BRANCH_URL_BYID', {
+export const getBranchAction = data => getFetch('GET_BRANCH_BY_ID', {
   body: data
 })
 
 // 修改操作
-export const modifyBranchAction = data => getFetch('GET_BRANCH_MODIFY', {
+export const modifyBranchAction = data => getFetch('SET_BRANCH', {
   body: data,
   header: {
     type: 'K'
@@ -20,7 +20,7 @@ export const modifyBranchAction = data => getFetch('GET_BRANCH_MODIFY', {
 })
 
 // 删除操作
-export const deleteBranchAction = data => getFetch('GET_BRANCH_DELETE', {
+export const deleteBranchAction = data => getFetch('DEL_BRANCH', {
   body: {
     brhId: data.brhId
   },
@@ -30,7 +30,7 @@ export const deleteBranchAction = data => getFetch('GET_BRANCH_DELETE', {
 })
 
 // 增加操作
-export const addBranchAction = data => getFetch('GET_BRANCH_ADD', {
+export const addBranchAction = data => getFetch('ADD_BRANCH', {
   body: data
 })
 

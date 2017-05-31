@@ -1,23 +1,23 @@
 import { getFetch } from 'CONSTANT/api'
 
-export const queryUpdateListAction = () => getFetch('GET_UPDATELIST_URL')
+export const queryUpdateListAction = () => getFetch('GET_UPDATE_LIST')
 
-export const addUpgradeListAction = data => getFetch('ADD_UPGRADELISHT_URL', {
+export const addUpgradeListAction = data => getFetch('ADD_UPGRADE_LIST', {
   body: data
 })
 
-export const addUpgradeTaskAction = data => getFetch('ADD_UPGRADETASK_URL', {
+export const addUpgradeTaskAction = data => getFetch('ADD_UPGRADE_TASK', {
   body: data
 })
 
-export const getUpgradeTaskAction = data => getFetch('GET_UPGRADETASK_URL', {
+export const getUpgradeTaskAction = data => getFetch('GET_UPGRADE_TASK', {
   body: data
 })
 
-export const getTaskDetailAction = data => getFetch('GET_TASK_DETAIL_URL', {
+export const getTaskDetailAction = data => getFetch('GET_UPGRADE_TASK_DETAIL', {
   body: data
 })
 
-export const changeTaskStatusAction = data => getFetch('CHANGE_TASK_STATUS_URL', {
+export const changeTaskStatusAction = data => getFetch('SET_UPGRADE_TASK_STATUS', {
   body: data
 })

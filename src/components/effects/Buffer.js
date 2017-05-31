@@ -1,6 +1,6 @@
 import React from 'react'
-import Lazy from 'COMPONENT/Lazy'
-import Loading from 'COMPONENT/Loading'
+import Lazy from './Lazy'
+import Loading from './Loading'
 
 const BufferCompnent = ({ compnent }) => (
   <Lazy load={compnent}>

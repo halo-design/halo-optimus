@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Form, Button, Table, Modal, Input, message } from 'antd'
 import { checkBtnList, str2json, formatDateTime } from 'UTIL/filters'
 import InfoTable from 'COMPONENT/InfoTable'
-import Spin from 'COMPONENT/Spin'
+import Spin from 'COMPONENT/effects/Spin'
 import { getCheckList, checkDecide } from 'REDUCER/pages/checkList'
 
 const FormItem = Form.Item

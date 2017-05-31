@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Form, Button, Input, Row, Col, Select, TreeSelect, message, Modal } from 'antd'
-import Spin from 'COMPONENT/Spin'
+import Spin from 'COMPONENT/effects/Spin'
 import { setAddBranchVisible, branchAdd } from 'REDUCER/pages/branchManage'
 
 const FormItem = Form.Item

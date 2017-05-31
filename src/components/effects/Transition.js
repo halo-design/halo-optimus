@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
-const Animater = ({ children, changeKey }) => (
+const Transition = ({ children, changeKey }) => (
   <CSSTransitionGroup
     transitionName='slide'
     transitionAppearTimeout={0}
@@ -14,4 +14,4 @@ const Animater = ({ children, changeKey }) => (
   </CSSTransitionGroup>
 )
 
-export default Animater
+export default Transition
