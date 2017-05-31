@@ -1,6 +1,6 @@
 import NProgress from 'nprogress'
 import * as RQ from '../fetch/update'
-import { NotiSuccess, NotiWarning, MsgError } from 'UTIL/info'
+import { NotiSuccess, NotiError, MsgError } from 'UTIL/info'
 
 const GET_UPDATE_LIST = 'GET_UPDATE_LIST'
 const SET_ADD_PKG_VISIBLE = 'SET_ADD_PKG_VISIBLE'
@@ -53,16 +53,10 @@ export const addUpgradeList = (state, success, fail) => (dispatch, getState) => 
   dispatch(RQ.addUpgradeListAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(queryUpdateList())
-      NotiSuccess({
-        message: '成功',
-        description: '添加成功！'
-      })
+      NotiSuccess({ description: '添加成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '添加失败！'
-      })
+      NotiError({ description: '添加失败！' })
       fail && fail()
     }
   })
@@ -88,16 +82,10 @@ export const addUpgradeTask = (state, success, fail) => (dispatch, getState) => 
   dispatch(RQ.addUpgradeTaskAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(getUpgradeTaskList({packageInfoId: state.packageInfoId}))
-      NotiSuccess({
-        message: '成功',
-        description: str + '成功！'
-      })
+      NotiSuccess({ description: str + '成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: str + '失败！'
-      })
+      NotiError({ description: str + '失败！' })
       fail && fail()
     }
   })
@@ -107,16 +95,10 @@ export const changeTaskStatus = (state, success, fail) => (dispatch, getState) =
   dispatch(RQ.changeTaskStatusAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(getUpgradeTaskList({packageInfoId: state.packageInfoId}))
-      NotiSuccess({
-        message: '成功',
-        description: '修改成功！'
-      })
+      NotiSuccess({ description: '修改成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '修改失败！'
-      })
+      NotiError({ description: '修改失败！' })
       fail && fail()
     }
   })

@@ -6,7 +6,7 @@ import { Form, Button, Radio, Row, Col, Select, Input, DatePicker, message, Moda
 import Spin from 'COMPONENT/effects/Spin'
 import * as hotpatchManageActions from 'REDUCER/pages/hotpatchManage'
 import { getResourceList } from 'REDUCER/public/config'
-import { platformFilter, operationFilter, ruleElementFilter, whitelistIdsFilter, formatGreyConfigInfo } from 'UTIL/filters'
+import { platformFilter, operationFilter, resourceFilter, whitelistIdsFilter, formatGreyConfigInfo } from 'UTIL/filters'
 import AddRule from './AddRule'
 
 const FormItem = Form.Item
@@ -184,7 +184,7 @@ export default class AddEditHotpatchTaskView extends React.Component {
       dataIndex: 'ruleElement',
       key: 'ruleElement',
       render: (text, record) => (
-        <span>{ruleElementFilter(record.ruleElement)}</span>
+        <span>{resourceFilter(record.ruleElement)}</span>
       )
     }, {
       title: '规则运算',

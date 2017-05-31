@@ -1,7 +1,7 @@
 import { getRoleByUserAction } from '../fetch/role'
 import { userPageByBrhAction, addUserAction, updateUserAction, delUserAction } from '../fetch/user'
 import NProgress from 'nprogress'
-import { NotiSuccess, NotiWarning, MsgWarning } from 'UTIL/info'
+import { NotiSuccess, NotiError, MsgWarning } from 'UTIL/info'
 
 export const PAGE_USERS = 'PAGE_USERS'
 export const SET_PREV_USER = 'SET_PREV_USER'
@@ -117,16 +117,10 @@ export const addUser = (params, success, fail) => (dispatch, getState) => {
         dispatch(updateSelectKeys([params.brhId]))
         dispatch(pageUsers(data))
       })
-      NotiSuccess({
-        message: '成功',
-        description: '用户添加成功！'
-      })
+      NotiSuccess({ description: '用户添加成功！' })
       if (success) success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '用户添加失败！'
-      })
+      NotiError({ description: '用户添加失败！' })
       if (fail) fail()
     }
   })
@@ -140,16 +134,10 @@ export const updateUser = (params, success, fail) => (dispatch, getState) => {
         brhId: params.brhId,
         brhName: ''
       }))
-      NotiSuccess({
-        message: '成功',
-        description: '用户修改成功！'
-      })
+      NotiSuccess({ description: '用户修改成功！' })
       if (success) success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '用户修改失败！'
-      })
+      NotiError({ description: '用户修改失败！' })
       if (fail) fail()
     }
   })
@@ -166,7 +154,7 @@ export const delUserUpdate = (userNo, brhId, curPage) => (dispatch, getState) =>
       })
       dispatch(userPageByBrh({ brhId }))
     } else {
-      NotiWarning({
+      NotiError({
         message: '失败',
         description: `删除用户失败，errCode: ${dataBody.errorCode}，errMsg: ${dataBody.errorMsg}`
       })

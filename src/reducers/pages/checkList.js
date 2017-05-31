@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { NotiSuccess, NotiWarning } from 'UTIL/info'
+import { NotiSuccess, NotiError } from 'UTIL/info'
 import { getCheckListAction, checkDecideAction } from '../fetch/check'
 
 const GET_CHECK_LIST = 'GET_CHECK_LIST'
@@ -28,16 +28,10 @@ export const checkDecide = (data, success, fail) => (dispatch, getState) => {
         currentPage: 1,
         turnPageShowNum: getState().pages.checkList.checkListSelectOpt.turnPageShowNum
       }))
-      NotiSuccess({
-        message: '成功',
-        description: '操作成功！'
-      })
+      NotiSuccess({ description: '操作成功！' })
       if (success) success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '操作失败！'
-      })
+      NotiError({ description: '操作失败！' })
       if (fail) fail()
     }
   })

@@ -1,7 +1,7 @@
 import NProgress from 'nprogress'
 import * as RQ from '../fetch/hotpatch'
 import { changeTaskStatusAction } from '../fetch/update'
-import { NotiSuccess, NotiWarning } from 'UTIL/info'
+import { NotiSuccess, NotiError } from 'UTIL/info'
 
 const GET_HOTPATCH_LIST = 'GET_HOTPATCH_LIST'
 const GET_HOTPATCH_TASK_LIST = 'GET_HOTPATCH_TASK_LIST'
@@ -44,16 +44,10 @@ export const changeTaskStatus = (state, success, fail) => (dispatch, getState) =
   dispatch(changeTaskStatusAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(getHotpatchTaskList({hotpatchId: state.hotpatchId}))
-      NotiSuccess({
-        message: '成功',
-        description: '修改成功！'
-      })
+      NotiSuccess({ description: '修改成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '修改失败！'
-      })
+      NotiError({ description: '修改失败！' })
       fail && fail()
     }
   })
@@ -63,16 +57,10 @@ export const addHotpatchList = (state, success, fail) => (dispatch, getState) =>
   dispatch(RQ.addHotpatchAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(queryHotpatchList())
-      NotiSuccess({
-        message: '成功',
-        description: '添加成功！'
-      })
+      NotiSuccess({ description: '添加成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '添加失败！'
-      })
+      NotiError({ description: '添加失败！' })
       fail && fail()
     }
   })
@@ -96,16 +84,10 @@ export const addHotpatchTask = (state, success, fail) => (dispatch, getState) =>
   dispatch(RQ.addHotpatchTaskAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(getHotpatchTaskList({hotpatchId: state.hotpatchId}))
-      NotiSuccess({
-        message: '成功',
-        description: str + '成功！'
-      })
+      NotiSuccess({ description: str + '成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: str + '失败！'
-      })
+      NotiError({ description: str + '失败！' })
       fail && fail()
     }
   })

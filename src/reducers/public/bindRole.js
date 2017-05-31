@@ -1,7 +1,7 @@
 import { groupList } from 'UTIL/filters'
 import NProgress from 'nprogress'
 import { getUserRoleListAction, userRoleAssociationAction, getRoleListAction } from '../fetch/role'
-import { NotiSuccess, NotiWarning } from 'UTIL/info'
+import { NotiSuccess, NotiError } from 'UTIL/info'
 
 const USER_GET_ROLE = 'USER_GET_ROLE'
 const UPDATE_USER_ROLE = 'UPDATE_USER_ROLE'
@@ -53,15 +53,9 @@ export const userRoleAssociation = (userNo, userName, roleList) => (dispatch, ge
   dispatch(userRoleAssociationAction(userNo, userName, roleList)).then(action => {
     const dataBody = action.data.body
     if (dataBody.errorCode === '0') {
-      NotiSuccess({
-        message: '成功',
-        description: '綁定成功！'
-      })
+      NotiSuccess({ description: '綁定成功！' })
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '绑定失败！'
-      })
+      NotiError({ description: '绑定失败！' })
     }
   })
 }

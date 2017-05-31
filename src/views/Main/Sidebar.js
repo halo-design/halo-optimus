@@ -37,9 +37,15 @@ export default class SidebarView extends React.Component {
     }
   }
 
-  handleActiveItem (e, id) {
+  handleActiveItem (id, title) {
     this.props.selectMenu(id)
-    document.title = `${settings.projectName} - ${e.target.innerText}`
+    document.title = `${settings.projectName} - ${title}`
+  }
+
+  fixedTop (state) {
+    this.setState({
+      top: state
+    })
   }
 
   componentDidMount () {
@@ -47,9 +53,11 @@ export default class SidebarView extends React.Component {
 
     const scroll = () => {
       let scrollTop = docEl.scrollTop || document.body.scrollTop
-      this.setState({
-        top: scrollTop > 60
-      })
+      if (scrollTop > 60 && !this.state.top) {
+        this.fixedTop(true)
+      } else if (scrollTop <= 60 && this.state.top) {
+        this.fixedTop(false)
+      }
     }
     window.addEventListener('scroll', scroll, false)
   }
@@ -81,7 +89,7 @@ export default class SidebarView extends React.Component {
                       exact={false}
                       to={path}
                       activeClassName='active'
-                      onClick={e => this.handleActiveItem(e, item.id)}
+                      onClick={e => this.handleActiveItem(item.id, item.title)}
                     >
                       <i className={`iconfont ${CSS[item.id]}`} />
                       {item.title}
@@ -108,7 +116,7 @@ export default class SidebarView extends React.Component {
                                 to={path}
                                 exact={false}
                                 activeClassName='active'
-                                onClick={e => this.handleActiveItem(e, item.id)}
+                                onClick={e => this.handleActiveItem(item.id, item.title)}
                               >
                                 {item.title}
                               </NavLink>

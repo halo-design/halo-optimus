@@ -1,7 +1,7 @@
 import NProgress from 'nprogress'
 import { initBranchList } from '../public/branchTree'
 import { getBranchAction, modifyBranchAction, deleteBranchAction, addBranchAction } from '../fetch/branch'
-import { NotiSuccess, NotiWarning, MsgWarning } from 'UTIL/info'
+import { NotiSuccess, NotiError, MsgWarning } from 'UTIL/info'
 
 const RESET_FORM = 'RESET_FORM'
 const APPLY_BRANCH = 'APPLY_BRANCH'
@@ -42,16 +42,10 @@ export const branchModify = (params, success, fail) => (dispatch, getState) => {
   dispatch(modifyBranchAction(params)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(initBranchList())
-      NotiSuccess({
-        message: '成功',
-        description: '修改成功！'
-      })
+      NotiSuccess({ description: '修改成功！' })
       if (success) success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '修改失败！'
-      })
+      NotiError({ description: '修改失败！' })
       if (fail) fail()
     }
   })
@@ -63,16 +57,10 @@ export const branchDelete = (params, success, fail) => (dispatch, getState) => {
     if (action.data.body.errorCode === '0' && action.data.body.op_result !== '0') {
       dispatch(initBranchList())
       dispatch(resetForm())
-      NotiSuccess({
-        message: '成功',
-        description: '删除成功！'
-      })
+      NotiSuccess({ description: '删除成功！' })
       if (success) success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '删除失败！'
-      })
+      NotiError({ description: '删除失败！' })
       if (fail) fail()
     }
   })
@@ -85,16 +73,10 @@ export const branchAdd = (params, success, fail) => (dispatch, getState) => {
       dispatch(initBranchList())
       // 添加完毕后选中该节点
       dispatch(changeBranchSelected(params))
-      NotiSuccess({
-        message: '成功',
-        description: '添加成功！'
-      })
+      NotiSuccess({ description: '添加成功！' })
       if (success) success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '添加失败！'
-      })
+      NotiError({ description: '添加失败！' })
       if (fail) fail()
     }
   })

@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { NotiSuccess, NotiWarning, MsgError } from 'UTIL/info'
+import { NotiSuccess, NotiError, MsgError } from 'UTIL/info'
 import { getBsnListAction, getStrategyAction, setRelationAction } from '../fetch/strategy'
 
 const GET_BSN_LIST = 'GET_BSN_LIST'
@@ -61,15 +61,9 @@ export const setRelation = params => (dispatch, getState) => {
     const dataBody = action.data.body
     if (dataBody.errorCode === '0') {
       dispatch(getBsnList(getState().pages.reviewSettings.bsnSelectOpt))
-      NotiSuccess({
-        message: '成功',
-        description: '关联成功！'
-      })
+      NotiSuccess({ description: '关联成功！' })
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '关联失败！'
-      })
+      NotiError({ description: '关联失败！' })
     }
   })
 }

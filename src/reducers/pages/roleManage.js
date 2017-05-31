@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { NotiSuccess, NotiWarning, MsgError } from 'UTIL/info'
+import { NotiSuccess, NotiError, MsgError } from 'UTIL/info'
 import { getRoleTree } from '../public/bindRole'
 import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction, addRoleAction, itemsBindRoleAction, delRoleAction } from '../fetch/role'
 
@@ -143,18 +143,12 @@ export const updateRole = params => (dispatch, getState) => {
   dispatch(updateRoleAction(params)).then(action => {
     const dataBody = action.data.body
     if (dataBody.errorCode === '0') {
-      NotiSuccess({
-        message: '成功',
-        description: '角色更新成功！'
-      })
+      NotiSuccess({ description: '角色更新成功！' })
       // 刷新一次选择的树
       dispatch(getRoleTree())
       dispatch(getInfoByRoleId(params.roleId))
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '角色更新失败！'
-      })
+      NotiError({ description: '角色更新失败！' })
     }
   })
 }
@@ -168,18 +162,12 @@ export const setAddRoleBoxVisible = state => ({
 export const addRole = (params, success, fail) => (dispatch, getState) => {
   dispatch(addRoleAction(params)).then(action => {
     if (action.data.body.errorCode === '0') {
-      NotiSuccess({
-        message: '成功',
-        description: '角色添加成功！'
-      })
+      NotiSuccess({ description: '角色添加成功！' })
       // 刷新一次选择的树
       dispatch(getRoleTree())
       if (success) success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '角色添加失败！'
-      })
+      NotiError({ description: '角色添加失败！' })
       if (fail) fail()
     }
   })
@@ -194,17 +182,11 @@ export const setBindRoleBoxVisible = state => ({
 export const itemsBindRole = (roleId, roleMenuItemRelList, success, fail) => (dispatch, getState) => {
   dispatch(itemsBindRoleAction(roleId, roleMenuItemRelList)).then(action => {
     if (action.data.body.errorCode === '0') {
-      NotiSuccess({
-        message: '成功',
-        description: '功能关联成功！'
-      })
+      NotiSuccess({ description: '功能关联成功！' })
       dispatch(getAllRoleFnItems(1, roleId, '', 1))
       if (success) success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '功能关联失败！'
-      })
+      NotiError({ description: '功能关联失败！' })
       if (fail) fail()
     }
   })
@@ -214,16 +196,10 @@ export const itemsBindRole = (roleId, roleMenuItemRelList, success, fail) => (di
 export const delRole = roleId => (dispatch, getState) => {
   dispatch(delRoleAction(roleId)).then(action => {
     if (action.data.body.errorCode === '0') {
-      NotiSuccess({
-        message: '成功',
-        description: '角色删除成功！'
-      })
+      NotiSuccess({ description: '角色删除成功！' })
       dispatch(getRoleTree())
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '角色删除失败！'
-      })
+      NotiError({ description: '角色删除失败！' })
     }
   })
 }

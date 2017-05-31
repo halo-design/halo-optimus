@@ -115,9 +115,9 @@ const API = {
   SET_SCHEDULE_ROLE_ASSOCIATE: `${RMU}TSM01015.do`,
 
   // 白名单管理
-  GET_WHITELIST_URL: `${RMU}IM10002.do`,
-  ADD_WHITELIST_URL: `${RMU}IM10001.do`,
-  DEL_WHITELIST_URL: `${RMU}IM10004.do`,
+  GET_WHITELIST: `${RMU}IM10002.do`,
+  ADD_WHITELIST: `${RMU}IM10001.do`,
+  DEL_WHITELIST: `${RMU}IM10004.do`,
   ADD_WHITELIST_INFO: `${RMU}IM10003.do`,
 
   // 资源配置管理
@@ -143,12 +143,12 @@ const API = {
 
 }
 
-export const getFetch = (reqURL, params) => {
+export const getFetch = (apiName, params) => {
   const data = params || {}
   return {
     [BZ_REQUESTER]: {
-      types: reqURL,
-      url: API[reqURL],
+      apiName,
+      url: API[apiName],
       ...data
     }
   }

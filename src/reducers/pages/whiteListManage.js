@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { NotiSuccess, NotiWarning } from 'UTIL/info'
+import { NotiSuccess, NotiError } from 'UTIL/info'
 import * as RQ from '../fetch/whitelist'
 
 const GET_WHITE_LIST = 'GET_WHITE_LIST'
@@ -29,16 +29,10 @@ export const addWhiteList = (state, success, fail) => (dispatch, getState) => {
   dispatch(RQ.addWhiteListAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(queryWhiteList())
-      NotiSuccess({
-        message: '成功',
-        description: '添加成功！'
-      })
+      NotiSuccess({ description: '添加成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '添加失败！'
-      })
+      NotiError({ description: '添加失败！' })
       fail && fail()
     }
   })
@@ -48,16 +42,10 @@ export const delWhiteList = (state, success, fail) => (dispatch, getState) => {
   dispatch(RQ.delWhiteListAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(queryWhiteList())
-      NotiSuccess({
-        message: '成功',
-        description: '删除成功！'
-      })
+      NotiSuccess({ description: '删除成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '删除失败！'
-      })
+      NotiError({ description: '删除失败！' })
       fail && fail()
     }
   })
@@ -72,16 +60,10 @@ export const addUserId = (state, success, fail) => (dispatch, getState) => {
   dispatch(RQ.whiteListAddAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(queryWhiteList())
-      NotiSuccess({
-        message: '成功',
-        description: '添加成功！'
-      })
+      NotiSuccess({ description: '添加成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '添加失败！'
-      })
+      NotiError({ description: '添加失败！' })
       fail && fail()
     }
   })

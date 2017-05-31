@@ -152,7 +152,7 @@ export const operationFilter = record => {
   }
 }
 
-export const ruleElementFilter = record => {
+export const resourceFilter = record => {
   switch (record) {
     case 'version':
       return '版本号'
@@ -164,7 +164,7 @@ export const ruleElementFilter = record => {
       return '机型'
 
     case 'netType':
-      return 'netType'
+      return '网络'
 
     case 'osVersion':
       return 'OS版本'
@@ -208,24 +208,3 @@ export const businessFilter = record => {
   }
 }
 
-export const resourceFilter = record => {
-  switch (record) {
-    case 'version':
-      return '版本号'
-
-    case 'city':
-      return '城市'
-
-    case 'mobileModel':
-      return '机型'
-
-    case 'netType':
-      return '网络'
-
-    case 'osVersion':
-      return 'osVersion'
-
-    default:
-      return record
-  }
-}

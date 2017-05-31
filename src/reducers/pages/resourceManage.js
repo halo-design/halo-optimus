@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { NotiSuccess, NotiWarning } from 'UTIL/info'
+import { NotiSuccess, NotiError } from 'UTIL/info'
 import * as RQ from '../fetch/resource'
 
 const GET_RESOURCE_LIST_DATA = 'GET_RESOURCE_LIST_DATA'
@@ -23,16 +23,10 @@ export const addResourceList = (state, success, fail) => (dispatch, getState) =>
   dispatch(RQ.addResourceAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(queryResourceList())
-      NotiSuccess({
-        message: '成功',
-        description: '添加成功！'
-      })
+      NotiSuccess({ description: '添加成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '添加失败！'
-      })
+      NotiError({ description: '添加失败！' })
       fail && fail()
     }
   })
@@ -42,16 +36,10 @@ export const changeResourceList = (state, success, fail) => (dispatch, getState)
   dispatch(RQ.changeResourceAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(queryResourceList())
-      NotiSuccess({
-        message: '成功',
-        description: '修改成功！'
-      })
+      NotiSuccess({ description: '修改成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '修改失败！'
-      })
+      NotiError({ description: '修改失败！' })
       fail && fail()
     }
   })
@@ -61,16 +49,10 @@ export const delResource = (state, success, fail) => (dispatch, getState) => {
   dispatch(RQ.delResourceAction(state)).then(action => {
     if (action.data.body.errorCode === '0') {
       dispatch(queryResourceList())
-      NotiSuccess({
-        message: '成功',
-        description: '删除成功！'
-      })
+      NotiSuccess({ description: '删除成功！' })
       success && success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '删除失败！'
-      })
+      NotiError({ description: '删除失败！' })
       fail && fail()
     }
   })

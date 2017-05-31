@@ -10,7 +10,7 @@ export const queryHotpatchTaskAction = data => getFetch('GET_QUERY_HOTPATCH_LIST
   body: data
 })
 
-export const queryWhiteListAction = data => getFetch('GET_WHITELIST_URL')
+export const queryWhiteListAction = data => getFetch('GET_WHITELIST')
 
 export const addHotpatchTaskAction = data => getFetch('ADD_HOTPATCH_TASK', {
   body: data

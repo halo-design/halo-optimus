@@ -1,4 +1,4 @@
-import { NotiSuccess, NotiWarning } from 'UTIL/info'
+import { NotiSuccess, NotiError } from 'UTIL/info'
 import { getStrategyList } from '../public/strategy'
 import { addStrategyAction, editStrategyAction, deleteStrategyAction } from '../fetch/strategy'
 
@@ -27,10 +27,7 @@ export const addStrategy = (data, success, fail) => (dispatch, getState) => {
       refreshStrategy(dispatch, getState)
       if (success) success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '策略新增失败！'
-      })
+      NotiError({ description: '策略新增失败！' })
       if (fail) fail()
     }
   })
@@ -40,17 +37,11 @@ export const addStrategy = (data, success, fail) => (dispatch, getState) => {
 export const editStrategy = (data, success, fail) => (dispatch, getState) => {
   dispatch(editStrategyAction(data)).then(action => {
     if (action.data.body.errorCode === '0') {
-      NotiSuccess({
-        message: '成功',
-        description: '策略修改成功！'
-      })
+      NotiSuccess({ description: '策略修改成功！' })
       refreshStrategy(dispatch, getState)
       if (success) success()
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '策略修改失败！'
-      })
+      NotiError({ description: '策略修改失败！' })
       if (fail) fail()
     }
   })
@@ -60,16 +51,10 @@ export const editStrategy = (data, success, fail) => (dispatch, getState) => {
 export const deleteStrategy = data => (dispatch, getState) => {
   dispatch(deleteStrategyAction(data)).then(action => {
     if (action.data.body.errorCode === '0') {
-      NotiSuccess({
-        message: '成功',
-        description: '策略删除成功！'
-      })
+      NotiSuccess({ description: '策略删除成功！' })
       refreshStrategy(dispatch, getState)
     } else {
-      NotiWarning({
-        message: '失败',
-        description: '策略删除失败！'
-      })
+      NotiError({ description: '策略删除失败！' })
     }
   })
 }
