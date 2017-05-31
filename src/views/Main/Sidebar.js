@@ -14,13 +14,6 @@ import settings from 'CONSTANT/config'
 
 export default class SidebarView extends React.Component {
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      top: false
-    }
-  }
-
   handleActive (e) {
     const target = e.target
     const parent = target.parentNode
@@ -42,24 +35,14 @@ export default class SidebarView extends React.Component {
     document.title = `${settings.projectName} - ${title}`
   }
 
-  fixedTop (state) {
-    this.setState({
-      top: state
-    })
-  }
-
   componentDidMount () {
     const docEl = document.documentElement
-
-    const scroll = () => {
+    const sidebarClass = this.sidebar.classList
+    const scrollHandle = () => {
       let scrollTop = docEl.scrollTop || document.body.scrollTop
-      if (scrollTop > 60 && !this.state.top) {
-        this.fixedTop(true)
-      } else if (scrollTop <= 60 && this.state.top) {
-        this.fixedTop(false)
-      }
+      scrollTop > 60 ? sidebarClass.add('fixed') : sidebarClass.remove('fixed')
     }
-    window.addEventListener('scroll', scroll, false)
+    window.addEventListener('scroll', scrollHandle, false)
   }
 
   render () {
@@ -137,7 +120,7 @@ export default class SidebarView extends React.Component {
     return (
       <div className='app-sidebar'>
         <div className='sidebar-title'><span>{menus.title}</span></div>
-        <div className={this.state.top ? 'scroller-wrap fixed' : 'scroller-wrap'}>
+        <div ref={node => { this.sidebar = node }} className='scroller-wrap'>
           <div className='scroller'>
             {Menu(menus, parentUrl)}
           </div>
