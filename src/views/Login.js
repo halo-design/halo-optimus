@@ -134,7 +134,7 @@ export default class LoginView extends React.Component {
           <div className='btn-wrap'>
             <button onClick={e => this.handleSubmit()}>立即登录</button>
           </div>
-          <div className='project'>IFP内部管理系统 2.0</div>
+          <div className='project'>FLAME移动管理系统 2.0</div>
         </div>
       </div>
     )
