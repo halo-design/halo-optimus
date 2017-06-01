@@ -144,16 +144,30 @@ body {
   @include fixedEdge;
   background-color: $maskOpacity;
   z-index: 999;
-  animation: fadeIn .2s;
-  
+
+  &.fadeIn {
+    animation: fadeIn .2s both;
+  }
+
+  &.fadeOut {
+    animation: fadeOut .3s both;
+  }
+
   .app-modal-box {
     @include centerMiddle(520px, 360px)
     @include bgWhite;
     margin-top: -210px;
     border-radius: 5px;
-    animation: zoomIn .3s .2s both cubic-bezier(0.42, 0.96, 0.6, 1.22);
     box-shadow: 0 12px 24px -6px rgba(0,0,0,.34);
-    
+
+    &.zoomIn {
+      animation: zoomIn .3s .2s both cubic-bezier(0.42, 0.96, 0.6, 1.22);
+    }
+
+    &.zoomOut {
+      animation: zoomOut .3s both;
+    }
+
     .close {
       width: 52px;
       height: 52px;

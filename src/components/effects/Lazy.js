@@ -1,8 +1,11 @@
 import React from 'react'
 
 export default class Lazy extends React.Component {
-  state = {
-    model: null
+  constructor (props) {
+    super(props)
+    this.state = {
+      model: null
+    }
   }
 
   componentWillMount () {

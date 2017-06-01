@@ -153,6 +153,12 @@ $sidebarWidth : 200px;
               content: "\e673";
             }
           }
+
+          &.messagePush {
+            &:after {
+              content: "\e6b7";
+            }
+          }
         }
 
         &.arr:after {

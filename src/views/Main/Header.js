@@ -4,6 +4,7 @@ import { withRouter, NavLink } from 'react-router-dom'
 import Account from './Account'
 import Sidebar from './Sidebar'
 import ChangePswd from './ChangePswd'
+import LazyDisplay from 'COMPONENT/effects/LazyDisplay'
 
 @withRouter
 
@@ -73,7 +74,13 @@ export default class HeaderView extends React.Component {
           parentUrl={currentUrl}
         />
         <Account />
-        <ChangePswd visible={passwordVisible} />
+        <LazyDisplay
+          enterDelay={0}
+          leaveDelay={300}
+          visibleKey={passwordVisible}
+        >
+          <ChangePswd visible={passwordVisible} />
+        </LazyDisplay>
       </div>
     )
   }
