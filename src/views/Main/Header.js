@@ -33,11 +33,7 @@ export default class HeaderView extends React.Component {
   }
 
   componentWillMount () {
-    let items = this.props.items[0]
-    this.setState({
-      currentMenus: items.menus[0],
-      currentUrl: items.url
-    })
+    this.handleMenu(0)
   }
 
   render () {
