@@ -17,19 +17,27 @@ export default store => next => action => {
   }
   let { url, body, header, method, dataType, apiName, requestType, error, success } = reqAction
 
+  body = body || {}
+  method = method || 'POST'
+  dataType = dataType || 'JSON'
+
   const actionWith = data => {
     const finalAction = { ...action, ...data }
     delete finalAction[BZ_REQUESTER]
     return finalAction
   }
 
-  const type = requestType || 'K'
+  const reqType = requestType || 'K'
+  if (reqType !== 'K' && reqType !== 'J') {
+    throw new Error('Unexcept type!')
+  }
+
   const date = new Date()
   const mmt = moment(date)
   const transId = `AT${Date.now()}`
 
-  let finalHeader = {
-    type: type,
+  const headers = {
+    type: reqType,
     encry: '0',
     channel: 'AT',
     transId: transId,
@@ -40,38 +48,20 @@ export default store => next => action => {
     iCIFID: getCookie('iCIFID') || '',
     eCIFID: getCookie('eCIFID') || '',
     'Accept': 'application/json',
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    'Content-Type': `application/${reqType === 'J' ? 'json' : 'x-www-form-urlencoded'}; charset=UTF-8`,
     ...header
   }
 
-  if (type === 'J') {
-    finalHeader = {
-      ...finalHeader,
-      'type': 'J',
-      'Content-Type': 'application/json; charset=UTF-8'
-    }
-  }
+  const finalBody = reqType === 'K' ? qs.stringify(body) : JSON.stringify({ body, header: headers })
 
-  let finalBody
-  body = body || {}
-  if (type === 'K') {
-    finalBody = qs.stringify(body)
-  } else if (type === 'J') {
-    finalBody = JSON.stringify({body, finalHeader})
-  } else {
-    throw new Error('Unexcept Type!')
-  }
-
-  let finalRequest = {
-    headers: finalHeader,
-    dataType: dataType || 'JSON',
-    method: method || 'post'
-  }
+  let finalRequest = { headers, dataType, method }
 
   if (method === 'GET') {
     url += '?' + finalBody
-  } else if (method !== 'HEAD') {
+  } else if (method === 'POST') {
     finalRequest.body = finalBody
+  } else {
+    throw new Error('Unexcept method!')
   }
 
   next(actionWith({ type: `[FETCH]: ${apiName}`, url }))
