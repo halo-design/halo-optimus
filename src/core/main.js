@@ -6,11 +6,12 @@ import createStore from 'STORE/createStore'
 import { routeRootPath } from 'CONSTANT/config'
 import App from 'VIEW/App'
 
+const supportsHistory = 'pushState' in window.history
 const store = createStore()
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <Router basename={routeRootPath}>
+      <Router basename={routeRootPath} forceRefresh={!supportsHistory}>
         <App />
       </Router>
     </Provider>,

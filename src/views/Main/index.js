@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Switch, Route } from 'react-router-dom'
+import createRoutes from 'UTIL/createRoutes'
 import { initUserForm } from 'REDUCER/public/main'
 import { initUserMenu } from 'REDUCER/public/menu'
 import Loading from 'COMPONENT/effects/Loading'
@@ -49,22 +49,50 @@ export default class MainView extends React.Component {
         <Header />
         <div className='app-content'>
           <div className='app-page-wrapper'>
-            <Switch>
-              <Route path='/home/branchList' component={BranchManage} />
-              <Route path='/home/User' component={UserManage} />
-              <Route path='/home/Role' component={RoleManage} />
-              <Route path='/home/postList' component={PostManage} />
-              <Route path='/home/relationList' component={ReviewSettings} />
-              <Route path='/home/relationSet' component={StrategySettings} />
-              <Route path='/home/checkList' component={CheckList} />
-              <Route path='/home/checkHistoryList' component={CheckHistoryList} />
-              <Route path='/home/pendHistoryList' component={ApplyHistoryList} />
-              <Route path='/home/upgradeManage' component={UpgradeManage} />
-              <Route path='/home/hotpatchManage' component={HotpatchManage} />
-              <Route path='/home/whiteListManage' component={WhiteListManage} />
-              <Route path='/home/resourceManage' component={ResourceManage} />
-              <Route component={Welcome} />
-            </Switch>
+            {
+              createRoutes('/home', [{
+                path: '/branchList',
+                component: BranchManage
+              }, {
+                path: '/User',
+                component: UserManage
+              }, {
+                path: '/Role',
+                component: RoleManage
+              }, {
+                path: '/postList',
+                component: PostManage
+              }, {
+                path: '/relationList',
+                component: ReviewSettings
+              }, {
+                path: '/relationSet',
+                component: StrategySettings
+              }, {
+                path: '/checkList',
+                component: CheckList
+              }, {
+                path: '/checkHistoryList',
+                component: CheckHistoryList
+              }, {
+                path: '/pendHistoryList',
+                component: ApplyHistoryList
+              }, {
+                path: '/upgradeManage',
+                component: UpgradeManage
+              }, {
+                path: '/hotpatchManage',
+                component: HotpatchManage
+              }, {
+                path: '/whiteListManage',
+                component: WhiteListManage
+              }, {
+                path: '/resourceManage',
+                component: ResourceManage
+              }, {
+                component: Welcome
+              }])
+            }
           </div>
         </div>
       </div>
