@@ -7,7 +7,7 @@ const chalk = require('chalk')
 const sftp = require('gulp-sftp')
 const tools = require('./bin/analyzing-tools')
 
-gulp.task('upload', () => 
+gulp.task('upload', () =>
   gulp.src('dist/**')
   .pipe(sftp({
     host: '139.224.128.69',
@@ -16,7 +16,7 @@ gulp.task('upload', () =>
   }))
 )
 
-gulp.task('upload-diff', () => 
+gulp.task('upload-diff', () =>
   gulp.src('dist_diff/**')
   .pipe(sftp({
     host: '139.224.128.69',
