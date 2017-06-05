@@ -24,7 +24,7 @@ exports.deleteFolder = dir => {
   if (fs.existsSync(dir)) {
     files = fs.readdirSync(dir)
     files.forEach((file, index) => {
-      var curPath = path.join(dir, file)
+      const curPath = path.join(dir, file)
       if (fs.statSync(curPath).isDirectory()) {
         exports.deleteFolder(curPath)
       } else {
@@ -118,8 +118,8 @@ exports.getSnapshots = (readPath, outputPath) => {
 }
 
 exports.deleteEmptyProperty = object => {
-  for (var key in object) {
-    var value = object[key]
+  for (let key in object) {
+    let value = object[key]
     if (typeof value === 'object') {
       if (Array.isArray(value)) {
         if (value.length === 0) {

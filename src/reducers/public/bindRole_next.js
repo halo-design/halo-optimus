@@ -1,4 +1,4 @@
-import { createActions, handleActions } from 'redux-actions'
+import createReducers from 'UTIL/createReducers'
 import { groupList } from 'UTIL/filters'
 import NProgress from 'nprogress'
 import { getUserRoleListAction, userRoleAssociationAction, getRoleListAction } from '../fetch/role'
@@ -66,33 +66,17 @@ export const getRoleTree = () => (dispatch, getState) => {
   })
 }
 
-export const { userGetRole, updateSelectedRole, updateRoleTree, updateRoleTreeList } = createActions({
-  USER_GET_ROLE: data => data,
-  UPDATE_SELECTED_ROLE: selectedRoleList => ({ selectedRoleList }),
-  UPDATE_ROLE_TREE: roleTreeList => ({ roleTreeList }),
-  UPDATE_ROLE_TREE_LIST: selectRoleTreeList => ({ selectRoleTreeList })
-})
-
-export default handleActions({
-  USER_GET_ROLE: (state, action) => ({
-    ...state,
-    ...action.payload
-  }),
-  UPDATE_ROLE_TREE: (state, action) => ({
-    ...state,
-    ...action.payload
-  }),
-  UPDATE_SELECTED_ROLE: (state, action) => ({
-    ...state,
-    ...action.payload
-  }),
-  UPDATE_ROLE_TREE_LIST: (state, action) => ({
-    ...state,
-    ...action.payload
-  })
+const actionsReducer = createReducers({
+  userGetRole: data => data,
+  updateSelectedRole: selectedRoleList => ({ selectedRoleList }),
+  updateRoleTree: roleTreeList => ({ roleTreeList }),
+  updateRoleTreeList: selectRoleTreeList => ({ selectRoleTreeList })
 }, {
   roleTreeList: [],
   selectRoleTreeList: [],
   allSelectRoleList: [],
   selectedRoleList: []
 })
+
+export const { userGetRole, updateSelectedRole, updateRoleTree, updateRoleTreeList } = actionsReducer.actions
+export default actionsReducer.reducer
