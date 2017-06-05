@@ -10,23 +10,16 @@ const isOpera = hasString('Opera')
 const isIE = hasString('compatible') && hasString('MSIE') && !isOpera
 const isEdge = hasString('Edge') || !isIE && hasString('Windows NT') && hasString(' Trident/7.0;')
 
-if (isIE) {
-  const reIE = new RegExp('MSIE (\\d+\\.\\d+);')
-  reIE.test(userAgent)
+if (isIE || isEdge) {
+  window.fetch = null
 }
 
-(isIE || isEdge) && (window.fetch = null)
-
 if (isIE) {
-  es5(() => es6(() => esFetch(() => main())))
+  es5(() => es6(() => esFetch(main)))
 } else {
   if (Promise) {
-    fetch ? main() : esFetch(() => main())
+    fetch ? main() : esFetch(main)
   } else {
-    if (fetch) {
-      esPromise(fn => fn.polyfill() && main())
-    } else {
-      es6(() => esFetch(() => main()))
-    }
+    fetch ? esPromise(fn => fn.polyfill() && main()) : es6(() => esFetch(main))
   }
 }

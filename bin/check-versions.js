@@ -16,20 +16,18 @@ let versionRequirements = [{
 
 module.exports = () => {
   let warnings = []
-  for (let i = 0; i < versionRequirements.length; i++) {
-    let mod = versionRequirements[i]
+  versionRequirements.forEach(mod => {
     if (!semver.satisfies(mod.currentVersion, mod.versionRequirement)) {
       warnings.push(`${mod.name} : ${chalk.red(mod.currentVersion)} should be ${chalk.green(mod.versionRequirement)}`
       )
     }
-  }
+  })
 
   if (warnings.length) {
     console.log(chalk.yellow('To use this template, you must update following to modules:\n'))
-    for (let i = 0; i < warnings.length; i++) {
-      let warning = warnings[i]
+    warnings.forEach(warning => {
       console.log(`> ${warning}\n`)
-    }
+    })
     process.exit(1)
   }
 }
