@@ -14,6 +14,8 @@ let versionRequirements = [{
   versionRequirement: packageConfig.engines.npm
 }]
 
+console.log(chalk.green('Start checking version...'))
+
 module.exports = () => {
   let warnings = []
   versionRequirements.forEach(mod => {

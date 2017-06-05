@@ -1,5 +1,5 @@
 const tools = require('./analyzing-tools')
-require('./check-versions')()
+const check = require('./check-versions')
 process.env.NODE_ENV = 'production'
 
 const ora = require('ora')
@@ -7,12 +7,15 @@ const rm = require('rimraf')
 const path = require('path')
 const chalk = require('chalk')
 const webpack = require('webpack')
-const assets = require('../config/settings').build.assets
+const settings = require('../config/settings').build
 const webpackConfig = require('../config/webpack.prod')
+
+settings.checkVersions && check()
 
 const spinner = ora('building for production...')
 spinner.start()
 
+const assets = settings.assets
 rm(path.join(assets.root, assets.subDir), err => {
   if (err) {
     throw err

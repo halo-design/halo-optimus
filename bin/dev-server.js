@@ -1,5 +1,5 @@
-require('./check-versions')()
 const ip = require('ip')
+const ora = require('ora')
 const opn = require('opn')
 const path = require('path')
 const http = require('http')
@@ -8,12 +8,18 @@ const request = require('request')
 const express = require('express')
 const webpack = require('webpack')
 const socket = require('socket.io')
+const check = require('./check-versions')
 const settings = require('../config/settings').dev
 const webpackConfig = require('../config/webpack.dev')
+
+settings.checkVersions && check()
 
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(settings.env.NODE_ENV)
 }
+
+const spinner = ora('building for development...')
+spinner.start()
 
 const port = process.env.PORT || settings.port
 const openBrowser = !!settings.openBrowser
@@ -73,7 +79,10 @@ app.use(staticPath, express.static('./public'))
 
 const uri = `http://${ip.address()}:${port}`
 
-devMiddleware.waitUntilValid(() => console.log(chalk.green(`> Listening at ${uri} \n`)))
+devMiddleware.waitUntilValid(() => {
+  spinner.stop()
+  console.log(chalk.green(`> Listening at ${uri} \n`))
+})
 
 module.exports = httpServer.listen(port, err => {
   if (err) {

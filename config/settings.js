@@ -20,7 +20,8 @@ module.exports = {
     gzip: false,
     gzipExtensions: ['js', 'css'],
     bundleAnalyzerReport: process.env.BUNDLE_REPORT,
-    htmlTemplate: resolve('static/index.html')
+    htmlTemplate: resolve('static/index.html'),
+    checkVersions: true
   },
   dev: {
     env: {
@@ -32,6 +33,7 @@ module.exports = {
       subDir: ''
     },
     publicPath: '/',
-    htmlTemplate: resolve('static/dev.html')
+    htmlTemplate: resolve('static/dev.html'),
+    checkVersions: true
   }
 }

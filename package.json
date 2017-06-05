@@ -11,8 +11,8 @@
     "clean:dist": "rimraf dist",
     "clean:diff": "rimraf dist_diff",
     "dev": "node bin/dev-server.js",
-    "build": "node bin/compile.js",
-    "build:report": "cross-env BUNDLE_REPORT=true node bin/compile.js",
+    "build": "node bin/production.js",
+    "build:report": "cross-env BUNDLE_REPORT=true node bin/production.js",
     "shot": "gulp snapshot",
     "diff": "gulp dist-different",
     "repo": "gulp report",
@@ -38,6 +38,7 @@
     "react-router-dom": "^4.1.1",
     "react-transition-group": "^1.1.2",
     "redux": "^3.6.0",
+    "redux-actions": "^2.0.3",
     "redux-logger": "^3.0.1",
     "redux-persist": "^4.8.0",
     "redux-thunk": "^2.2.0"

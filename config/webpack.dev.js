@@ -9,7 +9,7 @@ const baseWebpackConfig = require('./webpack.base')
 const port = process.env.PORT || settings.port
 
 Object.keys(baseWebpackConfig.entry).forEach(name => {
-  baseWebpackConfig.entry[name] = ['./bin/dev-client'].concat(baseWebpackConfig.entry[name])
+  baseWebpackConfig.entry[name] = ['./config/dev-client'].concat(baseWebpackConfig.entry[name])
 })
 
 module.exports = merge(baseWebpackConfig, {
