@@ -1,9 +1,7 @@
+import createReducer from 'STORE/createReducer'
 import NProgress from 'nprogress'
 import { groupList } from 'UTIL/filters'
 import { getBranchListAction } from '../fetch/branch'
-
-const GET_BRANCH_LIST = 'GET_BRANCH_LIST'
-const USER_GROUP_BRANCH = 'USER_GROUP_BRANCH'
 
 const getBranch = branch => ({
   label: branch.brhName,
@@ -27,46 +25,21 @@ export const initBranchList = cb => (dispatch, getState) => {
     const selectTreeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', getBranch)
 
     // 新增的时候查机构列表
-    dispatch({
-      type: GET_BRANCH_LIST,
-      data: {
-        selectTreeBranchList
-      }
-    })
-    dispatch({
-      type: USER_GROUP_BRANCH,
-      data: {
-        allBranchList,
-        treeBranchList
-      }
-    })
+    dispatch(setBranchList(selectTreeBranchList))
+    dispatch(setUserGroupBranch({ allBranchList, treeBranchList }))
     NProgress.done()
     if (cb) cb()
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  setBranchList: selectTreeBranchList => ({ selectTreeBranchList }),
+  setUserGroupBranch: data => data
+}, {
   allBranchList: [],
   selectTreeBranchList: [],
   treeBranchList: []
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case GET_BRANCH_LIST:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    case USER_GROUP_BRANCH:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { setBranchList, setUserGroupBranch } = actionsReducer.actions
+export default actionsReducer.reducer

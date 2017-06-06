@@ -1,21 +1,14 @@
+import createReducer from 'STORE/createReducer'
 import NProgress from 'nprogress'
 import * as RQ from '../fetch/update'
 import { NotiSuccess, NotiError, MsgError } from 'UTIL/info'
-
-const GET_UPDATE_LIST = 'GET_UPDATE_LIST'
-const SET_ADD_PKG_VISIBLE = 'SET_ADD_PKG_VISIBLE'
-const SET_RELEASE_STATE = 'SET_RELEASE_STATE'
-const GET_UPGRADE_TASK_LIST = 'GET_UPGRADE_TASK_LIST'
 
 export const queryUpdateList = () => (dispatch, getState) => {
   NProgress.start()
   dispatch(RQ.queryUpdateListAction()).then(action => {
     const dataBody = action.data.body
     if (dataBody.errorCode === '0') {
-      dispatch({
-        type: GET_UPDATE_LIST,
-        data: dataBody.upgradeList
-      })
+      dispatch(setUpgrageList(dataBody.upgradeList))
     }
     NProgress.done()
   })
@@ -31,23 +24,10 @@ export const getUpgradeTaskList = (data, cb) => (dispatch, getState) => {
         [data.packageInfoId]: dataBody.versionTaskList
       }
     }
-    dispatch({
-      type: GET_UPGRADE_TASK_LIST,
-      data: list
-    })
+    dispatch(setUpgradeTaskList(list))
     cb && cb(dataBody)
   })
 }
-
-export const setAddPkgVisible = state => ({
-  type: SET_ADD_PKG_VISIBLE,
-  data: state
-})
-
-export const setAddEditRelState = state => ({
-  type: SET_RELEASE_STATE,
-  data: state
-})
 
 export const addUpgradeList = (state, success, fail) => (dispatch, getState) => {
   dispatch(RQ.addUpgradeListAction(state)).then(action => {
@@ -104,7 +84,12 @@ export const changeTaskStatus = (state, success, fail) => (dispatch, getState) =
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  setUpgrageList: upgradeList => ({ upgradeList }),
+  setAddPkgVisible: addPkgVisible => ({ addPkgVisible }),
+  setAddEditRelState: addEditReleaseState => ({ addEditReleaseState }),
+  setUpgradeTaskList: upgradeTaskList => ({ upgradeTaskList })
+}, {
   upgradeList: [],
   upgradeTaskList: {},
   addPkgVisible: false,
@@ -115,36 +100,7 @@ const initialState = {
     itemInfo: null,
     visible: false
   }
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case GET_UPDATE_LIST:
-      return {
-        ...state,
-        upgradeList: action.data
-      }
-
-    case GET_UPGRADE_TASK_LIST:
-      return {
-        ...state,
-        upgradeTaskList: action.data
-      }
-
-    case SET_ADD_PKG_VISIBLE:
-      return {
-        ...state,
-        addPkgVisible: action.data
-      }
-
-    case SET_RELEASE_STATE:
-      return {
-        ...state,
-        addEditReleaseState: action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { setUpgrageList, setAddPkgVisible, setAddEditRelState, setUpgradeTaskList } = actionsReducer.actions
+export default actionsReducer.reducer

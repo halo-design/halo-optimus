@@ -1,14 +1,7 @@
+import createReducer from 'STORE/createReducer'
 import { NotiSuccess, NotiError } from 'UTIL/info'
 import { getStrategyList } from '../public/strategy'
 import { addStrategyAction, editStrategyAction, deleteStrategyAction } from '../fetch/strategy'
-
-const SET_ADD_EDIT_VISIBLE = 'SET_ADD_EDIT_VISIBLE'
-
-// 设置新增修改模态框方法
-export const setAddEditModalVisible = state => ({
-  type: SET_ADD_EDIT_VISIBLE,
-  data: state
-})
 
 // 刷新策略列表
 const refreshStrategy = (dispatch, getState) => dispatch(getStrategyList({
@@ -59,20 +52,11 @@ export const deleteStrategy = data => (dispatch, getState) => {
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  setAddEditModalVisible: addEditBoxVisible => ({ addEditBoxVisible })
+}, {
   addEditBoxVisible: false
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case SET_ADD_EDIT_VISIBLE:
-      return {
-        ...state,
-        addEditBoxVisible: action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { setAddEditModalVisible } = actionsReducer.actions
+export default actionsReducer.reducer

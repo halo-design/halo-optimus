@@ -1,20 +1,8 @@
+import createReducer from 'STORE/createReducer'
 import { getUserConfigDataAction } from '../fetch/config'
 import { postListAction } from '../fetch/post'
 import { queryWhiteListAction } from '../fetch/whitelist'
 import { queryResourceAction } from '../fetch/resource'
-
-const SET_USER_TYPE_LEVEL = 'SET_USER_TYPE_LEVEL'
-const POST_LIST = 'POST_LIST'
-const GET_WHITE_LIST = 'GET_WHITE_LIST'
-const GET_RESOURCE_LIST = 'GET_RESOURCE_LIST'
-
-const setUserTypeLevel = (certType, level) => ({
-  type: SET_USER_TYPE_LEVEL,
-  data: {
-    certType,
-    level
-  }
-})
 
 export const getUserConfigData = () => (dispatch, getState) => {
   dispatch(getUserConfigDataAction('')).then(action => {
@@ -37,10 +25,7 @@ export const getUserConfigData = () => (dispatch, getState) => {
 // 查询所有岗位
 export const postList = data => (dispatch, getState) => {
   dispatch(postListAction(data)).then(action => {
-    dispatch({
-      type: POST_LIST,
-      data: action.data.body
-    })
+    dispatch(setPostList(action.data.body))
   })
 }
 
@@ -48,10 +33,7 @@ export const postList = data => (dispatch, getState) => {
 export const queryWhiteList = () => (dispatch, getState) => {
   dispatch(queryWhiteListAction()).then(action => {
     const dataBody = action.data.body
-    dispatch({
-      type: GET_WHITE_LIST,
-      data: dataBody.whiteList
-    })
+    dispatch(setWhiteList(dataBody.whiteList))
   })
 }
 
@@ -60,50 +42,23 @@ export const getResourceList = state => (dispatch, getState) => {
   dispatch(queryResourceAction(state)).then(action => {
     const dataBody = action.data.body
     if (dataBody.errorCode === '0') {
-      dispatch({
-        type: GET_RESOURCE_LIST,
-        data: dataBody.resourceList
-      })
+      dispatch(setResourceList(dataBody.resourceList))
     }
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  setUserTypeLevel: (certType, level) => ({ certType, level }),
+  setPostList: post => ({ post }),
+  setWhiteList: whiteList => ({ whiteList }),
+  setResourceList: resourceList => ({ resourceList })
+}, {
   certType: [],
   level: [],
   post: [],
   whiteList: [],
   resourceList: []
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case POST_LIST:
-      return {
-        ...state,
-        post: action.data
-      }
-
-    case SET_USER_TYPE_LEVEL:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    case GET_WHITE_LIST:
-      return {
-        ...state,
-        whiteList: action.data
-      }
-
-    case GET_RESOURCE_LIST:
-      return {
-        ...state,
-        resourceList: action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { setUserTypeLevel, setPostList, setWhiteList, setResourceList } = actionsReducer.actions
+export default actionsReducer.reducer

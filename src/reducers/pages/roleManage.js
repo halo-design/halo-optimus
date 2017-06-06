@@ -1,50 +1,8 @@
+import createReducer from 'STORE/createReducer'
 import NProgress from 'nprogress'
 import { NotiSuccess, NotiError, MsgError } from 'UTIL/info'
 import { getRoleTree } from '../public/bindRole'
 import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction, addRoleAction, itemsBindRoleAction, delRoleAction } from '../fetch/role'
-
-const CLEAR_TABLE_ITEMS = 'CLEAR_TABLE_ITEMS'
-const UPDATE_TABLE_CUR_ITEMS = 'UPDATE_TABLE_CUR_ITEMS'
-const UPDATE_CUR_ROLE_INFO = 'UPDATE_CUR_ROLE_INFO'
-const SET_SELECT_TREE_VAL = 'SET_SELECT_TREE_VAL'
-const SET_ADD_ROLE_VISIBLE = 'SET_ADD_ROLE_VISIBLE'
-const SET_BIND_ROLE_VISIBLE = 'SET_BIND_ROLE_VISIBLE'
-const UPDATE_MENU_FN_PAGE_ITEMS = 'UPDATE_MENU_FN_PAGE_ITEMS'
-const CLEAR_MENU_FN_ITEMS = 'CLEAR_MENU_FN_ITEMS'
-const SET_MENU_FN_SELECT_KEYS = 'SET_MENU_FN_SELECT_KEYS'
-
-// 清空table列表
-export const clearTableItems = () => ({
-  type: CLEAR_TABLE_ITEMS
-})
-
-const updateTableItems = (tableCurPageItems, tableCurPage, tableTotalSize) => ({
-  type: UPDATE_TABLE_CUR_ITEMS,
-  data: {
-    tableCurPageItems,
-    tableCurPage,
-    tableTotalSize
-  }
-})
-
-// 清空綁定框
-export const clearMenuFnItems = () => ({
-  type: CLEAR_MENU_FN_ITEMS
-})
-
-export const setAllMenuFnSelectKeys = data => ({
-  type: SET_MENU_FN_SELECT_KEYS,
-  data
-})
-
-const updateMenuFnPageItems = (allMenuFnCurPageItems, allMenuFnCurPage, allMenuTotalSize) => ({
-  type: UPDATE_MENU_FN_PAGE_ITEMS,
-  data: {
-    allMenuFnCurPageItems,
-    allMenuFnCurPage,
-    allMenuTotalSize
-  }
-})
 
 // 获取角色详情和功能列表
 export const getAllRoleFnItems = (curPage, roleId, roleName, reqType) => (dispatch, getState) => {
@@ -78,29 +36,6 @@ export const getAllRoleFnItems = (curPage, roleId, roleName, reqType) => (dispat
   })
 }
 
-// 清除当前选中角色信息
-export const clearCurRoleInfo = () => ({
-  type: UPDATE_CUR_ROLE_INFO,
-  data: {
-    roleDesc: '',
-    selectModifyRole: '',
-    roleStatus: '',
-    roleName: '',
-    roleId: ''
-  }
-})
-
-const applyCurRoleInfo = info => ({
-  type: UPDATE_CUR_ROLE_INFO,
-  data: {
-    roleDesc: info.roleDesc,
-    selectModifyRole: info.rolePId,
-    roleStatus: info.roleStatus,
-    roleName: info.roleName,
-    roleId: info.roleId && info.roleId !== 'undefined' ? info.roleId : '' // 数据库拿到的数据带有'undefined'字符串，他们的锅，这个坑我填了
-  }
-})
-
 // 通过角色id获取当前选中角色信息
 export const getInfoByRoleId = roleId => (dispatch, getState) => {
   NProgress.start()
@@ -132,12 +67,6 @@ export const getInfoByRoleName = (roleName, cb) => (dispatch, getState) => {
   })
 }
 
-// 用户修改所属角色 selectTree
-export const setSelectTreeVal = val => ({
-  type: SET_SELECT_TREE_VAL,
-  data: val || ''
-})
-
 // 更新角色信息
 export const updateRole = params => (dispatch, getState) => {
   dispatch(updateRoleAction(params)).then(action => {
@@ -153,11 +82,6 @@ export const updateRole = params => (dispatch, getState) => {
   })
 }
 
-export const setAddRoleBoxVisible = state => ({
-  type: SET_ADD_ROLE_VISIBLE,
-  data: state
-})
-
 // 添加用户
 export const addRole = (params, success, fail) => (dispatch, getState) => {
   dispatch(addRoleAction(params)).then(action => {
@@ -172,11 +96,6 @@ export const addRole = (params, success, fail) => (dispatch, getState) => {
     }
   })
 }
-
-export const setBindRoleBoxVisible = state => ({
-  type: SET_BIND_ROLE_VISIBLE,
-  data: state
-})
 
 // 绑定功能列表到角色上
 export const itemsBindRole = (roleId, roleMenuItemRelList, success, fail) => (dispatch, getState) => {
@@ -204,7 +123,50 @@ export const delRole = roleId => (dispatch, getState) => {
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  clearTableItems: () => ({
+    tableCurPageItems: [],
+    tableCurPage: 1,
+    tableTotalSize: 0
+  }),
+  updateTableItems: (tableCurPageItems, tableCurPage, tableTotalSize) => ({
+    tableCurPageItems,
+    tableCurPage,
+    tableTotalSize
+  }),
+  clearCurRoleInfo: () => ({
+    curRoleInfo: {
+      roleDesc: '',
+      selectModifyRole: '',
+      roleStatus: '',
+      roleName: '',
+      roleId: ''
+    },
+    selectModifyRole: ''
+  }),
+  applyCurRoleInfo: info => ({
+    curRoleInfo: {
+      roleDesc: info.roleDesc,
+      selectModifyRole: info.rolePId,
+      roleStatus: info.roleStatus,
+      roleName: info.roleName,
+      // 数据库拿到的数据带有'undefined'字符串，他们的锅，这个坑我填了
+      roleId: info.roleId && info.roleId !== 'undefined' ? info.roleId : ''
+    },
+    selectModifyRole: info.rolePId
+  }),
+  setSelectTreeVal: val => ({ selectModifyRole: val || '' }),
+  setAddRoleBoxVisible: addBoxVisible => ({ addBoxVisible }),
+  setBindRoleBoxVisible: bindBoxVisible => ({ bindBoxVisible }),
+  updateMenuFnPageItems: (allMenuFnCurPageItems, allMenuFnCurPage, allMenuTotalSize) => ({ allMenuFnCurPageItems, allMenuFnCurPage, allMenuTotalSize }),
+  clearMenuFnItems: () => ({
+    allMenuFnCurPageItems: [],
+    allMenuFnCurPage: 1,
+    allMenuTotalSize: 0,
+    allMenuFnSelectKeys: []
+  }),
+  setAllMenuFnSelectKeys: allMenuFnSelectKeys => ({ allMenuFnSelectKeys })
+}, {
   pageSize: 8,
 
   tableCurPageItems: [],
@@ -227,74 +189,7 @@ const initialState = {
   selectModifyRole: '',
   addBoxVisible: false,
   bindBoxVisible: false
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case CLEAR_TABLE_ITEMS: {
-      return {
-        ...state,
-        tableCurPageItems: [],
-        tableCurPage: 1,
-        tableTotalSize: 0
-      }
-    }
-
-    case SET_MENU_FN_SELECT_KEYS:
-      return {
-        ...state,
-        allMenuFnSelectKeys: action.data
-      }
-
-    case UPDATE_TABLE_CUR_ITEMS:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    case CLEAR_MENU_FN_ITEMS: {
-      return {
-        ...state,
-        allMenuFnCurPageItems: [],
-        allMenuFnCurPage: 1,
-        allMenuTotalSize: 0,
-        allMenuFnSelectKeys: []
-      }
-    }
-
-    case UPDATE_MENU_FN_PAGE_ITEMS:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    case UPDATE_CUR_ROLE_INFO:
-      return {
-        ...state,
-        curRoleInfo: action.data,
-        selectModifyRole: action.data.selectModifyRole
-      }
-
-    case SET_SELECT_TREE_VAL:
-      return {
-        ...state,
-        selectModifyRole: action.data
-      }
-
-    case SET_ADD_ROLE_VISIBLE:
-      return {
-        ...state,
-        addBoxVisible: action.data
-      }
-
-    case SET_BIND_ROLE_VISIBLE:
-      return {
-        ...state,
-        bindBoxVisible: action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { clearTableItems, updateTableItems, clearCurRoleInfo, applyCurRoleInfo, setSelectTreeVal, setAddRoleBoxVisible, setBindRoleBoxVisible, updateMenuFnPageItems, clearMenuFnItems, setAllMenuFnSelectKeys } = actionsReducer.actions
+export default actionsReducer.reducer

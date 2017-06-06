@@ -1,16 +1,8 @@
+import createReducer from 'STORE/createReducer'
 import { groupList, getNodeFromList } from 'UTIL/filters'
 import NProgress from 'nprogress'
 import { getMenuAction } from '../fetch/menu'
 import { refreshInfo } from './main'
-
-const SAVE_USER_MENU = 'SAVE_USER_MENU'
-const MERGE_FINAL_MENU = 'MERGE_FINAL_MENU'
-const SELECT_LEFT_MENU = 'SELECT_LEFT_MENU'
-
-export const selectMenu = currentMenu => ({
-  type: SELECT_LEFT_MENU,
-  data: currentMenu
-})
 
 const converMenu = menu => ({
   id: menu.menuId,
@@ -53,13 +45,7 @@ export const initUserMenu = cb => (dispatch, getState) => {
     const dataBody = action.data.body
     const sourceList = dataBody.menuList
 
-    dispatch({
-      type: SAVE_USER_MENU,
-      data: {
-        menuList: sourceList,
-        menuItemList: dataBody.menuItemList
-      }
-    })
+    dispatch(saveUserMenu(sourceList, dataBody.menuItemList))
 
     authMenu = groupList(dataBody.menuList, 'id', 'parentId', 'menus', converMenu)
     authMenu.map(data => data.level === '0' ? topMenu.push(data) : null)
@@ -71,10 +57,7 @@ export const initUserMenu = cb => (dispatch, getState) => {
     sourceList.map(item => item.parentId && !userMenuMap[item.parentId] ? addWithoutPNode(item.parentId, sourceList, authMenu) : null)
 
     userMenu = groupList(sourceList, 'menuId', 'menuParentId', 'menus', converMenu)
-    dispatch({
-      type: MERGE_FINAL_MENU,
-      items: userMenu
-    })
+    dispatch(mergeFinalMenu(userMenu))
 
     dispatch(refreshInfo(action.data.body))
     NProgress.done()
@@ -82,39 +65,29 @@ export const initUserMenu = cb => (dispatch, getState) => {
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  saveUserMenu: (menuList, menuItemList) => ({ userMenu: { menuList, menuItemList } }),
+  mergeFinalMenu: items => ({ items }),
+  selectMenu: {
+    action: currentMenu => currentMenu,
+    merge: (state, action) => {
+      const currentMenu = action.payload
+      return {
+        ...state,
+        currentMenu,
+        userMenu: {
+          ...state.userMenu,
+          currentMenu
+        }
+      }
+    }
+  }
+}, {
   items: [],
   topMenu: [],
   userMenu: {},
   currentMenu: ''
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case SAVE_USER_MENU:
-      return {
-        ...state,
-        userMenu: action.data
-      }
-
-    case MERGE_FINAL_MENU:
-      return {
-        ...state,
-        items: action.items
-      }
-
-    case SELECT_LEFT_MENU:
-      return {
-        ...state,
-        currentMenu: action.data,
-        userMenu: {
-          ...state.userMenu,
-          currentMenu: action.data
-        }
-      }
-
-    default:
-      return state
-  }
-}
+export const { saveUserMenu, mergeFinalMenu, selectMenu } = actionsReducer.actions
+export default actionsReducer.reducer

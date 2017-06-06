@@ -12,8 +12,14 @@ export default (actions, initialState) => {
 
   Object.keys(actions).forEach(item => {
     const key = changeKyes(item)
-    handles[key] = merge
-    newActions[key] = actions[item]
+    const action = actions[item]
+    if (typeof action === 'function') {
+      newActions[key] = action
+      handles[key] = merge
+    } else if (Object.prototype.toString.call(action) === '[object Object]') {
+      newActions[key] = action.action
+      handles[key] = action.merge
+    }
   })
 
   return {

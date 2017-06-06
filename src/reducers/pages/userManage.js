@@ -1,22 +1,8 @@
+import createReducer from 'STORE/createReducer'
 import { getRoleByUserAction } from '../fetch/role'
 import { userPageByBrhAction, addUserAction, updateUserAction, delUserAction } from '../fetch/user'
 import NProgress from 'nprogress'
 import { NotiSuccess, NotiError, MsgWarning } from 'UTIL/info'
-
-export const PAGE_USERS = 'PAGE_USERS'
-export const SET_PREV_USER = 'SET_PREV_USER'
-export const CLOSE_PREV_USER = 'CLOSE_PREV_USER'
-export const SET_BIND_USER = 'SET_BIND_USER'
-export const CLOSE_BIND_USER = 'CLOSE_BIND_USER'
-export const APPLY_MODIFY_USER = 'APPLY_MODIFY_USER'
-export const CLOSE_MODIFY_USER = 'CLOSE_MODIFY_USER'
-export const SET_ADDUSER_VISIBLE = 'SET_ADDUSER_VISIBLE'
-export const UPDATE_SELECTE_KEYS = 'UPDATE_SELECTE_KEYS'
-
-const pageUsers = state => ({
-  type: PAGE_USERS,
-  data: state
-})
 
 // 查询用户信息 搜索功能 分页功能
 export const userPageByBrh = (params, cb) => (dispatch, getState) => {
@@ -43,15 +29,6 @@ export const userPageByBrh = (params, cb) => (dispatch, getState) => {
   })
 }
 
-export const closePreviewUser = () => ({
-  type: CLOSE_PREV_USER
-})
-
-const setPreviewInfo = info => ({
-  type: SET_PREV_USER,
-  data: info
-})
-
 export const previewUser = (num, success, fail) => (dispatch, getState) => {
   dispatch(getRoleByUserAction(num)).then(action => {
     dispatch(setPreviewInfo(action.data.body))
@@ -62,25 +39,6 @@ export const previewUser = (num, success, fail) => (dispatch, getState) => {
   })
 }
 
-export const userBindRole = info => ({
-  type: SET_BIND_USER,
-  data: info
-})
-
-export const closeBindRole = () => ({
-  type: CLOSE_BIND_USER
-})
-
-export const setAddUserBoxVsisible = state => ({
-  type: SET_ADDUSER_VISIBLE,
-  data: state
-})
-
-const applyInitVal = info => ({
-  type: APPLY_MODIFY_USER,
-  data: info
-})
-
 export const modifyUser = (num, success, fail) => (dispatch, getState) => {
   dispatch(getRoleByUserAction(num)).then(action => {
     dispatch(applyInitVal(action.data.body))
@@ -90,10 +48,6 @@ export const modifyUser = (num, success, fail) => (dispatch, getState) => {
     if (fail) fail()
   })
 }
-
-export const colseModifyUser = () => ({
-  type: CLOSE_MODIFY_USER
-})
 
 export const addUser = (params, success, fail) => (dispatch, getState) => {
   dispatch(addUserAction(params)).then(action => {
@@ -162,12 +116,55 @@ export const delUserUpdate = (userNo, brhId, curPage) => (dispatch, getState) =>
   })
 }
 
-export const updateSelectKeys = keys => ({
-  type: UPDATE_SELECTE_KEYS,
-  data: keys
-})
-
-const initialState = {
+const actionsReducer = createReducer({
+  pageUsers: data => data,
+  setPreviewInfo: info => ({
+    previewBox: {
+      visible: true,
+      info
+    }
+  }),
+  closePreviewUser: () => ({
+    previewBox: {
+      visible: false,
+      info: {}
+    }
+  }),
+  userBindRole: info => ({
+    bindRoleBox: {
+      visible: true,
+      info
+    }
+  }),
+  closeBindRole: info => ({
+    bindRoleBox: {
+      visible: false,
+      info: {}
+    }
+  }),
+  applyInitVal: initVal => ({
+    userBox: {
+      initVal,
+      visible: true,
+      type: 'MODIFY'
+    }
+  }),
+  colseModifyUser: () => ({
+    userBox: {
+      initVal: {},
+      visible: false,
+      type: 'MODIFY'
+    }
+  }),
+  setAddUserBoxVsisible: visible => ({
+    userBox: {
+      visible,
+      initVal: {},
+      type: 'ADD'
+    }
+  }),
+  updateSelectKeys: selectedKeys => ({ selectedKeys })
+}, {
   count: 0,
   userList: [],
   totalSize: 0,
@@ -189,90 +186,7 @@ const initialState = {
     turnPageShowNum: 10
   },
   selectedKeys: []
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case SET_PREV_USER:
-      return {
-        ...state,
-        previewBox: {
-          visible: true,
-          info: action.data
-        }
-      }
-
-    case CLOSE_PREV_USER:
-      return {
-        ...state,
-        previewBox: {
-          visible: false,
-          info: {}
-        }
-      }
-
-    case PAGE_USERS:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    case SET_BIND_USER:
-      return {
-        ...state,
-        bindRoleBox: {
-          visible: true,
-          info: action.data
-        }
-      }
-
-    case CLOSE_BIND_USER:
-      return {
-        ...state,
-        bindRoleBox: {
-          visible: false,
-          info: {}
-        }
-      }
-
-    case SET_ADDUSER_VISIBLE:
-      return {
-        ...state,
-        userBox: {
-          visible: action.data,
-          initVal: {},
-          type: 'ADD'
-        }
-      }
-
-    case APPLY_MODIFY_USER:
-      return {
-        ...state,
-        userBox: {
-          visible: true,
-          initVal: action.data,
-          type: 'MODIFY'
-        }
-      }
-
-    case CLOSE_MODIFY_USER:
-      return {
-        ...state,
-        userBox: {
-          visible: false,
-          initVal: {},
-          type: 'MODIFY'
-        }
-      }
-
-    case UPDATE_SELECTE_KEYS:
-      return {
-        ...state,
-        selectedKeys: action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { pageUsers, setPreviewInfo, closePreviewUser, userBindRole, closeBindRole, applyInitVal, colseModifyUser, setAddUserBoxVsisible, updateSelectKeys } = actionsReducer.actions
+export default actionsReducer.reducer

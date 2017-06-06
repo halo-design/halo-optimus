@@ -16,8 +16,9 @@ module.exports = {
       'react-dom',
       'react-redux',
       'redux-thunk',
-      'redux-persist',
       'react-router',
+      'redux-actions',
+      'redux-persist',
       'react-router-dom',
       'react-transition-group/CSSTransitionGroup',
       // plugins

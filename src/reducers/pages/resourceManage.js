@@ -1,19 +1,14 @@
+import createReducer from 'STORE/createReducer'
 import NProgress from 'nprogress'
 import { NotiSuccess, NotiError } from 'UTIL/info'
 import * as RQ from '../fetch/resource'
-
-const GET_RESOURCE_LIST_DATA = 'GET_RESOURCE_LIST_DATA'
-const SET_RESOURCE_STATE = 'SET_RESOURCE_STATE'
 
 export const queryResourceList = () => (dispatch, getState) => {
   NProgress.start()
   dispatch(RQ.queryResourceAction()).then(action => {
     const dataBody = action.data.body
     if (dataBody.errorCode === '0') {
-      dispatch({
-        type: GET_RESOURCE_LIST_DATA,
-        data: dataBody.resourceList
-      })
+      dispatch(setResourceListData(dataBody.resourceList))
     }
     NProgress.done()
   })
@@ -58,36 +53,17 @@ export const delResource = (state, success, fail) => (dispatch, getState) => {
   })
 }
 
-export const setAddEditResouceState = state => ({
-  type: SET_RESOURCE_STATE,
-  data: state
-})
-
-const initialState = {
+const actionsReducer = createReducer({
+  setResourceListData: resourceList => ({ resourceList }),
+  setAddEditResouceState: addEditResourceState => ({ addEditResourceState })
+}, {
   resourceList: [],
   addEditResourceState: {
     mode: 'add',
     visible: false,
     initData: null
   }
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case GET_RESOURCE_LIST_DATA:
-      return {
-        ...state,
-        resourceList: action.data
-      }
-
-    case SET_RESOURCE_STATE:
-      return {
-        ...state,
-        addEditResourceState: action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { setResourceListData, setAddEditResouceState } = actionsReducer.actions
+export default actionsReducer.reducer

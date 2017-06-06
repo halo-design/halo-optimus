@@ -1,40 +1,27 @@
+import createReducer from 'STORE/createReducer'
 import NProgress from 'nprogress'
 import { getStateListAction } from '../fetch/check'
-
-const GET_STATE_LIST = 'GET_STATE_LIST'
 
 export const getStateList = selectOpt => (dispatch, getState) => {
   NProgress.start()
   dispatch(getStateListAction(selectOpt)).then(action => {
     const dataBody = action.data.body
-    dispatch({
-      type: GET_STATE_LIST,
-      data: {
-        stateList: dataBody.stateList,
-        stateListTotalNum: dataBody.turnPageTotalNum,
-        stateListSelectOpt: selectOpt
-      }
-    })
+    dispatch(setStateList(dataBody.stateList, dataBody.turnPageTotalNum, selectOpt))
     NProgress.done()
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  setStateList: (stateList, stateListTotalNum, stateListSelectOpt) => ({
+    stateList,
+    stateListTotalNum,
+    stateListSelectOpt
+  })
+}, {
   stateList: [],
   stateListTotalNum: 0,
   stateListSelectOpt: {}
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case GET_STATE_LIST:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { setStateList } = actionsReducer.actions
+export default actionsReducer.reducer

@@ -1,21 +1,13 @@
+import createReducer from 'STORE/createReducer'
 import NProgress from 'nprogress'
 import { NotiSuccess, NotiError } from 'UTIL/info'
 import { getCheckListAction, checkDecideAction } from '../fetch/check'
-
-const GET_CHECK_LIST = 'GET_CHECK_LIST'
 
 export const getCheckList = selectOpt => (dispatch, getState) => {
   NProgress.start()
   dispatch(getCheckListAction(selectOpt)).then(action => {
     const dataBody = action.data.body
-    dispatch({
-      type: GET_CHECK_LIST,
-      data: {
-        checkList: dataBody.pendList,
-        checkListTotalNum: dataBody.turnPageTotalNum,
-        checkListSelectOpt: selectOpt
-      }
-    })
+    dispatch(setCheckList(dataBody.pendList, dataBody.turnPageTotalNum, selectOpt))
     NProgress.done()
   })
 }
@@ -37,22 +29,13 @@ export const checkDecide = (data, success, fail) => (dispatch, getState) => {
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  setCheckList: (checkList, checkListTotalNum, checkListSelectOpt) => ({ checkList, checkListTotalNum, checkListSelectOpt })
+}, {
   checkList: [],
   checkListTotalNum: 0,
   checkListSelectOpt: {}
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case GET_CHECK_LIST:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { setCheckList } = actionsReducer.actions
+export default actionsReducer.reducer

@@ -1,28 +1,9 @@
+import createReducer from 'STORE/createReducer'
 import NProgress from 'nprogress'
 import { initBranchList } from '../public/branchTree'
 import { getBranchAction, modifyBranchAction, deleteBranchAction, addBranchAction } from '../fetch/branch'
 import { NotiSuccess, NotiError, MsgWarning } from 'UTIL/info'
 
-const RESET_FORM = 'RESET_FORM'
-const APPLY_BRANCH = 'APPLY_BRANCH'
-const SET_ADD_BRANCH_VISIBLE = 'SET_ADD_BRANCH_VISIBLE'
-
-export const resetForm = () => ({
-  type: RESET_FORM
-})
-
-export const applyBranch = branchList => ({
-  type: APPLY_BRANCH,
-  data: branchList || ''
-})
-
-// 设置增加机构弹框显示隐藏
-export const setAddBranchVisible = state => ({
-  type: SET_ADD_BRANCH_VISIBLE,
-  data: state
-})
-
-// 树选择的节点
 export const changeBranchSelected = data => (dispatch, getState) => {
   if (data.brhId !== null || data.brhId !== undefined) {
     NProgress.start()
@@ -37,7 +18,6 @@ export const changeBranchSelected = data => (dispatch, getState) => {
   }
 }
 
-// 修改机构
 export const branchModify = (params, success, fail) => (dispatch, getState) => {
   dispatch(modifyBranchAction(params)).then(action => {
     if (action.data.body.errorCode === '0') {
@@ -66,7 +46,6 @@ export const branchDelete = (params, success, fail) => (dispatch, getState) => {
   })
 }
 
-// 添加机构
 export const branchAdd = (params, success, fail) => (dispatch, getState) => {
   dispatch(addBranchAction(params)).then(action => {
     if (action.data.body.errorCode === '0') {
@@ -82,36 +61,21 @@ export const branchAdd = (params, success, fail) => (dispatch, getState) => {
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  resetForm: () => ({
+    selectedObject: {},
+    brhId: ''
+  }),
+  applyBranch: branchList => ({
+    selectedObject: branchList,
+    brhId: branchList.brhId
+  }),
+  setAddBranchVisible: addBranchBoxVisible => ({ addBranchBoxVisible })
+}, {
   brhId: '',
   selectedObject: {},
   addBranchBoxVisible: false
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case SET_ADD_BRANCH_VISIBLE:
-      return {
-        ...state,
-        addBranchBoxVisible: action.data
-      }
-
-    case RESET_FORM:
-      return {
-        ...state,
-        selectedObject: {},
-        brhId: ''
-      }
-
-    case APPLY_BRANCH:
-      return {
-        ...state,
-        selectedObject: action.data,
-        brhId: action.data.brhId
-      }
-
-    default:
-      return state
-  }
-}
+export const { resetForm, applyBranch, setAddBranchVisible } = actionsReducer.actions
+export default actionsReducer.reducer

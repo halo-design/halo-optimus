@@ -1,9 +1,7 @@
+import createReducer from 'STORE/createReducer'
 import NProgress from 'nprogress'
 import { NotiSuccess, NotiError, MsgError } from 'UTIL/info'
 import { getBsnListAction, getStrategyAction, setRelationAction } from '../fetch/strategy'
-
-const GET_BSN_LIST = 'GET_BSN_LIST'
-const SET_STRATEGY = 'SET_STRATEGY'
 
 export const getBsnList = selectOpt => (dispatch, getState) => {
   NProgress.start()
@@ -11,14 +9,7 @@ export const getBsnList = selectOpt => (dispatch, getState) => {
   .then(action => {
     const dataBody = action.data.body
     if (dataBody.errorCode === '0') {
-      dispatch({
-        type: GET_BSN_LIST,
-        data: {
-          bsnList: dataBody.bsnList,
-          bsnListTotalNum: dataBody.turnPageTotalNum,
-          bsnSelectOpt: selectOpt
-        }
-      })
+      dispatch(setBsnList(dataBody.bsnList, dataBody.turnPageTotalNum, selectOpt))
     } else {
       MsgError('获取列表失败！')
     }
@@ -33,21 +24,18 @@ export const getStrategy = (authId, success, fail) => (dispatch, getState) => {
     if (dataBody.errorCode === '0') {
       const authDefine = dataBody.authDefine
       const authDefArr = authDefine.split('')
-      dispatch({
-        type: SET_STRATEGY,
-        data: {
-          alias: dataBody.alias,
-          authId: dataBody.authId,
-          authType: dataBody.authType,
-          areaNo: dataBody.areaNo,
-          authDefine: authDefine,
-          add1: authDefArr[0],
-          add2: authDefArr[1],
-          add3: authDefArr[2],
-          add4: authDefArr[3],
-          add5: authDefArr[4]
-        }
-      })
+      dispatch(setStrategy({
+        alias: dataBody.alias,
+        authId: dataBody.authId,
+        authType: dataBody.authType,
+        areaNo: dataBody.areaNo,
+        authDefine: authDefine,
+        add1: authDefArr[0],
+        add2: authDefArr[1],
+        add3: authDefArr[2],
+        add4: authDefArr[3],
+        add5: authDefArr[4]
+      }))
       if (success) success()
     } else {
       MsgError('数据获取失败！')
@@ -68,29 +56,15 @@ export const setRelation = params => (dispatch, getState) => {
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  setBsnList: (bsnList, bsnListTotalNum, bsnSelectOpt) => ({ bsnList, bsnListTotalNum, bsnSelectOpt }),
+  setStrategy: strategyDetail => ({ strategyDetail })
+}, {
   bsnList: [],
   bsnListTotalNum: 0,
   bsnSelectOpt: {},
   strategyDetail: {}
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case GET_BSN_LIST:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    case SET_STRATEGY:
-      return {
-        ...state,
-        strategyDetail: action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { setBsnList, setStrategy } = actionsReducer.actions
+export default actionsReducer.reducer

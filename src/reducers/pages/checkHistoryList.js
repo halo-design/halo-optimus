@@ -1,41 +1,24 @@
+import createReducer from 'STORE/createReducer'
 import NProgress from 'nprogress'
 import { getHistoryListAction } from '../fetch/check'
-
-const GET_HISTORY_LIST = 'GET_HISTORY_LIST'
 
 export const getHistoryList = selectOpt => (dispatch, getState) => {
   NProgress.start()
   dispatch(getHistoryListAction(selectOpt))
   .then(action => {
     const dataBody = action.data.body
-    dispatch({
-      type: GET_HISTORY_LIST,
-      data: {
-        historyList: dataBody.hisList,
-        historyListTotalNum: dataBody.turnPageTotalNum,
-        historyListSelectOpt: selectOpt
-      }
-    })
+    dispatch(setHistoryList(dataBody.hisList, dataBody.turnPageTotalNum, selectOpt))
     NProgress.done()
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  setHistoryList: (historyList, historyListTotalNum, historyListSelectOpt) => ({ historyList, historyListTotalNum, historyListSelectOpt })
+}, {
   historyList: [],
   historyListTotalNum: 0,
   historyListSelectOpt: {}
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case GET_HISTORY_LIST:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { setHistoryList } = actionsReducer.actions
+export default actionsReducer.reducer

@@ -1,12 +1,8 @@
+import createReducer from 'STORE/createReducer'
 import { groupList } from 'UTIL/filters'
 import NProgress from 'nprogress'
 import { getUserRoleListAction, userRoleAssociationAction, getRoleListAction } from '../fetch/role'
 import { NotiSuccess, NotiError } from 'UTIL/info'
-
-const USER_GET_ROLE = 'USER_GET_ROLE'
-const UPDATE_USER_ROLE = 'UPDATE_USER_ROLE'
-const UPDATE_ROLE_TREE_LIST = 'UPDATE_ROLE_TREE_LIST'
-const UPDATE_ROLE_TREE = 'UPDATE_ROLE_TREE'
 
 // 用户绑定角色所需要数据的类型
 const converTreeSelectRole = roleList => ({
@@ -38,13 +34,10 @@ export const getUserRoleTree = userNo => (dispatch, getState) => {
     dispatch(updateSelectedRole(selectKeys))
     let allSelectRoleList = dataBody.userRoleRelList
     let selectRoleTreeList = groupList(allSelectRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
-    dispatch({
-      type: USER_GET_ROLE,
-      data: {
-        selectRoleTreeList,
-        allSelectRoleList
-      }
-    })
+    dispatch(userGetRole({
+      selectRoleTreeList,
+      allSelectRoleList
+    }))
   })
 }
 
@@ -67,58 +60,23 @@ export const getRoleTree = () => (dispatch, getState) => {
     const flatRoleList = dataBody.roleList
     let roleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeRole)
     let selectRoleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
-    dispatch({
-      type: UPDATE_ROLE_TREE_LIST,
-      data: selectRoleTreeList
-    })
-    dispatch({
-      type: UPDATE_ROLE_TREE,
-      data: roleTreeList
-    })
+    dispatch(updateRoleTreeList(selectRoleTreeList))
+    dispatch(updateRoleTree(roleTreeList))
     NProgress.done()
   })
 }
 
-export const updateSelectedRole = selectedRoleList => ({
-  type: UPDATE_USER_ROLE,
-  data: selectedRoleList
-})
-
-const initialState = {
+const actionsReducer = createReducer({
+  userGetRole: data => data,
+  updateSelectedRole: selectedRoleList => ({ selectedRoleList }),
+  updateRoleTree: roleTreeList => ({ roleTreeList }),
+  updateRoleTreeList: selectRoleTreeList => ({ selectRoleTreeList })
+}, {
   roleTreeList: [],
   selectRoleTreeList: [],
   allSelectRoleList: [],
   selectedRoleList: []
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case USER_GET_ROLE:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    case UPDATE_ROLE_TREE:
-      return {
-        ...state,
-        roleTreeList: action.data
-      }
-
-    case UPDATE_USER_ROLE:
-      return {
-        ...state,
-        selectedRoleList: action.data
-      }
-
-    case UPDATE_ROLE_TREE_LIST:
-      return {
-        ...state,
-        selectRoleTreeList: action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { userGetRole, updateSelectedRole, updateRoleTree, updateRoleTreeList } = actionsReducer.actions
+export default actionsReducer.reducer

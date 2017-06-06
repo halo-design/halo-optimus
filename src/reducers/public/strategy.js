@@ -1,7 +1,6 @@
+import createReducer from 'STORE/createReducer'
 import { getStrategyListAction } from '../fetch/strategy'
 import NProgress from 'nprogress'
-
-const SET_STRATEGY_LIST = 'SET_STRATEGY_LIST'
 
 export const getStrategyList = selOpt => (dispatch, getState) => {
   NProgress.start()
@@ -20,34 +19,18 @@ export const getStrategyList = selOpt => (dispatch, getState) => {
         add5: def[4]
       })
     })
-    dispatch({
-      type: SET_STRATEGY_LIST,
-      data: {
-        strategyList,
-        strategyListTotalNum: dataBody.turnPageTotalNum,
-        strategyListSelOpt: selOpt
-      }
-    })
+    dispatch(setStrategyList(strategyList, dataBody.turnPageTotalNum, selOpt))
     NProgress.done()
   })
 }
 
-const initialState = {
+const actionsReducer = createReducer({
+  setStrategyList: (strategyList, strategyListTotalNum, strategyListSelOpt) => ({ strategyList, strategyListTotalNum, strategyListSelOpt })
+}, {
   strategyList: [],
   strategyListTotalNum: 0,
   strategyListSelOpt: {}
-}
+})
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-
-    case SET_STRATEGY_LIST:
-      return {
-        ...state,
-        ...action.data
-      }
-
-    default:
-      return state
-  }
-}
+export const { setStrategyList } = actionsReducer.actions
+export default actionsReducer.reducer
