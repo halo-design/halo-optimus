@@ -18,30 +18,34 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(settings.env.NODE_ENV)
 }
 
-const spinner = ora('building for development...')
-spinner.start()
-
 const port = process.env.PORT || settings.port
 const openBrowser = !!settings.openBrowser
 const app = express()
-const httpServer = http.Server(app)
-const io = socket(httpServer)
-const compiler = webpack(webpackConfig)
+let httpServer = app
 
-io.on('connection', socket => {
-  socket.on('log', info => {
-    console.log(info)
+if (settings.remoteLog) {
+  console.log(chalk.green('Opening remote logging service...\n'))
+  httpServer = http.Server(app)
+  const io = socket(httpServer)
+  io.on('connection', socket => {
+    socket.on('log', info => {
+      console.log(info)
+    })
+    socket.on('log:success', info => {
+      console.log(chalk.green(info))
+    })
+    socket.on('log:error', info => {
+      console.log(chalk.red(info))
+    })
+    socket.on('log:warn', info => {
+      console.log(chalk.yellow(info))
+    })
   })
-  socket.on('log:success', info => {
-    console.log(chalk.green(info))
-  })
-  socket.on('log:error', info => {
-    console.log(chalk.red(info))
-  })
-  socket.on('log:warn', info => {
-    console.log(chalk.yellow(info))
-  })
-})
+}
+
+const compiler = webpack(webpackConfig)
+const spinner = ora('building for development...')
+spinner.start()
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: settings.publicPath,

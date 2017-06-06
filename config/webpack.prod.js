@@ -9,6 +9,7 @@ const assetsPath = require('./assets-path')
 const settings = require('./settings').build
 const assets = settings.assets
 const baseWebpackConfig = require('./webpack.base')
+const resolve = dir => path.join(__dirname, '..', dir)
 
 const webpackConfig = merge(baseWebpackConfig, {
   devtool: settings.sourceMap ? '#source-map' : false,
@@ -35,7 +36,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new OptimizeCSSPlugin(),
     new HtmlWebpackPlugin({
       filename: assetsPath(assets.htmlFileName),
-      template: settings.htmlTemplate,
+      template: resolve('static/index.html'),
       inject: true,
       minify: {
         removeComments: true,
@@ -48,7 +49,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       names: ['vendor', 'manifest']
     }),
     new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, '../public'),
+      from: resolve('public'),
       to: assets.subDir,
       ignore: ['.*']
     }])

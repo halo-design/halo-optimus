@@ -1,5 +1,3 @@
-import moment from 'moment'
-
 if ('io' in window) {
   const socket = window.io.connect()
   console.remote = function () {
@@ -13,10 +11,14 @@ if ('io' in window) {
 
 const remoteLogger = ({ dispatch, getState }) => next => action => {
   if ('remote' in console) {
-    console.remote('log:warn', `[ACTION][${moment().format('hh:mm:ss')}]: ${action.type}\n`)
+    console.remote('log:warn', `[ACTION]: ${action.type}\n`)
     if ('data' in action) {
       const data = JSON.stringify(action.data)
-      console.remote('log:success', `[DATA][${moment().format('hh:mm:ss')}]: ${data}\n`)
+      console.remote('log:success', `[DATA]: ${data}\n`)
+    }
+    if ('payload' in action) {
+      const data = JSON.stringify(action.payload)
+      console.remote('log:success', `[PAYLOAD]: ${data}\n`)
     }
   }
   return next(action)

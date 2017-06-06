@@ -1,5 +1,4 @@
 const path = require('path')
-const resolve = dir => path.join(__dirname, '..', dir)
 
 module.exports = {
   build: {
@@ -7,7 +6,7 @@ module.exports = {
       NODE_ENV: '"production"'
     },
     assets: {
-      root: resolve('dist'),
+      root: path.join(__dirname, '../dist'),
       subDir: '',
       htmlFileName: 'index.html',
       cssDir: 'css',
@@ -20,7 +19,6 @@ module.exports = {
     gzip: false,
     gzipExtensions: ['js', 'css'],
     bundleAnalyzerReport: process.env.BUNDLE_REPORT,
-    htmlTemplate: resolve('static/index.html'),
     checkVersions: true
   },
   dev: {
@@ -33,7 +31,7 @@ module.exports = {
       subDir: ''
     },
     publicPath: '/',
-    htmlTemplate: resolve('static/dev.html'),
-    checkVersions: true
+    checkVersions: true,
+    remoteLog: true
   }
 }
