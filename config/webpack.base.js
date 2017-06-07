@@ -3,18 +3,40 @@ const path = require('path')
 const webpack = require('webpack')
 const cssnano = require('cssnano')
 const HappyPack = require('happypack')
-const vendor = require('./vendor-core')
+const settings = require('./settings')
 const styleLoader = require('./style-loader')
-const assetsPath = require('./assets-path')
-// const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
+const isProduction = process.env.NODE_ENV === 'production'
+const env = isProduction ? 'build' : 'dev'
+const assetsPath = curPath => path.posix.join(settings[env].assets.subDir, curPath)
 const resolve = dir => path.join(__dirname, '..', dir)
 
 module.exports = {
   entry: {
     app: './src/entry/index.js',
-    vendor: vendor
+    vendor: [
+      'antd/lib/button',
+      'antd/lib/checkbox',
+      'antd/lib/col',
+      'antd/lib/date-picker',
+      'antd/lib/form',
+      'antd/lib/icon',
+      'antd/lib/input',
+      'antd/lib/message',
+      'antd/lib/modal',
+      'antd/lib/notification',
+      'antd/lib/radio',
+      'antd/lib/row',
+      'antd/lib/select',
+      'antd/lib/slider',
+      'antd/lib/spin',
+      'antd/lib/table',
+      'antd/lib/tree',
+      'antd/lib/tree-select',
+      'antd/lib/popconfirm'
+    ]
   },
   output: {
     filename: '[name].js'
@@ -89,15 +111,17 @@ module.exports = {
       loaders: ['babel-loader'],
       threadPool: happyThreadPool
     }),
-    // new AddAssetHtmlPlugin({
-    //   filepath: require.resolve('../public/vendor.dll.js'),
-    //   includeSourcemap: false,
-    //   hash: true
-    // }),
-    // new webpack.DllReferencePlugin({
-    //   context: path.join(__dirname),
-    //   manifest: require('../public/vendor-manifest.json')
-    // }),
+    new AddAssetHtmlPlugin({
+      filepath: require.resolve('../vendor/vendor.dll.js'),
+      outputPath: 'js',
+      publicPath: settings[env].publicPath + 'js',
+      includeSourcemap: false,
+      hash: true
+    }),
+    new webpack.DllReferencePlugin({
+      context: path.join(__dirname),
+      manifest: require('../vendor/vendor-manifest.json')
+    }),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: [

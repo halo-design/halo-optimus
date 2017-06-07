@@ -5,11 +5,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const assetsPath = require('./assets-path')
 const settings = require('./settings').build
 const assets = settings.assets
 const baseWebpackConfig = require('./webpack.base')
+
 const resolve = dir => path.join(__dirname, '..', dir)
+
+const assetsPath = curPath => path.posix.join(assets.subDir, curPath)
 
 const webpackConfig = merge(baseWebpackConfig, {
   devtool: settings.sourceMap ? '#source-map' : false,
