@@ -1,4 +1,4 @@
-const tools = require('./analyzing-tools')
+const tools = require('./analyze-tools')
 const check = require('./check-versions')
 process.env.NODE_ENV = 'production'
 

@@ -5,7 +5,7 @@ const gulp = require('gulp')
 const path = require('path')
 const chalk = require('chalk')
 const sftp = require('gulp-sftp')
-const tools = require('./bin/analyzing-tools')
+const tools = require('./bin/analyze-tools')
 
 gulp.task('upload', () =>
   gulp.src('dist/**')

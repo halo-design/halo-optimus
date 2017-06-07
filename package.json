@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "vendor": "webpack -p --config config/webpack.dll.js",
     "clean": "rimraf dist dist_diff",
     "clean:npm": "rimraf node_modules",
     "clean:dist": "rimraf dist",
@@ -82,6 +83,7 @@
     "function-bind": "^1.1.0",
     "gulp": "^3.9.1",
     "gulp-sftp": "^0.1.5",
+    "happypack": "^4.0.0-beta.1",
     "html-webpack-plugin": "^2.28.0",
     "http": "^0.0.0",
     "ip": "^1.1.5",
