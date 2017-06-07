@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1471 184" style="enable-background:new 0 0 1471 184;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#444444;}
 </style>
-<g id="FLAME移动管理系统">
+<g id="flame">
 	<g>
 		<path class="st0" d="M265.4,58.6H202v27.1h51.4V100H202v42h-15.6V45h79V58.6z"/>
 		<path class="st0" d="M354.9,142h-75.4V45h16.2v83.2h59.2V142z"/>
@@ -37,9 +36,9 @@
 			H1378.9z"/>
 	</g>
 </g>
-<g id="图层_0_xA0_图像_1_">
+<g id="layer1">
 	
-		<image style="overflow:visible;" width="161" height="184" id="图层_0_xA0_图像" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKEAAAC4CAYAAACLiIzlAAAACXBIWXMAAAsSAAALEgHS3X78AAAA
+		<image style="overflow:visible;" width="161" height="184" id="layer2" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKEAAAC4CAYAAACLiIzlAAAACXBIWXMAAAsSAAALEgHS3X78AAAA
 GXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAQg1JREFUeNrsXQe81UT2npPX4AGP
 agcb6ir2XrG3/VsXFV0rrg0LAvbe1opSBKQjKriKa+8N1l7WXlDsiA3pSId3c/7fpNw7SWaS3Pty
 EdeX98tLbtpMZr58p8yZGRKNS0nLvge8uh3b9RdVVdTt07rVFuMrRGW/cffT140lU/xCjUVQ3LLP

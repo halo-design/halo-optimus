@@ -12,10 +12,18 @@ const isProduction = process.env.NODE_ENV === 'production'
 const env = isProduction ? 'build' : 'dev'
 const assetsPath = curPath => path.posix.join(settings[env].assets.subDir, curPath)
 const resolve = dir => path.join(__dirname, '..', dir)
+const publicPath = dir => settings[env].publicPath + dir
+const assetConfig = (filename, hash) => ({
+  filepath: require.resolve(filename),
+  outputPath: 'js',
+  publicPath: publicPath('js'),
+  includeSourcemap: false,
+  hash: hash || false
+})
 
 module.exports = {
   entry: {
-    app: './src/entry/index.js',
+    app: './src/core/main.js',
     vendor: [
       'antd/lib/button',
       'antd/lib/checkbox',
@@ -111,13 +119,12 @@ module.exports = {
       loaders: ['babel-loader'],
       threadPool: happyThreadPool
     }),
-    new AddAssetHtmlPlugin({
-      filepath: require.resolve('../vendor/vendor.dll.js'),
-      outputPath: 'js',
-      publicPath: settings[env].publicPath + 'js',
-      includeSourcemap: false,
-      hash: true
-    }),
+    new AddAssetHtmlPlugin([
+      assetConfig('../vendor/es5-shim.min.js'), 
+      assetConfig('../vendor/es6-shim.min.js'),
+      assetConfig('../vendor/fetch.min.js'), 
+      assetConfig('../vendor/vendor.dll.js', true)
+    ]),
     new webpack.DllReferencePlugin({
       context: path.join(__dirname),
       manifest: require('../vendor/vendor-manifest.json')
