@@ -36,6 +36,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new OptimizeCSSPlugin(),
     new HtmlWebpackPlugin({
       filename: assetsPath(assets.htmlFileName),
+      favicon  : resolve('public/favicon.ico'),
       template: resolve('static/index.html'),
       inject: true,
       minify: {

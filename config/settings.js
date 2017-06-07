@@ -32,6 +32,6 @@ module.exports = {
     },
     publicPath: '/',
     checkVersions: true,
-    remoteLog: true
+    remoteLog: process.env.REMOTE_LOG
   }
 }

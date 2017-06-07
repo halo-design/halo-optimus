@@ -27,6 +27,7 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
+      favicon  : resolve('public/favicon.ico'),
       template: settings.remoteLog ? resolve('static/dev.html') : resolve('static/index.html'),
       inject: true
     }),

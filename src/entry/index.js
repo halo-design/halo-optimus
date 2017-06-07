@@ -1,25 +1,36 @@
-import es5 from 'bundle-loader?lazy&name=es5!es5-shim'
-import es6 from 'bundle-loader?lazy&name=es5!es6-shim'
-import esPromise from 'bundle-loader?lazy&name=promise!es6-promise'
-import esFetch from 'bundle-loader?lazy&name=fetch!isomorphic-fetch'
-import main from 'bundle-loader?lazy&name=main!CORE/main'
-
 const userAgent = navigator.userAgent
 const hasString = str => userAgent.indexOf(str) > -1
 const isOpera = hasString('Opera')
 const isIE = hasString('compatible') && hasString('MSIE') && !isOpera
 const isEdge = hasString('Edge') || !isIE && hasString('Windows NT') && hasString(' Trident/7.0;')
 
-if (isIE || isEdge) {
-  window.fetch = null
-}
+isIE || isEdge ? window.fetch = null : null
 
 if (isIE) {
-  es5(() => es6(() => esFetch(main)))
+  require.ensure(['es5-shim', 'es6-shim', 'isomorphic-fetch'], require => {
+    require('es5-shim')
+    require('es6-shim')
+    require('isomorphic-fetch')
+    require('CORE/main')
+  }, 'esshim')
 } else {
-  if (Promise) {
-    fetch ? main() : esFetch(main)
+  if (!window.Promise && window.fetch) {
+    require.ensure('es6-promise', require => {
+      require('es6-promise').polyfill()
+      require('CORE/main')
+    }, 'promise')
+  } else if (window.Promise && !window.fetch) {
+    require.ensure('isomorphic-fetch', require => {
+      require('isomorphic-fetch')
+      require('CORE/main')
+    }, 'fetch')
+  } else if (!window.Promise && !window.fetch) {
+    require.ensure(['es6-promise', 'isomorphic-fetch'], require => {
+      require('es6-promise').polyfill()
+      require('isomorphic-fetch')
+      require('CORE/main')
+    }, 'fetchpromise')
   } else {
-    fetch ? esPromise(fn => fn.polyfill() && main()) : es6(() => esFetch(main))
+    require('CORE/main')
   }
 }
