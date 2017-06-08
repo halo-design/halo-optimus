@@ -276,8 +276,10 @@ export default class AddEditReleaseView extends React.Component {
                   }]
                 })(
                   <RadioGroup>
-                    <Radio value='1'>单次</Radio>
-                    <Radio value='2'>多次</Radio>
+                    <Radio value='0'>忽略更新</Radio>
+                    <Radio value='1'>单次提示更新</Radio>
+                    <Radio value='2'>多次提示更新</Radio>
+                    <Radio value='3'>强制更新</Radio>
                   </RadioGroup>
                 )
               }
