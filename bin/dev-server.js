@@ -68,7 +68,7 @@ compiler.plugin('compilation', compilation => {
 
 app.use('/inmanage', (req, res) => {
   const url = `https://flame.zaixy.cn/inmanage${req.url}`
-  console.log(chalk.green(`[PROXY]: `) + url)
+  console.log(chalk.cyan(`[PROXY]: `) + url)
   req.pipe(request(url)).pipe(res)
 })
 

@@ -1,12 +1,9 @@
-const os = require('os')
 const path = require('path')
 const webpack = require('webpack')
 const cssnano = require('cssnano')
-const HappyPack = require('happypack')
 const settings = require('./settings')
 const styleLoader = require('./style-loader')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
 const isProduction = process.env.NODE_ENV === 'production'
 const env = isProduction ? 'build' : 'dev'
@@ -25,6 +22,21 @@ module.exports = {
   entry: {
     app: './src/core/main.js',
     vendor: [
+      // core
+      'react',
+      'redux',
+      'react-dom',
+      'react-redux',
+      'redux-thunk',
+      'react-router',
+      'redux-actions',
+      'redux-persist',
+      'react-router-dom',
+      'react-transition-group/CSSTransitionGroup',
+      // plugins
+      'qs',
+      'md5',
+      'nprogress',
       'antd/lib/button',
       'antd/lib/checkbox',
       'antd/lib/col',
@@ -83,7 +95,7 @@ module.exports = {
       }
     }, {
       test: /\.(js|jsx)$/,
-      loader: 'happypack/loader?id=happybabel',
+      loader: 'babel-loader',
       include: [resolve('src'), resolve('test')]
     }, {
       test: /\.css$/,
@@ -114,21 +126,11 @@ module.exports = {
     }]
   },
   plugins: [
-    new HappyPack({
-      id: 'happybabel',
-      loaders: ['babel-loader'],
-      threadPool: happyThreadPool
-    }),
     new AddAssetHtmlPlugin([
-      assetConfig('../vendor/es5-shim.min.js'), 
-      assetConfig('../vendor/es6-shim.min.js'),
-      assetConfig('../vendor/fetch.min.js'), 
-      assetConfig('../vendor/vendor.dll.js', true)
+      assetConfig('../shim/es5-shim.min.js'),
+      assetConfig('../shim/es6-shim.min.js'),
+      assetConfig('../shim/fetch.min.js')
     ]),
-    new webpack.DllReferencePlugin({
-      context: path.join(__dirname),
-      manifest: require('../vendor/vendor-manifest.json')
-    }),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: [
