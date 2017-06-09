@@ -5,7 +5,31 @@ const gulp = require('gulp')
 const path = require('path')
 const chalk = require('chalk')
 const sftp = require('gulp-sftp')
+const webpack = require('webpack')
 const tools = require('./bin/analyze-tools')
+const dllConfig = require('./config/webpack.dll')
+
+gulp.task('dll', () => {
+  webpack(dllConfig, (err, stats) => {
+    if (err) throw err
+    process.stdout.write(stats.toString({
+      colors: true,
+      modules: true,
+      children: true,
+      chunks: true,
+      chunkModules: false
+    }) + '\n')
+    console.log(chalk.green('vendor.dll build complete.\n'))
+  })
+})
+
+gulp.task('dev', () => {
+  require('./bin/dev-server')
+})
+
+gulp.task('build', () => {
+  require('./bin/production')
+})
 
 gulp.task('upload', () =>
   gulp.src('dist/**')

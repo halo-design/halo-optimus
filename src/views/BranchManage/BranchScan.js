@@ -93,14 +93,14 @@ export default class BranchScanView extends React.Component {
           if (selectedBranch.brhId === params.brhParentId) {
             message.error('不允许选择当前机构为所属机构！')
           } else {
-            const reolad = () => {
+            const reload = () => {
               resetFields()
               changeBranchSelected(params)
               this.hideSpin()
             }
 
             this.showSpin()
-            branchModify(params, reolad, reolad)
+            branchModify(params, reload, reload)
           }
         }
       })
@@ -181,6 +181,8 @@ export default class BranchScanView extends React.Component {
           return '等级2'
         case '3':
           return '等级3'
+        default:
+          return selectedBranch.brhLevel
       }
     }
 

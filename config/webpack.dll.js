@@ -28,6 +28,16 @@ module.exports = {
     library: '[name]_library'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      comments: false,
+      sourceMap: false
+    }),
     new webpack.DllPlugin({
       path: resolve('vendor/[name]-manifest.json'),
       name: '[name]_library'

@@ -19,7 +19,7 @@ export const checkBtnList = (menu, btnList, noDivider) => {
       !noDivider && i !== size - 1 ? ableBtn.push(divider) : null
     }
   })
-  return ableBtn.length === 0 ? <span>无操作权限</span> : ableBtn.map((item, i) => (<span key={i}>{item}</span>))
+  return ableBtn.length === 0 ? <span>无操作权限</span> : ableBtn.map((item, i) => <span key={i}>{item}</span>)
 }
 
 export const checkBtn = (menu, item, button) => {

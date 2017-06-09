@@ -29,7 +29,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       compress: {
         warnings: false
       },
-      sourceMap: true
+      comments: false,
+      sourceMap: settings.sourceMap
     }),
     new ExtractTextPlugin({
       filename: assetsPath(`${assets.cssDir}/[name].[${settings.cssHashType}].css`),
