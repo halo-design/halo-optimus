@@ -23,7 +23,7 @@
     "upload:diff": "gulp upload-diff"
   },
   "dependencies": {
-    "antd": "^2.10.4",
+    "antd": "^2.11.0",
     "md5": "^2.2.1",
     "normalize.css": "^6.0.0",
     "nprogress": "^0.2.0",
