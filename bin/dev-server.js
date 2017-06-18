@@ -4,11 +4,11 @@ const opn = require('opn')
 const path = require('path')
 const http = require('http')
 const chalk = require('chalk')
-const request = require('request')
 const express = require('express')
 const webpack = require('webpack')
 const socket = require('socket.io')
 const check = require('./check-versions')
+const proxyMiddleware = require('http-proxy-middleware')
 const settings = require('../config/settings').dev
 const webpackConfig = require('../config/webpack.dev')
 
@@ -66,11 +66,10 @@ compiler.plugin('compilation', compilation => {
   })
 })
 
-app.use('/inmanage', (req, res) => {
-  const url = `https://flame.zaixy.cn/inmanage${req.url}`
-  console.log(chalk.cyan(`[PROXY]: `) + url)
-  req.pipe(request(url)).pipe(res)
-})
+app.use('/inmanage', proxyMiddleware({
+  target: 'https://flame.zaixy.cn',
+  changeOrigin: true
+}))
 
 app.use(require('connect-history-api-fallback')())
 
