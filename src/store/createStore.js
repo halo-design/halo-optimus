@@ -7,11 +7,10 @@ import requester from 'MIDDLEWARE/requester'
 import remoteLogger from 'MIDDLEWARE/remote-logger'
 
 export default (initialState = {}) => {
-  let enhancers = [autoRehydrate()]
+  const enhancers = [autoRehydrate()]
   let middleware = [thunk, requester]
   if (process.env.NODE_ENV === 'development') {
     middleware = [thunk, requester, logger, remoteLogger]
-    enhancers = []
   }
   const store = createStore(
     rootReducer,
