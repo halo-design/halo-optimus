@@ -18,6 +18,52 @@ const assetConfig = (filename, hash) => ({
   hash: hash || false
 })
 
+let loaderRules = [
+  {
+    test: /\.(js|jsx)$/,
+    loader: 'babel-loader',
+    include: [resolve('src'), resolve('test')]
+  }, {
+    test: /\.css$/,
+    use: styleLoader()
+  }, {
+    test: /\.less$/,
+    use: styleLoader('less-loader')
+  }, {
+    test: /\.(scss|sass)$/,
+    use: styleLoader('sass-loader')
+  }, {
+    test: /\.(stylus|styl)$/,
+    use: styleLoader('stylus-loader')
+  }, {
+    test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+    loader: 'url-loader',
+    query: {
+      limit: 8192,
+      name: assetsPath('images/[name].[hash:7].[ext]')
+    }
+  }, {
+    test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+    loader: 'url-loader',
+    query: {
+      limit: 8192,
+      name: assetsPath('fonts/[name].[hash:7].[ext]')
+    }
+  }
+]
+
+if (!isProduction && settings.dev.lint) {
+  loaderRules = [{
+    test: /\.(js|jsx)$/,
+    loader: 'eslint-loader',
+    enforce: 'pre',
+    include: [resolve('src'), resolve('test')],
+    options: {
+      formatter: require('eslint-friendly-formatter')
+    }
+  }].concat(loaderRules)
+}
+
 module.exports = {
   entry: {
     app: './src/core/main.js',
@@ -85,45 +131,7 @@ module.exports = {
     }
   },
   module: {
-    rules: [{
-      test: /\.(js|jsx)$/,
-      loader: 'eslint-loader',
-      enforce: 'pre',
-      include: [resolve('src'), resolve('test')],
-      options: {
-        formatter: require('eslint-friendly-formatter')
-      }
-    }, {
-      test: /\.(js|jsx)$/,
-      loader: 'babel-loader',
-      include: [resolve('src'), resolve('test')]
-    }, {
-      test: /\.css$/,
-      use: styleLoader()
-    }, {
-      test: /\.less$/,
-      use: styleLoader('less-loader')
-    }, {
-      test: /\.(scss|sass)$/,
-      use: styleLoader('sass-loader')
-    }, {
-      test: /\.(stylus|styl)$/,
-      use: styleLoader('stylus-loader')
-    }, {
-      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      loader: 'url-loader',
-      query: {
-        limit: 8192,
-        name: assetsPath('images/[name].[hash:7].[ext]')
-      }
-    }, {
-      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-      loader: 'url-loader',
-      query: {
-        limit: 8192,
-        name: assetsPath('fonts/[name].[hash:7].[ext]')
-      }
-    }]
+    rules: loaderRules
   },
   plugins: [
     new AddAssetHtmlPlugin([

@@ -25,6 +25,7 @@ module.exports = {
     env: {
       NODE_ENV: '"development"'
     },
+    lint: true,
     port: 8080,
     openBrowser: true,
     assets: {
