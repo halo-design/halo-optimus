@@ -1,6 +1,5 @@
 const path = require('path')
 const webpack = require('webpack')
-const cssnano = require('cssnano')
 const settings = require('./settings')
 const styleLoader = require('./style-loader')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
@@ -134,31 +133,11 @@ module.exports = {
     rules: loaderRules
   },
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new AddAssetHtmlPlugin([
       assetConfig('../shim/es5-shim.min.js'),
       assetConfig('../shim/es6-shim.min.js'),
       assetConfig('../shim/fetch.min.js')
-    ]),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: [
-          cssnano({
-            autoprefixer: {
-              add: true,
-              remove: true,
-              browsers: ['last 2 versions']
-            },
-            discardComments: {
-              removeAll: true
-            },
-            discardUnused: false,
-            mergeIdents: false,
-            reduceIdents: false,
-            safe: true,
-            sourcemap: true
-          })
-        ]
-      }
-    })
+    ])
   ]
 }

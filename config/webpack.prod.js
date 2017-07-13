@@ -1,4 +1,5 @@
 const path = require('path')
+const moment = require('moment')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -49,6 +50,14 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       chunksSortMode: 'dependency'
     }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   minChunks: ({ resource }) => resource && resource.indexOf(path.join(__dirname, '../node_modules')) >= 0
+    // }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'manifest',
+    //   chunks: ['vendor']
+    // }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest']
     }),
@@ -75,7 +84,10 @@ if (settings.gzip) {
 
 if (settings.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin({
+    analyzerMode: 'static',
+    reportFilename: `../data/reports/${moment().format('YYYYMMDDHHmmss')}.html`
+  }))
 }
 
 module.exports = webpackConfig

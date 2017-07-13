@@ -1,3 +1,4 @@
+const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -7,10 +8,19 @@ const styleLoader = (loader, options) => {
   let loaders = [{
     loader: 'css-loader',
     options: {
+      importLoaders: 1,
       minimize: isProduction,
       sourceMap: !isProduction
     }
-  }, 'postcss-loader']
+  }, {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: !isProduction,
+      config: {
+        path: path.join(__dirname, 'postcss.config.js')
+      }
+    }
+  }]
 
   if (loader) {
     loaders.push({
