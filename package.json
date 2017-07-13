@@ -20,7 +20,8 @@
     "comp": "gulp compare-report",
     "lint": "eslint --ext .js,.jsx src",
     "upload": "gulp upload",
-    "upload:diff": "gulp upload-diff"
+    "upload:diff": "gulp upload-diff",
+    "update": "npm-check -u"
   },
   "dependencies": {
     "antd": "^2.12.0",
