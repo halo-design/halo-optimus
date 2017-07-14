@@ -88,6 +88,7 @@ export default class LoginView extends React.Component {
 
   render () {
     const { userName, pswd, vcode } = this.state
+    const { vcodeSrc } = this.props
     return (
       <div className='pageLogin'>
         <div className='loginBox'>
@@ -126,10 +127,14 @@ export default class LoginView extends React.Component {
               onBlur={e => this.handleBlur(e)}
               onChange={this.handleChange}
             />
-            <img
-              src={this.props.vcodeSrc}
-              onClick={this.reloadCode}
-            />
+            {
+              vcodeSrc
+                ? <img
+                  src={vcodeSrc}
+                  onClick={this.reloadCode}
+                />
+                : null
+            }
           </div>
           <div className='btn-wrap'>
             <button onClick={e => this.handleSubmit()}>立即登录</button>
