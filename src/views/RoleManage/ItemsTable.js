@@ -66,4 +66,3 @@ export default class ItemsTableView extends React.Component {
     )
   }
 }
-

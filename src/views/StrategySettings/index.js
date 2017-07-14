@@ -185,8 +185,8 @@ export default class StrategySettingsView extends React.Component {
         </div>
         {
           addEditBoxVisible
-          ? <StrategyAddEditBox modalType={modalType} initVal={initVal} />
-          : null
+            ? <StrategyAddEditBox modalType={modalType} initVal={initVal} />
+            : null
         }
       </div>
     )

@@ -35,4 +35,3 @@ export default class LazyDisplay extends React.Component {
     return remove ? null : children
   }
 }
-

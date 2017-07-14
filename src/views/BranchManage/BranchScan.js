@@ -87,7 +87,9 @@ export default class BranchScanView extends React.Component {
             brhLevel: level
           }
           // 避免将空字段保存为 'undefined'
-          params.brhParentId ? null : params.brhParentId = ''
+          if (!params.brhParentId) {
+            params.brhParentId = ''
+          }
 
           // 避免选中节点自身作为所属机构
           if (selectedBranch.brhId === params.brhParentId) {
@@ -259,7 +261,7 @@ export default class BranchScanView extends React.Component {
                     <Input
                       placeholder='请输入机构'
                       size='large'
-                     />
+                    />
                   )
                 }
               </FormItem>
@@ -333,7 +335,7 @@ export default class BranchScanView extends React.Component {
                     <Input
                       placeholder='请填写机构描述'
                       size='large'
-                     />
+                    />
                   )
                 }
               </FormItem>
@@ -369,7 +371,7 @@ export default class BranchScanView extends React.Component {
                     <Input
                       placeholder='请输入机构地址'
                       size='large'
-                     />
+                    />
                   )
                 }
               </FormItem>
@@ -380,7 +382,7 @@ export default class BranchScanView extends React.Component {
               <FormItem
                 label='所属机构：'
                 {...formItemLayout}
-                >
+              >
                 {
                   getFieldDecorator('brhParentId', {
                     initialValue: selectedBranch.brhParentId || ''
@@ -400,4 +402,3 @@ export default class BranchScanView extends React.Component {
     )
   }
 }
-

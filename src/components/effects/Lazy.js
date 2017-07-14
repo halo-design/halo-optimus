@@ -33,4 +33,3 @@ export default class Lazy extends React.Component {
     return this.props.children(this.state.model)
   }
 }
-

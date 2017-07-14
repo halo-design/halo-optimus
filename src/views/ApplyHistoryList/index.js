@@ -99,8 +99,8 @@ export default class ApplyHistoryListView extends React.Component {
       key: 'authFlag',
       render: (text, record) => {
         return text === '1' || text === 1
-        ? <span>进行中</span>
-        : text === '0' || text === 0 ? <span>通过</span> : <span>驳回</span>
+          ? <span>进行中</span>
+          : text === '0' || text === 0 ? <span>通过</span> : <span>驳回</span>
       }
     }, {
       title: '授权时间',

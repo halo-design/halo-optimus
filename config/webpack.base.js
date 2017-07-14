@@ -67,21 +67,6 @@ module.exports = {
   entry: {
     app: './src/core/main.js',
     vendor: [
-      // core
-      'react',
-      'redux',
-      'react-dom',
-      'react-redux',
-      'redux-thunk',
-      'react-router',
-      'redux-actions',
-      'redux-persist',
-      'react-router-dom',
-      'react-transition-group/CSSTransitionGroup',
-      // plugins
-      'qs',
-      'md5',
-      'nprogress',
       'antd/lib/button',
       'antd/lib/checkbox',
       'antd/lib/col',

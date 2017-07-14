@@ -203,8 +203,8 @@ export default class ReviewSettingsView extends React.Component {
         >
           {
             modalType === 'detail'
-            ? <DetailBox info={modalDetailInfo} />
-            : <RelSetBox info={modalRelSetInfo} />
+              ? <DetailBox info={modalDetailInfo} />
+              : <RelSetBox info={modalRelSetInfo} />
           }
         </Modal>
         <Spin loading={this.state.loading} />

@@ -50,16 +50,13 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       chunksSortMode: 'dependency'
     }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   minChunks: ({ resource }) => resource && resource.indexOf(path.join(__dirname, '../node_modules')) >= 0
-    // }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'manifest',
-    //   chunks: ['vendor']
-    // }),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest']
+      name: 'vendor',
+      minChunks: ({ resource }) => resource && resource.indexOf(path.join(__dirname, '../node_modules')) >= 0
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      chunks: ['vendor']
     }),
     new CopyWebpackPlugin([{
       from: resolve('public'),

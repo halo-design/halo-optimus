@@ -19,4 +19,3 @@ export const addHotpatchTaskAction = data => getFetch('ADD_HOTPATCH_TASK', {
 export const pauseHotpatchTaskAction = data => getFetch('SET_PAUSE_HOTPATCH_TASK', {
   body: data
 })
-

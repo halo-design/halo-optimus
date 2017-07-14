@@ -67,45 +67,45 @@ export default store => next => action => {
   next(actionWith({ type: `[FETCH]: ${apiName}`, url }))
 
   return fetch(new Request(url, finalRequest))
-  .then(response => response.json().then(json => ({ json, response })))
-  .then(({ json, response }) => response.ok ? json : Promise.reject(json))
-  .then(json => {
-    if (typeof success === 'function') {
-      success(json)
-    } else {
-      const { header, body } = json
-      const { errorCode } = body
-      header.iCIFID ? setCookie('iCIFID', header.iCIFID) : setCookie('iCIFID', body.iCIFID)
-      if (errorCode !== '0' && !isError) {
+    .then(response => response.json().then(json => ({ json, response })))
+    .then(({ json, response }) => response.ok ? json : Promise.reject(json))
+    .then(json => {
+      if (typeof success === 'function') {
+        success(json)
+      } else {
+        const { header, body } = json
+        const { errorCode } = body
+        header.iCIFID ? setCookie('iCIFID', header.iCIFID) : setCookie('iCIFID', body.iCIFID)
+        if (errorCode !== '0' && !isError) {
+          isError = true
+          ModalError({
+            title: `请求失败！[${errorCode}]`,
+            content: body.errorMsg,
+            onOk: onClose => {
+              errorCodeCheck(errorCode)
+              isError = false
+              NProgress.done()
+              onClose()
+            }
+          })
+        }
+      }
+      return next(actionWith({ type: `[SUCCESS]: ${apiName}`, data: json, url }))
+    })
+    .catch(json => {
+      if (typeof error === 'function') {
+        error()
+      } else if (!isError) {
         isError = true
         ModalError({
-          title: `请求失败！[${errorCode}]`,
-          content: body.errorMsg,
+          title: '请求失败！',
           onOk: onClose => {
-            errorCodeCheck(errorCode)
             isError = false
             NProgress.done()
             onClose()
           }
         })
       }
-    }
-    return next(actionWith({ type: `[SUCCESS]: ${apiName}`, data: json, url }))
-  }).catch(json => {
-    if (typeof error === 'function') {
-      error()
-    } else if (!isError) {
-      isError = true
-      ModalError({
-        title: '请求失败！',
-        onOk: onClose => {
-          isError = false
-          NProgress.done()
-          onClose()
-        }
-      })
-    }
-    return next(actionWith({ type: `[FAILED]: ${apiName}`, data: json, url }))
-  })
+      return next(actionWith({ type: `[FAILED]: ${apiName}`, data: json, url }))
+    })
 }
-

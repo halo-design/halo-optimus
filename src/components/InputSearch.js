@@ -20,15 +20,17 @@ export default class InputSearch extends Component {
                 addonAfter={
                   <Icon
                     type='search'
-                    onClick={e => {
-                      let keyword = getFieldsValue().keyword
-                      if (!keyword.trim()) {
-                        message.warning('请输入搜索关键字！')
-                      } else {
-                        onSearch(keyword)
+                    onClick={
+                      e => {
+                        let keyword = getFieldsValue().keyword
+                        if (!keyword.trim()) {
+                          message.warning('请输入搜索关键字！')
+                        } else {
+                          onSearch(keyword)
+                        }
                       }
                     }
-                  } />
+                  />
                 }
                 placeholder={placeholder}
               />
@@ -39,4 +41,3 @@ export default class InputSearch extends Component {
     )
   }
 }
-

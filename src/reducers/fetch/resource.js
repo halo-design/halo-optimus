@@ -15,4 +15,3 @@ export const delResourceAction = data => getFetch('DEL_RESOURCE', {
 export const changeResourceAction = data => getFetch('SET_RESOURCE', {
   body: data
 })
-

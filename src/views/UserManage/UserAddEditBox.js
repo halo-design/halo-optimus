@@ -96,9 +96,7 @@ export default class BranchAddView extends React.Component {
 
   onClose () {
     const { userBox, setAddUserBoxVsisible, colseModifyUser } = this.props
-    userBox.type === 'MODIFY'
-    ? colseModifyUser()
-    : setAddUserBoxVsisible(false)
+    userBox.type === 'MODIFY' ? colseModifyUser() : setAddUserBoxVsisible(false)
     this.onClear()
   }
 
@@ -158,7 +156,9 @@ export default class BranchAddView extends React.Component {
             userNo: userBox.initVal.userNo
           }
           // 若密码未发生改变，将保存原密码
-          this.state.pswdChange ? null : data.userPwd = userBox.initVal.userPwd
+          if (!this.state.pswdChange) {
+            data.userPwd = userBox.initVal.userPwd
+          }
           updateUser(data, () => {
             hideSpin()
             this.onClear()
@@ -178,7 +178,8 @@ export default class BranchAddView extends React.Component {
   phoneNumberCheck (rule, value, callback) {
     let reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/
     if (!reg.test(value)) {
-      callback('请输入有效的手机号码')
+      let str = '请输入有效的手机号码'
+      callback(str)
     } else {
       callback()
     }
@@ -186,59 +187,63 @@ export default class BranchAddView extends React.Component {
 
   pswdCheck (rule, value, callback) {
     const reg = /^\w{6,20}$/
-    !reg.test(value)
-    ? callback([new Error('密码为6~20位字符')])
-    : callback()
+    const str = '密码为6~20位字符'
+    !reg.test(value) ? callback(str) : callback()
   }
 
   certCheck (rule, value, callback) {
     const { getFieldValue } = this.props.form
     let key = getFieldValue('userCertType')
     if (key === '1') {
-      var iSum = 0
+      let iSum = 0
+      const str = '身份证长度或格式错误'
       if (!/^\d{17}(\d|x)$/i.test(value)) {
-        callback('身份证长度或格式错误')
+        callback(str)
         return
       }
       value = value.replace(/x$/i, 'a')
       if (!aCity[parseInt(value.substring(0, 2))]) {
-        callback('身份证地区非法')
+        const str = '身份证地区非法'
+        callback(str)
         return
       }
       let sBirthday = `${value.substr(6, 4)}/${Number(value.substr(10, 2))}/${Number(value.substr(12, 2))}`
       let birthDate = new Date(sBirthday)
       if (sBirthday !== `${birthDate.getFullYear()}/${(birthDate.getMonth() + 1)}/${birthDate.getDate()}`) {
-        callback('身份证出生日期非法')
+        const str = '身份证出生日期非法'
+        callback(str)
         return
       }
       for (var i = 17; i >= 0; i--) {
         iSum += (Math.pow(2, i) % 11) * parseInt(value.charAt(17 - i), 11)
       }
       if (iSum % 11 !== 1) {
-        callback('身份证号非法')
+        const str = '身份证号非法'
+        callback(str)
         return
       }
       callback()
     } else if (key === '2') {
       const hureg = /^\w{7,}$/
       if (!hureg.test(value)) {
-        callback([new Error('请输入正确的护照')])
+        const str = '请输入正确的护照'
+        callback(str)
         return
       }
       callback()
     } else if (key === '3') {
       const greg = /^[G|T|S|L|Q|D|C|W]\w{9,11}\S+$/
       if (!greg.test(value)) {
-        callback([new Error('请输入正确的港澳通行证')])
+        const str = '请输入正确的港澳通行证'
+        callback(str)
         return
       }
       callback()
     } else if (value) {
-      callback([new Error('请先选择证件类型')])
-      return
+      const str = '请先选择证件类型'
+      callback(str)
     } else {
       callback()
-      return
     }
   }
 
@@ -263,9 +268,9 @@ export default class BranchAddView extends React.Component {
 
     // 清除按钮
     let clearBtn = ''
-    userBox.type === 'ADD'
-    ? clearBtn = <Button key='clean' type='ghost' size='large' onClick={e => this.onClear()}>清除所有</Button>
-    : null
+    if (userBox.type === 'ADD') {
+      clearBtn = <Button key='clean' type='ghost' size='large' onClick={e => this.onClear()}>清除所有</Button>
+    }
 
     const treeProps = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
@@ -330,7 +335,7 @@ export default class BranchAddView extends React.Component {
                       <Input
                         placeholder='请输入用户名'
                         size='large'
-                       />
+                      />
                     )
                   }
                 </FormItem>
@@ -502,7 +507,7 @@ export default class BranchAddView extends React.Component {
                       <Input
                         placeholder='请输入证件号码'
                         size='large'
-                       />
+                      />
                     )
                   }
                 </FormItem>

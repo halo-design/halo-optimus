@@ -229,4 +229,5 @@ export default class AddRuleView extends React.Component {
       </div>
     )
   }
+
 }

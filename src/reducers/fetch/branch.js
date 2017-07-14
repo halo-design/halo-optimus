@@ -27,4 +27,3 @@ export const deleteBranchAction = data => getFetch('DEL_BRANCH', {
 export const addBranchAction = data => getFetch('ADD_BRANCH', {
   body: data
 })
-

@@ -280,7 +280,7 @@ export default class CheckListView extends React.Component {
                     <Input
                       placeholder='驳回理由'
                       size='large'
-                     />
+                    />
                   )
                 }
               </FormItem>
@@ -312,4 +312,3 @@ export default class CheckListView extends React.Component {
     )
   }
 }
-

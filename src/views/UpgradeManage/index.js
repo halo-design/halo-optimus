@@ -83,59 +83,61 @@ export default class UpgradeManageView extends React.Component {
     if (list[id]) {
       const lis = list[id]
       return lis.length === 0
-      ? <div className='subNoData'><Icon type='frown-o' /> 暂无数据</div>
-      : <table className='subList'>
-        <tbody>
-          {
-            lis.map((item, i) =>
-              <tr key={i}>
-                <td>{releaseFilter(item.publishMode)}</td>
-                <td>{releaseStatusFilter(item.taskStatus)}</td>
-                <td>{item.gmtModified}</td>
-                <td>{upgradeTypeFilter(item.upgradeType)}</td>
-                {
-                  item.taskStatus !== '2'
-                  ? (
-                    <td className='panel'>
-                      <a onClick={e => this.modifyItem(record, item)}>修改</a>
-                      {
-                        item.taskStatus === '3'
-                        ? (
+        ? <div className='subNoData'><Icon type='frown-o' /> 暂无数据</div>
+        : <table className='subList'>
+          <tbody>
+            {
+              lis.map((item, i) =>
+                <tr key={i}>
+                  <td>{releaseFilter(item.publishMode)}</td>
+                  <td>{releaseStatusFilter(item.taskStatus)}</td>
+                  <td>{item.gmtModified}</td>
+                  <td>{upgradeTypeFilter(item.upgradeType)}</td>
+                  {
+                    item.taskStatus !== '2'
+                      ? (
+                        <td className='panel'>
+                          <a onClick={e => this.modifyItem(record, item)}>修改</a>
+                          {
+                            item.taskStatus === '3'
+                              ? (
+                                <Popconfirm
+                                  title='确定要继续吗？'
+                                  onConfirm={e => this.changeItem(1, item)}
+                                  okText='确定'
+                                  cancelText='取消'
+                                >
+                                  <a>继续</a>
+                                </Popconfirm>
+                              )
+                              : (
+                                <Popconfirm
+                                  title='确定要暂停吗？'
+                                  onConfirm={e => this.changeItem(3, item)}
+                                  okText='确定'
+                                  cancelText='取消'
+                                >
+                                  <a>暂停</a>
+                                </Popconfirm>
+                              )
+                          }
                           <Popconfirm
-                            title='确定要继续吗？'
-                            onConfirm={e => this.changeItem(1, item)}
+                            title='确定要结束吗？'
+                            onConfirm={e => this.changeItem(2, item)}
                             okText='确定'
                             cancelText='取消'
                           >
-                            <a>继续</a>
+                            <a>结束</a>
                           </Popconfirm>
-                        ) : (
-                          <Popconfirm
-                            title='确定要暂停吗？'
-                            onConfirm={e => this.changeItem(3, item)}
-                            okText='确定'
-                            cancelText='取消'
-                          >
-                            <a>暂停</a>
-                          </Popconfirm>
-                        )
-                      }
-                      <Popconfirm
-                        title='确定要结束吗？'
-                        onConfirm={e => this.changeItem(2, item)}
-                        okText='确定'
-                        cancelText='取消'
-                      >
-                        <a>结束</a>
-                      </Popconfirm>
-                    </td>
-                  ) : <td />
-                }
-              </tr>
-            )
-          }
-        </tbody>
-      </table>
+                        </td>
+                      )
+                      : <td />
+                  }
+                </tr>
+              )
+            }
+          </tbody>
+        </table>
     }
     this.props.getUpgradeTaskList({packageInfoId: id})
     return <div style={{textAlign: 'center'}}><Spin /></div>

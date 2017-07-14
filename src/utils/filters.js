@@ -3,7 +3,9 @@ import React from 'react'
 const listHasItem = (list, key, val) => {
   let hasIt = false
   list.map(item => {
-    item[key] === val ? hasIt = true : null
+    if (item[key] === val) {
+      hasIt = true
+    }
   })
   return hasIt
 }
@@ -16,7 +18,9 @@ export const checkBtnList = (menu, btnList, noDivider) => {
     const btn = checkBtn(menu, item.item, item.button)
     if (btn) {
       ableBtn.push(btn)
-      !noDivider && i !== size - 1 ? ableBtn.push(divider) : null
+      if (!noDivider && i !== size - 1) {
+        ableBtn.push(divider)
+      }
     }
   })
   return ableBtn.length === 0 ? <span>无操作权限</span> : ableBtn.map((item, i) => <span key={i}>{item}</span>)
@@ -24,7 +28,9 @@ export const checkBtnList = (menu, btnList, noDivider) => {
 
 export const checkBtn = (menu, item, button) => {
   let menuItem = item
-  item.length > 4 ? null : menuItem = menu.currentMenu + item
+  if (item.length <= 4) {
+    menuItem = menu.currentMenu + item
+  }
   return listHasItem(menu.menuItemList, 'menuItemId', menuItem) ? button : null
 }
 
@@ -40,7 +46,9 @@ export const groupList = (list, id, parentId, childName, conver) => {
     if (!item[parentId] || !keyMap[item[parentId]]) {
       groupList.push(keyMap[item[id]])
     } else if (keyMap[item[parentId]]) {
-      keyMap[item[parentId]][childName] ? null : keyMap[item[parentId]][childName] = []
+      if (!keyMap[item[parentId]][childName]) {
+        keyMap[item[parentId]][childName] = []
+      }
       keyMap[item[parentId]][childName].push(keyMap[item[id]])
     }
   })
@@ -56,7 +64,9 @@ export const getNodeFromList = (id, list, idName, childName, conver) => {
       node = conver ? conver(el) : el
     } else if (chName && chName.length > 0) {
       node = getNodeFromList(id, chName, idName, childName, conver)
-      node ? node = (conver ? conver(node) : node) : null
+      if (node) {
+        node = (conver ? conver(node) : node)
+      }
     }
   }
   return node
@@ -82,10 +92,14 @@ export const str2json = str => {
     let li = item.split('=')
     let key = li[0]
     let val = li[1]
-    key ? null : key = '未知'
+    if (!key) {
+      key = '未知'
+    }
     if (val) {
       tmp.key = key
-      val.indexOf(':') > 0 ? val = val.replace(/:/g, '， ') : null
+      if (val.indexOf(':') > 0) {
+        val = val.replace(/:/g, '， ')
+      }
       tmp.value = val
       jsonArr.push(tmp)
     } else {
@@ -207,4 +221,3 @@ export const businessFilter = record => {
       return record
   }
 }
-

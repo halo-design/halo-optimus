@@ -167,10 +167,14 @@ export default class ApplyHistoryListView extends React.Component {
         let li = item.split('=')
         let key = li[0]
         let val = li[1]
-        key ? null : key = '未知'
+        if (!key) {
+          key = '未知'
+        }
         if (val) {
           tmp.key = key
-          val.indexOf(':') > 0 ? val = val.replace(/:/g, '， ') : null
+          if (val.indexOf(':') > 0) {
+            val = val.replace(/:/g, '， ')
+          }
           tmp.value = val
           jsonArr.push(tmp)
         } else {

@@ -15,4 +15,3 @@ export const getHistoryListAction = data => getFetch('GET_CHECK_HISTORY_LIST', {
 export const checkDecideAction = data => getFetch('SET_CHECK_OPERATE', {
   body: data
 })
-

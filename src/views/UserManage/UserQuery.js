@@ -69,21 +69,19 @@ export default class UserQueryView extends React.Component {
     updateSelectKeys([])
     let filter = form.getFieldsValue()
     form.validateFields((err, fieldsValue) => {
-      if (err) {
-        return
-      } else {
+      if (!err) {
         const filterTime = fieldsValue['filterTime']
         !filterTime
-        ? filter = {
-          ...filter,
-          beginTime: '',
-          endTime: ''
-        }
-        : filter = {
-          ...filter,
-          beginTime: filterTime[0].format('YYYYMMDD'),
-          endTime: filterTime[1].format('YYYYMMDD')
-        }
+          ? filter = {
+            ...filter,
+            beginTime: '',
+            endTime: ''
+          }
+          : filter = {
+            ...filter,
+            beginTime: filterTime[0].format('YYYYMMDD'),
+            endTime: filterTime[1].format('YYYYMMDD')
+          }
       }
     })
     userPageByBrh({

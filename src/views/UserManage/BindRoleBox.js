@@ -53,10 +53,12 @@ export default class BindRoleBoxView extends React.Component {
     selectedRoleList.map((sr, i) => {
       allSelectRoleList.map((rr, j) => {
         let outerkey = rr.roleId
-        outerkey === sr ? roleList.push({
-          roleId: sr,
-          roleName: rr.roleName
-        }) : null
+        if (outerkey === sr) {
+          roleList.push({
+            roleId: sr,
+            roleName: rr.roleName
+          })
+        }
       })
     })
 
@@ -119,4 +121,3 @@ export default class BindRoleBoxView extends React.Component {
     )
   }
 }
-

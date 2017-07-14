@@ -25,7 +25,7 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
         menu: { userMenu },
         bindRole: { selectRoleTreeList }
       }
-  } = state
+    } = state
     return {
       userMenu,
       treeNodes: selectRoleTreeList,

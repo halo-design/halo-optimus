@@ -7,33 +7,33 @@ import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction
 // 获取角色详情和功能列表
 export const getAllRoleFnItems = (curPage, roleId, roleName, reqType) => (dispatch, getState) => {
   !roleId
-  ? dispatch(clearTableItems())
-  : dispatch(getAllRoleFnItemsAction(curPage, roleId, roleName, reqType, getState().pages.roleManage.pageSize))
-  .then(action => {
-    const dataBody = action.data.body
-    if (dataBody.errorCode === '0') {
-      const roleMenuItemRelList = dataBody.roleMenuItemRelList
-      const turnPageTotalNum = dataBody.turnPageTotalNum
-      // 复制数组，并为其添加key属性，用于table遍历生成
-      let tableCurPageItems = [].concat(roleMenuItemRelList)
-      roleMenuItemRelList.map((item, i) => {
-        tableCurPageItems[i].key = item.menuItemId
+    ? dispatch(clearTableItems())
+    : dispatch(getAllRoleFnItemsAction(curPage, roleId, roleName, reqType, getState().pages.roleManage.pageSize))
+      .then(action => {
+        const dataBody = action.data.body
+        if (dataBody.errorCode === '0') {
+          const roleMenuItemRelList = dataBody.roleMenuItemRelList
+          const turnPageTotalNum = dataBody.turnPageTotalNum
+          // 复制数组，并为其添加key属性，用于table遍历生成
+          let tableCurPageItems = [].concat(roleMenuItemRelList)
+          roleMenuItemRelList.map((item, i) => {
+            tableCurPageItems[i].key = item.menuItemId
+          })
+          if (reqType === 1) {
+            dispatch(updateTableItems(tableCurPageItems, curPage, turnPageTotalNum))
+          } else if (reqType === 2) {
+            let selectKeys = []
+            roleMenuItemRelList.map(item => {
+              selectKeys.push(item.menuItemId)
+            })
+            dispatch(setAllMenuFnSelectKeys(selectKeys))
+          } else {
+            dispatch(updateMenuFnPageItems(tableCurPageItems, curPage, turnPageTotalNum))
+          }
+        } else {
+          MsgError('获取列表失败！')
+        }
       })
-      if (reqType === 1) {
-        dispatch(updateTableItems(tableCurPageItems, curPage, turnPageTotalNum))
-      } else if (reqType === 2) {
-        let selectKeys = []
-        roleMenuItemRelList.map(item => {
-          selectKeys.push(item.menuItemId)
-        })
-        dispatch(setAllMenuFnSelectKeys(selectKeys))
-      } else {
-        dispatch(updateMenuFnPageItems(tableCurPageItems, curPage, turnPageTotalNum))
-      }
-    } else {
-      MsgError('获取列表失败！')
-    }
-  })
 }
 
 // 通过角色id获取当前选中角色信息

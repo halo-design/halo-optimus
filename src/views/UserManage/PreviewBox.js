@@ -71,7 +71,9 @@ export default class PreviewBoxView extends React.Component {
     const getLevelType = (item, list) => {
       let ct = ''
       list.forEach(itm => {
-        item === itm.paramKey ? ct = itm.paramValue : ''
+        if (item === itm.paramKey) {
+          ct = itm.paramValue
+        }
       })
       return ct || ''
     }

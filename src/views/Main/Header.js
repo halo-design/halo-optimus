@@ -81,4 +81,3 @@ export default class HeaderView extends React.Component {
     )
   }
 }
-

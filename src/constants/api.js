@@ -155,4 +155,3 @@ export const getFetch = (apiName, params) => {
 }
 
 export default API
-

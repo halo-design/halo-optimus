@@ -21,7 +21,7 @@ import { userPageByBrh } from 'REDUCER/pages/userManage'
           treeBranchList
         }
       }
-  } = state
+    } = state
     return {
       treeBranchList,
       allBranchList,
@@ -59,7 +59,9 @@ export default class UserManageView extends React.Component {
     // 取到 brhId
     let id = ''
     allBranchList.map(item => {
-      item.brhName === brhName ? id = item.brhId : null
+      if (item.brhName === brhName) {
+        id = item.brhId
+      }
     })
 
     userPageByBrh({

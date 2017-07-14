@@ -116,7 +116,8 @@ export default class BranchAddView extends React.Component {
   phoneNumberCheck (rule, value, callback) {
     const reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/
     if (!reg.test(value)) {
-      callback('请输入有效的手机号码！')
+      let str = '请输入有效的手机号码！'
+      callback(str)
     } else {
       callback()
     }
@@ -203,7 +204,7 @@ export default class BranchAddView extends React.Component {
                       <Input
                         placeholder='请输入机构'
                         size='large'
-                       />
+                      />
                     )
                   }
                 </FormItem>
@@ -355,4 +356,3 @@ export default class BranchAddView extends React.Component {
     )
   }
 }
-

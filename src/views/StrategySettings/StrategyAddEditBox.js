@@ -61,12 +61,12 @@ export default class StrategyAddEditBoxView extends React.Component {
         let handleFn = editStrategy
         params.authDefine = '' + params.ad1 + params.ad2 + params.ad3 + params.ad4 + params.ad5
         isAdd
-        ? handleFn = addStrategy
-        : params = {
-          ...params,
-          authId: initVal.authId,
-          areaNo: initVal.areaNo
-        }
+          ? handleFn = addStrategy
+          : params = {
+            ...params,
+            authId: initVal.authId,
+            areaNo: initVal.areaNo
+          }
 
         showSpin()
         handleFn(params, () => {
@@ -162,7 +162,7 @@ export default class StrategyAddEditBoxView extends React.Component {
                   <Input
                     placeholder='请填写策略名称'
                     size='large'
-                   />
+                  />
                 )
               }
             </FormItem>

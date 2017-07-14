@@ -119,15 +119,15 @@ export default class AddEditPostBoxView extends React.Component {
             </Button>,
 
             addType
-            ? <Button
-              key='clean'
-              type='ghost'
-              size='large'
-              onClick={e => this.onClear()}
-            >
-              清除
-            </Button>
-            : '',
+              ? <Button
+                key='clean'
+                type='ghost'
+                size='large'
+                onClick={e => this.onClear()}
+              >
+                清除
+              </Button>
+              : '',
 
             <Button
               key='submit'
