@@ -127,14 +127,10 @@ export default class LoginView extends React.Component {
               onBlur={e => this.handleBlur(e)}
               onChange={this.handleChange}
             />
-            {
-              vcodeSrc
-                ? <img
-                  src={vcodeSrc}
-                  onClick={this.reloadCode}
-                />
-                : null
-            }
+            <img
+              src={vcodeSrc}
+              onClick={this.reloadCode}
+            />
           </div>
           <div className='btn-wrap'>
             <button onClick={e => this.handleSubmit()}>立即登录</button>

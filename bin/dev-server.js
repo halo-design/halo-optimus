@@ -67,7 +67,7 @@ compiler.plugin('compilation', compilation => {
 })
 
 app.use('/inmanage', proxyMiddleware({
-  target: 'https://flame.zaixy.cn',
+  target: 'https://flameapp.cn',
   changeOrigin: true
 }))
 
