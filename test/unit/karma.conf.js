@@ -7,7 +7,6 @@ module.exports = config => {
     reporters: ['spec', 'coverage'],
     files: [
       '../../node_modules/babel-polyfill/dist/polyfill.js',
-      // '../../node_modules/phantomjs-polyfill/bind-polyfill.js',
       './specs/**/*.spec.js'
     ],
     preprocessors: {
