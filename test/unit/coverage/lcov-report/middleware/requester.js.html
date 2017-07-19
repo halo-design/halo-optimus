@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for middleware\requester.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">middleware/</a> requester.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">7.14% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>4/56</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/40</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">18.18% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5.56% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/54</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { getCookie, setCookie } from 'UTIL/cookie'
+import { errorCodeCheck } from 'CONSTANT/config'
+import { ModalError } from 'UTIL/info'
+import NProgress from 'nprogress'
+import moment from 'moment'
+import qs from 'qs'
+&nbsp;
+export const BZ_REQUESTER = Symbol('BZ REQUESTER')
+&nbsp;
+let isError = false
+&nbsp;
+export default store =&gt; next =&gt; action =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  const reqAction = <span class="cstat-no" title="statement not covered" >action[BZ_REQUESTER]</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof reqAction === 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >    return next(action)</span>
+  }
+  let { url, body, header, method, dataType, apiName, requestType, error, success } = <span class="cstat-no" title="statement not covered" >reqAction</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  body = body || {}</span>
+<span class="cstat-no" title="statement not covered" >  method = method || 'POST'</span>
+<span class="cstat-no" title="statement not covered" >  dataType = dataType || 'JSON'</span>
+&nbsp;
+  const actionWith = <span class="cstat-no" title="statement not covered" >data =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    const finalAction = <span class="cstat-no" title="statement not covered" >{ ...action, ...data }</span>
+<span class="cstat-no" title="statement not covered" >    delete finalAction[BZ_REQUESTER]</span>
+<span class="cstat-no" title="statement not covered" >    return finalAction</span>
+  }
+&nbsp;
+  const reqType = <span class="cstat-no" title="statement not covered" >requestType || 'K'</span>
+<span class="cstat-no" title="statement not covered" >  if (reqType !== 'K' &amp;&amp; reqType !== 'J') {</span>
+<span class="cstat-no" title="statement not covered" >    throw new Error('Unexcept type!')</span>
+  }
+&nbsp;
+  const date = <span class="cstat-no" title="statement not covered" >new Date()</span>
+  const mmt = <span class="cstat-no" title="statement not covered" >moment(date)</span>
+  const transId = <span class="cstat-no" title="statement not covered" >`AT${Date.now()}`</span>
+&nbsp;
+  const headers = <span class="cstat-no" title="statement not covered" >{</span>
+    type: reqType,
+    encry: '0',
+    channel: 'AT',
+    transId: transId,
+    channelFlow: transId,
+    transCode: url.replace(/(.*\/)*([^.]+).*/ig, '$2'),
+    channelDate: mmt.format('YYYYMD'),
+    channelTime: mmt.format('Hms'),
+    iCIFID: getCookie('iCIFID') || '',
+    eCIFID: getCookie('eCIFID') || '',
+    'Accept': 'application/json',
+    'Content-Type': `application/${reqType === 'J' ? 'json' : 'x-www-form-urlencoded'}; charset=UTF-8`,
+    ...header
+  }
+&nbsp;
+  const finalBody = <span class="cstat-no" title="statement not covered" >reqType === 'K' ? qs.stringify(body) : JSON.stringify({ body, header: headers })</span>
+&nbsp;
+  let finalRequest = <span class="cstat-no" title="statement not covered" >{ headers, dataType, method }</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (method === 'GET') {</span>
+<span class="cstat-no" title="statement not covered" >    url += '?' + finalBody</span>
+  } else <span class="cstat-no" title="statement not covered" >if (method === 'POST') {</span>
+<span class="cstat-no" title="statement not covered" >    finalRequest.body = finalBody</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    throw new Error('Unexcept method!')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  next(actionWith({ type: `[FETCH]: ${apiName}`, url }))</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return fetch(new Request(url, finalRequest))</span>
+    .then(response =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >response.json().then(json =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ json, response })</span></span>))</span></span>
+    .then(({ json, response }) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >response.ok ? json : Promise.reject(json))</span></span>
+    .then(json =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof success === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        success(json)</span>
+      } else {
+        const { header, body } = <span class="cstat-no" title="statement not covered" >json</span>
+        const { errorCode } = <span class="cstat-no" title="statement not covered" >body</span>
+<span class="cstat-no" title="statement not covered" >        header.iCIFID ? setCookie('iCIFID', header.iCIFID) : setCookie('iCIFID', body.iCIFID)</span>
+<span class="cstat-no" title="statement not covered" >        if (errorCode !== '0' &amp;&amp; !isError) {</span>
+<span class="cstat-no" title="statement not covered" >          isError = true</span>
+<span class="cstat-no" title="statement not covered" >          ModalError({</span>
+            title: `请求失败！[${errorCode}]`,
+            content: body.errorMsg,
+            onOk: onClose =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >              errorCodeCheck(errorCode)</span>
+<span class="cstat-no" title="statement not covered" >              isError = false</span>
+<span class="cstat-no" title="statement not covered" >              NProgress.done()</span>
+<span class="cstat-no" title="statement not covered" >              onClose()</span>
+            }
+          })
+        }
+      }
+<span class="cstat-no" title="statement not covered" >      return next(actionWith({ type: `[SUCCESS]: ${apiName}`, data: json, url }))</span>
+    })
+    .catch(json =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof error === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        error()</span>
+      } else <span class="cstat-no" title="statement not covered" >if (!isError) {</span>
+<span class="cstat-no" title="statement not covered" >        isError = true</span>
+<span class="cstat-no" title="statement not covered" >        ModalError({</span>
+          title: '请求失败！',
+          onOk: onClose =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            isError = false</span>
+<span class="cstat-no" title="statement not covered" >            NProgress.done()</span>
+<span class="cstat-no" title="statement not covered" >            onClose()</span>
+          }
+        })
+      }
+<span class="cstat-no" title="statement not covered" >      return next(actionWith({ type: `[FAILED]: ${apiName}`, data: json, url }))</span>
+    })
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 19 2017 15:38:03 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

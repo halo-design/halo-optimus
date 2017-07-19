@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for reducers\public\login.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">reducers/public/</a> login.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">13.51% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>5/37</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.71% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>5/34</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import createReducer from 'STORE/createReducer'
+import { delCookies, setCookie } from 'UTIL/cookie'
+import NProgress from 'nprogress'
+import { MsgError } from 'UTIL/info'
+import md5 from 'md5'
+import API from 'CONSTANT/api'
+import { setSessionIDAction, loginAction, logoutAction } from '../fetch/login'
+&nbsp;
+export const setSessionID = () =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  delCookies(['cstName', 'iCIFID', 'eCIFID'])</span>
+<span class="cstat-no" title="statement not covered" >  dispatch(setSessionIDAction()).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    const { header, body } = <span class="cstat-no" title="statement not covered" >action.data</span>
+<span class="cstat-no" title="statement not covered" >    if (header.iCIFID) {</span>
+<span class="cstat-no" title="statement not covered" >      setCookie('iCIFID', header.iCIFID)</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(doSetSesionId(header.iCIFID))</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      setCookie('iCIFID', body.iCIFID)</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(doSetSesionId(body.iCIFID))</span>
+    }
+  })
+}
+&nbsp;
+export const logout = () =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  dispatch(logoutAction())</span>
+<span class="cstat-no" title="statement not covered" >  dispatch(doLogout())</span>
+}
+&nbsp;
+// 验证登陆
+export const validateLogin = (data, success, fail) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+  const newData = <span class="cstat-no" title="statement not covered" >{</span>
+    loginName: data.userName,
+    loginPassword: md5(data.pswd.toString()),
+    isLogin: data.isLogin,
+    validateCodeText: data.vcode
+  }
+<span class="cstat-no" title="statement not covered" >  dispatch(loginAction(newData)).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    NProgress.done()</span>
+    const dataBody = <span class="cstat-no" title="statement not covered" >action.data.body</span>
+<span class="cstat-no" title="statement not covered" >    if (dataBody.result === '1') {</span>
+<span class="cstat-no" title="statement not covered" >      setCookie('eCIFID', dataBody.cstNo)</span>
+<span class="cstat-no" title="statement not covered" >      setCookie('cstName', dataBody.cstName)</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(doLogin(dataBody.cstName))</span>
+<span class="cstat-no" title="statement not covered" >      if (success) {</span>
+<span class="cstat-no" title="statement not covered" >        success()</span>
+      }
+    } else {
+<span class="cstat-no" title="statement not covered" >      dataBody.errorMsg</span>
+      ? MsgError(dataBody.errorMsg)
+      : MsgError('登录信息有误！')
+<span class="cstat-no" title="statement not covered" >      dispatch(loginFailed())</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(setSessionID())</span>
+<span class="cstat-no" title="statement not covered" >      if (fail) {</span>
+<span class="cstat-no" title="statement not covered" >        fail()</span>
+      }
+    }
+  })
+}
+&nbsp;
+const actionsReducer = createReducer({
+  doLogin: cstname =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ isLogin: 'true', cstname })</span></span>,
+  doLogout: () =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ isLogin: 'false' })</span></span>,
+  doSetSesionId: iCIFID =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+    iCIFID,
+    checkCodeSrc: `${API.GET_CHECKCODE_URL}?nocache=${Date.now()}&amp;iCIFID=${iCIFID}`
+  }),
+  loginFailed: () =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ isLogin: 'FAILED', time: Date.now() })</span></span>
+}, {
+  isLogin: 'false',
+  iCIFID: '',
+  time: '',
+  cstname: '',
+  checkCodeSrc: ''
+})
+&nbsp;
+export const { doLogin, doLogout, doSetSesionId, loginFailed } = actionsReducer.actions
+export default actionsReducer.reducer</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 19 2017 15:38:03 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

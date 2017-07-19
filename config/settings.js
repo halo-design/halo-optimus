@@ -5,6 +5,7 @@ module.exports = {
     env: {
       NODE_ENV: '"production"'
     },
+    lint: false,
     assets: {
       root: path.join(__dirname, '../dist'),
       subDir: '',
@@ -34,5 +35,11 @@ module.exports = {
     publicPath: '/',
     checkVersions: true,
     remoteLog: process.env.REMOTE_LOG
+  },
+  test: {
+    env: {
+      NODE_ENV: '"testing"'
+    },
+    lint: false
   }
 }

@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for reducers\pages\roleManage.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">reducers/pages/</a> roleManage.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.89% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>9/91</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/33</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.39% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>9/79</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import createReducer from 'STORE/createReducer'
+import NProgress from 'nprogress'
+import { NotiSuccess, NotiError, MsgError } from 'UTIL/info'
+import { getRoleTree } from '../public/bindRole'
+import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction, addRoleAction, itemsBindRoleAction, delRoleAction } from '../fetch/role'
+&nbsp;
+// 获取角色详情和功能列表
+export const getAllRoleFnItems = (curPage, roleId, roleName, reqType) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  !roleId</span>
+    ? dispatch(clearTableItems())
+    : dispatch(getAllRoleFnItemsAction(curPage, roleId, roleName, reqType, getState().pages.roleManage.pageSize))
+      .then(action =&gt; <span class="fstat-no" title="function not covered" >{</span>
+        const dataBody = <span class="cstat-no" title="statement not covered" >action.data.body</span>
+<span class="cstat-no" title="statement not covered" >        if (dataBody.errorCode === '0') {</span>
+          const roleMenuItemRelList = <span class="cstat-no" title="statement not covered" >dataBody.roleMenuItemRelList</span>
+          const turnPageTotalNum = <span class="cstat-no" title="statement not covered" >dataBody.turnPageTotalNum</span>
+          // 复制数组，并为其添加key属性，用于table遍历生成
+          let tableCurPageItems = <span class="cstat-no" title="statement not covered" >[].concat(roleMenuItemRelList)</span>
+<span class="cstat-no" title="statement not covered" >          roleMenuItemRelList.map((item, i) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            tableCurPageItems[i].key = item.menuItemId</span>
+          })
+<span class="cstat-no" title="statement not covered" >          if (reqType === 1) {</span>
+<span class="cstat-no" title="statement not covered" >            dispatch(updateTableItems(tableCurPageItems, curPage, turnPageTotalNum))</span>
+          } else <span class="cstat-no" title="statement not covered" >if (reqType === 2) {</span>
+            let selectKeys = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >            roleMenuItemRelList.map(item =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >              selectKeys.push(item.menuItemId)</span>
+            })
+<span class="cstat-no" title="statement not covered" >            dispatch(setAllMenuFnSelectKeys(selectKeys))</span>
+          } else {
+<span class="cstat-no" title="statement not covered" >            dispatch(updateMenuFnPageItems(tableCurPageItems, curPage, turnPageTotalNum))</span>
+          }
+        } else {
+<span class="cstat-no" title="statement not covered" >          MsgError('获取列表失败！')</span>
+        }
+      })
+}
+&nbsp;
+// 通过角色id获取当前选中角色信息
+export const getInfoByRoleId = roleId =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  NProgress.start()</span>
+<span class="cstat-no" title="statement not covered" >  dispatch(getInfoByRoleIdAction(roleId)).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    const dataBody = <span class="cstat-no" title="statement not covered" >action.data.body</span>
+<span class="cstat-no" title="statement not covered" >    if (dataBody.errorCode === '0') {</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(applyCurRoleInfo(dataBody))</span>
+<span class="cstat-no" title="statement not covered" >      NProgress.done()</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      NProgress.done()</span>
+<span class="cstat-no" title="statement not covered" >      MsgError('获取信息失败！')</span>
+    }
+  })
+}
+&nbsp;
+// 通过角色名搜索相关信息
+export const getInfoByRoleName = (roleName, cb) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  NProgress.start()</span>
+<span class="cstat-no" title="statement not covered" >  dispatch(getInfoByRoleNameAction(roleName)).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    const dataBody = <span class="cstat-no" title="statement not covered" >action.data.body</span>
+<span class="cstat-no" title="statement not covered" >    if (dataBody.errorCode === '0') {</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(applyCurRoleInfo(dataBody))</span>
+<span class="cstat-no" title="statement not covered" >      NProgress.done()</span>
+<span class="cstat-no" title="statement not covered" >      if (cb) <span class="cstat-no" title="statement not covered" >cb(dataBody)</span></span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      NProgress.done()</span>
+<span class="cstat-no" title="statement not covered" >      MsgError('获取信息失败！')</span>
+    }
+  })
+}
+&nbsp;
+// 更新角色信息
+export const updateRole = params =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  dispatch(updateRoleAction(params)).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    const dataBody = <span class="cstat-no" title="statement not covered" >action.data.body</span>
+<span class="cstat-no" title="statement not covered" >    if (dataBody.errorCode === '0') {</span>
+<span class="cstat-no" title="statement not covered" >      NotiSuccess({ description: '角色更新成功！' })</span>
+      // 刷新一次选择的树
+<span class="cstat-no" title="statement not covered" >      dispatch(getRoleTree())</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(getInfoByRoleId(params.roleId))</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      NotiError({ description: '角色更新失败！' })</span>
+    }
+  })
+}
+&nbsp;
+// 添加用户
+export const addRole = (params, success, fail) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  dispatch(addRoleAction(params)).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    if (action.data.body.errorCode === '0') {</span>
+<span class="cstat-no" title="statement not covered" >      NotiSuccess({ description: '角色添加成功！' })</span>
+      // 刷新一次选择的树
+<span class="cstat-no" title="statement not covered" >      dispatch(getRoleTree())</span>
+<span class="cstat-no" title="statement not covered" >      if (success) <span class="cstat-no" title="statement not covered" >success()</span></span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      NotiError({ description: '角色添加失败！' })</span>
+<span class="cstat-no" title="statement not covered" >      if (fail) <span class="cstat-no" title="statement not covered" >fail()</span></span>
+    }
+  })
+}
+&nbsp;
+// 绑定功能列表到角色上
+export const itemsBindRole = (roleId, roleMenuItemRelList, success, fail) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  dispatch(itemsBindRoleAction(roleId, roleMenuItemRelList)).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    if (action.data.body.errorCode === '0') {</span>
+<span class="cstat-no" title="statement not covered" >      NotiSuccess({ description: '功能关联成功！' })</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(getAllRoleFnItems(1, roleId, '', 1))</span>
+<span class="cstat-no" title="statement not covered" >      if (success) <span class="cstat-no" title="statement not covered" >success()</span></span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      NotiError({ description: '功能关联失败！' })</span>
+<span class="cstat-no" title="statement not covered" >      if (fail) <span class="cstat-no" title="statement not covered" >fail()</span></span>
+    }
+  })
+}
+&nbsp;
+// 删除角色
+export const delRole = roleId =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  dispatch(delRoleAction(roleId)).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    if (action.data.body.errorCode === '0') {</span>
+<span class="cstat-no" title="statement not covered" >      NotiSuccess({ description: '角色删除成功！' })</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(getRoleTree())</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      NotiError({ description: '角色删除失败！' })</span>
+    }
+  })
+}
+&nbsp;
+const actionsReducer = createReducer({
+  clearTableItems: () =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+    tableCurPageItems: [],
+    tableCurPage: 1,
+    tableTotalSize: 0
+  }),
+  updateTableItems: (tableCurPageItems, tableCurPage, tableTotalSize) =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+    tableCurPageItems,
+    tableCurPage,
+    tableTotalSize
+  }),
+  clearCurRoleInfo: () =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+    curRoleInfo: {
+      roleDesc: '',
+      selectModifyRole: '',
+      roleStatus: '',
+      roleName: '',
+      roleId: ''
+    },
+    selectModifyRole: ''
+  }),
+  applyCurRoleInfo: info =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+    curRoleInfo: {
+      roleDesc: info.roleDesc,
+      selectModifyRole: info.rolePId,
+      roleStatus: info.roleStatus,
+      roleName: info.roleName,
+      // 数据库拿到的数据带有'undefined'字符串，他们的锅，这个坑我填了
+      roleId: info.roleId &amp;&amp; info.roleId !== 'undefined' ? info.roleId : ''
+    },
+    selectModifyRole: info.rolePId
+  }),
+  setSelectTreeVal: val =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ selectModifyRole: val || '' })</span></span>,
+  setAddRoleBoxVisible: addBoxVisible =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ addBoxVisible })</span></span>,
+  setBindRoleBoxVisible: bindBoxVisible =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ bindBoxVisible })</span></span>,
+  updateMenuFnPageItems: (allMenuFnCurPageItems, allMenuFnCurPage, allMenuTotalSize) =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ allMenuFnCurPageItems, allMenuFnCurPage, allMenuTotalSize })</span></span>,
+  clearMenuFnItems: () =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+    allMenuFnCurPageItems: [],
+    allMenuFnCurPage: 1,
+    allMenuTotalSize: 0,
+    allMenuFnSelectKeys: []
+  }),
+  setAllMenuFnSelectKeys: allMenuFnSelectKeys =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ allMenuFnSelectKeys })</span></span>
+}, {
+  pageSize: 8,
+&nbsp;
+  tableCurPageItems: [],
+  tableCurPage: 1,
+  tableTotalSize: 0,
+&nbsp;
+  allMenuFnCurPageItems: [],
+  allMenuFnCurPage: 1,
+  allMenuTotalSize: 0,
+  allMenuFnSelectKeys: [],
+&nbsp;
+  curRoleInfo: {
+    roleDesc: '',
+    selectModifyRole: '',
+    roleStatus: '',
+    roleName: '',
+    roleId: ''
+  },
+&nbsp;
+  selectModifyRole: '',
+  addBoxVisible: false,
+  bindBoxVisible: false
+})
+&nbsp;
+export const { clearTableItems, updateTableItems, clearCurRoleInfo, applyCurRoleInfo, setSelectTreeVal, setAddRoleBoxVisible, setBindRoleBoxVisible, updateMenuFnPageItems, clearMenuFnItems, setAllMenuFnSelectKeys } = actionsReducer.actions
+export default actionsReducer.reducer
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 19 2017 15:38:03 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

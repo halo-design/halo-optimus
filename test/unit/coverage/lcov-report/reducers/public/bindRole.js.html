@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for reducers\public\bindRole.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">reducers/public/</a> bindRole.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">17.5% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>7/40</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>7/35</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import createReducer from 'STORE/createReducer'
+import { groupList } from 'UTIL/filters'
+import NProgress from 'nprogress'
+import { getUserRoleListAction, userRoleAssociationAction, getRoleListAction } from '../fetch/role'
+import { NotiSuccess, NotiError } from 'UTIL/info'
+&nbsp;
+// 用户绑定角色所需要数据的类型
+const converTreeSelectRole = roleList =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+  label: roleList.roleName,
+  value: roleList.roleId,
+  key: roleList.roleId,
+  children: []
+})
+&nbsp;
+// 查询所有角色时，树所需要的类型
+const converTreeRole = role =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+  roleId: role.roleId,
+  rolePId: role.rolePId,
+  roleName: role.roleName,
+  roleDesc: role.roleDesc,
+  roleStatus: role.roleStatus,
+  roleType: role.roleType,
+  children: []
+})
+&nbsp;
+export const getUserRoleTree = userNo =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  dispatch(getUserRoleListAction(userNo)).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    const dataBody = <span class="cstat-no" title="statement not covered" >action.data.body</span>
+    let selectKeys = <span class="cstat-no" title="statement not covered" >[]</span>
+    let userRoleRelList = <span class="cstat-no" title="statement not covered" >dataBody.userRoleRelList</span>
+<span class="cstat-no" title="statement not covered" >    userRoleRelList.map(item =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      item.state === '1' ? selectKeys.push(item.roleId) : null</span>
+    })
+<span class="cstat-no" title="statement not covered" >    dispatch(updateSelectedRole(selectKeys))</span>
+    let allSelectRoleList = <span class="cstat-no" title="statement not covered" >dataBody.userRoleRelList</span>
+    let selectRoleTreeList = <span class="cstat-no" title="statement not covered" >groupList(allSelectRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)</span>
+<span class="cstat-no" title="statement not covered" >    dispatch(userGetRole({</span>
+      selectRoleTreeList,
+      allSelectRoleList
+    }))
+  })
+}
+&nbsp;
+// 绑定角色的方法
+export const userRoleAssociation = (userNo, userName, roleList) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  dispatch(userRoleAssociationAction(userNo, userName, roleList)).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    const dataBody = <span class="cstat-no" title="statement not covered" >action.data.body</span>
+<span class="cstat-no" title="statement not covered" >    if (dataBody.errorCode === '0') {</span>
+<span class="cstat-no" title="statement not covered" >      NotiSuccess({ description: '綁定成功！' })</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      NotiError({ description: '绑定失败！' })</span>
+    }
+  })
+}
+&nbsp;
+export const getRoleTree = () =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(dispatch, getState) =&gt; <span class="fstat-no" title="function not covered" >{</span></span></span>
+<span class="cstat-no" title="statement not covered" >  NProgress.start()</span>
+<span class="cstat-no" title="statement not covered" >  dispatch(getRoleListAction()).then(action =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+    const dataBody = <span class="cstat-no" title="statement not covered" >action.data.body</span>
+    const flatRoleList = <span class="cstat-no" title="statement not covered" >dataBody.roleList</span>
+    let roleTreeList = <span class="cstat-no" title="statement not covered" >groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeRole)</span>
+    let selectRoleTreeList = <span class="cstat-no" title="statement not covered" >groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)</span>
+<span class="cstat-no" title="statement not covered" >    dispatch(updateRoleTreeList(selectRoleTreeList))</span>
+<span class="cstat-no" title="statement not covered" >    dispatch(updateRoleTree(roleTreeList))</span>
+<span class="cstat-no" title="statement not covered" >    NProgress.done()</span>
+  })
+}
+&nbsp;
+const actionsReducer = createReducer({
+  userGetRole: data =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >data,</span></span>
+  updateSelectedRole: selectedRoleList =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ selectedRoleList })</span></span>,
+  updateRoleTree: roleTreeList =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ roleTreeList })</span></span>,
+  updateRoleTreeList: selectRoleTreeList =&gt; (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{ selectRoleTreeList })</span></span>
+}, {
+  roleTreeList: [],
+  selectRoleTreeList: [],
+  allSelectRoleList: [],
+  selectedRoleList: []
+})
+&nbsp;
+export const { userGetRole, updateSelectedRole, updateRoleTree, updateRoleTreeList } = actionsReducer.actions
+export default actionsReducer.reducer
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 19 2017 15:38:03 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
