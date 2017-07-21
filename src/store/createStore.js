@@ -9,13 +9,18 @@ import remoteLogger from 'MIDDLEWARE/remote-logger'
 export default (initialState = {}) => {
   const enhancers = [autoRehydrate()]
   let middleware = [thunk, requester]
+  let composeEnhancers = compose
   if (process.env.NODE_ENV === 'development') {
     middleware = [thunk, requester, logger, remoteLogger]
+    const composeWithDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    if (typeof composeWithDevToolsExtension === 'function') {
+      composeEnhancers = composeWithDevToolsExtension
+    }
   }
   const store = createStore(
     rootReducer,
     initialState,
-    compose(
+    composeEnhancers(
       applyMiddleware(...middleware),
       ...enhancers
     )
