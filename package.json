@@ -25,7 +25,7 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run"
   },
   "dependencies": {
-    "antd": "^2.12.3",
+    "antd": "2.12.4",
     "md5": "^2.2.1",
     "nprogress": "^0.2.0",
     "qs": "^6.4.0",

@@ -140,9 +140,9 @@ ansi-styles@^3.1.0:
   dependencies:
     color-convert "^1.9.0"
 
-antd@^2.12.3:
-  version "2.12.3"
-  resolved "http://registry.npm.taobao.org/antd/download/antd-2.12.3.tgz#6dbc6f077b1579aa4c8423e5180d55cc1ffde4c3"
+antd@2.12.4:
+  version "2.12.4"
+  resolved "http://registry.npm.taobao.org/antd/download/antd-2.12.4.tgz#513f451ac4699da1edbfb2145a35b3707c30211b"
   dependencies:
     array-tree-filter "~1.0.0"
     babel-runtime "6.x"
@@ -174,7 +174,7 @@ antd@^2.12.3:
     rc-steps "~2.5.1"
     rc-switch "~1.5.1"
     rc-table "~5.4.0"
-    rc-tabs "~8.0.0"
+    rc-tabs "~9.0.2"
     rc-time-picker "~2.4.1"
     rc-tooltip "~3.4.6"
     rc-tree "~1.7.0"
@@ -6479,9 +6479,9 @@ rc-table@~5.4.0:
     shallowequal "^0.2.2"
     warning "^3.0.0"
 
-rc-tabs@~8.0.0:
-  version "8.0.2"
-  resolved "http://registry.npm.taobao.org/rc-tabs/download/rc-tabs-8.0.2.tgz#05fa4b57252df33851e5c250a08bcc6f8e55ceb4"
+rc-tabs@~9.0.2:
+  version "9.0.2"
+  resolved "http://registry.npm.taobao.org/rc-tabs/download/rc-tabs-9.0.2.tgz#2008ffc0ab9b8e573d077d2be19ec76adbb73539"
   dependencies:
     babel-runtime "6.x"
     classnames "2.x"
