@@ -8223,7 +8223,7 @@ webpack-bundle-analyzer@^2.8.2:
     opener "^1.4.3"
     ws "^2.3.1"
 
-webpack-dev-middleware@^1.0.11, webpack-dev-middleware@^1.10.2:
+webpack-dev-middleware@^1.0.11, webpack-dev-middleware@^1.12.0:
   version "1.12.0"
   resolved "http://registry.npm.taobao.org/webpack-dev-middleware/download/webpack-dev-middleware-1.12.0.tgz#d34efefb2edda7e1d3b5dbe07289513219651709"
   dependencies:
@@ -8233,7 +8233,7 @@ webpack-dev-middleware@^1.0.11, webpack-dev-middleware@^1.10.2:
     range-parser "^1.0.3"
     time-stamp "^2.0.0"
 
-webpack-hot-middleware@^2.18.0:
+webpack-hot-middleware@^2.18.2:
   version "2.18.2"
   resolved "http://registry.npm.taobao.org/webpack-hot-middleware/download/webpack-hot-middleware-2.18.2.tgz#84dee643f037c3d59c9de142548430371aa8d3b2"
   dependencies:
