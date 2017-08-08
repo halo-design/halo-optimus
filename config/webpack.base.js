@@ -4,8 +4,8 @@ const settings = require('./settings')
 const styleLoader = require('./style-loader')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
-const isProduction = process.env.NODE_ENV === 'production'
-const env = isProduction ? 'build' : 'dev'
+const isProd = process.env.NODE_ENV === 'production'
+const env = isProd ? 'build' : 'dev'
 const assetsPath = curPath => path.posix.join(settings[env].assets.subDir, curPath)
 const resolve = dir => path.join(__dirname, '..', dir)
 const publicPath = dir => settings[env].publicPath + dir
@@ -51,7 +51,7 @@ let loaderRules = [
   }
 ]
 
-if (settings[env].lint && !isProduction) {
+if (settings[env].lint && !isProd) {
   loaderRules = [{
     test: /\.(js|jsx)$/,
     loader: 'eslint-loader',
