@@ -1,6 +1,6 @@
 {
   "name": "halo-optimus",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A React Application",
   "author": "OwlAford <zhangyh@belink.com>",
   "license": "MIT",
@@ -11,9 +11,7 @@
     "clean:dist": "rimraf dist",
     "clean:diff": "rimraf dist_diff",
     "dev": "gulp dev",
-    "dev:log": "cross-env REMOTE_LOG=true gulp dev",
     "build": "gulp build",
-    "build:report": "cross-env BUNDLE_REPORT=true gulp build",
     "shot": "gulp snapshot",
     "diff": "gulp dist-different",
     "repo": "gulp report",

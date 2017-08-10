@@ -1,3 +1,11 @@
+const check = require('./check-versions')
+const settings = require('../config/settings').dev
+settings.checkVersions && check()
+
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = JSON.parse(settings.env.NODE_ENV)
+}
+
 const ip = require('ip')
 const ora = require('ora')
 const opn = require('opn')
@@ -7,16 +15,10 @@ const chalk = require('chalk')
 const express = require('express')
 const webpack = require('webpack')
 const socket = require('socket.io')
-const check = require('./check-versions')
 const proxyMiddleware = require('http-proxy-middleware')
-const settings = require('../config/settings').dev
 const webpackConfig = require('../config/webpack.dev')
 
-settings.checkVersions && check()
-
-if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = JSON.parse(settings.env.NODE_ENV)
-}
+const proxyTable = settings.proxyTable
 
 const port = process.env.PORT || settings.port
 const openBrowser = !!settings.openBrowser
@@ -66,10 +68,13 @@ compiler.plugin('compilation', compilation => {
   })
 })
 
-app.use('/inmanage', proxyMiddleware({
-  target: 'https://flameapp.cn',
-  changeOrigin: true
-}))
+Object.keys(proxyTable).forEach(context => {
+  const options = proxyTable[context]
+  if (typeof options === 'string') {
+    options = { target: options }
+  }
+  app.use(proxyMiddleware(options.filter || context, options))
+})
 
 app.use(require('connect-history-api-fallback')())
 

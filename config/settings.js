@@ -19,7 +19,7 @@ module.exports = {
     sourceMap: false,
     gzip: false,
     gzipExtensions: ['js', 'css'],
-    bundleAnalyzerReport: process.env.BUNDLE_REPORT,
+    bundleAnalyzerReport: process.env.npm_config_report,
     checkVersions: true
   },
   dev: {
@@ -34,7 +34,13 @@ module.exports = {
     },
     publicPath: '/',
     checkVersions: true,
-    remoteLog: process.env.REMOTE_LOG
+    remoteLog: process.env.npm_config_log,
+    proxyTable: {
+      '/inmanage': {
+        target: 'https://flameapp.cn',
+        changeOrigin: true
+      }
+    },
   },
   test: {
     env: {
