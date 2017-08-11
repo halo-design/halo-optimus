@@ -1,11 +1,18 @@
 const fs = require('fs')
+const del = require('del')
 const opn = require('opn')
 const pug = require('pug')
 const gulp = require('gulp')
 const path = require('path')
 const chalk = require('chalk')
 const sftp = require('gulp-sftp')
+const server = require('gulp-express')
 const tools = require('./bin/analyze-tools')
+const settings = require('./config/settings')
+
+const publicPath = settings.build.publicPath
+const distServerPath = settings.build.distServerPath
+const allServerFiles = `${distServerPath}/**/*`
 
 gulp.task('dev', () => {
   require('./bin/dev-server')
@@ -76,3 +83,17 @@ gulp.task('report', () => {
 })
 
 gulp.task('compare-report', ['compare', 'report'])
+
+gulp.task('dist-server', ['clean-dist-server', 'copy-files', 'server'])
+
+gulp.task('clean-dist-server', () => del.sync([allServerFiles]))
+
+gulp.task('copy-files', () =>
+  gulp.src('dist/**/*')
+    .pipe(gulp.dest(distServerPath + publicPath))
+)
+
+gulp.task('server', () => {
+  server.run(['bin/dist-server.js'])
+  gulp.watch([allServerFiles], server.notify)
+})

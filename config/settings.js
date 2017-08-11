@@ -19,6 +19,8 @@ module.exports = {
     sourceMap: false,
     gzip: false,
     gzipExtensions: ['js', 'css'],
+    distServerPort: 3030,
+    distServerPath: 'www',
     bundleAnalyzerReport: process.env.npm_config_report,
     checkVersions: true
   },

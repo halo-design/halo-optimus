@@ -1125,7 +1125,7 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.7"
   resolved "http://registry.npm.taobao.org/bn.js/download/bn.js-4.11.7.tgz#ddb048e50d9482790094c13eb3fcfc833ce7ab46"
 
-body-parser@^1.16.1:
+body-parser@^1.16.1, body-parser@^1.2.0:
   version "1.17.2"
   resolved "http://registry.npm.taobao.org/body-parser/download/body-parser-1.17.2.tgz#f8892abc8f9e627d42aedafbca66bf5ab99104ee"
   dependencies:
@@ -1701,6 +1701,10 @@ connect-history-api-fallback@^1.3.0:
   version "1.3.0"
   resolved "http://registry.npm.taobao.org/connect-history-api-fallback/download/connect-history-api-fallback-1.3.0.tgz#e51d17f8f0ef0db90a64fdb47de3051556e9f169"
 
+connect-livereload@^0.6.0:
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/connect-livereload/download/connect-livereload-0.6.0.tgz#f9f009874ad6837183afb170b4c4e3857a1d7ceb"
+
 connect@^3.6.0:
   version "3.6.3"
   resolved "http://registry.npm.taobao.org/connect/download/connect-3.6.3.tgz#f7320d46a25b4be7b483a2236517f24b1e27e301"
@@ -2058,6 +2062,10 @@ debug@2.6.7:
   dependencies:
     ms "2.0.0"
 
+debug@^0.8.1:
+  version "0.8.1"
+  resolved "http://registry.npm.taobao.org/debug/download/debug-0.8.1.tgz#20ff4d26f5e422cb68a1bacbbb61039ad8c1c130"
+
 decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
   resolved "http://registry.npm.taobao.org/decamelize/download/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
@@ -2079,6 +2087,10 @@ deep-extend@~0.4.0:
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "http://registry.npm.taobao.org/deep-is/download/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
+
+deepmerge@~0.2.7:
+  version "0.2.10"
+  resolved "http://registry.npm.taobao.org/deepmerge/download/deepmerge-0.2.10.tgz#8906bf9e525a4fbf1b203b2afcb4640249821219"
 
 defaults@^1.0.0:
   version "1.0.3"
@@ -2107,6 +2119,17 @@ del@^2.0.2:
     object-assign "^4.0.1"
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
+    rimraf "^2.2.8"
+
+del@^3.0.0:
+  version "3.0.0"
+  resolved "http://registry.npm.taobao.org/del/download/del-3.0.0.tgz#53ecf699ffcbcb39637691ab13baf160819766e5"
+  dependencies:
+    globby "^6.1.0"
+    is-path-cwd "^1.0.0"
+    is-path-in-cwd "^1.0.0"
+    p-map "^1.1.1"
+    pify "^3.0.0"
     rimraf "^2.2.8"
 
 delayed-stream@~1.0.0:
@@ -2313,7 +2336,7 @@ duplexer3@^0.1.4:
   version "0.1.4"
   resolved "http://registry.npm.taobao.org/duplexer3/download/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
 
-duplexer@^0.1.1:
+duplexer@^0.1.1, duplexer@~0.1.1:
   version "0.1.1"
   resolved "http://registry.npm.taobao.org/duplexer/download/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
 
@@ -2784,6 +2807,18 @@ event-emitter@~0.3.5:
     d "1"
     es5-ext "~0.10.14"
 
+event-stream@~3.2.1:
+  version "3.2.2"
+  resolved "http://registry.npm.taobao.org/event-stream/download/event-stream-3.2.2.tgz#f79f9984c07ee3fd9b44ffb3cd0422b13e24084d"
+  dependencies:
+    duplexer "~0.1.1"
+    from "~0"
+    map-stream "~0.1.0"
+    pause-stream "0.0.11"
+    split "0.3"
+    stream-combiner "~0.0.4"
+    through "~2.3.1"
+
 eventemitter3@1.x.x:
   version "1.2.0"
   resolved "http://registry.npm.taobao.org/eventemitter3/download/eventemitter3-1.2.0.tgz#1c86991d816ad1e504750e73874224ecf3bec508"
@@ -2996,6 +3031,12 @@ fastparse@^1.1.1:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/fastparse/download/fastparse-1.1.1.tgz#d1e2643b38a94d7583b479060e6c4affc94071f8"
 
+faye-websocket@^0.7.2:
+  version "0.7.3"
+  resolved "http://registry.npm.taobao.org/faye-websocket/download/faye-websocket-0.7.3.tgz#cc4074c7f4a4dfd03af54dd65c354b135132ce11"
+  dependencies:
+    websocket-driver ">=0.3.6"
+
 fbjs@^0.8.7, fbjs@^0.8.9:
   version "0.8.14"
   resolved "http://registry.npm.taobao.org/fbjs/download/fbjs-0.8.14.tgz#d1dbe2be254c35a91e09f31f9cd50a40b2a0ed1c"
@@ -3200,6 +3241,10 @@ friendly-errors-webpack-plugin@^1.6.1:
     chalk "^1.1.3"
     error-stack-parser "^2.0.0"
     string-length "^1.0.1"
+
+from@~0:
+  version "0.1.7"
+  resolved "http://registry.npm.taobao.org/from/download/from-0.1.7.tgz#83c60afc58b9c56997007ed1a768b3ab303a44fe"
 
 fs-exists-sync@^0.1.0:
   version "0.1.0"
@@ -3548,6 +3593,16 @@ graceful-fs@~1.2.0:
 growl@1.9.2:
   version "1.9.2"
   resolved "http://registry.npm.taobao.org/growl/download/growl-1.9.2.tgz#0ea7743715db8d8de2c5ede1775e1b45ac85c02f"
+
+gulp-express@^0.3.5:
+  version "0.3.5"
+  resolved "http://registry.npm.taobao.org/gulp-express/download/gulp-express-0.3.5.tgz#2b4fc94a8fed9b6c6190f2e98c178358f549d9ba"
+  dependencies:
+    chalk "^1.0.0"
+    debug "^2.1.1"
+    deepmerge "~0.2.7"
+    event-stream "~3.2.1"
+    tiny-lr "0.0.9"
 
 gulp-sftp@^0.1.5:
   version "0.1.5"
@@ -4964,6 +5019,10 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/map-obj/download/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
+map-stream@~0.1.0:
+  version "0.1.0"
+  resolved "http://registry.npm.taobao.org/map-stream/download/map-stream-0.1.0.tgz#e56aa94c4c8055a16404a0674b78f215f7c8e194"
+
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
   resolved "http://registry.npm.taobao.org/math-expression-evaluator/download/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
@@ -5329,6 +5388,18 @@ nopt@^4.0.1:
     abbrev "1"
     osenv "^0.1.4"
 
+nopt@~2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/nopt/download/nopt-2.0.0.tgz#ca7416f20a5e3f9c3b86180f96295fa3d0b52e0d"
+  dependencies:
+    abbrev "1"
+
+noptify@~0.0.3:
+  version "0.0.3"
+  resolved "http://registry.npm.taobao.org/noptify/download/noptify-0.0.3.tgz#58f654a73d9753df0c51d9686dc92104a67f4bbb"
+  dependencies:
+    nopt "~2.0.0"
+
 normalize-package-data@^2.3.2, normalize-package-data@^2.3.4:
   version "2.4.0"
   resolved "http://registry.npm.taobao.org/normalize-package-data/download/normalize-package-data-2.4.0.tgz#12f95a307d58352075a04907b84ac8be98ac012f"
@@ -5626,6 +5697,10 @@ p-locate@^2.0.0:
   dependencies:
     p-limit "^1.1.0"
 
+p-map@^1.1.1:
+  version "1.1.1"
+  resolved "http://registry.npm.taobao.org/p-map/download/p-map-1.1.1.tgz#05f5e4ae97a068371bc2a5cc86bfbdbc19c4ae7a"
+
 package-json@^4.0.0, package-json@^4.0.1:
   version "4.0.1"
   resolved "http://registry.npm.taobao.org/package-json/download/package-json-4.0.1.tgz#8869a0401253661c4c4ca3da6c2121ed555f5eed"
@@ -5706,7 +5781,7 @@ parseuri@0.0.5:
   dependencies:
     better-assert "~1.0.0"
 
-parseurl@~1.3.1:
+parseurl@^1.0.1, parseurl@~1.3.1:
   version "1.3.1"
   resolved "http://registry.npm.taobao.org/parseurl/download/parseurl-1.3.1.tgz#c8ab8c9223ba34888aa64a297b28853bec18da56"
 
@@ -5785,6 +5860,12 @@ path-type@^2.0.0:
 pathval@^1.0.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/pathval/download/pathval-1.1.0.tgz#b942e6d4bde653005ef6b71361def8727d0645e0"
+
+pause-stream@0.0.11:
+  version "0.0.11"
+  resolved "http://registry.npm.taobao.org/pause-stream/download/pause-stream-0.0.11.tgz#fe5a34b0cbce12b5aa6a2b403ee2e73b602f1445"
+  dependencies:
+    through "~2.3"
 
 pbkdf2@^3.0.3:
   version "3.0.13"
@@ -6337,6 +6418,10 @@ qs@6.4.0, qs@~6.4.0:
 qs@6.5.0, qs@^6.4.0:
   version "6.5.0"
   resolved "http://registry.npm.taobao.org/qs/download/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
+
+qs@^0.6.6:
+  version "0.6.6"
+  resolved "http://registry.npm.taobao.org/qs/download/qs-0.6.6.tgz#6e015098ff51968b8a3c819001d5f2c89bc4b107"
 
 qs@~6.3.0:
   version "6.3.2"
@@ -7598,6 +7683,12 @@ spdx-license-ids@^1.0.2:
   version "1.2.2"
   resolved "http://registry.npm.taobao.org/spdx-license-ids/download/spdx-license-ids-1.2.2.tgz#c9df7a3424594ade6bd11900d596696dc06bac57"
 
+split@0.3:
+  version "0.3.3"
+  resolved "http://registry.npm.taobao.org/split/download/split-0.3.3.tgz#cd0eea5e63a211dfff7eb0f091c4133e2d0dd28f"
+  dependencies:
+    through "2"
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "http://registry.npm.taobao.org/sprintf-js/download/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -7648,6 +7739,12 @@ stream-browserify@^2.0.1:
   dependencies:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
+
+stream-combiner@~0.0.4:
+  version "0.0.4"
+  resolved "http://registry.npm.taobao.org/stream-combiner/download/stream-combiner-0.0.4.tgz#4d5e433c185261dde623ca3f44c586bcf5c4ad14"
+  dependencies:
+    duplexer "~0.1.1"
 
 stream-consume@~0.1.0:
   version "0.1.0"
@@ -7906,7 +8003,7 @@ through2@~0.4.2:
     readable-stream "~1.0.17"
     xtend "~2.1.1"
 
-through@^2.3.6:
+through@2, through@^2.3.6, through@~2.3, through@~2.3.1:
   version "2.3.8"
   resolved "http://registry.npm.taobao.org/through/download/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
@@ -7934,6 +8031,17 @@ timers-browserify@^2.0.2:
   dependencies:
     global "^4.3.2"
     setimmediate "^1.0.4"
+
+tiny-lr@0.0.9:
+  version "0.0.9"
+  resolved "http://registry.npm.taobao.org/tiny-lr/download/tiny-lr-0.0.9.tgz#53973fae34f8c18c07c825b4b270f782e5ebb152"
+  dependencies:
+    body-parser "^1.2.0"
+    debug "^0.8.1"
+    faye-websocket "^0.7.2"
+    noptify "~0.0.3"
+    parseurl "^1.0.1"
+    qs "^0.6.6"
 
 tmp@0.0.31, tmp@0.0.x, tmp@^0.0.31:
   version "0.0.31"
@@ -8349,6 +8457,16 @@ webpack@3.2.0:
     watchpack "^1.3.1"
     webpack-sources "^1.0.1"
     yargs "^6.0.0"
+
+websocket-driver@>=0.3.6:
+  version "0.6.5"
+  resolved "http://registry.npm.taobao.org/websocket-driver/download/websocket-driver-0.6.5.tgz#5cb2556ceb85f4373c6d8238aa691c8454e13a36"
+  dependencies:
+    websocket-extensions ">=0.1.1"
+
+websocket-extensions@>=0.1.1:
+  version "0.1.1"
+  resolved "http://registry.npm.taobao.org/websocket-extensions/download/websocket-extensions-0.1.1.tgz#76899499c184b6ef754377c2dbb0cd6cb55d29e7"
 
 whatwg-fetch@>=0.10.0:
   version "2.0.3"

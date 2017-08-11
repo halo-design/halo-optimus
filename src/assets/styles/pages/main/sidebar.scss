@@ -10,7 +10,6 @@ $sidebarWidth : 200px;
   left: 0;
   top: 60px;
   bottom: 0;
-  z-index: 99;
 
   .sidebar-title {
     text-align: center;
@@ -38,7 +37,6 @@ $sidebarWidth : 200px;
     overflow: auto;
 
     &.fixed {
-      z-index: 999;
       background-color: #eff4f8;
       position: fixed;
       top: 0;
