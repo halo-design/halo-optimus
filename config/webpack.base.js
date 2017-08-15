@@ -58,7 +58,7 @@ let loaderRules = [
   }
 ]
 
-if (settings[env].lint && !isProd) {
+if (settings[env].lint && !process.env.npm_config_nolint) {
   loaderRules = [{
     test: /\.(js|jsx)$/,
     loader: 'eslint-loader',
