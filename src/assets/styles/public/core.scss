@@ -154,7 +154,7 @@ body {
   }
 
   .app-modal-box {
-    @include centerMiddle(520px, 360px)
+    @include centerMiddle(520px, 360px);
     @include bgWhite;
     margin-top: -210px;
     border-radius: 5px;
