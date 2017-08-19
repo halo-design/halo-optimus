@@ -279,7 +279,7 @@ exports.screenshot = async (url, deviceList, delay) => {
     await page.emulate(params)
     await page.goto(url)
     await sleep(delay)
-    await page.screenshot({ path: getFullPath(`data/screenshot/${Date.now()}-${params.name.replace(/\s+/g, '_')}.png`)})
+    await page.screenshot({path: getFullPath(`data/screenshot/${params.name.replace(/\s+/g, '_')}.png`)})
   }
   browser.close()
 }

@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const settings = require('./settings')
+const settings = require('../settings/core')
 const styleLoader = require('./style-loader')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 

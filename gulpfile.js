@@ -7,8 +7,8 @@ const path = require('path')
 const chalk = require('chalk')
 const sftp = require('gulp-sftp')
 const server = require('gulp-express')
+const settings = require('./settings/core')
 const tools = require('./bin/analyze-tools')
-const settings = require('./config/settings')
 
 gulp.task('dev', () => {
   require('./bin/dev-server')

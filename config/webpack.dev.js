@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-const settings = require('./settings').dev
+const settings = require('../settings/core').dev
 const baseWebpackConfig = require('./webpack.base')
 
 const resolve = dir => path.join(__dirname, '..', dir)

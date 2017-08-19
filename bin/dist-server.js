@@ -4,8 +4,8 @@ const path = require('path')
 const chalk = require('chalk')
 const express = require('express')
 const tools = require('./analyze-tools')
-const settings = require('../config/settings')
-const devices = require('../config/devices-list')
+const settings = require('../settings/core')
+const devices = require('../settings/devices')
 const proxyMiddleware = require('http-proxy-middleware')
 const proxyTable = settings.dev.proxyTable
 

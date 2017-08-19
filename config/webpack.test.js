@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-const settings = require('./settings').test
+const settings = require('../settings/core').test
 const baseWebpackConfig = require('./webpack.base')
 
 module.exports = {

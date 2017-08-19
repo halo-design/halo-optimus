@@ -1,5 +1,5 @@
 const check = require('./check-versions')
-const settings = require('../config/settings').dev
+const settings = require('../settings/core').dev
 settings.checkVersions && check()
 
 if (!process.env.NODE_ENV) {

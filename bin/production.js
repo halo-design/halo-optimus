@@ -7,7 +7,7 @@ const rm = require('rimraf')
 const path = require('path')
 const chalk = require('chalk')
 const webpack = require('webpack')
-const settings = require('../config/settings').build
+const settings = require('../settings/core').build
 const webpackConfig = require('../config/webpack.prod')
 
 settings.checkVersions && check()
