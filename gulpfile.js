@@ -1,4 +1,5 @@
 const fs = require('fs')
+const ip = require('ip')
 const opn = require('opn')
 const pug = require('pug')
 const gulp = require('gulp')
@@ -83,4 +84,3 @@ gulp.task('dist-server', () => {
   server.run(['bin/dist-server.js'])
   gulp.watch([`${settings.build.distServerPath}/**/*`], server.notify)
 })
-

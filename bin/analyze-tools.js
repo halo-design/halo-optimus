@@ -4,6 +4,8 @@ const chalk = require('chalk')
 const moment = require('moment')
 const mkdirp = require('mkdirp')
 const merge = require('webpack-merge')
+const puppeteer = require('puppeteer')
+const devices = require('puppeteer/DeviceDescriptors')
 
 const rootPath = path.resolve()
 const getFullPath = relPath => path.join(rootPath, relPath)
@@ -258,4 +260,26 @@ exports.distDiffer = (map, outPath) => {
   } else {
     console.log(chalk.yellow('No files available for replication!'))
   }
+}
+
+// device list #https://github.com/GoogleChrome/puppeteer/blob/master/DeviceDescriptors.js
+exports.screenshot = async (url, deviceList, delay) => {
+  createDir('data/screenshot')
+  const sleep = time => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+          resolve('ok')
+      }, time || 0)
+    })
+  }
+  const browser = await puppeteer.launch()
+  for (let device of deviceList) {
+    const params =  typeof device === 'object' ? device : devices[device]
+    const page = await browser.newPage()
+    await page.emulate(params)
+    await page.goto(url)
+    await sleep(delay)
+    await page.screenshot({ path: getFullPath(`data/screenshot/${Date.now()}-${params.name.replace(/\s+/g, '_')}.png`)})
+  }
+  browser.close()
 }
