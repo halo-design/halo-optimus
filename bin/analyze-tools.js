@@ -262,13 +262,18 @@ exports.distDiffer = (map, outPath) => {
   }
 }
 
-// device list #https://github.com/GoogleChrome/puppeteer/blob/master/DeviceDescriptors.js
+/**
+  * @param [String] url
+  * @param [Array] deviceList
+  * @param [Number] delay
+  *
+  */
 exports.screenshot = async (url, deviceList, delay) => {
   createDir('data/screenshot')
   const sleep = time => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-          resolve('ok')
+        resolve()
       }, time || 0)
     })
   }
