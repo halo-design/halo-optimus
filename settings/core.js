@@ -42,7 +42,7 @@ module.exports = {
         target: 'https://flameapp.cn',
         changeOrigin: true
       }
-    },
+    }
   },
   test: {
     env: {
