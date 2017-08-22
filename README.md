@@ -1,4 +1,7 @@
 # halo-optimus
+
+[![Dependency Status](https://gemnasium.com/badges/github.com/halo-design/halo-optimus.svg)](https://gemnasium.com/github.com/halo-design/halo-optimus)
+
 Scaffolding with the latest react components
 
 ## Build Setup
