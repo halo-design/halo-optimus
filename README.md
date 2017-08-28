@@ -1,6 +1,19 @@
 # halo-optimus
 
-[![Dependency Status](https://gemnasium.com/badges/github.com/halo-design/halo-optimus.svg)](https://gemnasium.com/github.com/halo-design/halo-optimus)
+<p align="center">
+   <a href="https://github.com/halo-design/halo-optimus">
+    <img src="https://img.shields.io/github/issues/halo-design/halo-optimus.svg" alt="">
+  </a>
+  <a href="https://github.com/halo-design/halo-optimus">
+    <img src="https://img.shields.io/github/forks/halo-design/halo-optimus.svg" alt="">
+  </a>
+  <a href="https://github.com/halo-design/halo-optimus">
+    <img src="https://img.shields.io/github/stars/halo-design/halo-optimus.svg" alt="">
+  </a>
+  <a href="https://github.com/halo-design/halo-optimus">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="">
+  </a>
+</p>
 
 Scaffolding with the latest react components
 
