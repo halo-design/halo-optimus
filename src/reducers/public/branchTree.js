@@ -17,19 +17,18 @@ const converRole = branch => ({
   children: []
 })
 
-export const initBranchList = cb => (dispatch, getState) => {
+export const initBranchList = cb => async (dispatch, getState) => {
   NProgress.start()
-  dispatch(getBranchListAction()).then(action => {
-    const allBranchList = action.data.body.branchList
-    const treeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', converRole)
-    const selectTreeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', getBranch)
+  const action = await dispatch(getBranchListAction())
+  const allBranchList = action.data.body.branchList
+  const treeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', converRole)
+  const selectTreeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', getBranch)
 
-    // 新增的时候查机构列表
-    dispatch(setBranchList(selectTreeBranchList))
-    dispatch(setUserGroupBranch({ allBranchList, treeBranchList }))
-    NProgress.done()
-    if (cb) cb()
-  })
+  // 新增的时候查机构列表
+  dispatch(setBranchList(selectTreeBranchList))
+  dispatch(setUserGroupBranch({ allBranchList, treeBranchList }))
+  NProgress.done()
+  if (cb) cb()
 }
 
 const actionsReducer = createReducer({

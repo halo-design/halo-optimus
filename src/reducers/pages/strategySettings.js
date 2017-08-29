@@ -10,46 +10,43 @@ const refreshStrategy = (dispatch, getState) => dispatch(getStrategyList({
 }))
 
 // 新增策略
-export const addStrategy = (data, success, fail) => (dispatch, getState) => {
-  dispatch(addStrategyAction(data)).then(action => {
-    if (action.data.body.errorCode === '0') {
-      NotiSuccess({
-        message: '成功',
-        description: '策略新增成功！'
-      })
-      refreshStrategy(dispatch, getState)
-      if (success) success()
-    } else {
-      NotiError({ description: '策略新增失败！' })
-      if (fail) fail()
-    }
-  })
+export const addStrategy = (data, success, fail) => async (dispatch, getState) => {
+  const action = await dispatch(addStrategyAction(data))
+  if (action.data.body.errorCode === '0') {
+    NotiSuccess({
+      message: '成功',
+      description: '策略新增成功！'
+    })
+    refreshStrategy(dispatch, getState)
+    if (success) success()
+  } else {
+    NotiError({ description: '策略新增失败！' })
+    if (fail) fail()
+  }
 }
 
 // 修改策略
-export const editStrategy = (data, success, fail) => (dispatch, getState) => {
-  dispatch(editStrategyAction(data)).then(action => {
-    if (action.data.body.errorCode === '0') {
-      NotiSuccess({ description: '策略修改成功！' })
-      refreshStrategy(dispatch, getState)
-      if (success) success()
-    } else {
-      NotiError({ description: '策略修改失败！' })
-      if (fail) fail()
-    }
-  })
+export const editStrategy = (data, success, fail) => async (dispatch, getState) => {
+  const action = await dispatch(editStrategyAction(data))
+  if (action.data.body.errorCode === '0') {
+    NotiSuccess({ description: '策略修改成功！' })
+    refreshStrategy(dispatch, getState)
+    if (success) success()
+  } else {
+    NotiError({ description: '策略修改失败！' })
+    if (fail) fail()
+  }
 }
 
 // 删除策略
-export const deleteStrategy = data => (dispatch, getState) => {
-  dispatch(deleteStrategyAction(data)).then(action => {
-    if (action.data.body.errorCode === '0') {
-      NotiSuccess({ description: '策略删除成功！' })
-      refreshStrategy(dispatch, getState)
-    } else {
-      NotiError({ description: '策略删除失败！' })
-    }
-  })
+export const deleteStrategy = data => async (dispatch, getState) => {
+  const action = await dispatch(deleteStrategyAction(data))
+  if (action.data.body.errorCode === '0') {
+    NotiSuccess({ description: '策略删除成功！' })
+    refreshStrategy(dispatch, getState)
+  } else {
+    NotiError({ description: '策略删除失败！' })
+  }
 }
 
 const actionsReducer = createReducer({

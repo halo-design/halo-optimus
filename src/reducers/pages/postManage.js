@@ -3,52 +3,48 @@ import NProgress from 'nprogress'
 import { NotiSuccess, NotiError } from 'UTIL/info'
 import { postListAction, addPostListAction, modifyPostAction, delPostAction } from '../fetch/post'
 
-export const getPostList = () => (dispatch, getState) => {
+export const getPostList = () => async (dispatch, getState) => {
   NProgress.start()
   let state = getState().pages.postManage
-  dispatch(postListAction(state.currentPage, state.turnPageShowNum)).then(action => {
-    if (action.data.body.errorCode === '0') {
-      dispatch(setAllPostList(action.data.body))
-    }
-    NProgress.done()
-  })
+  const action = await dispatch(postListAction(state.currentPage, state.turnPageShowNum))
+  if (action.data.body.errorCode === '0') {
+    dispatch(setAllPostList(action.data.body))
+  }
+  NProgress.done()
 }
 
-export const addPostList = (data, success, fail) => (dispatch, getState) => {
-  dispatch(addPostListAction(data)).then(action => {
-    if (action.data.body.errorCode === '0') {
-      NotiSuccess({ description: '岗位添加成功！' })
-      dispatch(getPostList())
-      if (success) success()
-    } else {
-      NotiError({ description: '岗位添加失败！' })
-      if (fail) fail()
-    }
-  })
+export const addPostList = (data, success, fail) => async (dispatch, getState) => {
+  const action = await dispatch(addPostListAction(data))
+  if (action.data.body.errorCode === '0') {
+    NotiSuccess({ description: '岗位添加成功！' })
+    dispatch(getPostList())
+    if (success) success()
+  } else {
+    NotiError({ description: '岗位添加失败！' })
+    if (fail) fail()
+  }
 }
 
-export const modifyPost = (data, success, fail) => (dispatch, getState) => {
-  dispatch(modifyPostAction(data)).then(action => {
-    if (action.data.body.errorCode === '0') {
-      NotiSuccess({ description: '岗位修改成功！' })
-      dispatch(getPostList())
-      if (success) success()
-    } else {
-      NotiError({ description: '岗位修改失败！' })
-      if (fail) fail()
-    }
-  })
+export const modifyPost = (data, success, fail) => async (dispatch, getState) => {
+  const action = await dispatch(modifyPostAction(data))
+  if (action.data.body.errorCode === '0') {
+    NotiSuccess({ description: '岗位修改成功！' })
+    dispatch(getPostList())
+    if (success) success()
+  } else {
+    NotiError({ description: '岗位修改失败！' })
+    if (fail) fail()
+  }
 }
 
-export const deletePost = data => (dispatch, getState) => {
-  dispatch(delPostAction(data)).then(action => {
-    if (action.data.body.errorCode === '0') {
-      NotiSuccess({ description: '岗位删除成功！' })
-      dispatch(getPostList())
-    } else {
-      NotiError({ description: '岗位删除失败！' })
-    }
-  })
+export const deletePost = data => async (dispatch, getState) => {
+  const action = await dispatch(delPostAction(data))
+  if (action.data.body.errorCode === '0') {
+    NotiSuccess({ description: '岗位删除成功！' })
+    dispatch(getPostList())
+  } else {
+    NotiError({ description: '岗位删除失败！' })
+  }
 }
 
 const actionsReducer = createReducer({

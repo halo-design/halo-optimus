@@ -157,6 +157,18 @@ $sidebarWidth : 200px;
               content: "\e6b7";
             }
           }
+
+          &.authority {
+            &:after {
+              content: "\e635";
+            }
+          }
+
+          &.appMenu {
+            &:after {
+              content: "\e6f0";
+            }
+          }
         }
 
         &.arr:after {

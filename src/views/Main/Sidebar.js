@@ -55,7 +55,9 @@ export default class SidebarView extends React.Component {
       A001B005: 'strategyManage',
       A001B006: 'reviewManage',
       A001B007: 'realTimeRelease',
-      A001B008: 'messagePush'
+      A001B008: 'messagePush',
+      A001B009: 'appMenu',
+      A001B010: 'authority'
     }
 
     const { parentUrl, menus } = this.props

@@ -6,18 +6,17 @@ import md5 from 'md5'
 import API from 'CONSTANT/api'
 import { setSessionIDAction, loginAction, logoutAction } from '../fetch/login'
 
-export const setSessionID = () => (dispatch, getState) => {
+export const setSessionID = () => async (dispatch, getState) => {
   delCookies(['cstName', 'iCIFID', 'eCIFID'])
-  dispatch(setSessionIDAction()).then(action => {
-    const { header, body } = action.data
-    if (header.iCIFID) {
-      setCookie('iCIFID', header.iCIFID)
-      dispatch(doSetSesionId(header.iCIFID))
-    } else {
-      setCookie('iCIFID', body.iCIFID)
-      dispatch(doSetSesionId(body.iCIFID))
-    }
-  })
+  const action = await dispatch(setSessionIDAction())
+  const { header, body } = action.data
+  if (header.iCIFID) {
+    setCookie('iCIFID', header.iCIFID)
+    dispatch(doSetSesionId(header.iCIFID))
+  } else {
+    setCookie('iCIFID', body.iCIFID)
+    dispatch(doSetSesionId(body.iCIFID))
+  }
 }
 
 export const logout = () => (dispatch, getState) => {
@@ -26,34 +25,33 @@ export const logout = () => (dispatch, getState) => {
 }
 
 // 验证登陆
-export const validateLogin = (data, success, fail) => (dispatch, getState) => {
+export const validateLogin = (data, success, fail) => async (dispatch, getState) => {
   const newData = {
     loginName: data.userName,
     loginPassword: md5(data.pswd.toString()),
     isLogin: data.isLogin,
     validateCodeText: data.vcode
   }
-  dispatch(loginAction(newData)).then(action => {
-    NProgress.done()
-    const dataBody = action.data.body
-    if (dataBody.result === '1') {
-      setCookie('eCIFID', dataBody.cstNo)
-      setCookie('cstName', dataBody.cstName)
-      dispatch(doLogin(dataBody.cstName))
-      if (success) {
-        success()
-      }
-    } else {
-      dataBody.errorMsg
-      ? MsgError(dataBody.errorMsg)
-      : MsgError('登录信息有误！')
-      dispatch(loginFailed())
-      dispatch(setSessionID())
-      if (fail) {
-        fail()
-      }
+  const action = await dispatch(loginAction(newData))
+  NProgress.done()
+  const dataBody = action.data.body
+  if (dataBody.result === '1') {
+    setCookie('eCIFID', dataBody.cstNo)
+    setCookie('cstName', dataBody.cstName)
+    dispatch(doLogin(dataBody.cstName))
+    if (success) {
+      success()
     }
-  })
+  } else {
+    dataBody.errorMsg
+    ? MsgError(dataBody.errorMsg)
+    : MsgError('登录信息有误！')
+    dispatch(loginFailed())
+    dispatch(setSessionID())
+    if (fail) {
+      fail()
+    }
+  }
 }
 
 const actionsReducer = createReducer({

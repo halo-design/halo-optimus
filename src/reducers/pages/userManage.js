@@ -5,115 +5,114 @@ import NProgress from 'nprogress'
 import { NotiSuccess, NotiError, MsgWarning } from 'UTIL/info'
 
 // 查询用户信息 搜索功能 分页功能
-export const userPageByBrh = (params, cb) => (dispatch, getState) => {
+export const userPageByBrh = (params, cb) => async (dispatch, getState) => {
   NProgress.start()
   let pageShowNum = getState().pages.userManage.pageData.turnPageShowNum
-  dispatch(userPageByBrhAction(params, pageShowNum)).then(action => {
-    const dataBody = action.data.body
-    const userList = dataBody.userList.map(user => ({
+  const action = await dispatch(userPageByBrhAction(params, pageShowNum))
+  const dataBody = action.data.body
+  const userList = dataBody.userList.map(user => ({
+    ...user,
+    key: user.userNo
+  }))
+  const data = {
+    userList: userList,
+    totalSize: dataBody.turnPageTotalNum,
+    pageData: {
+      turnPageShowNum: dataBody.turnPageShowNum,
+      currentPage: dataBody.currentPage
+    }
+  }
+  dispatch(updateSelectKeys([params.brhId]))
+  dispatch(pageUsers(data))
+  NProgress.done()
+  if (cb) cb()
+}
+
+export const previewUser = (num, success, fail) => async (dispatch, getState) => {
+  const action = await dispatch(getRoleByUserAction(num))
+  const dataBody = action.data.body
+  if (dataBody.errorCode === '0') {
+    dispatch(setPreviewInfo(dataBody))
+    if (success) success()
+  } else {
+    MsgWarning('获取失败！')
+    if (fail) fail()
+  }
+}
+
+export const modifyUser = (num, success, fail) => async (dispatch, getState) => {
+  const action = await dispatch(getRoleByUserAction(num))
+  const dataBody = action.data.body
+  if (dataBody.errorCode === '0') {
+    dispatch(applyInitVal(dataBody))
+    if (success) success()
+  } else {
+    MsgWarning('获取失败！')
+    if (fail) fail()
+  }
+}
+
+export const addUser = (params, success, fail) => async (dispatch, getState) => {
+  const action = await dispatch(addUserAction(params))
+  const dataBody = action.data.body
+  if (dataBody.errorCode === '0') {
+    let dataList = {
+      brhId: params.brhId
+    }
+    const subAction = await dispatch(userPageByBrhAction(dataList, 10))
+    const subDataBody = subAction.data.body
+    let userList = subDataBody.userList.map(user => ({
       ...user,
       key: user.userNo
     }))
-    const data = {
-      userList: userList,
-      totalSize: dataBody.turnPageTotalNum,
-      pageData: {
-        turnPageShowNum: dataBody.turnPageShowNum,
-        currentPage: dataBody.currentPage
-      }
+    let data = {
+      totalSize: subDataBody.turnPageTotalNum,
+      turnPageShowNum: subDataBody.turnPageShowNum,
+      currentPage: subDataBody.currentPage,
+      userList: userList
     }
     dispatch(updateSelectKeys([params.brhId]))
     dispatch(pageUsers(data))
-    NProgress.done()
-    if (cb) cb()
-  })
-}
-
-export const previewUser = (num, success, fail) => (dispatch, getState) => {
-  dispatch(getRoleByUserAction(num)).then(action => {
-    dispatch(setPreviewInfo(action.data.body))
+    NotiSuccess({ description: '用户添加成功！' })
     if (success) success()
-  }, () => {
-    MsgWarning('获取失败！')
+  } else {
+    NotiError({ description: '用户添加失败！' })
     if (fail) fail()
-  })
+  }
 }
 
-export const modifyUser = (num, success, fail) => (dispatch, getState) => {
-  dispatch(getRoleByUserAction(num)).then(action => {
-    dispatch(applyInitVal(action.data.body))
+export const updateUser = (params, success, fail) => async (dispatch, getState) => {
+  const action = await dispatch(updateUserAction(params))
+  if (action.data.body.errorCode === '0') {
+    dispatch(userPageByBrh({
+      currentPage: '1',
+      brhId: params.brhId,
+      brhName: ''
+    }))
+    NotiSuccess({ description: '用户修改成功！' })
     if (success) success()
-  }, () => {
-    MsgWarning('获取失败！')
+  } else {
+    NotiError({ description: '用户修改失败！' })
     if (fail) fail()
-  })
-}
-
-export const addUser = (params, success, fail) => (dispatch, getState) => {
-  dispatch(addUserAction(params)).then(action => {
-    const dataBody = action.data.body
-    if (dataBody.errorCode === '0') {
-      let dataList = {
-        brhId: params.brhId
-      }
-      dispatch(userPageByBrhAction(dataList, 10)).then(action => {
-        const dataBody = action.data.body
-        let userList = dataBody.userList.map(user => ({
-          ...user,
-          key: user.userNo
-        }))
-        let data = {
-          totalSize: dataBody.turnPageTotalNum,
-          turnPageShowNum: dataBody.turnPageShowNum,
-          currentPage: dataBody.currentPage,
-          userList: userList
-        }
-        dispatch(updateSelectKeys([params.brhId]))
-        dispatch(pageUsers(data))
-      })
-      NotiSuccess({ description: '用户添加成功！' })
-      if (success) success()
-    } else {
-      NotiError({ description: '用户添加失败！' })
-      if (fail) fail()
-    }
-  })
-}
-
-export const updateUser = (params, success, fail) => (dispatch, getState) => {
-  dispatch(updateUserAction(params)).then(action => {
-    if (action.data.body.errorCode === '0') {
-      dispatch(userPageByBrh({
-        currentPage: '1',
-        brhId: params.brhId,
-        brhName: ''
-      }))
-      NotiSuccess({ description: '用户修改成功！' })
-      if (success) success()
-    } else {
-      NotiError({ description: '用户修改失败！' })
-      if (fail) fail()
-    }
-  })
+  }
 }
 
 // 删除并更新用户列表
-export const delUserUpdate = (userNo, brhId, curPage) => (dispatch, getState) => {
-  dispatch(delUserAction(userNo)).then(action => {
-    const dataBody = action.data.body
-    if (dataBody.errorCode === '0') {
-      NotiSuccess({
-        message: '成功',
-        description: '用户删除成功！'
-      })
-      dispatch(userPageByBrh({ brhId }))
-    } else {
-      NotiError({
-        message: '失败',
-        description: `删除用户失败，errCode: ${dataBody.errorCode}，errMsg: ${dataBody.errorMsg}`
-      })
-    }
-  })
+export const delUserUpdate = (userNo, brhId, curPage) => async (dispatch, getState) => {
+  const action = await dispatch(delUserAction(userNo))
+  const dataBody = action.data.body
+  if (dataBody.errorCode === '0') {
+    NotiSuccess({
+      message: '成功',
+      description: '用户删除成功！'
+    })
+    dispatch(userPageByBrh({ brhId }))
+  } else {
+    NotiError({
+      message: '失败',
+      description: `删除用户失败，errCode: ${dataBody.errorCode}，errMsg: ${dataBody.errorMsg}`
+    })
+  }
 }
 
 const actionsReducer = createReducer({

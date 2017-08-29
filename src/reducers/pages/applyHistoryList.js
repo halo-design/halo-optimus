@@ -2,13 +2,12 @@ import createReducer from 'STORE/createReducer'
 import NProgress from 'nprogress'
 import { getStateListAction } from '../fetch/check'
 
-export const getStateList = selectOpt => (dispatch, getState) => {
+export const getStateList = selectOpt => async (dispatch, getState) => {
   NProgress.start()
-  dispatch(getStateListAction(selectOpt)).then(action => {
-    const dataBody = action.data.body
-    dispatch(setStateList(dataBody.stateList, dataBody.turnPageTotalNum, selectOpt))
-    NProgress.done()
-  })
+  const action = await dispatch(getStateListAction(selectOpt))
+  const dataBody = action.data.body
+  dispatch(setStateList(dataBody.stateList, dataBody.turnPageTotalNum, selectOpt))
+  NProgress.done()
 }
 
 const actionsReducer = createReducer({

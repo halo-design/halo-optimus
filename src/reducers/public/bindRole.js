@@ -23,47 +23,44 @@ const converTreeRole = role => ({
   children: []
 })
 
-export const getUserRoleTree = userNo => (dispatch, getState) => {
-  dispatch(getUserRoleListAction(userNo)).then(action => {
-    const dataBody = action.data.body
-    let selectKeys = []
-    let userRoleRelList = dataBody.userRoleRelList
-    userRoleRelList.map(item => {
-      item.state === '1' ? selectKeys.push(item.roleId) : null
-    })
-    dispatch(updateSelectedRole(selectKeys))
-    let allSelectRoleList = dataBody.userRoleRelList
-    let selectRoleTreeList = groupList(allSelectRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
-    dispatch(userGetRole({
-      selectRoleTreeList,
-      allSelectRoleList
-    }))
+export const getUserRoleTree = userNo => async (dispatch, getState) => {
+  const action = await dispatch(getUserRoleListAction(userNo))
+  const dataBody = action.data.body
+  let selectKeys = []
+  let userRoleRelList = dataBody.userRoleRelList
+  userRoleRelList.map(item => {
+    item.state === '1' ? selectKeys.push(item.roleId) : null
   })
+  dispatch(updateSelectedRole(selectKeys))
+  let allSelectRoleList = dataBody.userRoleRelList
+  let selectRoleTreeList = groupList(allSelectRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
+  dispatch(userGetRole({
+    selectRoleTreeList,
+    allSelectRoleList
+  }))
 }
 
 // 绑定角色的方法
-export const userRoleAssociation = (userNo, userName, roleList) => (dispatch, getState) => {
-  dispatch(userRoleAssociationAction(userNo, userName, roleList)).then(action => {
-    const dataBody = action.data.body
-    if (dataBody.errorCode === '0') {
-      NotiSuccess({ description: '綁定成功！' })
-    } else {
-      NotiError({ description: '绑定失败！' })
-    }
-  })
+export const userRoleAssociation = (userNo, userName, roleList) => async (dispatch, getState) => {
+  const action = await dispatch(userRoleAssociationAction(userNo, userName, roleList))
+  const dataBody = action.data.body
+  if (dataBody.errorCode === '0') {
+    NotiSuccess({ description: '綁定成功！' })
+  } else {
+    NotiError({ description: '绑定失败！' })
+  }
 }
 
-export const getRoleTree = () => (dispatch, getState) => {
+export const getRoleTree = () => async (dispatch, getState) => {
   NProgress.start()
-  dispatch(getRoleListAction()).then(action => {
-    const dataBody = action.data.body
-    const flatRoleList = dataBody.roleList
-    let roleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeRole)
-    let selectRoleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
-    dispatch(updateRoleTreeList(selectRoleTreeList))
-    dispatch(updateRoleTree(roleTreeList))
-    NProgress.done()
-  })
+  const action = await dispatch(getRoleListAction())
+  const dataBody = action.data.body
+  const flatRoleList = dataBody.roleList
+  let roleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeRole)
+  let selectRoleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
+  dispatch(updateRoleTreeList(selectRoleTreeList))
+  dispatch(updateRoleTree(roleTreeList))
+  NProgress.done()
 }
 
 const actionsReducer = createReducer({
