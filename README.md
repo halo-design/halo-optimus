@@ -1,19 +1,10 @@
 # halo-optimus
 
-<p align="center">
-   <a href="https://github.com/halo-design/halo-optimus">
-    <img src="https://img.shields.io/github/issues/halo-design/halo-optimus.svg" alt="">
-  </a>
-  <a href="https://github.com/halo-design/halo-optimus">
-    <img src="https://img.shields.io/github/forks/halo-design/halo-optimus.svg" alt="">
-  </a>
-  <a href="https://github.com/halo-design/halo-optimus">
-    <img src="https://img.shields.io/github/stars/halo-design/halo-optimus.svg" alt="">
-  </a>
-  <a href="https://github.com/halo-design/halo-optimus">
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="">
-  </a>
-</p>
+[![issues](https://img.shields.io/github/issues/halo-design/halo-optimus.svg)](https://github.com/halo-design/halo-optimus)
+[![forks](https://img.shields.io/github/forks/halo-design/halo-optimus.svg)](https://github.com/halo-design/halo-optimus)
+[![stars](https://img.shields.io/github/stars/halo-design/halo-optimus.svg)](https://github.com/halo-design/halo-optimus)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/halo-design/halo-optimus)
+
 
 Scaffolding with the latest react components
 
