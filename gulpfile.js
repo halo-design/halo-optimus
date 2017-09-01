@@ -20,21 +20,21 @@ gulp.task('build', () => {
 
 gulp.task('upload', () =>
   gulp.src('dist/**')
-  .pipe(sftp({
-    host: '139.224.128.69',
-    auth: 'nginxAdmin',
-    remotePath: '/home/nginx/www/ydkf/halo'
-  }))
+    .pipe(sftp({
+      host: '139.224.128.69',
+      auth: 'nginxAdmin',
+      remotePath: '/home/nginx/www/ydkf/halo'
+    }))
 )
 
 gulp.task('upload-diff', () =>
   gulp.src('dist_diff/**')
-  .pipe(sftp({
-    host: '139.224.128.69',
-    user: 'nginx',
-    auth: 'nginxAdmin',
-    remotePath: '/home/nginx/www/ydkf/halo'
-  }))
+    .pipe(sftp({
+      host: '139.224.128.69',
+      user: 'nginx',
+      auth: 'nginxAdmin',
+      remotePath: '/home/nginx/www/ydkf/halo'
+    }))
 )
 
 gulp.task('snapshot', () => {
