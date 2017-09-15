@@ -279,7 +279,7 @@ exports.screenshot = async (url, deviceList, delay) => {
   }
   const browser = await puppeteer.launch()
   for (let device of deviceList) {
-    const params =  typeof device === 'object' ? device : devices[device]
+    const params = typeof device === 'object' ? device : devices[device]
     const page = await browser.newPage()
     await page.emulate(params)
     await page.goto(url)
