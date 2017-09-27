@@ -9,7 +9,9 @@ const devices = require('puppeteer/DeviceDescriptors')
 
 const rootPath = path.resolve()
 const getFullPath = relPath => path.join(rootPath, relPath)
-const createDir = (path, islog) => mkdirp(path, err => err ? console.log(chalk.red(err)) : !islog && console.log(chalk.green(`${path} created successfully!`)))
+const createDir = path => {
+  mkdirp(path, err => err && console.log(chalk.red(err)))
+}
 
 createDir('data', true)
 
@@ -265,18 +267,12 @@ exports.distDiffer = (map, outPath) => {
 /**
   * @param [String] url
   * @param [Array] deviceList
+  * @param [String] filename
   * @param [Number] delay
   *
   */
-exports.screenshot = async (url, deviceList, delay) => {
-  createDir('data/screenshot')
-  const sleep = time => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve()
-      }, time || 0)
-    })
-  }
+exports.screenshot = async (url, deviceList, filename, delay) => {
+  const sleep = time => new Promise((resolve, reject) => setTimeout(() => resolve(), time || 0))
   const browser = await puppeteer.launch()
   for (let device of deviceList) {
     const params = typeof device === 'object' ? device : devices[device]
@@ -284,7 +280,10 @@ exports.screenshot = async (url, deviceList, delay) => {
     await page.emulate(params)
     await page.goto(url)
     await sleep(delay)
-    await page.screenshot({path: getFullPath(`data/screenshot/${params.name.replace(/\s+/g, '_')}.png`)})
+    console.log(chalk.blue(`> [${params.name}] Starting generate screenshot '${filename}'...`))
+    createDir(`screenshot/${filename}`)
+    await page.screenshot({ path: getFullPath(`screenshot/${filename}/${params.name.replace(/\s+/g, '_')}.png`) })
+    console.log(chalk.green(`- [${params.name}] screenshot '${filename}' have been generated!`))
   }
   browser.close()
 }

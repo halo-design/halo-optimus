@@ -90,14 +90,14 @@ const uri = `http://${ip.address()}:${port}`
 devMiddleware.waitUntilValid(() => {
   spinner.stop()
   console.log(chalk.green(`> Listening at ${uri} \n`))
+  if (openBrowser && process.env.NODE_ENV !== 'testing') {
+    opn(uri)
+  }
 })
 
 module.exports = httpServer.listen(port, err => {
   if (err) {
     console.log(chalk.red(err))
     return
-  }
-  if (openBrowser && process.env.NODE_ENV !== 'testing') {
-    opn(uri)
   }
 })

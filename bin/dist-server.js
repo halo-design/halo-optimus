@@ -1,11 +1,12 @@
 const ip = require('ip')
 const opn = require('opn')
-const path = require('path')
 const chalk = require('chalk')
 const express = require('express')
 const tools = require('./analyze-tools')
 const settings = require('../settings/core')
 const devices = require('../settings/devices')
+const routes = require('../settings/routes')
+const history = require('connect-history-api-fallback')
 const proxyMiddleware = require('http-proxy-middleware')
 const proxyTable = settings.dev.proxyTable
 
@@ -15,7 +16,17 @@ const publicPath = settings.build.publicPath
 const distServerPath = settings.build.distServerPath
 const uri = `http://${ip.address()}:${port}${publicPath}`
 
-app.use(publicPath, express.static(path.join(__dirname, '..', distServerPath)))
+const staticFileMiddleware = express.static(distServerPath)
+
+app.use(publicPath, staticFileMiddleware)
+
+app.use('/mock', express.static('./mock'))
+
+app.use(history({
+  index: `${publicPath}index.html`
+}))
+
+app.use(publicPath, staticFileMiddleware)
 
 app.listen(port, error => {
   if (error) {
@@ -23,7 +34,13 @@ app.listen(port, error => {
   }
   console.log(chalk.green(`Server is running at ${uri}`))
   process.env.npm_config_opn && opn(uri)
-  process.env.npm_config_shot && tools.screenshot(uri, devices, 600)
+  const genShot = async () => {
+    for (let route of routes) {
+      const fullPath = uri + route.path
+      await tools.screenshot(fullPath, devices, route.name, route.delay)
+    }
+  }
+  process.env.npm_config_shot && genShot()
 })
 
 Object.keys(proxyTable).forEach(context => {
