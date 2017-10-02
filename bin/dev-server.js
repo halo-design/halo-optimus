@@ -69,7 +69,7 @@ compiler.plugin('compilation', compilation => {
 })
 
 Object.keys(proxyTable).forEach(context => {
-  const options = proxyTable[context]
+  let options = proxyTable[context]
   if (typeof options === 'string') {
     options = { target: options }
   }
@@ -98,6 +98,5 @@ devMiddleware.waitUntilValid(() => {
 module.exports = httpServer.listen(port, err => {
   if (err) {
     console.log(chalk.red(err))
-    return
   }
 })
